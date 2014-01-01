@@ -1,7 +1,12 @@
 magrittr -  Ceci n'est pas une pipe.
 ====================================
 
-R package to bring forward-piping features ala F#'s |> operator.
+This package provides pipe-forwarding mechanisms similar to (but not exactly 
+like) e.g. F#'s pipe-forward operator. It allows writing code in a sometimes
+much more clean and readible way, and avoids making a mess in situations of 
+multiple nested function calls. It is particularly useful when manipulating
+data frames etc. The package also contains a few useful functions which 
+fit well into the syntax allowed by the package.
 
 Installation:
 -------------
