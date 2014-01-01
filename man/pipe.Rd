@@ -3,7 +3,7 @@
 \alias{\%<\%}
 \alias{\%>>\%}
 \alias{\%>\%}
-\title{Pipe an object forward into a function call.}
+\title{Pipe an object forward into a function call/expression.}
 \usage{
 e1 \%>\% e2
 

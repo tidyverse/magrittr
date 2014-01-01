@@ -30,7 +30,7 @@ input, e.g. colMeans.
    head
 
  airquality \%>\%
-   ofclass(integer) \%>\%
+   ofclass(integer, numeric) \%>\%
    head
 }
 }

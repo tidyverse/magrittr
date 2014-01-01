@@ -1,4 +1,4 @@
-#' Pipe an object forward into a function call.
+#' Pipe an object forward into a function call/expression.
 #'
 #' The \code{\%>\%} operator pipes the left-hand side into an expression on the 
 #' right-hand side. The \code{\%<\%} operator does the reverse. The expression
