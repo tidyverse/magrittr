@@ -32,8 +32,9 @@ Example of usage:
        
         
      # Here, the double dot serves as placeholder, because the 
-     # single-dot is used in the formula.
-     iris %>%
+     # single-dot is used in the formula. To do this, we use
+     # the %>>% operator.
+     iris %>>%
        aggregate(. ~ Species, .., mean)
        
      # If a function only takes one argument, you can omit the 
