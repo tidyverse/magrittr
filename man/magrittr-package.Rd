@@ -7,7 +7,7 @@ magrittr - ceci n'est pas une pipe!
 }
 \description{
 This package provides pipe-forwarding mechanisms similar to (but not exactly 
-like) e.g. F\#'s pipe-forward operator. It allows writing code in a sometimes
+like) e.g. F#'s pipe-forward operator. It allows writing code in a sometimes
 much more clean and readible way, and avoids making a mess in situations of 
 multiple nested function calls. It is particularly useful when manipulating
 data frames etc. The package also contains a few useful functions which 
@@ -38,7 +38,7 @@ Maintainer: <stefan@stefanbache.dk>
 }
 \references{
 This package is inspired by the pipe-forward mechanism in the .NET language
-F\# (Luca Bolognese has made an awesome video introduction to this language
+F# (Luca Bolognese has made an awesome video introduction to this language
 which I highly recommend).
 }
 
