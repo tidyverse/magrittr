@@ -1,6 +1,6 @@
 \name{orderby}
 \alias{orderby}
-\title{Order a data frame by expressions of the columns.}
+\title{Order a \code{data.frame} by expressions of the columns.}
 \usage{
 orderby(unordered, ...)
 }
@@ -14,12 +14,18 @@ orderby(unordered, ...)
 an ordered data.frame.
 }
 \description{
-Order a data frame by expressions of the columns.
+This function uses the \code{order} function, so any
+expression which works with \code{order} will work with
+\code{orderby}.
 }
 \examples{
 \dontrun{
  iris \%>\%
    orderby(Species, Sepal.Length)
+
+ mtcars \%>\%
+   where(mpg > 18) \%>\%
+   orderby(cyl, -hp)
 }
 }
 

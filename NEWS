@@ -1,0 +1,23 @@
+Version 0.1.1
+--------------------------------------------------------------------------------
+
+Added the function
+
+  ofclass  (selects columns which has one of the specified classes)
+  rows     (selects rows using numerical indices and/or amounts)
+
+
+
+Version 0.1
+--------------------------------------------------------------------------------
+
+Initital version, which contains the main operators
+
+  %>%, %<%, %>>%, %<<%.
+
+and the convenience functions
+
+  select   (selects, creates, or renames columns of data.frame)
+  delete   (deletes columns from a data.frame)
+  where    (filters a data.frame based on logical condition(s))
+  orderby  (orders a data.frame)

@@ -17,7 +17,7 @@ fit well into the syntax allowed by the package.
 \tabular{ll}{
 Package: \tab magrittr\cr
 Type: \tab Package\cr
-Version: \tab 0.1\cr
+Version: \tab 0.1.1\cr
 Date: \tab 2014-01-01\cr
 License: GPL\cr
 }

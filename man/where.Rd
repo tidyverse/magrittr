@@ -1,22 +1,21 @@
 \name{where}
 \alias{where}
-\title{Filter a data.frame based on conditions.
-Equivalent to using the \code{data.frame[restriction ,]} syntax.}
+\title{Filter a \code{data.frame} based on conditions (row-wise).}
 \usage{
 where(unrestricted, restriction)
 }
 \arguments{
-  \item{unrestricted}{The data.frame to filter.}
+  \item{unrestricted}{The \code{data.frame} to filter.}
 
   \item{restriction}{The restriction to apply.}
 }
 \value{
-a data.frame with rows for which the restriction evaluates
-to TRUE.
+a \code{data.frame} with rows for which the restriction
+evaluates to \code{TRUE}.
 }
 \description{
-Filter a data.frame based on conditions. Equivalent to
-using the \code{data.frame[restriction ,]} syntax.
+Equivalent to using the \code{data.frame[restriction ,]}
+syntax.
 }
 \examples{
 \dontrun{

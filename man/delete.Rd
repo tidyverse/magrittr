@@ -1,19 +1,19 @@
 \name{delete}
 \alias{delete}
-\title{Delete columns from data.frame.}
+\title{Delete columns from \code{data.frame}.}
 \usage{
 delete(from, ...)
 }
 \arguments{
-  \item{from}{The dataset to delete from.}
+  \item{from}{The \code{data.frame} to delete from.}
 
   \item{...}{The columns to delete}
 }
 \value{
-a data.frame with the specified columns removed.
+a \code{data.frame} with the specified columns removed.
 }
 \description{
-Delete columns from data.frame.
+Delete columns from \code{data.frame}.
 }
 \examples{
 \dontrun{
