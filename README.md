@@ -55,9 +55,9 @@ Example of usage:
 List of utility functions in addition to the pipe operator(s):
 --------------------------------------------------------------
   
-  select   (selects, creates, or renames columns of data.frame)
-  delete   (deletes columns from a data.frame)
-  where    (filters a data.frame based on logical condition(s))
-  orderby  (orders a data.frame)
-  ofclass  (selects columns which has one of the specified classes)
-  rows     (selects rows using numerical indices and/or amounts)  
+  * select   (selects, creates, or renames columns of data.frame)
+  * delete   (deletes columns from a data.frame)
+  * where    (filters a data.frame based on logical condition(s))
+  * orderby  (orders a data.frame)
+  * ofclass  (selects columns which has one of the specified classes)
+  * rows     (selects rows using numerical indices and/or amounts)  
