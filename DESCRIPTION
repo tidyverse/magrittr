@@ -1,0 +1,10 @@
+Package: magrittr
+Type: Package
+Title: magrittr - ceci n'est pas une pipe
+Version: 0.1
+Date: 2014-01-01
+Author: Stefan Milton Bache
+Maintainer: Stefan <stefan@stefanbache.dk>
+Description: Provides pipe-forward like features and a collection of useful
+    functions.
+License: GPL
