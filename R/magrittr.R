@@ -224,7 +224,7 @@ where <-
 #'    head
 #'    
 #'  airquality %>%
-#'    ofclass(integer) %>%
+#'    ofclass(integer, numeric) %>%
 #'    head
 #' }
 ofclass <- 
