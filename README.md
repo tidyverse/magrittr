@@ -51,6 +51,15 @@ Example of usage:
      # parentheses.
      rnorm(100) %>% abs %>% mean
        
+     # Of course, all the usual regular functions are compatible:
+     iris %>%
+       ofclass(numeric) %>%
+       apply(2, max)
+       
+     iris %>% sapply(class)
+     
+     iris %>% head(10)
+     
 
 List of utility functions in addition to the pipe operator(s):
 --------------------------------------------------------------
