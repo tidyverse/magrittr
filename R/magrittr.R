@@ -131,6 +131,33 @@ select <-
     cols
   }
 
+#' Add columns to \code{data.frame}.
+#'
+#' @param to The \code{data.frame} to add to.
+#' @param ... The columns to add, can be expressions of existing columns.
+#' @return a \code{data.frame} with original and new columns.
+#' @export
+#' @examples
+#' \dontrun{
+#'  iris %>% 
+#'    add(
+#'      width = Sepal.Width, 
+#'      len   = Sepal.Length,
+#'      ratio = Sepal.Width/Sepal.Length) %>% 
+#'    head
+#' }
+add <-
+  function(to, ...)
+  {
+    cl <- match.call()
+    lst <-
+      list(...) %>% substitute(.)[-1] %>% as.list
+    existing <- 
+      to %>% colnames %>% sapply(as.name)
+    lst <- c(existing, lst)
+    do.call(select, c(cl[[2]], lst), envir = parent.frame())
+  }
+
 #' Delete columns from \code{data.frame}.
 #'
 #' @param from The \code{data.frame} to delete from.
