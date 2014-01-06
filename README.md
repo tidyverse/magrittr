@@ -65,6 +65,7 @@ List of utility functions in addition to the pipe operator(s):
 --------------------------------------------------------------
   
   * select   (selects, creates, or renames columns of data.frame)
+  * add      (add columns to a data.frame. Uses select where existing columns are automatically selected).
   * delete   (deletes columns from a data.frame)
   * where    (filters a data.frame based on logical condition(s))
   * orderby  (orders a data.frame)
