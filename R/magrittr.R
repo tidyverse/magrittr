@@ -1,96 +1,74 @@
 #' Pipe an object forward into a function call/expression.
 #'
 #' The \code{\%>\%} operator pipes the left-hand side into an expression on the 
-#' right-hand side. The \code{\%<\%} operator does the reverse. The expression
-#' can contain a \code{.} as placeholder to indicate the position taken
-#' by the object in the pipeline. If not present, it will be squeezed in as the
-#' first argument. If the right-hand side expression is a function call that 
-#' takes only one argument, one can omit both parentheses
-#' and the \code{.}. The \code{\%>>\%} and \code{\%<<\%} versions replaces the
-#' \code{.} with \code{..} to allow for expressions with that includes 
-#' a \code{.}, e.g. a formula.
+#' right-hand side. The expression can contain a \code{.} as placeholder to 
+#' indicate the position taken by the object in the pipeline. If not present, 
+#' it will be squeezed in as the first argument. If the right-hand side 
+#' expression is a function call that takes only one argument, one can omit 
+#' parentheses and the \code{.}. Only the outmost call is matched against the
+#' dot, which means that e.g. formulas can still use a dot which will not be
+#' matched. Nested functions will not be matched either.
 #'
-#' @param e1 the object to be piped forward
-#' @param e2 an expression which expects an object from the pipe.
+#' @param tobacco That which is to be piped
+#' @param pipe the pipe to be stuffed with tobacco.
 #' @rdname pipe
 #' @export
 #' @examples
 #' \dontrun{
+#' library(dplyr)
+#' library(Lahman)
+#' 
+#' Batting %>%
+#'   group_by(playerID) %>%
+#'   summarise(total = sum(G)) %>%
+#'   arrange(desc(total)) %>%
+#'   head(5)
+#' 
+#' 
 #' iris %>%
 #'   where(Petal.Length > 5) %>%
 #'   delete(Species) %>%
 #'   colMeans
 #'   
-#' iris %>>%
-#'   aggregate(. ~ Species, .., mean)
+#' iris %>%
+#'   aggregate(. ~ Species, ., mean)
 #'
 #' rnorm(1000) %>% abs %>% sum
 #' }
-`%>%` <- 
-  function(e1, e2)
-  {
-    cl <- match.call()
-    if (length(cl[[3]]) == 1) {
-      # Function reference without parentheses.
-      e2(e1)
-    } else {
-      # Alter the right-hand side before evaluation.
-      e  <- do.call(substitute, list(cl[[3]], list(. = cl[[2]])))
-      if (e == cl[[3]]) { 
-        # No dot was found - so squeeze in as first argument.
-        j <- length(e)
-        while (j > 1) {
-          e[[j + 1]] <- e[[j]]
-          if (!is.null(names(e)))
-            # Make names (if present) follow values.
-            names(e)[[j + 1]] <- names(e)[[j]]
-          j <- j - 1
-        }
-        # place a dot, and try again.
-        e[[2]] <- as.name(".")
-        if (!is.null(names(e)))
-          names(e)[[2]] <- ""
-        e <- do.call(substitute, list(e, list(. = cl[[2]])))
-      }
-      # Evaluate the call.
-      eval(e, parent.frame(), parent.frame())
-    }
-  }
-
-#' @rdname pipe
-#' @export
-`%<%` <-
-  function(e1, e2)
-  {
-    cl <- match.call()
-    cl[[1]] <- `%>%`
-    tmp <- cl[[2]]
-    cl[[2]] <- cl[[3]]
-    cl[[3]] <- tmp
-    eval(cl, parent.frame(), parent.frame())
-  }
-
-#' @rdname pipe
-#' @export
-`%<<%` <-
-  function(e1, e2)
-  {
-    cl <- match.call()
-    cl[[1]] <- `%>>%`
-    tmp <- cl[[2]]
-    cl[[2]] <- cl[[3]]
-    cl[[3]] <- tmp
-    eval(cl, parent.frame(), parent.frame())
-  }
-
-#' @rdname pipe
-#' @export
-`%>>%` <-
-  deparse(`%>%`) %>% 
-  gsub("([^[:alpha:]])\\.", "\\1..", .) %>% 
-  parse(text = .) %>%
-  eval
+`%>%` <- function(tobacco, pipe)
+{
+  # Capture the call.
+  cl <- match.call()
   
+  # Is the rhs parentheses-less? 
+  if (length(cl[[3]]) == 1) {
+    
+    # Construct a new expression with piped tobacco
+    e <- call(as.character(cl[[3]]), cl[[2]])
+    
+  } else {
+    
+    # Find positions in the call which are not themselves a call.
+    # this restricts the .-matching to the "first level". This enables using
+    # dots in e.g. formulas.
+    potential.dots <- 
+      Filter(function(j) !is.call(cl[[3]][[j]]), 2:length(cl[[3]]))
+    
+    # Substitute the dot by lhs if present at the indices found above.
+    e <- cl[[3]]
+    for (j in potential.dots)
+      e[[j]] <- do.call(substitute, list(e[[j]], list(. = cl[[2]])))
+    
+    # Check whether any substitutions were made,
+    # in which case tobacco is piped as the first argument.
+    if (e == cl[[3]]) 
+      e <- as.call(c(cl[[3]][[1]], cl[[2]], lapply(cl[[3]], function(x) x)[-1]))
+    
+  }
+  
+  # Smoke the pipe (evaluate the call)
+  eval(e, parent.frame(), parent.frame())
+}
 
 #' Select columns from \code{data.frame}, define new columns, or rename columns.
 #'
@@ -110,9 +88,8 @@
 select <- 
   function(from, ...)
   {
-    lst <-
-      list(...) %>% substitute(.)[-1] %>% as.list
-    
+    lst <- as.list(substitute(list(...))[-1])
+      
     nms  <- 
       if (lst %>% names %>% is.null)
         lst %>% as.character
@@ -150,8 +127,7 @@ add <-
   function(to, ...)
   {
     cl <- match.call()
-    lst <-
-      list(...) %>% substitute(.)[-1] %>% as.list
+    lst <- as.list(substitute(list(...))[-1])
     existing <- 
       to %>% colnames %>% sapply(as.name)
     lst <- c(existing, lst)
@@ -172,7 +148,7 @@ add <-
 #' }
 delete <-
   function(from, ...) {
-    lst  <- list(...) %>% substitute(.)[-1] %>% as.list
+    lst  <- as.list(substitute(list(...))[-1])
     nms  <- lst %>% as.character
     keep <- !colnames(from) %in% nms
     from[, keep]
@@ -246,10 +222,12 @@ where <-
 #'    ofclass(numeric) %>%
 #'    colMeans
 #' 
+#'  # Maybe not what you'd expect...
 #'  airquality %>% 
 #'    ofclass(numeric) %>% 
 #'    head
 #'    
+#'  # ... then try this...
 #'  airquality %>%
 #'    ofclass(integer, numeric) %>%
 #'    head
@@ -259,9 +237,8 @@ ofclass <-
   {
     idx <-
       data. %>% 
-      sapply(class) %in%  
-        (substitute(list(...))[-1] %>%
-         as.list %>% 
+      sapply(class) %in% 
+        (as.list(substitute(list(...))[-1]) %>%
          as.character)
     data.[, idx]
   }

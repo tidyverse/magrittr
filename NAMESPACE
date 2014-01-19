@@ -1,7 +1,4 @@
-export("%<%")
-export("%<<%")
 export("%>%")
-export("%>>%")
 export(add)
 export(delete)
 export(ofclass)

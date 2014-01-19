@@ -25,10 +25,12 @@ input, e.g. colMeans.
    ofclass(numeric) \%>\%
    colMeans
 
+ # Maybe not what you'd expect...
  airquality \%>\%
    ofclass(numeric) \%>\%
    head
 
+ # ... then try this...
  airquality \%>\%
    ofclass(integer, numeric) \%>\%
    head

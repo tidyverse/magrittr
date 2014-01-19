@@ -24,22 +24,19 @@ License: GPL\cr
 
 The main feature is provided by the operator \code{\%>\%}. It takes a value
 (e.g. a data.frame) on the left and a function expression on the right, see the
-examples. The reverse direction is also provided by \code{\%<\%}. One can use
+examples. One can use
 a single dot, \code{`.`},  as a placeholder for the value on the left.
-In case of conflict with a dot in the function expression (e.g. in a formula)
-one can use the \code{\%>>\%} and \code{\%<<\%} operators which use a double-dot,
-\code{`..`} as placeholder.
 }
 
 \author{
-Stefan Milton Bache
+Stefan Milton Bache and Hadley Wickham
 
 Maintainer: <stefan@stefanbache.dk>
 }
 \references{
 This package is inspired by the pipe-forward mechanism in the .NET language
 F# (Luca Bolognese has made an awesome video introduction to this language
-which I highly recommend).
+which is highly recommended).
 }
 
 \keyword{ package }
