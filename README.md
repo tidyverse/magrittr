@@ -30,7 +30,9 @@ Example of usage:
       
      # Another example  
      iris %>%
-       select(len = Sepal.Length, width = Sepal.Width, ratio = Sepal.Length/Sepal.Length) %>%
+       select(len   = Sepal.Length, 
+              width = Sepal.Width, 
+              ratio = Sepal.Length/Sepal.Length) %>%
        head
        
      # This is equivalent to the first example. The dot can be used to specify
@@ -58,8 +60,15 @@ Example of usage:
      
      iris %>% head(10)
      
+     # The dplyr batting example:
+     Batting %>%
+       group_by(playerID) %>%
+       summarise(total = sum(G)) %>%
+       arrange(desc(total)) %>%
+       head(5)
 
-List of utility functions in addition to the pipe operator(s):
+
+List of utility functions in addition to the pipe operator:
 --------------------------------------------------------------
   
   * select   (selects, creates, or renames columns of data.frame)
