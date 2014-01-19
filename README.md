@@ -61,6 +61,9 @@ Example of usage:
      iris %>% head(10)
      
      # The dplyr batting example:
+     library(dplyr)
+     library(Lahman)
+     
      Batting %>%
        group_by(playerID) %>%
        summarise(total = sum(G)) %>%
