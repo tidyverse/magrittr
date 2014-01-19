@@ -41,11 +41,9 @@ Example of usage:
        colMeans
        
         
-     # Here, the double dot serves as placeholder, because the 
-     # single-dot is used in the formula. To do this, we use
-     # the %>>% operator.
-     iris %>>%
-       aggregate(. ~ Species, .., mean)
+     # This will work although a dot is in the formula. Only the "outmost" call is matched against the dot.
+     iris %>%
+       aggregate(. ~ Species, ., mean)
        
      # If a function only takes one argument, you can omit the 
      # parentheses.
