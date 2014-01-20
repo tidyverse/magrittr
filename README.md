@@ -12,7 +12,7 @@ Installation:
 -------------
 
     library(devtools)
-    install_github("magrittr", "smbache")
+    install_github("smbache/magrittr")
 
 Help overview:
 --------------
