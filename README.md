@@ -1,6 +1,8 @@
 magrittr -  Ceci n'est pas une pipe.
 ====================================
 
+[![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=master)](https://travis-ci.org/smbache/magrittr)
+
 This package provides pipe-forwarding mechanisms similar to (but not exactly 
 like) e.g. F#'s pipe-forward operator. It allows writing code in a sometimes
 much more clean and readable way, and avoids making a mess in situations of 
