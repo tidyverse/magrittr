@@ -1,3 +1,14 @@
+Version 0.1.4
+--------------------------------------------------------------------------------
+Another design decision has been made, where the data manipulation functions
+are removed from magrittr. The argument is that these belong in other packages
+for data processing. dplyr is an excellent example, and has equivalents of 
+most of the previous magrittr utility functions.
+
+On the other hand, we have added aliases to operators such as `[`, `$`, etc,
+so they are more pleasantly included in chains written with the pipe operator.
+
+
 Version 0.1.3
 --------------------------------------------------------------------------------
 

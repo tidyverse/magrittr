@@ -8,6 +8,7 @@
 #' parentheses and the \code{.}. Only the outmost call is matched against the
 #' dot, which means that e.g. formulas can still use a dot which will not be
 #' matched. Nested functions will not be matched either.
+#' The syntax \code{`\%.\%`} is an alias.
 #'
 #' @param tobacco That which is to be piped
 #' @param pipe the pipe to be stuffed with tobacco.
@@ -61,7 +62,7 @@
     
     # Check whether any substitutions were made,
     # in which case tobacco is piped as the first argument.
-    if (e == cl[[3]]) 
+    if (identical(e, cl[[3]]))
       e <- as.call(c(cl[[3]][[1]], cl[[2]], lapply(cl[[3]], function(x) x)[-1]))
     
   }
@@ -70,229 +71,94 @@
   eval(e, parent.frame(), parent.frame())
 }
 
-#' Select columns from \code{data.frame}, define new columns, or rename columns.
-#'
-#' @param from The \code{data.frame} to select from.
-#' @param ... The columns to select, define, or rename.
-#' @return a \code{data.frame} with the specified columns.
+#' Aliases
+#' 
+#' magrittr provides a series of aliases which can be more pleasant to use
+#' when composing chains using the %>% operator.
+#' 
+#' Currently implemented aliases are
+#' \tabular{ll}{
+#' \code{extract:}    \tab \code{`[`}      \cr
+#' \code{Extract:}    \tab \code{`[[`}     \cr
+#' \code{series:}     \tab \code{`$`}      \cr
+#' \code{plus:}       \tab \code{`+`}      \cr
+#' \code{minus:}      \tab \code{`-`}      \cr
+#' \code{times:}      \tab \code{`*`}      \cr
+#' \code{multiply:}   \tab \code{`\%*\%`}  \cr
+#' \code{divide:}     \tab \code{`/`}      \cr
+#' \code{int.divide:} \tab \code{`\%/\%`}  \cr
+#' \code{`\%.\%`}     \tab \code{`\%>\%`}  \cr
+#' }
+#' 
+#' @usage NULL
 #' @export
+#' @rdname aliases
+#' @name extract
 #' @examples
 #' \dontrun{
 #'  iris %>% 
-#'    select(
-#'      width = Sepal.Width, 
-#'      len   = Sepal.Length,
-#'      ratio = Sepal.Width/Sepal.Length) %>% 
+#'    extract(, 1:4) %>%
 #'    head
-#' }
-select <- 
-  function(from, ...)
-  {
-    lst <- as.list(substitute(list(...))[-1])
-      
-    nms  <- 
-      if (lst %>% names %>% is.null)
-        lst %>% as.character
-    else 
-      ifelse(names(lst) == "", 
-             yes = lst %>% as.character,
-             no  = lst %>% names)
-    
-    ev   <- 
-      function(e) 
-        eval(e, from, parent.frame())
-    
-    cols <- do.call(data.frame, lapply(lst, ev))
-    colnames(cols) <- nms
-    
-    cols
-  }
-
-#' Add columns to \code{data.frame}.
-#'
-#' @param to The \code{data.frame} to add to.
-#' @param ... The columns to add, can be expressions of existing columns.
-#' @return a \code{data.frame} with original and new columns.
-#' @export
-#' @examples
-#' \dontrun{
-#'  iris %>% 
-#'    add(
-#'      width = Sepal.Width, 
-#'      len   = Sepal.Length,
-#'      ratio = Sepal.Width/Sepal.Length) %>% 
-#'    head
-#' }
-add <-
-  function(to, ...)
-  {
-    cl <- match.call()
-    lst <- as.list(substitute(list(...))[-1])
-    existing <- 
-      to %>% colnames %>% sapply(as.name)
-    lst <- c(existing, lst)
-    do.call(select, c(cl[[2]], lst), envir = parent.frame())
-  }
-
-#' Delete columns from \code{data.frame}.
-#'
-#' @param from The \code{data.frame} to delete from.
-#' @param ... The columns to delete
-#' @return a \code{data.frame} with the specified columns removed.
-#' @export
-#' @examples
-#' \dontrun{
-#'  iris %>% 
-#'    delete(Species) %>% 
-#'    colMeans
-#' }
-delete <-
-  function(from, ...) {
-    lst  <- as.list(substitute(list(...))[-1])
-    nms  <- lst %>% as.character
-    keep <- !colnames(from) %in% nms
-    from[, keep]
-  }
-
-#' Order a \code{data.frame} by expressions of the columns.
-#'
-#' This function uses the \code{order} function, so any expression which 
-#' works with \code{order} will work with \code{orderby}.
-#'
-#' @param unordered The data.frame to order.
-#' @param ... expressions to order by (as in \code{\link{order}}).
-#' @return an ordered data.frame.
-#' @export
-#' @examples
-#' \dontrun{
-#'  iris %>% 
-#'    orderby(Species, Sepal.Length)
-#'    
-#'  mtcars %>%
-#'    where(mpg > 18) %>%
-#'    orderby(cyl, -hp)
-#' }
-orderby <-
-  function(unordered, ...) {
-    idx <-
-      substitute(order(...)) %>% 
-      eval(unordered, parent.frame())
-    unordered[idx, , drop = FALSE]
-  }
-
-#' Filter a \code{data.frame} based on conditions (row-wise).
-#' 
-#' Equivalent to using the \code{data.frame[restriction ,]} syntax.
-#'
-#' @param unrestricted The \code{data.frame} to filter.
-#' @param restriction The restriction to apply.
-#' @return a \code{data.frame} with rows for which the restriction evaluates 
-#'         to \code{TRUE}.
-#' @export
-#' @examples
-#' \dontrun{
-#'  iris %>% 
-#'    where(Species == "virginica") %>% 
-#'    delete(Species) %>%
-#'    colMeans
-#' }
-where <-
-  function(unrestricted, restriction) {
-    idx <- 
-      substitute(restriction) %>% 
-      eval(unrestricted, parent.frame())
-    if (! all(idx %>% is.logical))
-      stop("The expression is not valid.", call.=FALSE)
-    unrestricted[idx, ]
-  }
-
-#' Select columns of certain classes.
-#' 
-#' Given a \code{data.frame}, and a list of classes, a new \code{data.frame} is returned
-#' with columns of these classes. Can be useful for example to extract numeric
-#' columns before passed to a function expecting numeric input, e.g. colMeans.
-#'
-#' @param data. The \code{data.frame} to filter.
-#' @param ... classes to look for (unquoted)
-#' @return a \code{data.frame} with the selected classes
-#' @export
-#' @examples
-#' \dontrun{
-#'  iris %>%
-#'    ofclass(numeric) %>%
-#'    colMeans
-#' 
-#'  # Maybe not what you'd expect...
-#'  airquality %>% 
-#'    ofclass(numeric) %>% 
-#'    head
-#'    
-#'  # ... then try this...
-#'  airquality %>%
-#'    ofclass(integer, numeric) %>%
-#'    head
-#' }
-ofclass <- 
-  function(data., ...)
-  {
-    idx <-
-      data. %>% 
-      sapply(class) %in% 
-        (as.list(substitute(list(...))[-1]) %>%
-         as.character)
-    data.[, idx]
-  }
-
-#' Select certain rows by indices and/or amount.
-#' 
-#' Given a data.frame and indices (and possibly an amount of rows) a
-#' data.frame with a subset of rows is returned.
-#'
-#' @param data. The \code{data.frame} to filter.
-#' @param from the starting index. Can alternatively be a vector, in which case
-#'        the other arguments are ignored. If NULL and \code{to} is specified, this
-#'        will be taken to be 1.
-#' @param to The end index. Should not be specified if \code{from} is a vector, or
-#'        \code{take} != NULL. If \code{to} is NULL and \code{from} is a number, 
-#'        then this will be taken to be \code{nrow(data.)}
-#' @param take if one of from and to is specified this is the amount of rows to
-#'        take.
-#' @return a \code{data.frame} with the selected rows.
-#' @export
-#' @examples
-#' \dontrun{
-#'  iris %>%
-#'    rows(140)
-#'    
-#'  iris %>%
-#'    rows(to = 10)
-#' 
-#'  iris %>%
-#'    rows(140, take = 3)
-#'    
-#'  iris %>%
-#'    rows(to = 140, take = 3)
 #'  
-#'  iris %>%
-#'    rows(seq(1, 10, 2))
-#'    
-#'  iris %>%
-#'    rows(20:30)
+#' good.times <- 
+#'   Sys.Date() %>% 
+#'   as.POSIXct %>%
+#'   seq(by = "15 mins", length.out = 100) %>%
+#'   data.frame(timestamp = .)
+#'
+#' good.times$quarter <- 
+#'   good.times %>%
+#'   series(timestamp) %>%
+#'   format("%M") %>%
+#'   as.numeric %>%
+#'   int.divide(15) %>%
+#'   plus(1)
 #' }
-rows <- 
-  function(data., from = NULL, to = NULL, take = NULL)
-  {
-    if (length(from) > 1) {
-      data.[from, ]
-    } else if (!is.null(from) & is.null(to) & is.null(take)) {
-      data.[from:nrow(data.), ]
-    } else if (is.null(from) & !is.null(to) & !is.null(take)) {
-      data.[(to - take + 1):to, ]
-    } else if (is.null(from) & !is.null(to)) {
-      data.[1:to, ]
-    } else if (!is.null(to)) {
-      data.[from:to, ]
-    } else {
-      data.[from:(from + take - 1), ]
-    }
-  }
+extract <- `[`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+Extract <- `[[` 
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+series <- `$` 
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+plus <- `+`
+  
+#' @rdname aliases
+#' @usage NULL
+#' @export
+minus <- `-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+times <- `*`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+multiply <- `*`
+
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+divide <- `/`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+int.divide <- `%/%`
+
+
+#' @rdname pipe
+#' @usage NULL
+#' @export
+`%.%` <- `%>%`

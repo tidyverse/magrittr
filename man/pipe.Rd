@@ -1,4 +1,5 @@
 \name{\%>\%}
+\alias{\%.\%}
 \alias{\%>\%}
 \title{Pipe an object forward into a function call/expression.}
 \usage{
@@ -20,7 +21,7 @@ only one argument, one can omit parentheses and the
 \code{.}. Only the outmost call is matched against the dot,
 which means that e.g. formulas can still use a dot which
 will not be matched. Nested functions will not be matched
-either.
+either. The syntax \code{`\%.\%`} is an alias.
 }
 \examples{
 \dontrun{
