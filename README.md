@@ -16,7 +16,7 @@ Installation:
 -------------
 
     library(devtools)
-    install_github("smbache/magrittr", branch = "bruyere")
+    install_github("smbache/magrittr", ref = "bruyere")
 
 Help overview:
 --------------
