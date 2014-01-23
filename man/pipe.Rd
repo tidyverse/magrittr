@@ -3,12 +3,12 @@
 \alias{\%>\%}
 \title{Pipe an object forward into a function call/expression.}
 \usage{
-tobacco \%>\% pipe
+lhs \%>\% rhs
 }
 \arguments{
-  \item{tobacco}{That which is to be piped}
+  \item{lhs}{That which is to be piped}
 
-  \item{pipe}{the pipe to be stuffed with tobacco.}
+  \item{rhs}{the pipe to be stuffed with tobacco.}
 }
 \description{
 The \code{\%>\%} operator pipes the left-hand side into an
@@ -21,7 +21,7 @@ only one argument, one can omit parentheses and the
 \code{.}. Only the outmost call is matched against the dot,
 which means that e.g. formulas can still use a dot which
 will not be matched. Nested functions will not be matched
-either. The syntax \code{`\%.\%`} is an alias.
+either.
 }
 \examples{
 \dontrun{
@@ -36,8 +36,8 @@ Batting \%>\%
 
 
 iris \%>\%
-  where(Petal.Length > 5) \%>\%
-  delete(Species) \%>\%
+  filter(Petal.Length > 5) \%>\%
+  select(-Species) \%>\%
   colMeans
 
 iris \%>\%

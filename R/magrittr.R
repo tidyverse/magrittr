@@ -8,10 +8,9 @@
 #' parentheses and the \code{.}. Only the outmost call is matched against the
 #' dot, which means that e.g. formulas can still use a dot which will not be
 #' matched. Nested functions will not be matched either.
-#' The syntax \code{`\%.\%`} is an alias.
 #'
-#' @param tobacco That which is to be piped
-#' @param pipe the pipe to be stuffed with tobacco.
+#' @param lhs That which is to be piped
+#' @param rhs the pipe to be stuffed with tobacco.
 #' @rdname pipe
 #' @export
 #' @examples
@@ -27,8 +26,8 @@
 #' 
 #' 
 #' iris %>%
-#'   where(Petal.Length > 5) %>%
-#'   delete(Species) %>%
+#'   filter(Petal.Length > 5) %>%
+#'   select(-Species) %>%
 #'   colMeans
 #'   
 #' iris %>%
@@ -36,40 +35,47 @@
 #'
 #' rnorm(1000) %>% abs %>% sum
 #' }
-`%>%` <- function(tobacco, pipe)
-{
-  # Capture the call.
-  cl <- match.call()
-  
-  # Is the rhs parentheses-less? 
-  if (length(cl[[3]]) == 1) {
+`%>%` <- 
+  function(lhs, rhs) 
+  {
     
-    # Construct a new expression with piped tobacco
-    e <- call(as.character(cl[[3]]), cl[[2]])
+    # Capture unevaluated argumetns
+    lhs <- substitute(lhs)
+    rhs <- substitute(rhs)
     
-  } else {
+    if (!is.call(rhs) && !is.name(rhs)) {
+      stop("RHS must be a function name or function call", call. = FALSE)
+    }
     
-    # Find positions in the call which are not themselves a call.
-    # this restricts the .-matching to the "first level". This enables using
-    # dots in e.g. formulas.
-    potential.dots <- 
-      Filter(function(j) !is.call(cl[[3]][[j]]), 2:length(cl[[3]]))
+    # Evaluate LHS and store result in new environment. Use unusual name
+    # to avoid potential name clashes
+    env <- new.env(parent = parent.frame())
+    env$`__LHS` <- eval(lhs, env)
     
-    # Substitute the dot by lhs if present at the indices found above.
-    e <- cl[[3]]
-    for (j in potential.dots)
-      e[[j]] <- do.call(substitute, list(e[[j]], list(. = cl[[2]])))
+    # Is the rhs parentheses-less? 
+    if (length(rhs) == 1) {
+      
+      # Construct a new expression with piped tobacco
+      e <- call(as.character(rhs), quote(`__LHS`))
+      
+    } else {
+      
+      # Find arguments that are just a single .
+      dots <- c(F, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
+      
+      if (any(dots)) {
+        # If found, replace with `__LHS`
+        e <- rhs
+        e[dots] <- rep(list(quote(`__LHS`)), sum(dots))
+      } else {
+        # Otherwise insert in first position
+        e <- as.call(c(rhs[[1]], quote(`__LHS`), as.list(rhs[-1])))
+      } 
+    }
     
-    # Check whether any substitutions were made,
-    # in which case tobacco is piped as the first argument.
-    if (identical(e, cl[[3]]))
-      e <- as.call(c(cl[[3]][[1]], cl[[2]], lapply(cl[[3]], function(x) x)[-1]))
-    
+    # Smoke the pipe (evaluate the call)
+    eval(e, env)
   }
-  
-  # Smoke the pipe (evaluate the call)
-  eval(e, parent.frame(), parent.frame())
-}
 
 #' Aliases
 #' 
@@ -78,16 +84,20 @@
 #' 
 #' Currently implemented aliases are
 #' \tabular{ll}{
-#' \code{extract:}    \tab \code{`[`}      \cr
-#' \code{Extract:}    \tab \code{`[[`}     \cr
-#' \code{series:}     \tab \code{`$`}      \cr
-#' \code{plus:}       \tab \code{`+`}      \cr
-#' \code{minus:}      \tab \code{`-`}      \cr
-#' \code{times:}      \tab \code{`*`}      \cr
-#' \code{multiply:}   \tab \code{`\%*\%`}  \cr
-#' \code{divide:}     \tab \code{`/`}      \cr
-#' \code{int.divide:} \tab \code{`\%/\%`}  \cr
-#' \code{`\%.\%`}     \tab \code{`\%>\%`}  \cr
+#' \code{extract:}            \tab \code{`[`}      \cr
+#' \code{extract2:}           \tab \code{`[[`}     \cr
+#' \code{use_series:}         \tab \code{`$`}      \cr
+#' \code{add:}                \tab \code{`+`}      \cr
+#' \code{subtract:}           \tab \code{`-`}      \cr
+#' \code{myltiply_by:}        \tab \code{`*`}      \cr
+#' \code{raise_to_power:}     \tab \code{`^`}      \cr
+#' \code{multiply_by_matrix:} \tab \code{`\%*\%`}  \cr
+#' \code{divide_by:}          \tab \code{`/`}      \cr
+#' \code{divide_by_int:}       \tab \code{`\%/\%`}  \cr
+#' \code{mod:}                \tab \code{`\%\%`}   \cr
+#' \code{and:}                \tab \code{`&`}      \cr
+#' \code{or:}                 \tab \code{`|`}      \cr
+#' \code{`\%.\%`}             \tab \code{`\%>\%`}  \cr
 #' }
 #' 
 #' @usage NULL
@@ -95,7 +105,6 @@
 #' @rdname aliases
 #' @name extract
 #' @examples
-#' \dontrun{
 #'  iris %>% 
 #'    extract(, 1:4) %>%
 #'    head
@@ -108,55 +117,73 @@
 #'
 #' good.times$quarter <- 
 #'   good.times %>%
-#'   series(timestamp) %>%
+#'   use_series(timestamp) %>%
 #'   format("%M") %>%
 #'   as.numeric %>%
-#'   int.divide(15) %>%
-#'   plus(1)
-#' }
+#'   divide_by_int(15) %>%
+#'   add(1)
 extract <- `[`
 
 #' @rdname aliases
 #' @usage NULL
 #' @export
-Extract <- `[[` 
+extract2 <- `[[` 
 
 #' @rdname aliases
 #' @usage NULL
 #' @export
-series <- `$` 
+use_series <- `$` 
 
 #' @rdname aliases
 #' @usage NULL
 #' @export
-plus <- `+`
+add <- `+`
   
 #' @rdname aliases
 #' @usage NULL
 #' @export
-minus <- `-`
+subtract <- `-`
 
 #' @rdname aliases
 #' @usage NULL
 #' @export
-times <- `*`
+multiply_by <- `*`
 
 #' @rdname aliases
 #' @usage NULL
 #' @export
-multiply <- `*`
+multiply_by_matrix <- `%*%`
 
 
 #' @rdname aliases
 #' @usage NULL
 #' @export
-divide <- `/`
+divide_by <- `/`
 
 #' @rdname aliases
 #' @usage NULL
 #' @export
-int.divide <- `%/%`
+divide_by_int <- `%/%`
 
+#' @rdname aliases
+#' @usage NULL
+#' @export
+raise_to_power <- `^`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+and <- `&`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+or <- `|`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+mod <- `%%`
 
 #' @rdname pipe
 #' @usage NULL
