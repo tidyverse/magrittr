@@ -9,8 +9,8 @@
 #' dot, which means that e.g. formulas can still use a dot which will not be
 #' matched. Nested functions will not be matched either.
 #'
-#' @param tobacco That which is to be piped
-#' @param pipe the pipe to be stuffed with tobacco.
+#' @param lhs That which is to be piped
+#' @param rhs the pipe to be stuffed with tobacco.
 #' @rdname pipe
 #' @export
 #' @examples
@@ -35,39 +35,46 @@
 #'
 #' rnorm(1000) %>% abs %>% sum
 #' }
-`%>%` <- function(tobacco, pipe)
+`%>%` <- 
+  function(lhs, rhs) 
 {
-  # Capture the call.
-  cl <- match.call()
   
+  # Capture unevaluated argumetns
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  
+  if (!is.call(rhs) && !is.name(rhs)) {
+    stop("RHS must be a function name or function call", call. = FALSE)
+  }
+    
+  # Evaluate LHS and store result in new environment. Use unusual name
+  # to avoid potential name clashes
+  env <- new.env(parent = parent.frame())
+  env$`__LHS` <- eval(lhs, env)
+    
   # Is the rhs parentheses-less? 
-  if (length(cl[[3]]) == 1) {
+  if (length(rhs) == 1) {
     
     # Construct a new expression with piped tobacco
-    e <- call(as.character(cl[[3]]), cl[[2]])
+    e <- call(as.character(rhs), quote(`__LHS`))
     
   } else {
     
-    # Find positions in the call which are not themselves a call.
-    # this restricts the .-matching to the "first level". This enables using
-    # dots in e.g. formulas.
-    potential.dots <- 
-      Filter(function(j) !is.call(cl[[3]][[j]]), 2:length(cl[[3]]))
+    # Find arguments that are just a single .
+    dots <- c(F, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
     
-    # Substitute the dot by lhs if present at the indices found above.
-    e <- cl[[3]]
-    for (j in potential.dots)
-      e[[j]] <- do.call(substitute, list(e[[j]], list(. = cl[[2]])))
-    
-    # Check whether any substitutions were made,
-    # in which case tobacco is piped as the first argument.
-    if (e == cl[[3]]) 
-      e <- as.call(c(cl[[3]][[1]], cl[[2]], lapply(cl[[3]], function(x) x)[-1]))
-    
+    if (any(dots)) {
+      # If found, replace with `__LHS`
+      e <- rhs
+      e[dots] <- rep(list(quote(`__LHS`)), sum(dots))
+    } else {
+      # Otherwise insert in first position
+      e <- as.call(c(rhs[[1]], quote(`__LHS`), as.list(rhs[-1])))
+    } 
   }
   
   # Smoke the pipe (evaluate the call)
-  eval(e, parent.frame(), parent.frame())
+  eval(e, env)
 }
 
 #' Select columns from \code{data.frame}, define new columns, or rename columns.
@@ -131,7 +138,7 @@ add <-
     existing <- 
       to %>% colnames %>% sapply(as.name)
     lst <- c(existing, lst)
-    do.call(select, c(cl[[2]], lst), envir = parent.frame())
+    do.call(select, c(lhs, lst), envir = parent.frame())
   }
 
 #' Delete columns from \code{data.frame}.

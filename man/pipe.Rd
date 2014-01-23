@@ -2,12 +2,12 @@
 \alias{\%>\%}
 \title{Pipe an object forward into a function call/expression.}
 \usage{
-tobacco \%>\% pipe
+lhs \%>\% rhs
 }
 \arguments{
-  \item{tobacco}{That which is to be piped}
+  \item{lhs}{That which is to be piped}
 
-  \item{pipe}{the pipe to be stuffed with tobacco.}
+  \item{rhs}{the pipe to be stuffed with tobacco.}
 }
 \description{
 The \code{\%>\%} operator pipes the left-hand side into an
