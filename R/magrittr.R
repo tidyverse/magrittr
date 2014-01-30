@@ -39,7 +39,7 @@
   function(lhs, rhs) 
   {
     
-    # Capture unevaluated argumetns
+    # Capture unevaluated arguments
     lhs <- substitute(lhs)
     rhs <- substitute(rhs)
     
@@ -47,31 +47,42 @@
       stop("RHS must be a function name or function call", call. = FALSE)
     }
     
-    # Evaluate LHS and store result in new environment. Use unusual name
-    # to avoid potential name clashes
+    # LHS will be evaluated and stored in a new environment. 
     env <- new.env(parent = parent.frame())
-    env$`__LHS` <- eval(lhs, env)
     
-    # Is the rhs parentheses-less? 
-    if (length(rhs) == 1) {
-      
-      # Construct a new expression with piped tobacco
-      e <- call(as.character(rhs), quote(`__LHS`))
-      
-    } else {
-      
-      # Find arguments that are just a single .
-      dots <- c(F, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
-      
-      if (any(dots)) {
-        # If found, replace with `__LHS`
-        e <- rhs
-        e[dots] <- rep(list(quote(`__LHS`)), sum(dots))
+    # Find an appropriate name to use for evaluation:
+    #   deparse(lhs) is useful for preserving the call
+    #   but is not always feasible, in which case __LHS is used.
+    nm  <- 
+      if (is.call(lhs) | is.name(lhs)) 
+        paste(deparse(lhs), collapse = "") 
+    else 
+      '__LHS'
+    
+    # carry out assignment.
+    assign(nm, eval(lhs, env), envir=env)
+    
+    # Construct the final expression to evaluate from lhs and rhs. Scenarios:
+    #  1) rhs is a function name and parens are omitted.
+    #  2a) rhs has one or more dots that qualify as placeholder for lhs.
+    #  2b) lhs is placed as first argument in rhs call.
+    e <- 
+      if (length(rhs) == 1) {
+        # Is the rhs parentheses-less? 
+        # Construct a new expression with piped tobacco
+        call(as.character(rhs), as.name(nm))
       } else {
-        # Otherwise insert in first position
-        e <- as.call(c(rhs[[1]], quote(`__LHS`), as.list(rhs[-1])))
-      } 
-    }
+        # Find arguments that are just a single .
+        dots <- c(F, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
+        if (any(dots)) {
+          # If found, replace with lhs
+          rhs[dots] <- rep(list(as.name(nm)), sum(dots))
+          rhs
+        } else {
+          # Otherwise insert in first position
+          as.call(c(rhs[[1]], as.name(nm), as.list(rhs[-1])))
+        } 
+      }
     
     # Smoke the pipe (evaluate the call)
     eval(e, env)

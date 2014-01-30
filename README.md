@@ -91,16 +91,29 @@ Example of usage:
        int.divide(15) %>%
        plus(1)
 
+     # Calls are preserved when possible:
+     fit <- 
+       iris %>%
+       lm(Sepal.Length ~ ., .)
+       
+     new.fit <- 
+        fit %>%
+        update(. ~ . - Species)
+
 List of aliases provided:
 --------------------------------------------------------------
 
-    extract:     `[`
-    Extract:	   `[[`
-    series:	     `$`
-    plus:	       `+`
-    minus:       `-`
-    times:	     `*`
-    multiply:	   `%*%`
-    divide:	     `/`
-    int.divide:	 `%/%`
-    `%.%`:       `%>%`
+    extract:            `[`
+    extract2:           `[[`
+    use_series:         `$`
+    add:	              `+`
+    subtract:           `-`
+    multiply_by:	      `*`
+    multiply_by_matrix: `%*%`
+    raise_to_power      `^`
+    divide_by:          `/`
+    divide_by_int:      `%/%`
+    mod:                `\%\%`
+    and:                `&`
+    or:                 `|`
+    `%.%`:              `%>%`
