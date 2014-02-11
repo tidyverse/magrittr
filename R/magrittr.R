@@ -51,8 +51,8 @@
       return(rhs(eval(lhs, env)))
     if (!  exists(paste(deparse(rhs), collapse = ""))
         && deparse(rhs[[1]]) == "function")
-      return(eval(rhs, enclos = parent.frame())
-            (eval(lhs, enclos = parent.frame())))
+      return(eval(rhs, parent.frame(), parent.frame())
+            (eval(lhs, parent.frame(), parent.frame())))
       
     if (!is.call(rhs) && !is.name(rhs)) {
       stop("RHS must be a function name or function call", call. = FALSE)
