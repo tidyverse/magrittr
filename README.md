@@ -16,7 +16,7 @@ Installation:
 -------------
 
     library(devtools)
-    install_github("smbache/magrittr", ref = "bruyere")
+    install_github("smbache/magrittr")
 
 Help overview:
 --------------
@@ -85,11 +85,11 @@ Example of usage:
 
      good.times$quarter <-
        good.times %>%
-       series(timestamp) %>%
+       use_series(timestamp) %>%
        format("%M") %>%
        as.numeric %>%
-       int.divide(15) %>%
-       plus(1)
+       divide_by_int(15) %>%
+       add(1)
 
      # Calls are preserved when possible:
      fit <- 

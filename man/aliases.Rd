@@ -15,20 +15,20 @@
 \title{Aliases}
 \description{
 magrittr provides a series of aliases which can be more
-pleasant to use when composing chains using the %>%
-operator.
+pleasant to use when composing chains using the
+\code{\%>\%} operator.
 }
 \details{
 Currently implemented aliases are \tabular{ll}{
-\code{extract:} \tab \code{`[`} \cr \code{extract2:} \tab
-\code{`[[`} \cr \code{use_series:} \tab \code{`$`} \cr
-\code{add:} \tab \code{`+`} \cr \code{subtract:} \tab
-\code{`-`} \cr \code{myltiply_by:} \tab \code{`*`} \cr
-\code{raise_to_power:} \tab \code{`^`} \cr
-\code{multiply_by_matrix:} \tab \code{`\%*\%`} \cr
-\code{divide_by:} \tab \code{`/`} \cr \code{divide_by_int:}
-\tab \code{`\%/\%`} \cr \code{mod:} \tab \code{`\%\%`} \cr
-\code{and:} \tab \code{`&`} \cr \code{or:} \tab \code{`|`}
+\code{extract} \tab \code{`[`} \cr \code{extract2} \tab
+\code{`[[`} \cr \code{use_series} \tab \code{`$`} \cr
+\code{add} \tab \code{`+`} \cr \code{subtract} \tab
+\code{`-`} \cr \code{myltiply_by} \tab \code{`*`} \cr
+\code{raise_to_power} \tab \code{`^`} \cr
+\code{multiply_by_matrix} \tab \code{`\%*\%`} \cr
+\code{divide_by} \tab \code{`/`} \cr \code{divide_by_int}
+\tab \code{`\%/\%`} \cr \code{mod} \tab \code{`\%\%`} \cr
+\code{and} \tab \code{`&`} \cr \code{or} \tab \code{`|`}
 \cr \code{`\%.\%`} \tab \code{`\%>\%`} \cr }
 }
 \examples{
