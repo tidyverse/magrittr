@@ -103,17 +103,22 @@ Example of usage:
 List of aliases provided:
 --------------------------------------------------------------
 
-    extract:            `[`
-    extract2:           `[[`
-    use_series:         `$`
-    add:	              `+`
-    subtract:           `-`
-    multiply_by:	      `*`
-    multiply_by_matrix: `%*%`
-    raise_to_power      `^`
-    divide_by:          `/`
-    divide_by_int:      `%/%`
-    mod:                `\%\%`
-    and:                `&`
-    or:                 `|`
-    `%.%`:              `%>%`
+    extract:                `[`
+    extract2:              `[[`
+    use_series:             `$`
+    add:                    `+`
+    subtract:               `-`
+    multiply_by:            `*`
+    multiply_by_matrix:   `%*%`
+    raise_to_power          `^`
+    divide_by:              `/`
+    divide_by_int:        `%/%`
+    mod:                 `\%\%`
+    and:                    `&`
+    or:                     `|`
+    equals                 `==`
+    is_greater_than         `>`    
+    is_weakly_greater_than `>=`
+    is_less_than            `<`
+    is_weakly_less_than    `<=`
+    `%.%`:                `%>%`

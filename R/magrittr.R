@@ -119,11 +119,16 @@
 #' \code{raise_to_power}     \tab \code{`^`}      \cr
 #' \code{multiply_by_matrix} \tab \code{`\%*\%`}  \cr
 #' \code{divide_by}          \tab \code{`/`}      \cr
-#' \code{divide_by_int}       \tab \code{`\%/\%`}  \cr
+#' \code{divide_by_int}      \tab \code{`\%/\%`}  \cr
 #' \code{mod}                \tab \code{`\%\%`}   \cr
 #' \code{and}                \tab \code{`&`}      \cr
 #' \code{or}                 \tab \code{`|`}      \cr
-#' \code{`\%.\%`}             \tab \code{`\%>\%`}  \cr
+#' \code{equals}             \tab \code{`==`}     \cr
+#' \code{is_greater_than}    \tab \code{`>`}      \cr
+#' \code{is_weakly_greater_than} \tab \code{`>=`} \cr
+#' \code{is_less_than}       \tab \code{`<`}      \cr
+#' \code{is_weakly_less_than}    \tab \code{`<=`} \cr
+#' \code{`\%.\%`}             \tab \code{`\%>\%`} \cr
 #' }
 #' 
 #' @usage NULL
@@ -210,6 +215,32 @@ or <- `|`
 #' @usage NULL
 #' @export
 mod <- `%%`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+equals <- `==`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+is_greater_than <- `>`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+is_weakly_greater_than <- `>=`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+is_less_than <- `<`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+is_weakly_less_than <- `<=`
+
 
 #' @rdname pipe
 #' @usage NULL

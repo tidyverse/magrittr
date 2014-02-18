@@ -7,4 +7,6 @@ Author: Stefan Milton Bache <stefan@stefanbache.dk> and Hadley Wickham
     <h.wickham@gmail.com>
 Maintainer: Stefan <stefan@stefanbache.dk>
 Description: Provides pipe-forward like operator.
+Suggests:
+    testthat
 License: GPL

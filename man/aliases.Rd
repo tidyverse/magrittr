@@ -3,8 +3,13 @@
 \alias{and}
 \alias{divide_by}
 \alias{divide_by_int}
+\alias{equals}
 \alias{extract}
 \alias{extract2}
+\alias{is_greater_than}
+\alias{is_less_than}
+\alias{is_weakly_greater_than}
+\alias{is_weakly_less_than}
 \alias{mod}
 \alias{multiply_by}
 \alias{multiply_by_matrix}
@@ -29,7 +34,12 @@ Currently implemented aliases are \tabular{ll}{
 \code{divide_by} \tab \code{`/`} \cr \code{divide_by_int}
 \tab \code{`\%/\%`} \cr \code{mod} \tab \code{`\%\%`} \cr
 \code{and} \tab \code{`&`} \cr \code{or} \tab \code{`|`}
-\cr \code{`\%.\%`} \tab \code{`\%>\%`} \cr }
+\cr \code{equals} \tab \code{`==`} \cr
+\code{is_greater_than} \tab \code{`>`} \cr
+\code{is_weakly_greater_than} \tab \code{`>=`} \cr
+\code{is_less_than} \tab \code{`<`} \cr
+\code{is_weakly_less_than} \tab \code{`<=`} \cr
+\code{`\%.\%`} \tab \code{`\%>\%`} \cr }
 }
 \examples{
 iris \%>\%
