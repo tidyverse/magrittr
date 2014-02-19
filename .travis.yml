@@ -4,7 +4,11 @@ before_install:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
+install:
+  - ./travis-tool.sh r_binary_install testthat
 
+before_script:
+  - Rscript -e "library(testthat)"
 script: ./travis-tool.sh run_tests
 
 after_failure:
