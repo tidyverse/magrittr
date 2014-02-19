@@ -38,8 +38,7 @@ Currently implemented aliases are \tabular{ll}{
 \code{is_greater_than} \tab \code{`>`} \cr
 \code{is_weakly_greater_than} \tab \code{`>=`} \cr
 \code{is_less_than} \tab \code{`<`} \cr
-\code{is_weakly_less_than} \tab \code{`<=`} \cr
-\code{`\%.\%`} \tab \code{`\%>\%`} \cr }
+\code{is_weakly_less_than} \tab \code{`<=`} \cr }
 }
 \examples{
 iris \%>\%
