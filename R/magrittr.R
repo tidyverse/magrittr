@@ -80,7 +80,7 @@
     #  2b) lhs is placed as first argument in rhs call.
     if (is.symbol(rhs)) {
 
-      if (!exists(deparse(rhs), mode = "function"))
+      if (!exists(deparse(rhs), parent.frame(), mode = "function"))
         stop("RHS appears to be a function name, but it cannot be found.")
       e <- call(as.character(rhs), as.name(nm)) # (1)
 
