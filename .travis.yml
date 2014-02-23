@@ -5,6 +5,8 @@ before_install:
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
   - ./travis-tool.sh github_package testthat
+install:
+  - ./travis-tool.sh r_binary_install knitr
 
 script: ./travis-tool.sh run_tests
 

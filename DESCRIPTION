@@ -1,12 +1,14 @@
 Package: magrittr
 Type: Package
 Title: magrittr - ceci n'est pas une pipe
-Version: 0.1.4
+Version: 1.0.0
 Date: 2014-01-19
 Author: Stefan Milton Bache <stefan@stefanbache.dk> and Hadley Wickham
     <h.wickham@gmail.com>
 Maintainer: Stefan <stefan@stefanbache.dk>
 Description: Provides pipe-forward like operator.
 Suggests:
-    testthat
+    testthat,
+    knitr
+VignetteBuilder: knitr
 License: GPL
