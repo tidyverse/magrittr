@@ -11,4 +11,4 @@ Suggests:
     testthat,
     knitr
 VignetteBuilder: knitr
-License: GPL
+License: MIT
