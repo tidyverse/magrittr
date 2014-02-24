@@ -1,4 +1,4 @@
-magrittr -  Ceci n'est pas une pipe.
+magrittr -  Ceci n'est pas un pipe.
 ====================================
 
 [![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=master)](https://travis-ci.org/smbache/magrittr)
@@ -11,6 +11,7 @@ in situations of multiple nested function calls.
 It is particularly useful when manipulating data frames etc. 
 The package also contains a few useful aliases that make other R operators
 fit well into the syntax advocated by the package.
+To learn more, see the included vignette.
 
 Installation:
 -------------
