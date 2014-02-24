@@ -1,10 +1,16 @@
 <!--
 %\VignetteEngine{knitr}
-%\VignetteIndexEntry{Introduction to dplyr}
+%\VignetteIndexEntry{Introducing magrittr}
 -->
 
-
-
+```{r, echo = FALSE, message = FALSE}
+library(magrittr)
+options(scipen = 3)
+knitr::opts_chunk$set(
+  comment = NA,
+  error   = FALSE,
+  tidy    = FALSE)
+```
 
 ![magrittr-pipe](magrittr.jpg)
 
@@ -30,8 +36,7 @@ code in a way that makes it both more intuitive to write and read.
 
 Consider the following example, in which the `airquality` dataset shipped with
 R is aggregated by week. We also print the first 3 rows for exposition.
-
-```r
+```{r}
 library(magrittr)
 
 weekly <-
@@ -41,14 +46,6 @@ weekly <-
 
 weekly %>% head(3)
 ```
-
-```
-  Date %>% format("%W") Ozone Solar.R   Wind  Temp Month  Day Date
-1                    18 26.75   192.5  9.875 68.75     5  2.5 1218
-2                    19 15.40   192.6 12.280 64.00     5  9.8 1225
-3                    20 18.14   203.4 12.457 63.29     5 17.0 1232
-```
-
 We start with the value `airquality` (a `data.frame`). Then based on this, we 
 make the "transformation" of adding a `Date` column using month, day and 
 year (the year can be found in the dataset's documentation). Then we 
@@ -56,21 +53,12 @@ aggregate the data by week, which is a "format"" of the date, and
 we use the `mean` function as aggregator. Note how the code is arranged in the logical
 order of how you think about the task: data->transform->aggregate.
 A horrific alternative would be to write
-
-```r
+```{r}
 weekly <- aggregate(. ~ format(Date, "%W"), transform(airquality, 
   Date = as.Date(paste(1973, Month, Day, sep = "-"))), mean)
 
 head(weekly, 3)
 ```
-
-```
-  format(Date, "%W") Ozone Solar.R   Wind  Temp Month  Day Date
-1                 18 26.75   192.5  9.875 68.75     5  2.5 1218
-2                 19 15.40   192.6 12.280 64.00     5  9.8 1225
-3                 20 18.14   203.4 12.457 63.29     5 17.0 1232
-```
-
 There is a lot more clutter with parentheses and the mental task of deciphering
 the code is more challenging---in particular if you did not write it.
 Note how even the extraction of a first few rows has a semantic appeal in the
@@ -81,23 +69,15 @@ but one often sees cluttered lines like the ones presented.
 
 And here is another selling point. Suppose I want to quickly go a step further and 
 extract a subset somewhere in the process:
-
-```r
+```{r}
 windy.weeks <-
   airquality %>% 
   transform(Date = paste(1973, Month, Day, sep = "-") %>% as.Date) %>% 
   aggregate(. ~ Date %>% format("%W"), ., mean) %>%
   subset(Wind > 12, c(Ozone, Solar.R, Wind)) %>% 
   print
-```
 
 ```
-  Ozone Solar.R  Wind
-2 15.40   192.6 12.28
-3 18.14   203.4 12.46
-7 27.00   207.7 14.53
-```
-
 I will refrain from making the alternative mess even messier, but it should be 
 clear that adding steps in a *magrittr* chain is simpler than working ones
 way through a labyrinth of parentheses.
@@ -120,18 +100,10 @@ argument). Here, `LHS %>% print()`, or even `LHS %>% print(.)` would also work.
 
 One feature, which was not utilized above is piping into *anonymous functions*.
 This is also possible, e.g.
-
-```r
+```{r}
 windy.weeks %>%
 function(x) rbind(x %>% head(1), x %>% tail(1))
 ```
-
-```
-  Ozone Solar.R  Wind
-2  15.4   192.6 12.28
-7  27.0   207.7 14.53
-```
-
 
 To summarize the important features:
 
@@ -144,27 +116,20 @@ To summarize the important features:
 In addition to the `%>%`-operator, *magrittr* provides some aliases for other
 operators which make operations such as addition or mulitplication fit well 
 into the *magrittr*-syntax. As an example, consider:
-
-```r
+```{r}
 rnorm(1000)    %>%
 multiply_by(5) %>%
 add(5)         %>%
 function(x) 
   cat("Mean:",     x %>% mean, 
       "Variance:", x %>% var,  "\n")
-```
 
 ```
-Mean: 4.719 Variance: 24.78 
-```
-
 which could be written in more compact form as
-
-```r
+```{r, results = 'hide'}
 rnorm(100) %>% `*`(5) %>% `+`(5) %>% 
 function(x) cat("Mean:", x %>% mean, "Variance:", x %>% var,  "\n")
 ```
-
 To see a list of the aliases, execute e.g. `?multiply_by`. To see more
 examples of `%>%` use, see development page: 
 [github.com/smbache/magrittr](http://github.com/smbache/magrittr).
