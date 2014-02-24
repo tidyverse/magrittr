@@ -1,6 +1,6 @@
 Package: magrittr
 Type: Package
-Title: magrittr - ceci n'est pas une pipe
+Title: magrittr - ceci n'est pas un pipe
 Version: 1.0.0
 Date: 2014-01-19
 Author: Stefan Milton Bache <stefan@stefanbache.dk> and Hadley Wickham

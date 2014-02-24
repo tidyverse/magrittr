@@ -3,7 +3,7 @@
 \alias{magrittr}
 \docType{package}
 \title{
-magrittr - ceci n'est pas une pipe!
+magrittr - ceci n'est pas un pipe!
 }
 \description{
 This package provides pipe-forwarding mechanisms similar to (but not exactly 
@@ -12,12 +12,13 @@ much more clean and readable way, and avoids making a mess in situations of
 multiple nested function calls. It is particularly useful when manipulating
 data frames etc. The package also contains a few useful functions which 
 fit well into the syntax allowed by the package.
+For a brief introduction, see \code{vignette("magrittr")}.
 }
 \details{
 \tabular{ll}{
 Package: \tab magrittr\cr
 Type: \tab Package\cr
-Version: \tab 0.1.4\cr
+Version: \tab 1.0.0\cr
 Date: \tab 2014-01-01\cr
 License: GPL\cr
 }
