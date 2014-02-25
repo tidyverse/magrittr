@@ -1,12 +1,13 @@
 Package: magrittr
 Type: Package
-Title: magrittr - ceci n'est pas un pipe
+Title: magrittr - a forward-pipe operator for R
 Version: 1.0.0
 Date: 2014-01-19
-Author: Stefan Milton Bache <stefan@stefanbache.dk> and Hadley Wickham
-    <h.wickham@gmail.com>
+Author: Stefan Milton Bache <stefan@stefanbache.dk> and
+    Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Stefan <stefan@stefanbache.dk>
-Description: Provides a pipe-forward like operator.
+Description: Provides a mechanism for chaining commands with a
+    forwad-piping mechanism. Ceci n'est pas un pipe.
 Suggests:
     testthat,
     knitr
