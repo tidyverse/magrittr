@@ -7,7 +7,7 @@ Author: Stefan Milton Bache <stefan@stefanbache.dk> and
     Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Stefan <stefan@stefanbache.dk>
 Description: Provides a mechanism for chaining commands with a
-    forwad-piping mechanism. Ceci n'est pas un pipe.
+    new forward-pipe operator. Ceci n'est pas un pipe.
 Suggests:
     testthat,
     knitr
