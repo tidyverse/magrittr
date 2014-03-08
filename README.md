@@ -4,7 +4,7 @@ magrittr -  Ceci n'est pas un pipe.
 [![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=master)](https://travis-ci.org/smbache/magrittr)
 
 Make your code smokin' with magrittr's pipe operator.
-The pipe-forwarding mechanism provided are similar to (but not exactly 
+The pipe-forwarding mechanism provided is similar to (but not exactly 
 like) e.g. F#'s pipe-forward operator. It allows you to write code in a 
 much more clean and readable way, and you will avoid making a mess 
 in situations of multiple nested function calls. 
@@ -18,6 +18,11 @@ Installation:
 
     library(devtools)
     install_github("smbache/magrittr")
+
+Alternatively, you can install from CRAN:
+
+    install.packages("magrittr")
+    
 
 Help overview:
 --------------
@@ -114,7 +119,7 @@ List of aliases provided:
     raise_to_power          `^`
     divide_by:              `/`
     divide_by_int:        `%/%`
-    mod:                 `\%\%`
+    mod:                  `\%%`
     and:                    `&`
     or:                     `|`
     equals                 `==`
