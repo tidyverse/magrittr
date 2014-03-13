@@ -21,21 +21,15 @@
 #' 1:10 %>% 
 #'   sin %>% 
 #'   fun({d <- abs(x) > 0.5; x*d})
-fun <- function(value, body, arg = NULL)
+fun <- function(value, body, arg = "x")
 {
   # Capture the input arguments
   body <- substitute(body)
-  arg  <- substitute(arg)
+  arg  <- as.character(substitute(arg))
+
+  # Construct the argument pairlist
+  pl   <- as.pairlist({ al <- list(); `[[<-`(al, arg, ) })
   
-  # If no arg is supplied, default to `x`
-  if (is.null(arg))
-    arg <- substitute(x)
-  
-  # Create a function inheriting from the parent frame
-  fun <- eval(expression(function() {}), parent.frame(), parent.frame())
-  formals(fun)[[as.character(arg)]] <- NA
-  body(fun) <- body
-  
-  # Evaluate with arg = value  
-  fun(value)
+  # Create and evaluate funtion.
+  eval(call("function", pl, body), parent.frame(), parent.frame())(value)
 }
