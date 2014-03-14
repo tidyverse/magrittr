@@ -1,4 +1,4 @@
-#' Shorthand notation for anonymous functions 
+#' Shorthand notation for anonymous/lambda functions 
 #' in magrittr pipelines.
 #'
 #' It is suggested to use this for anonymous functions when composing chains
@@ -13,15 +13,15 @@
 #' @export
 #' @examples
 #' iris %>%
-#'   fun({ rbind(x %>% head, x %>% tail) })
+#'   lambda({ rbind(x %>% head, x %>% tail) })
 #'   
 #' iris %>%
-#'   fun({ rbind(z %>% head, z %>% tail) }, z)
+#'   lambda({ rbind(z %>% head, z %>% tail) }, z)
 #'   
 #' 1:10 %>% 
 #'   sin %>% 
-#'   fun({d <- abs(x) > 0.5; x*d})
-fun <- function(value, body, arg = "x")
+#'   lambda({d <- abs(x) > 0.5; x*d})
+lambda <- function(value, body, arg = "x")
 {
   # Capture the input arguments
   body <- substitute(body)
