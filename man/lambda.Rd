@@ -1,9 +1,9 @@
-\name{fun}
-\alias{fun}
-\title{Shorthand notation for anonymous functions
+\name{lambda}
+\alias{lambda}
+\title{Shorthand notation for anonymous/lambda functions
 in magrittr pipelines.}
 \usage{
-fun(value, body, arg = NULL)
+lambda(value, body, arg = "x")
 }
 \arguments{
   \item{value}{the value to be fed into the function}
@@ -22,13 +22,13 @@ avoids the high precedence of the \code{function} keyword.
 }
 \examples{
 iris \%>\%
-  fun({ rbind(x \%>\% head, x \%>\% tail) })
+  lambda({ rbind(x \%>\% head, x \%>\% tail) })
 
 iris \%>\%
-  fun({ rbind(z \%>\% head, z \%>\% tail) }, z)
+  lambda({ rbind(z \%>\% head, z \%>\% tail) }, z)
 
 1:10 \%>\%
   sin \%>\%
-  fun({d <- abs(x) > 0.5; x*d})
+  lambda({d <- abs(x) > 0.5; x*d})
 }
 

@@ -9,7 +9,7 @@
 #' @param value the value to be fed into the function
 #' @param body the body of the anonymous function
 #' @param arg the name used to reference \code{value} in the function. Defaults to x.
-#' @rdname fun
+#' @rdname lambda
 #' @export
 #' @examples
 #' iris %>%
