@@ -5,17 +5,24 @@ magrittr -  Ceci n'est pas un pipe.
 
 Make your code smokin' with magrittr's pipe operator.
 The pipe-forwarding mechanism provided is similar to (but not exactly 
-like) e.g. F#'s pipe-forward operator. It allows you to write code in a 
-much more clean and readable way, and you will avoid making a mess 
-in situations of multiple nested function calls. 
+like) e.g. F#'s pipe-forward operator or the classical unix pipe. 
+It allows you to write code in a much more clean and readable way,
+and you will avoid making a mess in situations of multiple nested function calls. 
 It is particularly useful when manipulating data frames etc. 
 The package also contains a few useful aliases that make other R operators
 fit well into the syntax advocated by the package.
-To learn more, see the included vignette.
 
-NB: This branch explores two new features, a tee operator `%T>%` and the
-possibilty to make add a fixed side-effect to pipelines using `teed_pipe`.
-See their documentation for details.
+In addition to the pipe operator, magrittr also contains a tee-like 
+operator, `%T>%`, which can be used in pipelines to add side-effects at certain
+steps in the chain, for example logging. It is also possible to make 
+make a pipe-operator with a fixed side-effect at *each* step in pipeline.
+
+Finally, there is a shortcut for anonymous functions/lambda
+expressions using `lambda` (or the alias `l`). This is designed to have
+a signature which is very convenient to use with `%>%`.
+
+To learn more, see the included vignette and/or see the examples below.
+
 
 Installation:
 -------------
@@ -110,6 +117,19 @@ Example of usage:
         fit %>%
         update(. ~ . - Species)
         
+     # Examples using anonymous functions:
+     iris %>% 
+       function(x) { 
+         rbind(x %>% head, x %>% tail)
+       }
+      
+     iris %>% 
+       lambda({ rbind(x %>% head, x %>% tail) })
+     
+     iris %>% 
+       l({ rbind(x %>% head, x %>% tail)})
+        
+        
      # Examples of the tee operator and teed_pipe.
      
      1:10 %T>% plot(type = "l") %>% multiply_by(2)
@@ -151,4 +171,4 @@ List of aliases provided:
     is_weakly_greater_than `>=`
     is_less_than            `<`
     is_weakly_less_than    `<=`
-    `%.%`:                `%>%`
+    `l`:                 lambda
