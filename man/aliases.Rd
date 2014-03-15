@@ -10,6 +10,7 @@
 \alias{is_less_than}
 \alias{is_weakly_greater_than}
 \alias{is_weakly_less_than}
+\alias{l}
 \alias{mod}
 \alias{multiply_by}
 \alias{multiply_by_matrix}
@@ -38,7 +39,8 @@ Currently implemented aliases are \tabular{ll}{
 \code{is_greater_than} \tab \code{`>`} \cr
 \code{is_weakly_greater_than} \tab \code{`>=`} \cr
 \code{is_less_than} \tab \code{`<`} \cr
-\code{is_weakly_less_than} \tab \code{`<=`} \cr }
+\code{is_weakly_less_than}\tab \code{`<=`} \cr \code{l}
+\tab\code{lambda} \cr }
 }
 \examples{
 iris \%>\%

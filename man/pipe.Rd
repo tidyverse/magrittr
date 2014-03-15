@@ -1,13 +1,13 @@
 \name{\%>\%}
 \alias{\%>\%}
 \title{Pipe an object forward into a function call/expression.}
-\usage{
-lhs \%>\% rhs
-}
 \arguments{
   \item{lhs}{That which is to be piped}
 
   \item{rhs}{the pipe to be stuffed with tobacco.}
+
+  \item{tee}{Not used directly, but by \code{\%T>\%} and
+  \code{teed_pipe}.}
 }
 \description{
 The \code{\%>\%} operator pipes the left-hand side into an
@@ -21,6 +21,10 @@ only one argument, one can omit parentheses and the
 which means that e.g. formulas can still use a dot which
 will not be matched. Nested functions will not be matched
 either.
+}
+\details{
+The operator is used like other binary operators: \code{
+lhs \%>\% rhs }
 }
 \examples{
 \dontrun{

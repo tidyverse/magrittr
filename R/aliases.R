@@ -22,7 +22,8 @@
 #' \code{is_greater_than}    \tab \code{`>`}      \cr
 #' \code{is_weakly_greater_than} \tab \code{`>=`} \cr
 #' \code{is_less_than}       \tab \code{`<`}      \cr
-#' \code{is_weakly_less_than}    \tab \code{`<=`} \cr
+#' \code{is_weakly_less_than}\tab \code{`<=`}     \cr
+#' \code{l}                  \tab\code{lambda}    \cr
 #' }
 #'
 #' @usage NULL

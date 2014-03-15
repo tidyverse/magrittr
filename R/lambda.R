@@ -33,3 +33,8 @@ lambda <- function(value, body, arg = "x")
   # Create and evaluate funtion.
   eval(call("function", pl, body), parent.frame(), parent.frame())(value)
 }
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+l <- lambda
