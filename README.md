@@ -28,7 +28,7 @@ Installation:
 -------------
 
     library(devtools)
-    install_github("smbache/magrittr")
+    install_github("smbache/magrittr", ref = "tee")
 
 Alternatively, you can install from CRAN:
 
