@@ -13,6 +13,10 @@ The package also contains a few useful aliases that make other R operators
 fit well into the syntax advocated by the package.
 To learn more, see the included vignette.
 
+NB: This branch explores two new features, a tee operator `%T>%` and the
+possibilty to make add a fixed side-effect to pipelines using `teed_pipe`.
+See their documentation for details.
+
 Installation:
 -------------
 
@@ -105,6 +109,26 @@ Example of usage:
      new.fit <- 
         fit %>%
         update(. ~ . - Species)
+        
+     # Examples of the tee operator and teed_pipe.
+     
+     1:10 %T>% plot(type = "l") %>% multiply_by(2)
+     
+     # Define a logging function
+     logger <- function(x)
+        cat(as.character(Sys.time()), ":", nrow(x), "\n")
+
+     # mask %>% with a version using the logger.
+     `%>%` <- teed_pipe(logger)
+
+     # Test it:
+     iris %>%
+        subset(Species == "setosa") %>%
+        subset(Sepal.Length > 5) %>%
+        tail(10)
+
+     # Restore the original pipe:
+     rm(`%>%`)
 
 List of aliases provided:
 --------------------------------------------------------------
