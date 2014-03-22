@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' 1:10 %T>% 
-#'    lambda({ cat("LHS:", x, "\n")}) %>% 
+#'    lambda(cat("LHS:", x, "\n")) %>% 
 #'    multiply_by(2)
 `%T>%` <- 
   function(lhs, rhs)
