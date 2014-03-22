@@ -17,9 +17,9 @@
 `%T>%` <- 
   function(lhs, rhs)
   {
-    cl <- match.call()
-    cl[[1]] <- as.name("%>%")
-    cl$tee <- TRUE
+    cl      <- match.call()
+    cl[[1]] <- quote(magrittr:::pipe)
+    cl$tee  <- TRUE
     eval(cl, parent.frame(), parent.frame())
   }
 
@@ -48,11 +48,17 @@
 #'    
 #' # Restore the original pipe:
 #' rm(`%>%`)
-teed_pipe <- function(fun)
-{
-  if (!is.function(fun))
-    stop("Argument `fun` must be a function.")
-  teed <- `%>%`
-  formals(teed)$tee <- fun
-  teed
-}
+teed_pipe <- 
+  function(fun)
+    if (!is.function(fun)) {
+      stop("Argument `fun` must be a function.")
+    } else {
+      function(lhs, rhs)
+      {
+        cl      <- match.call()
+        cl[[1]] <- quote(magrittr:::pipe)
+        cl$tee  <- fun
+        eval(cl, parent.frame(), parent.frame())
+      }
+    }
+    
