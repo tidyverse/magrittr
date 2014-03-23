@@ -130,7 +130,7 @@ Example of usage:
        l({ rbind(x %>% head, x %>% tail)})
         
         
-     # Examples of the tee operator and teed_pipe.
+     # Examples of the tee operator and pipe_with.
      
      1:10 %T>% plot(type = "l") %>% multiply_by(2)
      
@@ -138,17 +138,14 @@ Example of usage:
      logger <- function(x)
         cat(as.character(Sys.time()), ":", nrow(x), "\n")
 
-     # mask %>% with a version using the logger.
-     `%>%` <- teed_pipe(logger)
+     # Create a pipe using the logger.
+     `%L>%` <- pipe_with(logger)
 
      # Test it:
      iris %>%
-        subset(Species == "setosa") %>%
-        subset(Sepal.Length > 5) %>%
+        subset(Species == "setosa") %L>%
+        subset(Sepal.Length > 5) %L>%
         tail(10)
-
-     # Restore the original pipe:
-     rm(`%>%`)
 
 List of aliases provided:
 --------------------------------------------------------------
