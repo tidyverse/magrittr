@@ -3,6 +3,8 @@ magrittr -  Ceci n'est pas un pipe.
 
 [![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=master)](https://travis-ci.org/smbache/magrittr)
 
+NB: This is a branch with experimental features...
+
 Make your code smokin' with magrittr's pipe operator.
 The pipe-forwarding mechanism provided is similar to (but not exactly 
 like) e.g. F#'s pipe-forward operator or the classical unix pipe. 
@@ -29,10 +31,6 @@ Installation:
 
     library(devtools)
     install_github("smbache/magrittr", ref = "tee")
-
-Alternatively, you can install from CRAN:
-
-    install.packages("magrittr")
     
 
 Help overview:
