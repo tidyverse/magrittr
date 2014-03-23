@@ -1,8 +1,18 @@
-# Internal pipe function.
-pipe <-
-  function(lhs, rhs, tee = FALSE)
+#' Function to create a pipe operator.
+#'
+#' @param tee Either a logical or a function. 
+#'
+#' @return When tee is FALSE a standard pipe is returned. When tee is TRUE
+#'   a tee is returned, i.e. the rhs is used for the side-effect and the 
+#'   the tee passes on the left-hand side. When tee is a function, the return
+#'   value is a pipe where the function is attached as a side-effect, i.e. it
+#'   works like a pipe, but also evaluates the function with the left-hand side
+#'   as argument.
+#'    
+#' @details This is not exported.
+pipe <- function(tee = FALSE) 
+  function(lhs, rhs)
   {
-
     # Capture unevaluated arguments
     lhs <- substitute(lhs)
     rhs <- substitute(rhs)
@@ -21,15 +31,19 @@ pipe <-
     #   for a few special cases.
     nm <- paste(deparse(lhs), collapse = "")
     nm <-
-      if (object.size(nm) < 1e4 && 
+      if (nchar(nm) < 9900 && 
          (is.call(lhs) || is.name(lhs))) nm else "__LHS"
    
     # carry out assignment.
     env[[nm]] <- eval(lhs, env)
     
-    # Evaluate potential tee
-    if (is.function(tee))
-      tee(env[[nm]])
+    # Evaluate potential tee if one such is attached.
+    if (is.function(tee)) {
+      # Evaluate the tee in env to preserve call (which e.g. is
+      # used in `plot`)
+      env$tee <- tee
+      eval(substitute(tee(nm), list(nm = as.name(nm))), env)
+    }
     
     if (is.function(rhs)) {
       
@@ -118,11 +132,4 @@ pipe <-
 #'
 #' rnorm(1000) %>% abs %>% sum
 #' }
-`%>%` <- 
-  function(lhs, rhs)
-  {
-    cl      <- match.call()
-    cl[[1]] <- quote(magrittr:::pipe)
-    eval(cl, parent.frame(), parent.frame())
-  }
-    
+`%>%` <- pipe()

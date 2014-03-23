@@ -22,13 +22,13 @@ avoids the high precedence of the \code{function} keyword.
 }
 \examples{
 iris \%>\%
-  lambda({ rbind(x \%>\% head, x \%>\% tail) })
+  lambda(rbind(x \%>\% head, x \%>\% tail))
 
 iris \%>\%
-  lambda({ rbind(z \%>\% head, z \%>\% tail) }, z)
+  lambda(rbind(z \%>\% head, z \%>\% tail), z)
 
 1:10 \%>\%
   sin \%>\%
-  lambda({d <- abs(x) > 0.5; x*d})
+  lambda({ d <- abs(x) > 0.5; x*d })
 }
 

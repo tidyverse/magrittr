@@ -14,51 +14,36 @@
 #' 1:10 %T>% 
 #'    lambda(cat("LHS:", x, "\n")) %>% 
 #'    multiply_by(2)
-`%T>%` <- 
-  function(lhs, rhs)
-  {
-    cl      <- match.call()
-    cl[[1]] <- quote(magrittr:::pipe)
-    cl$tee  <- TRUE
-    eval(cl, parent.frame(), parent.frame())
-  }
+`%T>%` <- pipe(tee = TRUE)
 
 #' Create a pipe operator with a fixed side-effect.
 #'
-#' This is useful e.g. for logging each step in a pipeline.
+#' This is useful e.g. for logging, plotting, or printing
+#' each step in a pipeline.
 #'
-#' @param fun a function which will be evaluated with left-hand side of
-#'            a pipe expression as argument.
+#' @param fun a function which will be evaluated with 
+#'  left-hand side of a pipe expression as argument.
 #' @return a pipe operator with the attached side effect.
-#' @rdname teed_pipe
+#' @rdname pipe_with
 #' @export
 #' @examples
 #' # Define a logging function
 #' logger <- function(x)
 #'   cat(as.character(Sys.time()), ":", nrow(x), "\n")
 #'
-#' # mask %>% with a version using the logger.
-#' `%>%` <- teed_pipe(logger)
+#' # Create a pipe using the logger.
+#' `%L>%` <- pipe_with(logger)
 #' 
 #' # Test it:
-#' iris %>% 
-#'    subset(Species == "setosa") %>%  
-#'    subset(Sepal.Length > 5) %>% 
+#' iris %L>% 
+#'    subset(Species == "setosa") %L>%  
+#'    subset(Sepal.Length > 5) %L>% 
 #'    tail(10)
-#'    
-#' # Restore the original pipe:
-#' rm(`%>%`)
-teed_pipe <- 
+pipe_with <- 
   function(fun)
     if (!is.function(fun)) {
       stop("Argument `fun` must be a function.")
     } else {
-      function(lhs, rhs)
-      {
-        cl      <- match.call()
-        cl[[1]] <- quote(magrittr:::pipe)
-        cl$tee  <- fun
-        eval(cl, parent.frame(), parent.frame())
-      }
+      pipe(tee = fun)
     }
     

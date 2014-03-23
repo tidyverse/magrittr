@@ -13,10 +13,10 @@
 #' @export
 #' @examples
 #' iris %>%
-#'   lambda( rbind(x %>% head, x %>% tail) )
+#'   lambda(rbind(x %>% head, x %>% tail))
 #'   
 #' iris %>%
-#'   lambda( rbind(z %>% head, z %>% tail), z)
+#'   lambda(rbind(z %>% head, z %>% tail), z)
 #'   
 #' 1:10 %>% 
 #'   sin %>% 

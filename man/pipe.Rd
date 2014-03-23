@@ -1,15 +1,31 @@
-\name{\%>\%}
+\name{pipe}
 \alias{\%>\%}
-\title{Pipe an object forward into a function call/expression.}
+\alias{pipe}
+\title{Function to create a pipe operator.}
 \usage{
+pipe(tee = FALSE)
+
 lhs \%>\% rhs
 }
 \arguments{
+  \item{tee}{Either a logical or a function.}
+
   \item{lhs}{That which is to be piped}
 
   \item{rhs}{the pipe to be stuffed with tobacco.}
 }
+\value{
+When tee is FALSE a standard pipe is returned. When tee is
+TRUE a tee is returned, i.e. the rhs is used for the
+side-effect and the the tee passes on the left-hand side.
+When tee is a function, the return value is a pipe where
+the function is attached as a side-effect, i.e. it works
+like a pipe, but also evaluates the function with the
+left-hand side as argument.
+}
 \description{
+Function to create a pipe operator.
+
 The \code{\%>\%} operator pipes the left-hand side into an
 expression on the right-hand side. The expression can
 contain a \code{.} as placeholder to indicate the position
@@ -21,6 +37,9 @@ only one argument, one can omit parentheses and the
 which means that e.g. formulas can still use a dot which
 will not be matched. Nested functions will not be matched
 either.
+}
+\details{
+This is not exported.
 }
 \examples{
 \dontrun{
