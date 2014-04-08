@@ -1,4 +1,4 @@
-#' Shorthand notation for anonymous/lambda functions 
+#' Shorthand notation for anonymous/lambda functions
 #' in magrittr pipelines.
 #'
 #' It is suggested to use this for anonymous functions when composing chains
@@ -9,17 +9,20 @@
 #' @param value the value to be fed into the function
 #' @param body the body of the anonymous function
 #' @param arg the name used to reference \code{value} in the function. Defaults to x.
+#' @return The anonymous function is evaluated and the result is returned
+#'   (unless \code{value} is missing, in which case the function itself is
+#'    returned.)
 #' @rdname lambda
 #' @export
 #' @examples
 #' iris %>%
 #'   lambda(rbind(x %>% head, x %>% tail))
-#'   
+#'
 #' iris %>%
 #'   lambda(rbind(z %>% head, z %>% tail), z)
-#'   
-#' 1:10 %>% 
-#'   sin %>% 
+#'
+#' 1:10 %>%
+#'   sin %>%
 #'   lambda({ d <- abs(x) > 0.5; x*d })
 lambda <- function(value, body, arg = "x")
 {
@@ -29,9 +32,9 @@ lambda <- function(value, body, arg = "x")
 
   # Construct the argument pairlist
   pl   <- as.pairlist({ al <- list(); `[[<-`(al, arg, ) })
-  
-  # Create and evaluate funtion.
-  eval(call("function", pl, body), parent.frame(), parent.frame())(value)
+
+  result <- eval(call("function", pl, body), parent.frame(), parent.frame())
+  if (missing(value)) result else result(value)
 }
 
 #' @rdname aliases
