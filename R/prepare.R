@@ -1,6 +1,6 @@
 #' Function to prepare a block of expressions for pipe chains.
 #'
-#' Alternative to \code{defer}. Very experimental.
+#' Alternative to \code{defer}. Very experimental, and name is up to debate.
 #' This is useful when a sequence of expressions, say \code{a \%>\% b \%>\% c},
 #' contains a subsequence, say \code{b \%>\% c}, which is frequently used.
 #' \code{defer} allows you to compose this subsequence into a singleton which
