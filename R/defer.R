@@ -14,12 +14,8 @@
 #' @examples
 #' ilm <- defer(lm(iris), summary)
 #'
-#' iris %>%
-#'   lambda(rbind(z %>% head, z %>% tail), z)
-#'
-#' 1:10 %>%
-#'   sin %>%
-#'   lambda({ d <- abs(x) > 0.5; x*d })
+#' ilm(Sepal.Length ~ .)
+#' ilm(Sepal.Length ~ . - Species)
 defer <- function(..., arg = quote(x))
 {
 
