@@ -4,15 +4,14 @@
 \title{Shorthand notation for anonymous/lambda functions
 in magrittr pipelines.}
 \usage{
-lambda(value, body, arg = "x")
+lambda(value, expr)
 }
 \arguments{
   \item{value}{the value to be fed into the function}
 
-  \item{body}{the body of the anonymous function}
-
-  \item{arg}{the name used to reference \code{value} in the
-  function. Defaults to x.}
+  \item{expr}{A special kind of expression for the
+  anonymous function.  The syntax is \code{symbol ->
+  expression}, see the examples.}
 }
 \value{
 The anonymous function is evaluated and the result is returned
@@ -25,15 +24,24 @@ with magrittr. It is shorter and has a signature designed for the purpose
 (i.e. it takes a value as the first argument to be fed into the function),
 and it avoids the high precedence of the \code{function} keyword.
 }
+\details{
+\code{lambda} has a special syntax, where the expression is defined as
+\code{symbol -> expression}. The alias \code{l} is shorthand for \code{lambda}.
+If both \code{value} and \code{expression} is provided, the resulting function
+is evaluated with \code{value} as input; otherwise the function is returned.
+}
 \examples{
-iris \%>\%
-  lambda(rbind(x \%>\% head, x \%>\% tail))
+lambda(x -> x^2 + 2*x)
+
+sapply(1:10, lambda(x -> x^2))
+
+Filter(lambda(x -> x > 0), rnorm(100))
 
 iris \%>\%
-  lambda(rbind(z \%>\% head, z \%>\% tail), z)
+  lambda(dfr -> rbind(dfr \%>\% head, dfr \%>\% tail))
 
 1:10 \%>\%
   sin \%>\%
-  lambda({ d <- abs(x) > 0.5; x*d })
+  lambda(x -> { d <- abs(x) > 0.5; x*d })
 }
 
