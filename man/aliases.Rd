@@ -10,11 +10,16 @@
 \alias{is_less_than}
 \alias{is_weakly_greater_than}
 \alias{is_weakly_less_than}
+\alias{l}
 \alias{mod}
 \alias{multiply_by}
 \alias{multiply_by_matrix}
+\alias{not}
 \alias{or}
 \alias{raise_to_power}
+\alias{set_colnames}
+\alias{set_names}
+\alias{set_rownames}
 \alias{subtract}
 \alias{use_series}
 \title{Aliases}
@@ -38,7 +43,11 @@ Currently implemented aliases are \tabular{ll}{
 \code{is_greater_than} \tab \code{`>`} \cr
 \code{is_weakly_greater_than} \tab \code{`>=`} \cr
 \code{is_less_than} \tab \code{`<`} \cr
-\code{is_weakly_less_than} \tab \code{`<=`} \cr }
+\code{is_weakly_less_than} \tab \code{`<=`} \cr \code{not}
+\tab \code{`!`} \cr \code{set_colnames} \tab
+\code{`colnames<-`} \cr \code{set_rownames} \tab
+\code{`rownames<-`} \cr \code{set_names} \tab
+\code{`names<-`} \cr }
 }
 \examples{
 iris \%>\%

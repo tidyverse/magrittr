@@ -1,4 +1,4 @@
-#' Shorthand notation for anonymous/lambda functions 
+#' Shorthand notation for anonymous/lambda functions
 #' in magrittr pipelines.
 #'
 #' It is suggested to use this for anonymous functions when composing chains
@@ -6,30 +6,58 @@
 #' (i.e. it takes a value as the first argument to be fed into the function),
 #' and it avoids the high precedence of the \code{function} keyword.
 #'
-#' @param value the value to be fed into the function
-#' @param body the body of the anonymous function
-#' @param arg the name used to reference \code{value} in the function. Defaults to x.
+#' \code{lambda} has a special syntax, where the expression is defined as
+#' \code{symbol -> expression}. The alias \code{l} is shorthand for \code{lambda}.
+#' If both \code{value} and \code{expr} is provided, the resulting function
+#' is evaluated with \code{value} as input; otherwise the function is returned.
+#' Here the argument \code{value} will used as \code{expr}.
+#'
+#' @param value the value to be fed into the function. If this is the only
+#'   argument provided, it is taken to be the function expression, see details.
+#' @param expr A special kind of expression for the anonymous function.
+#'   The syntax is \code{symbol -> expression}, see the examples.
+#' @return The anonymous function is evaluated and the result is returned
+#'   (unless only an expression was provided, in which case the function itself
+#'   is returned.)
 #' @rdname lambda
 #' @export
 #' @examples
+#' lambda(x -> x^2 + 2*x)
+#'
+#' sapply(1:10, lambda(x -> x^2))
+#'
+#' Filter(lambda(x -> x > 0), rnorm(100))
+#'
 #' iris %>%
-#'   lambda({ rbind(x %>% head, x %>% tail) })
-#'   
-#' iris %>%
-#'   lambda({ rbind(z %>% head, z %>% tail) }, z)
-#'   
-#' 1:10 %>% 
-#'   sin %>% 
-#'   lambda({d <- abs(x) > 0.5; x*d})
-lambda <- function(value, body, arg = "x")
+#'   lambda(dfr -> rbind(dfr %>% head, dfr %>% tail))
+#'
+#' 1:10 %>%
+#'   sin %>%
+#'   lambda(x -> {
+#'     d <- abs(x) > 0.5
+#'     x*d
+#'   })
+lambda <- function(value, expr)
 {
-  # Capture the input arguments
-  body <- substitute(body)
-  arg  <- as.character(substitute(arg))
+
+  shift <- missing(expr)
+  expr  <- if (shift) substitute(value) else substitute(expr)
+
+  if (!identical(expr[[1]], quote(`<-`)))
+    stop("Malformed expression. Expected format is symbol -> expression.")
+  if (!is.symbol(expr[[3]]))
+    stop("Malformed expression. 'sym' in 'sym -> expression' is not a symbol.")
 
   # Construct the argument pairlist
-  pl   <- as.pairlist({ al <- list(); `[[<-`(al, arg, ) })
-  
-  # Create and evaluate funtion.
-  eval(call("function", pl, body), parent.frame(), parent.frame())(value)
+  pl   <- as.pairlist({ al <- list(); `[[<-`(al, as.character(expr[[3]]), ) })
+
+  result <- eval(call("function", pl, expr[[2]]),
+                 parent.frame(), parent.frame())
+
+  if (shift) result else result(value)
 }
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+l <- lambda

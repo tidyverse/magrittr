@@ -23,6 +23,10 @@
 #' \code{is_weakly_greater_than} \tab \code{`>=`} \cr
 #' \code{is_less_than}       \tab \code{`<`}      \cr
 #' \code{is_weakly_less_than}    \tab \code{`<=`} \cr
+#' \code{not}                \tab \code{`!`}      \cr
+#' \code{set_colnames}       \tab \code{`colnames<-`} \cr
+#' \code{set_rownames}       \tab \code{`rownames<-`} \cr
+#' \code{set_names}          \tab \code{`names<-`} \cr
 #' }
 #'
 #' @usage NULL
@@ -134,3 +138,23 @@ is_less_than <- `<`
 #' @usage NULL
 #' @export
 is_weakly_less_than <- `<=`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+not <- `!`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+set_colnames <- `colnames<-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+set_rownames <- `rownames<-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+set_names <- `names<-`
