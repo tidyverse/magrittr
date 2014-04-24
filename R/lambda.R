@@ -52,7 +52,7 @@ lambda <- function(value, expr)
     stop("Malformed expression. Expecting one variable name on LHS",
       call. = FALSE)
   }
-.
+
   # Construct the function
   arg_name <- as.character(expr[[3]])
   args <- setNames(list(quote(expr = )), arg_name)
