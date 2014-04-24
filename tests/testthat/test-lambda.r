@@ -1,5 +1,6 @@
 context("magrittr lambdas")
 
+
 test_that("lambdas work", {
 
   x <- rnorm(100)
@@ -37,4 +38,13 @@ test_that("lambdas work", {
     Filter(function(z) z[z > 0], x)
   ))
 
+})
+
+test_that("lambda throws informative error with incorrect input", {
+  expect_error(lambda(10), "Malformed expression")
+  expect_error(lambda(a), "Malformed expression")
+  expect_error(lambda(function() 1), "Malformed expression")
+
+  expect_error(lambda(1 -> 10), "Malformed expression")
+  expect_error(lambda(f(1, 2) -> 10), "Malformed expression")
 })
