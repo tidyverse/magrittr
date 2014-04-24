@@ -10,7 +10,6 @@
 \alias{is_less_than}
 \alias{is_weakly_greater_than}
 \alias{is_weakly_less_than}
-\alias{l}
 \alias{mod}
 \alias{multiply_by}
 \alias{multiply_by_matrix}
