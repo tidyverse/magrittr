@@ -52,11 +52,11 @@ lambda <- function(value, expr)
     stop("Malformed expression. Expecting one variable name on LHS",
       call. = FALSE)
   }
+.
+  # Construct the function
   arg_name <- as.character(expr[[3]])
-  body <- expr[[2]]
-
-  # Construct the argument pairlist
   args <- setNames(list(quote(expr = )), arg_name)
+  body <- expr[[2]]
 
   fun <- eval(call("function", as.pairlist(args), body), parent.frame())
 
