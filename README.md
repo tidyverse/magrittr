@@ -9,9 +9,11 @@ like) e.g. F#'s pipe-forward operator. It allows you to write code in a
 much more clean and readable way, and you will avoid making a mess 
 in situations of multiple nested function calls. 
 It is particularly useful when manipulating data frames etc. 
-The package also contains a few useful aliases that make other R operators
+The package also contains a few useful features and aliases that
 fit well into the syntax advocated by the package.
 To learn more, see the included vignette.
+
+**Update:** new examples including a new lambda syntax and a tee operator.
 
 Installation:
 -------------
@@ -29,7 +31,7 @@ Help overview:
 
     help(package = magrittr)
 
-Example of usage:
+Examples of usage:
 ------
 
      # In many of the following examples we make use of the dplyr package
@@ -106,6 +108,50 @@ Example of usage:
         fit %>%
         update(. ~ . - Species)
 
+     # lambda expression
+	 1:10 %>% lambda(x -> x^2 + 2*x)
+
+	 # short-hand notation
+     1:10 %>% l(x -> x^2 + 2*x)
+
+	 # For longer expressions:
+     iris %>% l(x -> {
+        fit <- lm(Sepal.Length ~ ., x)
+	    fit %>% residuals %>% abs %>% mean
+     })
+
+     # Lambdas also work in other contexts:
+	 Filter(l(x -> x[x > 0]), rnorm(100))
+     
+     1:10 %>% 
+       sapply(l(i -> if (i %% 2) i^2 else NULL))  %>% 
+       unlist
+      
+     # Tee operator returns the left-hand side, after applying the
+     # right-hand side:
+	 rnorm(100) %T>%
+		plot(type = "l", col = "firebrick") %>%
+        abs %>%
+        sum
+     
+     # Create your own pipe with side-effects. In this example 
+     # we create a pipe with a "logging" function that traces
+     # the left-hand sides of a chain:
+	 lhs_trace <- local({
+       count <- 0
+       function(x) {
+         count <<- count + 1
+         cl <- match.call()
+         cat(sprintf("%d: lhs = %s\n", count, deparse(cl[[2]])))
+       }
+     })
+
+    `%c>%` <- pipe_with(lhs_trace)
+     1:10 %c>% 
+       sin %c>% 
+       cos %c>% 
+       abs
+
 List of aliases provided:
 --------------------------------------------------------------
 
@@ -127,4 +173,8 @@ List of aliases provided:
     is_weakly_greater_than `>=`
     is_less_than            `<`
     is_weakly_less_than    `<=`
-    `%.%`:                `%>%`
+    not                     `!`
+    set_colnames   `colnames<-`
+    set_rownames   `rownames<-`
+    set_names         `names<-`
+    l                   lambda
