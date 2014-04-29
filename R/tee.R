@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' 1:10 %T>%
-#'    lambda(x -> cat("LHS:", x, "\n")) %>%
+#'    (lambda(x -> cat("LHS:", x, "\n"))) %>%
 #'    multiply_by(2)
 `%T>%` <- pipe(tee = TRUE)
 

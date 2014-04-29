@@ -10,11 +10,11 @@
 #' a brief introduction, see \code{vignette("magrittr")}.
 #' @details
 #' \tabular{ll}{
-#'  Package: \tab magrittr\cr
-#'  Type: \tab Package\cr
-#'  Version: \tab 1.1.0\cr
-#'  Date: \tab 2014-01-01\cr
-#'  License: \tab MIT\cr
+#'  Package: \tab magrittr            \cr
+#'  Type:    \tab Package             \cr
+#'  Version: \tab 1.1.0               \cr
+#'  Date:    \tab 2014-01-01          \cr
+#'  License: \tab MIT + file LICENCE. \cr
 #' }
 #' The main feature is provided by the operator \code{\%>\%}. It takes a value
 #' (e.g. a data.frame) on the left and a function expression on the right, see the
@@ -40,11 +40,17 @@ NULL
 #'
 #' @details This is not exported.
 pipe <- function(tee = FALSE)
+{
   function(lhs, rhs)
   {
     # Capture unevaluated arguments
     lhs <- substitute(lhs)
     rhs <- substitute(rhs)
+
+    # Should rhs be evaluated first due to parentheses?
+    if (is.call(rhs) && identical(rhs[[1]], quote(`(`)))
+      rhs <- eval(rhs, parent.frame(), parent.frame())
+
 
     # Check right-hand side
     if (!any(is.symbol(rhs), is.call(rhs), is.function(rhs)))
@@ -122,6 +128,7 @@ pipe <- function(tee = FALSE)
       if (res$visible) res$value else invisible(res$value)
     }
   }
+}
 
 #' Pipe an object forward into a function call/expression.
 #'

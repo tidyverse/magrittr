@@ -20,7 +20,7 @@ certain steps in a chain.
 }
 \examples{
 1:10 \%T>\%
-   lambda(x -> cat("LHS:", x, "\\n")) \%>\%
+   (lambda(x -> cat("LHS:", x, "\\n"))) \%>\%
    multiply_by(2)
 }
 
