@@ -1,0 +1,11 @@
+# magrittr 1.0.1
+
+- `%>%` now respects parenthesized right-hand side. Useful when rhs evaluates to
+  a function.
+- new aliases:
+  - `not` for `!`
+  - `set_names` for `names<-`
+  - `set_colnames` for `colnames<-`
+  - `set_rownames` for `rownames<-`
+- `debug_pipe`, a small utitlity function for debugging certain places in a
+  pipeline.

@@ -1,8 +1,8 @@
 Package: magrittr
 Type: Package
 Title: magrittr - a forward-pipe operator for R
-Version: 1.0.0
-Date: 2014-01-19
+Version: 1.0.1
+Date: 2014-05-14
 Author: Stefan Milton Bache <stefan@stefanbache.dk> and
     Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Stefan Milton Bache <stefan@stefanbache.dk>

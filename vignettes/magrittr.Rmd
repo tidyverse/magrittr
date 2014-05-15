@@ -14,12 +14,12 @@ knitr::opts_chunk$set(
 
 ![magrittr-pipe](magrittr.jpg)
 
-*February, 2014. Stefan Milton Bache* 
+*This version: May, 2014. Stefan Milton Bache* 
 
-This introduction to *the magrittr* (very important: this is to be pronounced
+This introduction to *the magrittr* (to be pronounced
 with a sophisticated french accent) will be short(*ish*) and to the point; 
-as is the package itself. *magrittr* has two aims: to decrease development time and
-to improve readability and maintainability of code. Or even shortr: to make
+as is the package itself. *magrittr* has two aims: to decrease development time 
+and to improve readability and maintainability of code. Or even shortr: to make
 your code smokin' (puff puff)!
 
 To archive its humble aims, *magrittr* (remember the accent) provides a new 
@@ -27,12 +27,12 @@ To archive its humble aims, *magrittr* (remember the accent) provides a new
 expression or function call; something along the lines of ` x %>% f `, rather
 than ` f(x)`. This is not an unknown feature
 elsewhere; a prime example is the `|>` operator used extensively in `F#`
-(to say the least) and indeed this served as a motivation for developing 
-the magrittr package.
+(to say the least) and indeed this -- along with Unix pipes -- served as a 
+motivation for developing the magrittr package.
 
 At first encounter, you may wonder whether such an operator can really 
 be all that beneficial; but as you may notice, it semantically changes your 
-code in a way that makes it both more intuitive to read and write.
+code in a way that makes it more intuitive to both read and write.
 
 Consider the following example, in which the `airquality` dataset shipped with
 R is aggregated by week. We also print the first 3 rows for exposition.
@@ -49,7 +49,7 @@ weekly %>% head(3)
 We start with the value `airquality` (a `data.frame`). Then based on this, we 
 make the "transformation" of adding a `Date` column using month, day and 
 year (the year can be found in the dataset's documentation). Then we 
-aggregate the data by week (which is a "format"" of the date) using `mean`
+aggregate the data by week (which is a "format" of the date) using `mean`
 as aggregator. Note how the code is arranged in the logical
 order of how you think about the task: data->transform->aggregate.
 A horrific alternative would be to write
@@ -64,11 +64,12 @@ the code is more challenging---in particular if you did not write it yourself.
 Note how even the extraction of few rows has a semantic appeal in the
 first example over the second, even though none of them are hard to understand.
 Granted: you may make the second example better, perhaps throw in a few temporary
-variables (which is often avoided to some degree when using *the magrittr*),
+variables (which is often avoided to some degree when using *magrittr*),
 but one often sees cluttered lines like the ones presented. 
 
-And here is another selling point. Suppose I want to quickly go a step further and 
-extract a subset somewhere in the process. Simply add a few steps to the chain:
+And here is another selling point. Suppose I want to quickly go a step further 
+and extract a subset somewhere in the process. Simply add a few steps to the 
+chain:
 ```{r}
 windy.weeks <-
   airquality %>% 
@@ -84,13 +85,13 @@ way through a labyrinth of parentheses.
 
 The combined example shows a few neat features of the pipe (which it is not):
 
-1. As default the left-hand side (LHS) will be *piped in* as the first argument of 
-the function appearing on the right-hand side. This is the case in the `transform`
-expression.
+1. By default the left-hand side (LHS) will be *piped in* as the first argument of 
+the function appearing on the right-hand side (RHS). This is the case in the 
+`transform` expression.
 2. It may be used in a nested fashion, e.g. appearing in expressions within 
 arguments. This is used in the date conversion (Note how the "pronunciation"
 of e.g. `"2014-02-01" %>% as.Date` is more pleasant than is `as.Date("2014-02-01")`).
-3. When the LHS is needed somewhere else than as the first argument, one can use
+3. When the LHS is needed at a position other than the first, one can use
 the dot,`'.'`, as placeholder. This is used in the `aggregate` expression.
 4. The dot in e.g. a formula is *not* confused with a placeholder, which is
 utilized in the `aggregate` expression.
@@ -102,7 +103,13 @@ One feature, which was not utilized above is piping into *anonymous functions*.
 This is also possible, e.g.
 ```{r}
 windy.weeks %>%
-function(x) rbind(x %>% head(1), x %>% tail(1))
+(function(x) rbind(x %>% head(1), x %>% tail(1)))
+```
+Here the right-hand side is enclosed in parentheses, which is not strictly 
+necessary, but advised. Whenever the RHS is parenthesized, is evaluated before
+the piping operation is carried out, i.e., one could do:
+```{r}
+1:10 %>% (substitute(f(), list(f = sum)))
 ```
 
 To summarize the important features:
@@ -112,6 +119,8 @@ To summarize the important features:
   right-hand side.
 3. You may omit parentheses when only the LHS is needed as argument.
 4. You can use anonymous functions.
+5. You can parenthesize the right-hand side if this itself evaluates to the
+relevant call or function.
 
 In addition to the `%>%`-operator, *magrittr* provides some aliases for other
 operators which make operations such as addition or multiplication fit well 
