@@ -10,7 +10,7 @@
 #' \code{use_series}         \tab \code{`$`}      \cr
 #' \code{add}                \tab \code{`+`}      \cr
 #' \code{subtract}           \tab \code{`-`}      \cr
-#' \code{myltiply_by}        \tab \code{`*`}      \cr
+#' \code{multiply_by}        \tab \code{`*`}      \cr
 #' \code{raise_to_power}     \tab \code{`^`}      \cr
 #' \code{multiply_by_matrix} \tab \code{`\%*\%`}  \cr
 #' \code{divide_by}          \tab \code{`/`}      \cr
