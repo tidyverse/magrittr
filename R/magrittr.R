@@ -99,7 +99,17 @@ pipe <- function(tee = FALSE)
 
       } else {
 
-        # Find arguments that are just a single .
+        # Match .. at any level
+        match.. <- function(cl) {
+          as.call(lapply(cl, function(e) {
+            if (is.call(e)) {
+              match..(do.call(substitute, list(e, list(.. = as.name(nm)))))
+            } else e
+          }))
+        }
+        rhs <- match..(rhs)
+
+        # Match single . at outmost level.
         dots <- c(FALSE, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
         if (any(dots)) {
           # Replace with lhs
