@@ -46,6 +46,10 @@ pipe <- function(tee = FALSE)
     lhs <- substitute(lhs)
     rhs <- substitute(rhs)
 
+    # Should rhs be evaluated first due to parentheses?
+    if (is.call(rhs) && identical(rhs[[1]], quote(`(`)))
+      rhs <- eval(rhs, parent.frame(), parent.frame())
+
     # Check right-hand side
     if (!any(is.symbol(rhs), is.call(rhs), is.function(rhs)))
       stop("RHS should be a symbol, a call, or a function.")
