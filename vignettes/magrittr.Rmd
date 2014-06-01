@@ -102,7 +102,7 @@ One feature, which was not utilized above is piping into *anonymous functions*.
 This is also possible, e.g.
 ```{r}
 windy.weeks %>%
-function(x) rbind(x %>% head(1), x %>% tail(1))
+(function(x) rbind(x %>% head(1), x %>% tail(1)))
 ```
 
 To summarize the important features:
@@ -120,15 +120,15 @@ into the *magrittr*-syntax. As an example, consider:
 rnorm(1000)    %>%
 multiply_by(5) %>%
 add(5)         %>%
-function(x) 
+(function(x) 
   cat("Mean:",     x %>% mean, 
-      "Variance:", x %>% var,  "\n")
+      "Variance:", x %>% var,  "\n"))
 
 ```
 which could be written in more compact form as
 ```{r, results = 'hide'}
 rnorm(100) %>% `*`(5) %>% `+`(5) %>% 
-function(x) cat("Mean:", x %>% mean, "Variance:", x %>% var,  "\n")
+(function(x) cat("Mean:", x %>% mean, "Variance:", x %>% var,  "\n"))
 ```
 To see a list of the aliases, execute e.g. `?multiply_by`. For more
 examples of `%>%` in use, see the development page: 
