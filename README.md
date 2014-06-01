@@ -1,7 +1,7 @@
 magrittr -  Ceci n'est pas un pipe.
 ====================================
 
-[![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=master)](https://travis-ci.org/smbache/magrittr)
+[![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=dev)](https://travis-ci.org/smbache/magrittr)
 
 Make your code smokin' with magrittr's pipe operator.
 The pipe-forwarding mechanism provided is similar to (but not exactly 
@@ -13,15 +13,44 @@ The package also contains a few useful features and aliases that
 fit well into the syntax advocated by the package.
 To learn more, see the included vignette.
 
-**Update:** new examples including a new lambda syntax and a tee operator.
+This branch is a development version with the following differences from the current
+CRAN release:
+
+* a lambda syntax as an alternative to the usual anonymous function definitions. 
+  These are of the form `lambda(x ~ x^2 + 2*x)` or shorter: `l(x ~ x^2 + 2*x)`.
+  Note this is different from other branches using `->` syntax, but that will 
+  give rise to R CMD check to fail. While the latter had a nice math syntax 
+  analogue, the `~` syntax is more R-like.
+
+* A compund assignment operator, `:=`. This is short-hand for modifying a 
+  value and assigning its original name to it, i.e. `a := b` is equivalent to `a <- a %>% b`.
+
+* a tee operator, `%T>%`, which is like `%>%` but which only uses the right-hand side
+  for its side-effect, i.e. `x %T>% f` will evaluate `f(x)` but return `x`.
+
+* For consistency, using anonymous functions not enclosed in parentheses have been 
+  deprecated for consistency, i.e. `a %>% function(x) ...` will give a warning. 
+  The "new" way is `a %>% (function(x) ...)`. Using parens will evaluate the right-hand
+  side before piping, and can also be usefule for functions generating a call.
+
+* Using "`.`" in nested calls in the right-hand side is now possible, but nested dots 
+  do not act like first-level dots: they do not count for deciding on the position of 
+  the left-hand side, i.e. `1:10 %>% rep(I(.))` is equivalent to `1:10 %>% rep(., I(.))`.
+  Furthermore, magrittr will not try to track book-keep the call at nested levels. As an 
+  example, `1:10 %>% plot(., col = .)` will have "`1:10`" as label, while
+  `1:10 %>% plot(I(.), col = .)` has "`I(.)`" as label. The primary use of nested `.` is
+  to use some attribute, say number of rows or columns, without having to make a lambda.
+  Lastly, note that formulas using `.` still work.
+
+
 
 Installation:
 -------------
 
     library(devtools)
-    install_github("smbache/magrittr")
+    install_github("smbache/magrittr", ref = "dev")
 
-Alternatively, you can install from CRAN:
+Alternatively, you can install the current CRAN release:
 
     install.packages("magrittr")
     
@@ -109,48 +138,54 @@ Examples of usage:
       update(. ~ . - Species)
 
     # lambda expression
-	1:10 %>% lambda(x -> x^2 + 2*x)
+	1:10 %>% lambda(x ~ x^2 + 2*x)
 
 	# short-hand notation
-    1:10 %>% l(x -> x^2 + 2*x)
+    1:10 %>% l(x ~ x^2 + 2*x)
 
 	# For longer expressions:
-    iris %>% l(x -> {
+    iris %>% l(x ~ {
        fit <- lm(Sepal.Length ~ ., x)
 	   fit %>% residuals %>% abs %>% mean
     })
 
     # Lambdas also work in other contexts:
-	Filter(l(x -> x[x > 0]), rnorm(100))
+	Filter(l(x ~ x[x > 0]), rnorm(100))
     
     1:10 %>% 
-      sapply(l(i -> if (i %% 2) i^2 else NULL))  %>% 
+      sapply(l(i ~ if (i %% 2) i^2 else NULL))  %>% 
       unlist
       
+	# regular anonymous functions, and call-generating functions can
+    # be used too:
+    1:10 %>%
+      (function(x) x^2)
+
+    x <- 4:6
+	1:10 %>% (call("sum", x))
+
+
     # Tee operator returns the left-hand side, after applying the
     # right-hand side:
 	rnorm(100) %T>%
 	  plot(type = "l", col = "firebrick") %>%
       abs %>%
       sum
-     
-    # Create your own pipe with side-effects. In this example 
-    # we create a pipe with a "logging" function that traces
-    # the left-hand sides of a chain. First, the logger:
-	lhs_trace <- local({
-      count <- 0
-      function(x) {
-        count <<- count + 1
-        cl <- match.call()
-        cat(sprintf("%d: lhs = %s\n", count, deparse(cl[[2]])))
-      }
-    })
-	
-	# Then attach it to a new pipe
-    `%L>%` <- pipe_with(lhs_trace)
 
-    # Try it out.
-    1:10 %L>% sin %L>% cos %L>% abs
+    # Compund assignment
+    tmp <- iris
+
+    tmp :=
+      subset(Species == "setosa") %>%
+      set_names(LETTERS[1:5])
+
+    tmp$A := add(2)
+
+    x <- 1:10
+
+    x :=
+      replace(1:5, 0) %>%
+      divide_by(2)
 
 List of aliases provided:
 --------------------------------------------------------------
