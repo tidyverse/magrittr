@@ -42,6 +42,8 @@ CRAN release:
   to use some attribute, say number of rows or columns, without having to make a lambda.
   Lastly, note that formulas using `.` still work.
 
+* Tests for the above have been added to the test suite.
+
 
 
 Installation:
