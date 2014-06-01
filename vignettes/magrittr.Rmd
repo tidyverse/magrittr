@@ -117,7 +117,7 @@ In addition to the `%>%`-operator, *magrittr* provides some aliases for other
 operators which make operations such as addition or multiplication fit well 
 into the *magrittr*-syntax. As an example, consider:
 ```{r}
-rnorm(1000)    %>%
+rnorm(100)    %>%
 multiply_by(5) %>%
 add(5)         %>%
 function(x) 
