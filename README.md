@@ -26,17 +26,17 @@ CRAN release:
   value and assigning its original name to it, i.e. `a := b` is equivalent to `a <- a %>% b`.
 
 * a tee operator, `%T>%`, which is like `%>%` but which only uses the right-hand side
-  for its side-effect, i.e. `x %T>% f` will evaluate `f(x)` but return `x`.
+  for its side-effect, i.e. `x %T>% f` will evaluate `f(x)` and return `x`.
 
-* For consistency, using anonymous functions not enclosed in parentheses have been 
+* Using anonymous functions not enclosed in parentheses have been 
   deprecated for consistency, i.e. `a %>% function(x) ...` will give a warning. 
   The "new" way is `a %>% (function(x) ...)`. Using parens will evaluate the right-hand
-  side before piping, and can also be usefule for functions generating a call.
+  side before piping, and can also be useful for functions generating a call.
 
 * Using "`.`" in nested calls in the right-hand side is now possible, but nested dots 
-  do not act like first-level dots: they do not count for deciding on the position of 
-  the left-hand side, i.e. `1:10 %>% rep(I(.))` is equivalent to `1:10 %>% rep(., I(.))`.
-  Furthermore, magrittr will not try to track book-keep the call at nested levels. As an 
+  do not act like first-level dots: they do not count for deciding whether lhs is placed 
+  first, i.e. `1:10 %>% rep(I(.))` is equivalent to `1:10 %>% rep(., I(.))`.
+  Furthermore, magrittr will not try to book-keep the call at nested levels. As an 
   example, `1:10 %>% plot(., col = .)` will have "`1:10`" as label, while
   `1:10 %>% plot(I(.), col = .)` has "`I(.)`" as label. The primary use of nested `.` is
   to use some attribute, say number of rows or columns, without having to make a lambda.
