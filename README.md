@@ -22,7 +22,7 @@ CRAN release:
   give rise to R CMD check to fail. While the latter had a nice math syntax 
   analogue, the `~` syntax is more R-like.
 
-* A compund assignment operator, `:=`. This is short-hand for modifying a 
+* A compound assignment operator, `:=`. This is short-hand for modifying a 
   value and assigning its original name to it, i.e. `a := b` is equivalent to `a <- a %>% b`.
 
   **NB**. *Since `:=` is used extensively elsewhere, another alternative approach is being tested, 
@@ -178,7 +178,7 @@ Examples of usage:
       abs %>%
       sum
 
-    # Compund assignment
+    # Compound assignment
     tmp <- iris
 
     tmp :=
