@@ -25,6 +25,10 @@ CRAN release:
 * A compund assignment operator, `:=`. This is short-hand for modifying a 
   value and assigning its original name to it, i.e. `a := b` is equivalent to `a <- a %>% b`.
 
+  **NB**. *Since `:=` is used extensively elsewhere, another alternative approach is being tested, 
+  currently using the operator name `%<>%`. Since precedence of this kind of operator is different, 
+  it works fundamentally different, but usage should be the same.*
+
 * a tee operator, `%T>%`, which is like `%>%` but which only uses the right-hand side
   for its side-effect, i.e. `x %T>% f` will evaluate `f(x)` and return `x`.
 
