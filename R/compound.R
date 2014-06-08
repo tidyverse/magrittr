@@ -7,7 +7,7 @@
 #' @param lhs a reference to a value
 #' @param rhs a chain expression.
 #' @usage lhs := rhs
-#' @rdname reassign
+#' @rdname compound
 #' @export
 #' @examples
 #' \dontrun{

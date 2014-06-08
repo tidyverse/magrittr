@@ -10,11 +10,11 @@
 #' a brief introduction, see \code{vignette("magrittr")}.
 #' @details
 #' \tabular{ll}{
-#'  Package: \tab magrittr\cr
-#'  Type: \tab Package\cr
-#'  Version: \tab 1.1.0\cr
-#'  Date: \tab 2014-01-01\cr
-#'  License: \tab MIT\cr
+#'  Package: \tab magrittr   \cr
+#'  Type:    \tab Package    \cr
+#'  Version: \tab 1.1.0      \cr
+#'  Date:    \tab 2014-01-01 \cr
+#'  License: \tab MIT        \cr
 #' }
 #' The main feature is provided by the operator \code{\%>\%}. It takes a value
 #' (e.g. a data.frame) on the left and a function expression on the right, see the
@@ -30,6 +30,9 @@ NULL
 #' @param tee logical indicating whether the left-hand side should be returned
 #' rather than the result of the piped expression.
 #'
+#' @param compound logical indicating whether the resulting pipe should
+#' function as a compound assignment pipe operator.
+#'
 #' @return When tee is FALSE a standard pipe operator is returned. When tee is
 #'   TRUE, a tee operator is returned, i.e. an operator for which
 #'   the right-hand side is used for the side-effect and the left-hand side
@@ -38,33 +41,57 @@ NULL
 #' @rdname magrittr-internal
 #'
 #' @details This is not exported.
-pipe <- function(tee = FALSE)
+pipe <- function(tee = FALSE, compound = FALSE)
+{
+  if (tee && compound)
+    stop("Invalid pipe specification.", call. = FALSE)
+
   function(lhs, rhs)
   {
     # Capture unevaluated arguments
     lhs <- substitute(lhs)
     rhs <- substitute(rhs)
 
+    # reference the parent frame
+    parent <- parent.frame()
+
     # Should rhs be evaluated first due to parentheses?
     if (is.call(rhs) && identical(rhs[[1]], quote(`(`)))
-      rhs <- eval(rhs, parent.frame(), parent.frame())
+      rhs <- eval(rhs, parent, parent)
 
     # Check right-hand side
     if (!any(is.symbol(rhs), is.call(rhs), is.function(rhs)))
       stop("RHS should be a symbol, a call, or a function.")
 
-    # Make an environment in which lhs is to be evaluated.
-    env <- new.env(parent = parent.frame())
+    # Get an environment for evaluation of left-hand side.
+    if (exists("__env__", parent, mode = "environment", inherits = FALSE)) {
+      # get the existing environment and flag this as not being top-level
+      env <- get("__env__", parent)
+      toplevel <- FALSE
+    } else {
+      # Create a new environment, and set top-level
+      env <- new.env(parent = parent)
+      toplevel <- TRUE
+      # Make a reference to "self" here.
+      env[["__env__"]] <- env
+    }
 
-    # Find an appropriate name to use for evaluation:
-    #   deparse(lhs) is useful for preserving the call
-    #   but is not always feasible, in which case __LHS is used.
-    #   It is also necessary to restrict the size of the name
-    #   for a few special cases.
-    nm <- paste(deparse(lhs), collapse = "")
-    nm <-
-      if (nchar(nm) < 9900 &&
-            (is.call(lhs) || is.name(lhs))) nm else "."
+    if (compound) {
+      if (exists("__compound__", env, mode = "name"))
+        stop("Cannot use compound assignment more that once in a chain.",
+             call. = FALSE)
+      env[["__compound__"]] <- lhs
+    }
+
+    # Find an appropriate name for lhs to use. If at top-level
+    # or if tee, then try to mimic call, otherwise use "."
+    if (!toplevel && !tee) {
+      nm <- "."
+    } else {
+      nm <- paste(deparse(lhs), collapse = "")
+      nm <-
+        if ((is.call(lhs) || is.name(lhs)) && nchar(nm) < 9900) nm else "."
+    }
 
     # carry out assignment. The name "." also points the resulting
     # value, to allow accessing the left-hand side in nested expressions.
@@ -83,25 +110,31 @@ pipe <- function(tee = FALSE)
 
     if (is.function(rhs)) {
 
-      # Case of a function: rare but possible
-      res <- withVisible(rhs(env[[nm]]))
+      # Attach function in environment
+      env[["__fun__"]] <- rhs
+
+      # Construct the expression/call
+      e <- call("__fun__", as.name(nm))
 
     } else {
 
       # Construct the final expression to evaluate from lhs and rhs. Scenarios:
-      #  1)  rhs is a function name (symbol) and parens are omitted.
-      #  2a) rhs has one or more dots that qualify as placeholder for lhs.
-      #  2b) lhs is placed as first argument in rhs call.
+      #   * rhs is a function name (symbol) and parens are omitted.
+      #   * rhs has one or more dots that qualify as placeholder for lhs.
+      #   * lhs is placed as first argument in rhs call.
       if (is.symbol(rhs)) {
 
-        if (!exists(deparse(rhs), parent.frame(), mode = "function"))
+        if (!exists(deparse(rhs), env, mode = "function"))
           stop("RHS appears to be a function name, but it cannot be found.")
-        e <- call(as.character(rhs), as.name(nm)) # (1)
+
+        e <- call(as.character(rhs), as.name(nm))
 
       } else {
 
         # Match `.` placeholder at outmost level.
-        dots <- c(FALSE, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
+        dots <-
+          c(FALSE, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
+
         if (any(dots)) {
           # Replace with lhs
           rhs[dots] <- rep(list(as.name(nm)), sum(dots))
@@ -113,16 +146,26 @@ pipe <- function(tee = FALSE)
 
       }
 
-      res <- withVisible(eval(e, env))
     }
 
-    # Return either result or lhs if tee == TRUE
-    if (is.logical(tee) && tee) {
-      env[[nm]]
+    # Evaluate the call
+    res       <- withVisible(eval(e, env, env))
+    visibly   <- res$visible
+    to.return <- if (tee) env[[nm]] else res$value
+
+    # clean the environment to keep it light in long chains.
+    rm(list = unique(c(nm, ".")), envir = env)
+
+    if (toplevel && exists("__compound__", env, mode = "name")) {
+      # Compound operator was used, so assign the result, rather than return it.
+      eval(call("<-", get("__compound__", env), to.return), parent, parent)
+    } else if (tee) {
+      to.return
     } else {
-      if (res$visible) res$value else invisible(res$value)
+      if (visibly) to.return else invisible(to.return)
     }
   }
+}
 
 #' Pipe an object forward into a function call/expression.
 #'
@@ -178,3 +221,26 @@ pipe <- function(tee = FALSE)
 #' 1:10 %>% rep(I(.))  # like 1:10 %>% rep(., .) and rep(1:10, 1:10)
 #' }
 `%>%` <- pipe()
+
+#' Compound assignment pipe operator
+#'
+#' Use to overwrite/mask the left-hand side with the result of
+#' piping it forward into the right-hand side, which itself may be a chain.
+#'
+#' @param lhs a symbol or expression which may serve as left-hand
+#'        side for \code{`<-`}.
+#' @param rhs a function/call/expression/chain.
+#' @return No return value. Works by assigning the result.
+#' @rdname compound.op
+#' @export
+#' @examples
+#'
+#' x <- 1:10
+#'
+#' x %<>% replace(1:2, 0)
+#' x %<>% sqrt %T>% plot
+#'
+#' some.data <- iris
+#' colnames(some.data) %<>% paste0("!")
+#' some.data[, 1] %<>% multiply_by(2)
+`%<>%` <- pipe(compound = TRUE)

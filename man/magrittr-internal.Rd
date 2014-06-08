@@ -3,12 +3,16 @@
 \alias{pipe}
 \title{Function to create a pipe operator.}
 \usage{
-pipe(tee = FALSE)
+pipe(tee = FALSE, compound = FALSE)
 }
 \arguments{
   \item{tee}{logical indicating whether the left-hand side
   should be returned rather than the result of the piped
   expression.}
+
+  \item{compound}{logical indicating whether the resulting
+  pipe should function as a compound assignment pipe
+  operator.}
 }
 \value{
 When tee is FALSE a standard pipe operator is returned. When tee is
