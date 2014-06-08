@@ -156,7 +156,7 @@ pipe <- function(tee = FALSE, compound = FALSE)
     # clean the environment to keep it light in long chains.
     rm(list = unique(c(nm, ".")), envir = env)
 
-    if (toplevel && exists("__compound__", env, mode = "name")) {
+    if (toplevel && exists("__compound__", env)) {
       # Compound operator was used, so assign the result, rather than return it.
       eval(call("<-", get("__compound__", env), to.return), parent, parent)
     } else if (tee) {
