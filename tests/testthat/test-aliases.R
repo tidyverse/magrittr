@@ -20,10 +20,10 @@ test_that("the provided aliases work as intended.", {
   expect_that(((1:10) > 5) %>% or((1:10) > 7),
               is_identical_to(((1:10) > 5) | (1:10) > 7))
 
-  expect_that(1:10 %>% magrittr::equals(5) %>% sum, is_identical_to(1L))
+  expect_that(1:10 %>% (magrittr::equals)(5) %>% sum, is_identical_to(1L))
   expect_that(1:10 %>% is_greater_than(5) %>% sum, is_identical_to(5L))
   expect_that(1:10 %>% is_weakly_greater_than(5) %>% sum, is_identical_to(6L))
-  expect_that(1:10 %>% magrittr::is_less_than(5) %>% sum, is_identical_to(4L))
+  expect_that(1:10 %>% (magrittr::is_less_than)(5) %>% sum, is_identical_to(4L))
   expect_that(1:10 %>% is_weakly_less_than(5) %>% sum, is_identical_to(5L))
 
   expect_that(iris %>% set_colnames(LETTERS[1:ncol(iris)]),

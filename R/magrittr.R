@@ -25,6 +25,26 @@
 #' Maintainer: Stefan Holst Milton Bache <stefan[at]stefanbache.dk>
 NULL
 
+#' Function to make a piping environment.
+#'
+#' @param parent the parent which to assign to the new environment.
+#' @param compound a call which will be used as lhs in compound assignment.
+#'        If not used, set to NULL. This is used to pass forward the
+#'        compound call when environments are blocked.
+#'
+#' @return an environment.
+pipe_env <- function(parent, compound = NULL)
+{
+  # Create a new environment, and set top-level
+  env <- new.env(parent = parent)
+  # Make a reference to "self" here.
+  env[["__env__"]] <- env
+  env[["__blocked__"]] <- FALSE
+  env[["__compound__"]] <- compound
+
+  env
+}
+
 #' Function to create a pipe operator.
 #'
 #' @param tee logical indicating whether the left-hand side should be returned
@@ -67,17 +87,18 @@ pipe <- function(tee = FALSE, compound = FALSE)
     if (exists("__env__", parent, mode = "environment", inherits = FALSE)) {
       # get the existing environment and flag this as not being top-level
       env <- get("__env__", parent)
+      # If it is blocked, make a new.
+      if (env[["__blocked__"]])
+        env <- pipe_env(parent, compound = env[["__compound__"]])
       toplevel <- FALSE
     } else {
       # Create a new environment, and set top-level
-      env <- new.env(parent = parent)
+      env <- pipe_env(parent)
       toplevel <- TRUE
-      # Make a reference to "self" here.
-      env[["__env__"]] <- env
     }
 
     if (compound) {
-      if (exists("__compound__", env, mode = "name"))
+      if (!is.null(env[["__compound__"]]))
         stop("Cannot use compound assignment more that once in a chain.",
              call. = FALSE)
       env[["__compound__"]] <- lhs
@@ -148,6 +169,9 @@ pipe <- function(tee = FALSE, compound = FALSE)
 
     }
 
+    # From now on, this environment cannot be re-used.
+    env[["__blocked__"]] <- TRUE
+
     # Evaluate the call
     res       <- withVisible(eval(e, env, env))
     visibly   <- res$visible
@@ -156,7 +180,7 @@ pipe <- function(tee = FALSE, compound = FALSE)
     # clean the environment to keep it light in long chains.
     rm(list = unique(c(nm, ".")), envir = env)
 
-    if (toplevel && exists("__compound__", env)) {
+    if (toplevel && !is.null(env[["__compound__"]])) {
       # Compound operator was used, so assign the result, rather than return it.
       eval(call("<-", get("__compound__", env), to.return), parent, parent)
     } else if (tee) {
