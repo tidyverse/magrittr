@@ -27,20 +27,24 @@ NULL
 
 #' Function to make a piping environment.
 #'
+#' This function is used internally by magrittr to construct environments
+#' for evaluation of chain components.
+#'
 #' @param parent the parent which to assign to the new environment.
 #' @param compound a call which will be used as lhs in compound assignment.
 #'        If not used, set to NULL. This is used to pass forward the
-#'        compound call when environments are blocked.
+#'        compound call when environments are locked.
 #'
 #' @return an environment.
 pipe_env <- function(parent, compound = NULL)
 {
   # Create a new environment, and set top-level
   env <- new.env(parent = parent)
-  # Make a reference to "self" here.
-  env[["__env__"]] <- env
-  env[["__blocked__"]] <- FALSE
-  env[["__compound__"]] <- compound
+
+  env[["__env__"]]      <- env       # reference to "self"
+  env[["__locked__"]]   <- FALSE     # controls whether the env can be re-used.
+  env[["__compound__"]] <- compound  # a call for compound assignemt. Can be
+                                     #  set here, in cases of locked envirs.
 
   env
 }
@@ -85,23 +89,34 @@ pipe <- function(tee = FALSE, compound = FALSE)
 
     # Get an environment for evaluation of left-hand side.
     if (exists("__env__", parent, mode = "environment", inherits = FALSE)) {
+
       # get the existing environment and flag this as not being top-level
       env <- get("__env__", parent)
-      # If it is blocked, make a new.
-      if (env[["__blocked__"]])
+
+      # If it is locked, make a new one. Since compound is passed along in this
+      # case, we require that toplevel still be FALSE.
+      if (env[["__locked__"]])
         env <- pipe_env(parent, compound = env[["__compound__"]])
       toplevel <- FALSE
+
     } else {
+
       # Create a new environment, and set top-level
       env <- pipe_env(parent)
       toplevel <- TRUE
+
     }
 
+    # If this is a compound pipe call, then make sure that it is the only one
+    # and store lhs in the environment.
     if (compound) {
+
       if (!is.null(env[["__compound__"]]))
         stop("Cannot use compound assignment more that once in a chain.",
              call. = FALSE)
+
       env[["__compound__"]] <- lhs
+
     }
 
     # Find an appropriate name for lhs to use. If at top-level
@@ -118,7 +133,7 @@ pipe <- function(tee = FALSE, compound = FALSE)
     # value, to allow accessing the left-hand side in nested expressions.
     env[[nm]] <- env[["."]] <- eval(lhs, env)
 
-    # First, a temporary check for and warn about deprecated use of anonymous
+    # A temporary check for and warn about deprecated use of anonymous
     # functions not enclosed in parentheses.
     if (is.call(rhs) && deparse(rhs[[1]]) %in% c("function", "lambda", "l")) {
 
@@ -129,6 +144,7 @@ pipe <- function(tee = FALSE, compound = FALSE)
 
     }
 
+    # Deal with sitatuations where the right-hand side is a raw function.
     if (is.function(rhs)) {
 
       # Attach function in environment
@@ -139,7 +155,8 @@ pipe <- function(tee = FALSE, compound = FALSE)
 
     } else {
 
-      # Construct the final expression to evaluate from lhs and rhs. Scenarios:
+      # Otherwise, construct the final expression to evaluate from lhs and rhs.
+      # Scenarios:
       #   * rhs is a function name (symbol) and parens are omitted.
       #   * rhs has one or more dots that qualify as placeholder for lhs.
       #   * lhs is placed as first argument in rhs call.
@@ -157,12 +174,16 @@ pipe <- function(tee = FALSE, compound = FALSE)
           c(FALSE, vapply(rhs[-1], identical, quote(.), FUN.VALUE = logical(1)))
 
         if (any(dots)) {
+
           # Replace with lhs
           rhs[dots] <- rep(list(as.name(nm)), sum(dots))
           e <- rhs
+
         } else {
+
           # Otherwise insert in first position
           e <- as.call(c(rhs[[1]], as.name(nm), as.list(rhs[-1])))
+
         }
 
       }
@@ -170,7 +191,7 @@ pipe <- function(tee = FALSE, compound = FALSE)
     }
 
     # From now on, this environment cannot be re-used.
-    env[["__blocked__"]] <- TRUE
+    env[["__locked__"]] <- TRUE
 
     # Evaluate the call
     res       <- withVisible(eval(e, env, env))
@@ -178,15 +199,22 @@ pipe <- function(tee = FALSE, compound = FALSE)
     to.return <- if (tee) env[[nm]] else res$value
 
     # clean the environment to keep it light in long chains.
-    rm(list = unique(c(nm, ".")), envir = env)
+    if (nm != ".")
+      rm(list = nm, envir = env)
 
     if (toplevel && !is.null(env[["__compound__"]])) {
+
       # Compound operator was used, so assign the result, rather than return it.
       eval(call("<-", get("__compound__", env), to.return), parent, parent)
+
     } else if (tee) {
+
       to.return
+
     } else {
+
       if (visibly) to.return else invisible(to.return)
+
     }
   }
 }

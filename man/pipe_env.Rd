@@ -10,12 +10,15 @@ pipe_env(parent, compound = NULL)
   environment.}
 
   \item{compound}{a call which will be used as lhs in
-  compound assignment.  If not used, set to NULL.}
+  compound assignment.  If not used, set to NULL. This is
+  used to pass forward the compound call when environments
+  are locked.}
 }
 \value{
 an environment.
 }
 \description{
-Function to make a piping environment.
+This function is used internally by magrittr to construct environments
+for evaluation of chain components.
 }
 
