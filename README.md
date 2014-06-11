@@ -165,7 +165,7 @@ List of aliases provided:
     raise_to_power          `^`
     divide_by:              `/`
     divide_by_int:        `%/%`
-    mod:                  `\%%`
+    mod:                   `%%`
     and:                    `&`
     or:                     `|`
     equals                 `==`
