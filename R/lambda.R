@@ -35,7 +35,7 @@
 #'     d <- abs(x) > 0.5
 #'     x*d
 #'   }))
-compose <- function(...)
+compose <- function(..., .args = NULL)
 {
   dots <- lapply(as.list(substitute(list(...))[-1]), function(dot) {
     if (is.symbol(dot)) {
@@ -47,8 +47,26 @@ compose <- function(...)
     dot
   })
 
+  .args <- substitute(.args)
+  if (!is.null(.args)) {
+    if (!is.call(.args) ||
+        (is.call(.args) && !identical(.args[[1]], quote(list))))
+      stop(".args should be a list")
+
+    .args <- as.list(.args[-1])
+
+    .args <- sapply(1:length(.args), function(i) {
+      if (is.null(names(.args[i]))) {
+        setNames(list(quote(expr = )), .args[i])
+      } else {
+        eval(.args[i], parent.frame(), parent.frame())
+      }
+    })
+  }
+
   # Utility function to generate the different function expressions.
-  generate <- function(expr, rhs = NULL, parens = FALSE, wrap = FALSE, ellip = FALSE)
+  generate <- function(expr, rhs = NULL, parens = FALSE, wrap = FALSE,
+                       .args = NULL)
   {
     # Check that lambdas are of the right form x ~ expression_of(x)
     if (!is.call(expr) || !identical(expr[[1]], quote(`~`))) {
@@ -63,9 +81,7 @@ compose <- function(...)
 
     # Construct the function inputs
     arg_name <- as.character(expr[[2]])
-    args <-
-      if (ellip) setNames(rep(list(quote(expr = )), 2), c(arg_name, "...")) else
-                 setNames(list(quote(expr = )), arg_name)
+    args <- c(setNames(list(quote(expr = )), arg_name), .args)
     body <- expr[[3]]
 
     # Construct a function with or without wrapper/parens
@@ -96,7 +112,7 @@ compose <- function(...)
         },
         dots,
         right = TRUE)
-    cl <- generate(cl, ellip = TRUE)
+    cl <- generate(cl, .args = .args)
 
   }
 

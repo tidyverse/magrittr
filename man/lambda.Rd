@@ -5,11 +5,11 @@
 \alias{lambda}
 \title{compose a lambda function or chain of functions.}
 \usage{
-compose(...)
+compose(..., .args = NULL)
 
-lambda(...)
+lambda(..., .args = NULL)
 
-l(...)
+l(..., .args = NULL)
 }
 \arguments{
 \item{...}{A special kind of expressions for the anonymous function(s).
