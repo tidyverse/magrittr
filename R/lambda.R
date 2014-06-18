@@ -100,7 +100,7 @@ compose <- function(..., .args = NULL)
 
   if (length(dots) == 1) {
     # If only a single lambda is provided; regular lambda function.
-    cl <- generate(dots[[1]])
+    cl <- generate(dots[[1]], .args = .args)
 
   } else {
     # Multiple lambdas are given. Nest them, and create a single overall lambda.
