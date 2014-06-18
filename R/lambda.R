@@ -48,7 +48,7 @@ compose <- function(...)
   })
 
   # Utility function to generate the different function expressions.
-  generate <- function(expr, rhs = NULL, parens = FALSE, wrap = FALSE)
+  generate <- function(expr, rhs = NULL, parens = FALSE, wrap = FALSE, ellip = FALSE)
   {
     # Check that lambdas are of the right form x ~ expression_of(x)
     if (!is.call(expr) || !identical(expr[[1]], quote(`~`))) {
@@ -63,7 +63,9 @@ compose <- function(...)
 
     # Construct the function inputs
     arg_name <- as.character(expr[[2]])
-    args <- setNames(list(quote(expr = )), arg_name)
+    args <-
+      if (ellip) setNames(rep(list(quote(expr = )), 2), c(arg_name, "...")) else
+                 setNames(list(quote(expr = )), arg_name)
     body <- expr[[3]]
 
     # Construct a function with or without wrapper/parens
@@ -94,7 +96,7 @@ compose <- function(...)
         },
         dots,
         right = TRUE)
-    cl <- generate(cl)
+    cl <- generate(cl, ellip = TRUE)
 
   }
 
