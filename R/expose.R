@@ -18,8 +18,8 @@
 
   # Check that the right-hand side is a call.
   rhs <- substitute(rhs)
-  if (!is.call(rhs))
-    stop("right-hand side must be a call.")
+  if (!is.call(rhs) && !is.symbol(rhs))
+    stop("right-hand side must be symbol or a call.")
 
   # Evaluate the expression, exposing the contents of the left-hand side.
   eval(rhs, lhs, parent.frame())
