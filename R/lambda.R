@@ -16,6 +16,8 @@
 #'
 #' @param ... A special kind of expressions for the anonymous function(s).
 #'   The syntax is \code{symbol ~ expression}, see the examples.
+#' @param .args a list of the form \code{list(a, b = c)} to
+#'   specify the remainder of the signature of the composed function.
 #' @return a function.
 #' @rdname lambda
 #' @export

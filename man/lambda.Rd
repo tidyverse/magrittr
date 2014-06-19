@@ -14,6 +14,9 @@ l(..., .args = NULL)
 \arguments{
 \item{...}{A special kind of expressions for the anonymous function(s).
 The syntax is \code{symbol ~ expression}, see the examples.}
+
+\item{.args}{a list of the form \code{list(a, b = c)} to
+specify the remainder of the signature of the composed function.}
 }
 \value{
 a function.
