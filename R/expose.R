@@ -14,6 +14,7 @@
 {
   # Capture unevaluated arguments
   rhs <- substitute(rhs)
+  lhs <- substitute(lhs)
 
   # reference the parent frame
   parent <- parent.frame()
@@ -42,11 +43,13 @@
 
   }
 
+  env[["."]] <- eval(lhs, env)
+
   # From now on, this environment cannot be re-used.
   env[["__locked__"]] <- TRUE
 
   # Evaluate the call
-  res       <- withVisible(eval(rhs, lhs, parent))
+  res       <- withVisible(eval(rhs, env[["."]], parent))
   visibly   <- res$visible
   to.return <- res$value
 
