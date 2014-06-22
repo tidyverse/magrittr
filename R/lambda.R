@@ -156,8 +156,15 @@ compose <- function(..., .args = NULL)
     }
   }
 
+  parts <- lapply(c(unlist(call2list(lhs)), rhs), function(part) {
+    if (is.call(part) && identical(part[[1]], quote(`(`)))
+      part[[-1]]
+    else
+      part
+  })
+
   cl <-
-    do.call(compose, c(unlist(call2list(lhs)), rhs))
+    do.call(compose, parts)
 
   eval(cl, parent.frame(), parent.frame())
 }
