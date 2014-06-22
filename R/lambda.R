@@ -119,6 +119,46 @@ compose <- function(..., .args = NULL)
   }
 
   # Evaluate the final function, and return.
+  composite <- eval(cl, parent.frame(), parent.frame())
+  attr(composite, "parts") <- dots
+  class(composite) <- c("composite", "function")
+  composite
+}
+
+#' Composition operator.
+#'
+#' The composition operator combined lhs and rhs using the compose function.
+#' If several expressions are composed, e.g. a \%o>\% b \%o>\% c, then
+#' the result will be \code{compose(a, b, c)}.
+#'
+#' @usage lhs \%o>\% rhs
+#'
+#' @param lhs a function/expression
+#' @param rhs a function/expression
+#'
+#' @rdname composition
+#'
+#' @return a composite function
+#' @export
+`%o>%` <- function(lhs, rhs)
+{
+  # Capture inputs
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+
+  # Utility function to split the call chain.
+  call2list <- function(cl)
+  {
+    if (is.call(cl) && identical(cl[[1]], quote(`%o>%`))) {
+      lapply(as.list(cl)[-1], call2list)
+    } else {
+      cl
+    }
+  }
+
+  cl <-
+    do.call(compose, c(unlist(call2list(lhs)), rhs))
+
   eval(cl, parent.frame(), parent.frame())
 }
 
@@ -129,3 +169,21 @@ lambda <- compose
 #' @rdname lambda
 #' @export
 l <- lambda
+
+
+#' Print method for composite functions.
+#'
+#' Generic method for printing of composite functions generated with
+#' either \code{\%o>\%} or \code{compose}.
+#'
+#' @param x a composite function
+#' @param ... not used.
+#'
+#' @rdname compose
+#' @export
+print.composite <- function(x, ...)
+{
+  cat("Function composed of the following parts:\n\n")
+  lapply(attr(x, "parts"), function(p) cat(deparse(p), "\n"))
+  invisible(x)
+}
