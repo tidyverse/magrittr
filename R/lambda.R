@@ -128,10 +128,10 @@ compose <- function(..., .args = NULL)
 #' Composition operator.
 #'
 #' The composition operator combined lhs and rhs using the compose function.
-#' If several expressions are composed, e.g. a \%o>\% b \%o>\% c, then
+#' If several expressions are composed, e.g. a \%,\% b \%,\% c, then
 #' the result will be \code{compose(a, b, c)}.
 #'
-#' @usage lhs \%o>\% rhs
+#' @usage lhs \%,\% rhs
 #'
 #' @param lhs a function/expression
 #' @param rhs a function/expression
@@ -140,7 +140,7 @@ compose <- function(..., .args = NULL)
 #'
 #' @return a composite function
 #' @export
-`%o>%` <- function(lhs, rhs)
+`%,%` <- function(lhs, rhs)
 {
   # Capture inputs
   lhs <- substitute(lhs)
@@ -149,7 +149,7 @@ compose <- function(..., .args = NULL)
   # Utility function to split the call chain.
   call2list <- function(cl)
   {
-    if (is.call(cl) && identical(cl[[1]], quote(`%o>%`))) {
+    if (is.call(cl) && identical(cl[[1]], quote(`%,%`))) {
       lapply(as.list(cl)[-1], call2list)
     } else {
       cl
@@ -181,7 +181,7 @@ l <- lambda
 #' Print method for composite functions.
 #'
 #' Generic method for printing of composite functions generated with
-#' either \code{\%o>\%} or \code{compose}.
+#' either \code{\%,\%} or \code{compose}.
 #'
 #' @param x a composite function
 #' @param ... not used.

@@ -12,6 +12,6 @@
 }
 \description{
 Generic method for printing of composite functions generated with
-either \code{\%o>\%} or \code{compose}.
+either \code{\%,\%} or \code{compose}.
 }
 

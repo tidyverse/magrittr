@@ -2,10 +2,10 @@
 
 S3method(print,composite)
 export("%$%")
+export("%,%")
 export("%<>%")
 export("%>%")
 export("%T>%")
-export("%o>%")
 export(":=")
 export(add)
 export(and)
