@@ -54,7 +54,7 @@ Installation:
 -------------
 
     library(devtools)
-    install_github("smbache/magrittr", ref = "dev")
+    install_github("smbache/magrittr")
 
 Alternatively, you can install the current CRAN release:
 
