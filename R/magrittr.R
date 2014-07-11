@@ -139,7 +139,7 @@ pipe <- function(tee = FALSE, compound = FALSE)
 
       rhs <- eval(call("(", rhs), parent.frame(), parent.frame())
       warning("Using anonymous functions without enclosing parentheses ",
-              "has been deprecated.\nCurrent call has been altered, but please",
+              "has been deprecated.\nCurrent call has been altered, but please ",
               "change your code.")
 
     }
