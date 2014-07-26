@@ -1,4 +1,4 @@
-#' Expose the columns for direct use in an expression.
+#' Expose columns/elements for direct use in an expression.
 #'
 #' This operator exposes columns/members the data.frame/list to the
 #' expression on the right-hand side. This is useful when functions

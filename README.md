@@ -13,6 +13,13 @@ The package also contains a few useful features and aliases that
 fit well into the syntax advocated by the package.
 To learn more, see the included vignette.
 
+**Update**: It came to my attention that what I though of as compose
+was really functional sequences. Therefore, `compose` is removed, and
+`fseq` is introduced, see below. The `%,%` operator still works.
+The new `fseq` does not allow for specifying 
+more than a single argument, but arguments can be added with the new
+`add_args` function.
+
 This branch is a development version with the following differences from the current
 CRAN release:
 
@@ -22,15 +29,35 @@ CRAN release:
   give rise to R CMD check to fail. While the latter had a nice math syntax 
   analogue, the `~` syntax is more R-like.
 
-* A compound assignment operator, `:=`. This is short-hand for modifying a 
-  value and assigning its original name to it, i.e. `a := b` is equivalent to `a <- a %>% b`.
+* Functional sequences. The main feature of `magrittr` has been to build
+  *values*. A functional sequence is an analogue for building *functions* in 
+  a similar way. One can use either the `%,%` operator, or the `fseq` function
+  to create functions, where each component is an expression as `RHS` in 
+  calls to `%>%`, e.g. `cos %,% sin %,% sum(na.rm = TRUE)`. The *inputs* to
+  each step can be named and used in subseqent steps in the sequence.
+  To name an input, use the `~` syntax: `cos %,% {x ~ sin} %,% mean %,% divide_by(x)`,
+  or `fseq(cos, x ~ sin, mean, divide_by(x))`. The special use of `{` when 
+  using `%,%` is for controlling precedence of `~` versus `%,%`.
 
-  **NB**. *Since `:=` is used extensively elsewhere, another alternative approach is being tested, 
-  currently using the operator name `%<>%`. Since precedence of this kind of operator is different, 
-  it works fundamentally different, but usage should be the same.*
+* A compound assignment pipe operator, `%<>%`. This is short-hand for modifying a 
+  value and assigning its original name to it, i.e. `a %<>% b` is equivalent to `a <- a %>% b`.
+  This is useful when e.g. modifying variables in a `data.frame` and one avoids
+  typing `data$variable` twice.
 
 * a tee operator, `%T>%`, which is like `%>%` but which only uses the right-hand side
   for its side-effect, i.e. `x %T>% f` will evaluate `f(x)` and return `x`.
+  Combined with the `%,%` operator one can make a longer "branch" of a chain
+  and return to a certain step, e.g. `a %>% b %T>% (c %,% d %,% e) %>% f`. 
+  
+* A function to add arguments to lambdas or functional sequences. This 
+  is used as 
+
+	`l(x ~ x^2/y) %>% 
+    add_args(y = 10)`
+     
+    `abs %,%
+    mean(na.rm = na.rm) %>% 
+    add_args(na.rm = TRUE)`
 
 * Using anonymous functions not enclosed in parentheses have been 
   deprecated for consistency, i.e. `a %>% function(x) ...` will give a warning. 
