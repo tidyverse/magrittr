@@ -1,19 +1,14 @@
-#' Place a debug browser in a chain of commands.
+#' Debugging function for magrittr pipelines.
 #'
-#' When using magrittr's piping syntax, it can be useful to
-#' be able to debug at certain steps in a chain. This
-#' is a simple wrapper around \code{browser} for this purpose.
+#' This function is a wrapper around \code{browser}, which makes it
+#' easier to debug at certain places in a magrittr pipe chain.
 #'
-#' @param x A value.
-#' @return returns the argument \code{x}.
-#' @rdname debug_pipe
+#' @param x a value
+#' @return x
+#'
 #' @export
-#' @examples
-#' iris %>%
-#'   debug_pipe %>%
-#'   head
 debug_pipe <- function(x)
 {
-  browser()
-  x
+	browser()
+	x
 }

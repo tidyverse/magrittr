@@ -5,52 +5,39 @@ test_that("placement of lhs is correct in different situations", {
   # When not to be placed in first position and in the presence of
   # non-placeholder dots, e.g. in formulas.
   case0a <- 
-    lm(Sepal.Length ~ ., data = iris)
+    lm(Sepal.Length ~ ., data = iris) %>% coef
   
   case1a <- 
-    iris %>% lm(Sepal.Length ~ ., .)
+    iris %>% lm(Sepal.Length ~ ., .) %>% coef
   
   case2a <-
-    iris %>% lm(Sepal.Length ~ ., data = .)
+    iris %>% lm(Sepal.Length ~ ., data = .) %>% coef
   
   expect_that(case1a, is_equivalent_to(case0a))
   expect_that(case2a, is_equivalent_to(case0a))
-  
-  # Is the call preserved well enough for update to work?
-  case0b <- 
-    update(case0a, . ~ . - Species)
+    
+  # In first position and used in arguments
+  case0b <-
+    transform(iris, Species = substring(Species, 1, 1))
   
   case1b <-
-    case1a %>% update(. ~ . - Species)
+    iris %>% transform(Species = Species %>% substr(1, 1))
   
   case2b <-
-    case2a %>% update(. ~ . - Species)
+    iris %>% transform(., Species = Species %>% substr(., 1, 1))
   
   expect_that(case1b, is_equivalent_to(case0b))
   expect_that(case2b, is_equivalent_to(case0b))
   
-  # In first position and used in arguments
-  case0c <-
-    transform(iris, Species = substring(Species, 1, 1))
-  
-  case1c <-
-    iris %>% transform(Species = Species %>% substr(1, 1))
-  
-  case2c <-
-    iris %>% transform(., Species = Species %>% substr(., 1, 1))
-  
-  expect_that(case1c, is_equivalent_to(case0c))
-  expect_that(case2c, is_equivalent_to(case0c))
-  
   # LHS function values
-  case0d <-
+  case0c <-
     aggregate(. ~ Species, iris, function(x) mean(x >= 5))
   
-  case1d <-
+  case1c <-
     (function(x) mean(x >= 5)) %>% 
     aggregate(. ~ Species, iris, .)
   
-  expect_that(case1d, is_equivalent_to(case0d))
+  expect_that(case1c, is_equivalent_to(case0c))
   
   # several placeholder dots
   expect_that(iris %>% identical(., .), is_true())

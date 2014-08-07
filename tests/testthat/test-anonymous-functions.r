@@ -63,3 +63,11 @@ test_that("%>% handles anonymous functions in other situations.", {
 
   expect_that(a, is_identical_to(b))
 })
+
+
+test_that("%>% throws error with anonymous functions when not parenthesized.", {
+	
+	expect_that(iris %>% function(x) { head(x) }, throws_error())
+	
+})
+	

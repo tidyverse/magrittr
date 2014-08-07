@@ -1,2 +1,2 @@
 library(testthat)
-test_check("magrittr")
+test_check("magrittr2")
