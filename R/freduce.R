@@ -11,6 +11,9 @@
 #' @export
 freduce <- function(value, fl)
 {
-	for (f in fl) value <- f(value)
-	value 
+	k <- length(fl)
+	if (k > 1)
+		for (i in 1:(k - 1L)) value <- fl[[i]](value)
+	value <- withVisible(fl[[k]](value))
+	if (value[["visible"]]) value[["value"]] else invisible(value[["value"]])
 }
