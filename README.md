@@ -58,8 +58,5 @@ In this case the expressions `a--d` only has to be determined once.
 # Relevant other differences
 * There is currently no `lambda` function in this version.
 * `magrittr` does not try to maintain a `call` as previously.
-* results are currently always returned visibly in this version.
-
-
 
  
