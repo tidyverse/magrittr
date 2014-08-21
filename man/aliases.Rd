@@ -7,6 +7,8 @@
 \alias{equals}
 \alias{extract}
 \alias{extract2}
+\alias{inset}
+\alias{inset2}
 \alias{is_greater_than}
 \alias{is_less_than}
 \alias{is_weakly_greater_than}
@@ -14,6 +16,7 @@
 \alias{mod}
 \alias{multiply_by}
 \alias{multiply_by_matrix}
+\alias{n'est pas}
 \alias{not}
 \alias{or}
 \alias{raise_to_power}
@@ -32,6 +35,8 @@ Currently implemented aliases are
 \tabular{ll}{
 \code{extract}            \tab \code{`[`}      \cr
 \code{extract2}           \tab \code{`[[`}     \cr
+\code{inset}              \tab \code{`[<-`}    \cr
+\code{inset2}             \tab \code{`[[<-`}   \cr
 \code{use_series}         \tab \code{`$`}      \cr
 \code{add}                \tab \code{`+`}      \cr
 \code{subtract}           \tab \code{`-`}      \cr
@@ -47,8 +52,8 @@ Currently implemented aliases are
 \code{is_greater_than}    \tab \code{`>`}      \cr
 \code{is_weakly_greater_than} \tab \code{`>=`} \cr
 \code{is_less_than}       \tab \code{`<`}      \cr
-\code{is_weakly_less_than}    \tab \code{`<=`} \cr
-\code{not}                \tab \code{`!`}      \cr
+\code{is_weakly_less_than}\tab \code{`<=`} \cr
+\code{not} (\code{`n'est pas`})  \tab \code{`!`} \cr
 \code{set_colnames}       \tab \code{`colnames<-`} \cr
 \code{set_rownames}       \tab \code{`rownames<-`} \cr
 \code{set_names}          \tab \code{`names<-`} \cr
