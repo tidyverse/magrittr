@@ -9,7 +9,7 @@ test_that("the provided aliases work as intended.", {
   expect_that(1:10 %>% subtract(10:1), is_identical_to(1:10 - 10:1))
   expect_that(1:10 %>% multiply_by(10:1), is_identical_to(1:10 * 10:1))
 
-  A <<- matrix(1:16, 4, 4)
+  A <- matrix(1:16, 4, 4)
   expect_that(A %>% multiply_by_matrix(A), is_identical_to(A %*% A))
   expect_that(1:10 %>% raise_to_power(10:1), is_identical_to((1:10)^(10:1)))
   expect_that(1:10 %>% divide_by(10:1), is_identical_to(1:10 / 10:1))

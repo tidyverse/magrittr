@@ -12,7 +12,8 @@ pipe <- function()
 		lhs   <- pl[["lhs"]]
 		
 		fseq <- 
-			lapply(1:length(calls), function(i) wrap_function(calls[[i]], pipes[[i]]))
+			lapply(1:length(calls), 
+						 function(i) wrap_function(calls[[i]], pipes[[i]], parent))
 		
 		if (is_placeholder(lhs)) {
 			env <- new.env(parent = parent)
