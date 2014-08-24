@@ -4,7 +4,7 @@
 # @return logical - TRUE if expr is of "first-argument" type, FALSE otherwise.
 is_first <- function(expr)
 {
-	identical(expr, eval(call("substitute", expr, list(. = "nodot"))))
+	!any(vapply(expr[-1], identical, quote(.), FUN.VALUE = logical(1)))
 }
 
 # Prepare a magrittr rhs of "first-argument" type.
