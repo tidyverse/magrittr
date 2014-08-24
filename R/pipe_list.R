@@ -22,6 +22,8 @@ pipe_list <- function(expr)
 		calls[[i]] <- 
 			if (is_function(rhs))
 				prepare_function(rhs)
+			else if (is_funexpr(rhs))
+				prepare_funexpr(rhs)
 			else if (is_first(rhs)) 
 				prepare_first(rhs)
 			else 

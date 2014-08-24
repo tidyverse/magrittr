@@ -37,11 +37,19 @@ is_compound_pipe <- function(pipe)
 	identical(pipe, quote(`%<>%`))
 }
 
+# Check whether expression is enclosed in curly braces.
+#
+# @param  expr An expression to be tested.
+# @return logical - TRUE if expr is enclosed in `{`, FALSE otherwise.
+is_funexpr <- function(expr)
+{
+	is.call(expr) && identical(expr[[1]], quote(`{`))
+}	
 
 # Check whether a symbol is the magrittr placeholder.
 #
 # @param  symbol A (quoted) symbol
-# @return logical - TRUE symbol is the magrittr placeholder, FALSE otherwise.
+# @return logical - TRUE if symbol is the magrittr placeholder, FALSE otherwise.
 is_placeholder <- function(symbol)
 {
 	identical(symbol, quote(.))

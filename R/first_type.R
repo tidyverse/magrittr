@@ -4,7 +4,7 @@
 # @return logical - TRUE if expr is of "first-argument" type, FALSE otherwise.
 is_first <- function(expr)
 {
-	!any(vapply(expr[-1], identical, quote(.), FUN.VALUE = logical(1)))
+	!any(vapply(expr[-1], identical, logical(1), quote(.)))
 }
 
 # Prepare a magrittr rhs of "first-argument" type.
