@@ -1,36 +1,35 @@
 pipe <- function()
 {
-	function(lhs, rhs)
-	{
-		parent <- parent.frame()
-		
-		cl <- match.call()
-		pl <- pipe_list(cl)
-		
-		pipes <- pl[["pipes"]]
-		calls <- pl[["calls"]]
-		lhs   <- pl[["lhs"]]
-		
-		fseq <- 
-			lapply(1:length(calls), 
-						 function(i) wrap_function(calls[[i]], pipes[[i]], parent))
-		
-		if (is_placeholder(lhs)) {
-			env <- new.env(parent = parent)
-			env[["__fseq__"]] <- fseq
-			`class<-`(eval(quote(function(.) freduce(., `__fseq__`)),	env, env),
-								c("fseq", "function"))
-		} else {
-			result <- withVisible(freduce(eval(lhs, parent, parent), fseq))
-			if (is_compound_pipe(pipes[[1L]]))
-				eval(call("<-", lhs, result[["value"]]), parent, parent)
-			else 
-				if (result[["visible"]]) 
-					result[["value"]] 
-				else 
-					invisible(result[["value"]])
-		}
-	}
+  function(lhs, rhs)
+  {
+    parent <- parent.frame()
+    cl     <- match.call()
+    pl     <- pipe_list(cl)
+
+    pipes <- pl[["pipes"]]
+    calls <- pl[["calls"]]
+    lhs   <- pl[["lhs"  ]]
+
+    fseq <- 
+      lapply(1:length(calls), 
+        function(i) wrap_function(calls[[i]], pipes[[i]], parent))
+
+    if (is_placeholder(lhs)) {
+      env <- new.env(parent = parent)
+      env[["__fseq__"]] <- fseq
+     `class<-`(eval(quote(function(.) freduce(., `__fseq__`)),	env, env),
+               c("fseq", "function"))
+    } else {
+      result <- withVisible(freduce(eval(lhs, parent, parent), fseq))
+      if (is_compound_pipe(pipes[[1L]]))
+        eval(call("<-", lhs, result[["value"]]), parent, parent)
+      else 
+        if (result[["visible"]]) 
+          result[["value"]] 
+        else 
+          invisible(result[["value"]])
+    }
+  }
 }
 
 #' magrittr pipe
@@ -54,4 +53,3 @@ pipe <- function()
 #' @rdname pipe
 #' @export
 `%T>%` <- pipe() 
-

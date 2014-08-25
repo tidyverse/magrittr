@@ -15,6 +15,6 @@
 # @return a function of a single argument, named \code{.}.
 wrap_function <- function(body, pipe, env)
 {
-	body <- if (is_tee(pipe)) call("{", body, quote(.)) else body
-	eval(call("function", as.pairlist(alist(.=)), body), env, env)
+  body <- if (is_tee(pipe)) call("{", body, quote(.)) else body
+  eval(call("function", as.pairlist(alist(.=)), body), env, env)
 }

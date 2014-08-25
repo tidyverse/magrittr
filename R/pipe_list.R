@@ -8,34 +8,33 @@
 # @return a list with components \code{lhs}, \code{calls}, and \code{pipes}.
 pipe_list <- function(expr)
 {
-	calls <- list()
-	pipes <- list()
-	
-	i <- 1L 
-	while(is.call(expr) && is_pipe(expr[[1L]])) {
-		pipes[[i]] <- expr[[1L]]
-		rhs <- expr[[3L]]
-		
-		if (is_parenthesized(rhs))
-			rhs <- eval(rhs)
-		
-		calls[[i]] <- 
-			if (is_function(rhs))
-				prepare_function(rhs)
-			else if (is_funexpr(rhs))
-				prepare_funexpr(rhs)
-			else if (is_first(rhs)) 
-				prepare_first(rhs)
-			else 
-				rhs
-			
-		if (identical(calls[[i]][[1L]], quote(`function`)))
-			stop("Anonymous functions myst be parenthesized", call. = FALSE)
-		
-		expr <- expr[[2L]]
-		i <- i + 1L
-	}
-	
-	
-	list(calls = rev(calls), pipes = rev(pipes), lhs = expr)
+  calls <- list()
+  pipes <- list()
+
+  i <- 1L 
+  while(is.call(expr) && is_pipe(expr[[1L]])) {
+    pipes[[i]] <- expr[[1L]]
+    rhs <- expr[[3L]]
+
+    if (is_parenthesized(rhs))
+      rhs <- eval(rhs)
+
+    calls[[i]] <- 
+      if (is_function(rhs))
+        prepare_function(rhs)
+      else if (is_funexpr(rhs))
+        prepare_funexpr(rhs)
+      else if (is_first(rhs)) 
+        prepare_first(rhs)
+      else 
+        rhs
+
+    if (identical(calls[[i]][[1L]], quote(`function`)))
+      stop("Anonymous functions myst be parenthesized", call. = FALSE)
+
+    expr <- expr[[2L]]
+    i <- i + 1L
+  }
+
+  list(calls = rev(calls), pipes = rev(pipes), lhs = expr)
 }

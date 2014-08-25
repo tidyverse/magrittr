@@ -9,8 +9,8 @@
 #' @export
 debug_pipe <- function(x)
 {
-	browser()
-	x
+  browser()
+  x
 }
 
 #' Debugging function for functional sequences.
@@ -25,25 +25,22 @@ debug_pipe <- function(x)
 #' @export
 debug_fseq <- function(fseq, ...)
 {
-	is_valid_index <- function(i) i %in% 1:length(functions(fseq))
-	
-	indices <- list(...)
-	if (length(indices) == 0)
-		print(fseq)
-	if (!any(vapply(indices, is.numeric, logical(1))) ||
-		  !any(vapply(indices, is_valid_index, logical(1))))
-		stop("Index or indices invalid.", call. = FALSE)
+  is_valid_index <- function(i) i %in% 1:length(functions(fseq))
 
-	invisible(lapply(indices, function(i) debug(functions(fseq)[[i]])))
+  indices <- list(...)
+    if (!any(vapply(indices, is.numeric, logical(1))) ||
+        !any(vapply(indices, is_valid_index, logical(1))))
+      stop("Index or indices invalid.", call. = FALSE)
+
+  invisible(lapply(indices, function(i) debug(functions(fseq)[[i]])))
 }
 
 #' @rdname debug_fseq
 #' @export
 undebug_fseq <- function(fseq)
 {
-	for (i in 1:length(functions(fseq)))
-		if (isdebugged(functions(fseq)[[i]])) 
-			undebug(functions(fseq)[[i]])
+  for (i in 1:length(functions(fseq)))
+    if (isdebugged(functions(fseq)[[i]])) 
+      undebug(functions(fseq)[[i]])
 }
-	
 	

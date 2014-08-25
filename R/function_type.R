@@ -4,7 +4,7 @@
 # @return logical - TRUE if expr represents a function, FALSE otherwise.
 is_function <- function(expr)
 {
-	is.symbol(expr) || is.function(expr)
+  is.symbol(expr) || is.function(expr)
 }
 
 # Prepare a magrittr rhs of funtion type
@@ -13,7 +13,7 @@ is_function <- function(expr)
 # @return an expression prepared for functional sequence construction.
 prepare_function <- function(f)
 {
-	as.call(list(f, quote(.)))
+  as.call(list(f, quote(.)))
 }
 
 # Prepare a magrittr rhs of funexpr type
@@ -22,7 +22,7 @@ prepare_function <- function(f)
 # @return an expression prepared for functional sequence construction.
 prepare_funexpr <- function(fe)
 {
-	if (is.symbol(fe[[2L]]))
-		fe[[2L]] <- call("<-", fe[[2L]], quote(.))
-	fe
+  if (is.symbol(fe[[2L]]))
+    fe[[2L]] <- call("<-", fe[[2L]], quote(.))
+  fe
 }

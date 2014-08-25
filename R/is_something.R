@@ -4,9 +4,9 @@
 # @return logical - TRUE if a valid magrittr pipe, FALSE otherwise.
 is_pipe <- function(pipe)
 {
-	identical(pipe, quote(`%>%`))   ||
-	identical(pipe, quote(`%T>%`))  ||
-	identical(pipe, quote(`%<>%`))
+  identical(pipe, quote(`%>%`))   ||
+  identical(pipe, quote(`%T>%`))  ||
+  identical(pipe, quote(`%<>%`))
 }
 
 # Determine whether an non-evaluated call is parenthesized
@@ -15,7 +15,7 @@ is_pipe <- function(pipe)
 # @retun logical - TRUE if expression is parenthesized, FALSE otherwise.
 is_parenthesized <- function(expr)
 {
-	is.call(expr) && identical(expr[[1]], quote(`(`))
+  is.call(expr) && identical(expr[[1]], quote(`(`))
 }
 
 # Check whether a pipe is a tee.
@@ -24,7 +24,7 @@ is_parenthesized <- function(expr)
 # @return logical - TRUE if pipe is a tee, FALSE otherwise.
 is_tee <- function(pipe)
 {
-	identical(pipe, quote(`%T>%`))
+  identical(pipe, quote(`%T>%`))
 }
 
 # Check whether a pipe is the compound assignment pipe operator
@@ -34,7 +34,7 @@ is_tee <- function(pipe)
 #   otherwise FALSE.
 is_compound_pipe <- function(pipe)
 {
-	identical(pipe, quote(`%<>%`))
+  identical(pipe, quote(`%<>%`))
 }
 
 # Check whether expression is enclosed in curly braces.
@@ -43,7 +43,7 @@ is_compound_pipe <- function(pipe)
 # @return logical - TRUE if expr is enclosed in `{`, FALSE otherwise.
 is_funexpr <- function(expr)
 {
-	is.call(expr) && identical(expr[[1]], quote(`{`))
+  is.call(expr) && identical(expr[[1]], quote(`{`))
 }	
 
 # Check whether a symbol is the magrittr placeholder.
@@ -52,8 +52,5 @@ is_funexpr <- function(expr)
 # @return logical - TRUE if symbol is the magrittr placeholder, FALSE otherwise.
 is_placeholder <- function(symbol)
 {
-	identical(symbol, quote(.))
+  identical(symbol, quote(.))
 }	
-	
-	
-	

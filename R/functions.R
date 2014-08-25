@@ -6,9 +6,9 @@
 #' @export
 functions <- function(fseq)
 {
-	if (!"fseq" %in% class(fseq))
-		stop("Object is not a functional sequence.", call. = FALSE)
-	environment(fseq)[["__fseq__"]]
+  if (!"fseq" %in% class(fseq))
+    stop("Object is not a functional sequence.", call. = FALSE)
+  environment(fseq)[["__fseq__"]]
 }
 
 #' Print method for functional sequence.
@@ -20,11 +20,11 @@ functions <- function(fseq)
 #' @export
 print.fseq <- function(x, ...)
 {
-	flist <- functions(x)
-	
-	cat("Functional sequence with the following components:\n\n")
-	lapply(1:length(flist), 
-		function(i) cat(" ", i, ". ", deparse(body(flist[[i]])), "\n", sep = ""))
-	cat("\nUse 'functions' to extract the individual functions.", "\n")
-	x
+  flist <- functions(x)
+
+  cat("Functional sequence with the following components:\n\n")
+  lapply(1:length(flist), 
+      function(i) cat(" ", i, ". ", deparse(body(flist[[i]])), "\n", sep = ""))
+  cat("\nUse 'functions' to extract the individual functions.", "\n")
+  x
 }
