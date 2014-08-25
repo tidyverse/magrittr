@@ -7,6 +7,8 @@
 #' \tabular{ll}{
 #' \code{extract}            \tab \code{`[`}      \cr
 #' \code{extract2}           \tab \code{`[[`}     \cr
+#' \code{inset}              \tab \code{`[<-`}    \cr
+#' \code{inset2}             \tab \code{`[[<-`}   \cr
 #' \code{use_series}         \tab \code{`$`}      \cr
 #' \code{add}                \tab \code{`+`}      \cr
 #' \code{subtract}           \tab \code{`-`}      \cr
@@ -23,7 +25,7 @@
 #' \code{is_weakly_greater_than} \tab \code{`>=`} \cr
 #' \code{is_less_than}       \tab \code{`<`}      \cr
 #' \code{is_weakly_less_than}    \tab \code{`<=`} \cr
-#' \code{not}                \tab \code{`!`}      \cr
+#' \code{not} (\code{`n'est pas`})  \tab \code{`!`} \cr
 #' \code{set_colnames}       \tab \code{`colnames<-`} \cr
 #' \code{set_rownames}       \tab \code{`rownames<-`} \cr
 #' \code{set_names}          \tab \code{`names<-`} \cr
@@ -147,6 +149,11 @@ not <- `!`
 #' @rdname aliases
 #' @usage NULL
 #' @export
+`n'est pas` <- `!`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
 set_colnames <- `colnames<-`
 
 #' @rdname aliases
@@ -158,3 +165,13 @@ set_rownames <- `rownames<-`
 #' @usage NULL
 #' @export
 set_names <- `names<-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+inset <- `[<-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+inset2 <- `[[<-`

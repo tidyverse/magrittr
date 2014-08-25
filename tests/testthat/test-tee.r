@@ -2,7 +2,7 @@ context("magrittr tee")
 
 test_that("tee related functionality works.", {
 
-  dim_message <<- function(data.)
+  dim_message <- function(data.)
     message(sprintf("Data has dimension %d x %d", NROW(data.), NCOL(data.)))
 
   expect_that(iris %T>% dim_message, shows_message(dim_message(iris)))
