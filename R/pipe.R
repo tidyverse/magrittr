@@ -3,6 +3,8 @@ pipe <- function()
   function(lhs, rhs)
   {
     parent <- parent.frame()
+    env    <- new.env(parent = parent)
+    
     cl     <- match.call()
     pl     <- pipe_list(cl)
 
@@ -10,17 +12,19 @@ pipe <- function()
     calls <- pl[["calls"]]
     lhs   <- pl[["lhs"  ]]
 
-    fseq <- 
+    env[["_fseq"]] <- 
       lapply(1:length(calls), 
-        function(i) wrap_function(calls[[i]], pipes[[i]], parent))
+             function(i) wrap_function(calls[[i]], pipes[[i]], parent))
 
+    env[["_function"]] <-
+     `class<-`(eval(quote(function(value) freduce(value, `_fseq`)),  env, env),
+      c("fseq", "function"))
+ 
     if (is_placeholder(lhs)) {
-      env <- new.env(parent = parent)
-      env[["__fseq__"]] <- fseq
-     `class<-`(eval(quote(function(.) freduce(., `__fseq__`)),	env, env),
-               c("fseq", "function"))
+      env[["_function"]]
     } else {
-      result <- withVisible(freduce(eval(lhs, parent, parent), fseq))
+      env[["_lhs"]] <- eval(lhs, parent, parent)
+      result <- withVisible(eval(quote(`_function`(`_lhs`)), env, env))
       if (is_compound_pipe(pipes[[1L]]))
         eval(call("<-", lhs, result[["value"]]), parent, parent)
       else 

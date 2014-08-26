@@ -8,7 +8,7 @@ functions <- function(fseq)
 {
   if (!"fseq" %in% class(fseq))
     stop("Object is not a functional sequence.", call. = FALSE)
-  environment(fseq)[["__fseq__"]]
+  environment(fseq)[["_fseq"]]
 }
 
 #' Print method for functional sequence.
