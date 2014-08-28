@@ -6,7 +6,7 @@ pipe <- function()
     env    <- new.env(parent = parent)
     
     cl     <- match.call()
-    pl     <- pipe_list(cl)
+    pl     <- pipe_list(cl, env = env)
 
     pipes <- pl[["pipes"]]
     calls <- pl[["calls"]]

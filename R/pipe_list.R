@@ -6,7 +6,7 @@
 # 
 # @param a non-evaluated pipe-line expression.
 # @return a list with components \code{lhs}, \code{calls}, and \code{pipes}.
-pipe_list <- function(expr)
+pipe_list <- function(expr, env)
 {
   calls <- list()
   pipes <- list()
@@ -17,7 +17,7 @@ pipe_list <- function(expr)
     rhs <- expr[[3L]]
 
     if (is_parenthesized(rhs))
-      rhs <- eval(rhs)
+      rhs <- eval(rhs, env, env)
 
     calls[[i]] <- 
       if (is_function(rhs))
