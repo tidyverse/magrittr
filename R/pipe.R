@@ -20,6 +20,10 @@ pipe <- function()
      `class<-`(eval(quote(function(value) freduce(value, `_fseq`)),  env, env),
       c("fseq", "function"))
  
+    # make freduce available to the resulting function 
+    # even if magrittr is not loaded.
+    env[["freduce"]] <- freduce 
+    
     if (is_placeholder(lhs)) {
       env[["_function"]]
     } else {
