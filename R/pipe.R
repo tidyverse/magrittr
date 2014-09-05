@@ -4,38 +4,45 @@ pipe <- function()
   {
     parent <- parent.frame()
     env    <- new.env(parent = parent)
-    
-    cl     <- match.call()
-    pl     <- pipe_list(cl, env = env)
 
-    pipes <- pl[["pipes"]]
-    calls <- pl[["calls"]]
-    lhs   <- pl[["lhs"  ]]
+    chain_parts <- split_chain(match.call(), env = env)
 
-    env[["_fseq"]] <- 
-      lapply(1:length(calls), 
-             function(i) wrap_function(calls[[i]], pipes[[i]], parent))
+    pipes <- chain_parts[["pipes"]] # the pipe operators.
+    rhss  <- chain_parts[["rhss" ]] # the right-hand sides.
+    lhs   <- chain_parts[["lhs"  ]] # the left-hand side.
 
-    env[["_function"]] <-
-     `class<-`(eval(quote(function(value) freduce(value, `_fseq`)),  env, env),
-      c("fseq", "function"))
+    env[["_function_list"]] <- 
+      lapply(1:length(rhss), 
+             function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
+
+    env[["_fseq"]] <-
+     `class<-`(eval(quote(function(value) freduce(value, `_function_list`)), 
+                    env, env), c("fseq", "function"))
  
     # make freduce available to the resulting function 
     # even if magrittr is not loaded.
     env[["freduce"]] <- freduce 
     
     if (is_placeholder(lhs)) {
-      env[["_function"]]
+      # return the function itself.
+      env[["_fseq"]]
     } else {
+      # evaluate the LHS
       env[["_lhs"]] <- eval(lhs, parent, parent)
-      result <- withVisible(eval(quote(`_function`(`_lhs`)), env, env))
-      if (is_compound_pipe(pipes[[1L]]))
+      
+      # compute the result by applying the function to the LHS
+      result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+      
+      # If compound assignment pipe operator is used, assign result
+      if (is_compound_pipe(pipes[[1L]])) {
         eval(call("<-", lhs, result[["value"]]), parent, parent)
-      else 
+      # Otherwise, return it.
+      } else {
         if (result[["visible"]]) 
           result[["value"]] 
         else 
           invisible(result[["value"]])
+      }
     }
   }
 }

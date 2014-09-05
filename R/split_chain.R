@@ -1,14 +1,14 @@
-# Split an expression into its components.
+# Split a chain expression into its components.
 #
-# This function splits a pipe call into its components: its 
+# This function splits a chain of pipe calls into its components: its 
 # left-hand side, a sequnce of right-hand sides, and the individual pipe
 # components.
 # 
 # @param a non-evaluated pipe-line expression.
-# @return a list with components \code{lhs}, \code{calls}, and \code{pipes}.
-pipe_list <- function(expr, env)
+# @return a list with components \code{lhs}, \code{rhss}, and \code{pipes}.
+split_chain <- function(expr, env)
 {
-  calls <- list()
+  rhss <- list()
   pipes <- list()
 
   i <- 1L 
@@ -19,7 +19,7 @@ pipe_list <- function(expr, env)
     if (is_parenthesized(rhs))
       rhs <- eval(rhs, env, env)
 
-    calls[[i]] <- 
+    rhss[[i]] <- 
       if (is_function(rhs))
         prepare_function(rhs)
       else if (is_funexpr(rhs))
@@ -29,12 +29,12 @@ pipe_list <- function(expr, env)
       else 
         rhs
 
-    if (identical(calls[[i]][[1L]], quote(`function`)))
+    if (identical(rhss[[i]][[1L]], quote(`function`)))
       stop("Anonymous functions myst be parenthesized", call. = FALSE)
 
     expr <- expr[[2L]]
     i <- i + 1L
   }
 
-  list(calls = rev(calls), pipes = rev(pipes), lhs = expr)
+  list(rhss = rev(rhss), pipes = rev(pipes), lhs = expr)
 }
