@@ -22,7 +22,7 @@ as is the package itself. *magrittr* has two aims: to decrease development time 
 to improve readability and maintainability of code. Or even shortr: to make
 your code smokin' (puff puff)!
 
-To archive its humble aims, *magrittr* (remember the accent) provides a new 
+To achieve its humble aims, *magrittr* (remember the accent) provides a new 
 "pipe"-like operator, `%>%`, with which you may pipe a value forward into an 
 expression or function call; something along the lines of ` x %>% f `, rather
 than ` f(x)`. This is not an unknown feature
