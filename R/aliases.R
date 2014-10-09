@@ -29,6 +29,7 @@
 #' \code{set_colnames}       \tab \code{`colnames<-`} \cr
 #' \code{set_rownames}       \tab \code{`rownames<-`} \cr
 #' \code{set_names}          \tab \code{`names<-`} \cr
+#' \code{set_dimnames}       \tab \code{`dimnames<-`} \cr
 #' }
 #'
 #' @usage NULL
@@ -165,6 +166,11 @@ set_rownames <- `rownames<-`
 #' @usage NULL
 #' @export
 set_names <- `names<-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+set_dimnames <- `dimnames<-`
 
 #' @rdname aliases
 #' @usage NULL
