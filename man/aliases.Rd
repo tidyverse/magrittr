@@ -21,6 +21,7 @@
 \alias{or}
 \alias{raise_to_power}
 \alias{set_colnames}
+\alias{set_dimnames}
 \alias{set_names}
 \alias{set_rownames}
 \alias{subtract}
@@ -57,6 +58,7 @@ Currently implemented aliases are
 \code{set_colnames}       \tab \code{`colnames<-`} \cr
 \code{set_rownames}       \tab \code{`rownames<-`} \cr
 \code{set_names}          \tab \code{`names<-`} \cr
+\code{set_dimnames}       \tab \code{`dimnames<-`} \cr
 }
 }
 \examples{
