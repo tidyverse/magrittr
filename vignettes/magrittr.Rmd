@@ -41,7 +41,7 @@ library(magrittr)
 
 weekly <-
   airquality %>% 
-  transform(Date = paste(1973, Month, Day, sep = "-") %>% as.Date) %>% 
+  transform(Date = paste(1973, Month, Day, sep = "-") %>% as.Date %>% 
   aggregate(. ~ Date %>% format("%W"), ., mean)
 
 weekly %>% head(3)
