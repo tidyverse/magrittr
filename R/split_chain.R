@@ -20,7 +20,9 @@ split_chain <- function(expr, env)
       rhs <- eval(rhs, env, env)
 
     rhss[[i]] <- 
-      if (is_function(rhs))
+      if (is_dollar(pipes[[i]]))
+        rhs
+      else if (is_function(rhs))
         prepare_function(rhs)
       else if (is_funexpr(rhs))
         prepare_funexpr(rhs)
@@ -29,7 +31,7 @@ split_chain <- function(expr, env)
       else 
         rhs
 
-    if (identical(rhss[[i]][[1L]], quote(`function`)))
+    if (is.call(rhss[[i]]) && identical(rhss[[i]][[1L]], quote(`function`)))
       stop("Anonymous functions myst be parenthesized", call. = FALSE)
 
     expr <- expr[[2L]]

@@ -15,6 +15,11 @@
 # @return a function of a single argument, named \code{.}.
 wrap_function <- function(body, pipe, env)
 {
-  body <- if (is_tee(pipe)) call("{", body, quote(.)) else body
+ 
+  if (is_tee(pipe)) {
+    body <- call("{", body, quote(.))
+  } else if (is_dollar(pipe)) {
+    body <- substitute(with(., b), list(b = body))
+  } 
   eval(call("function", as.pairlist(alist(.=)), body), env, env)
 }

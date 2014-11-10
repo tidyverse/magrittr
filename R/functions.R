@@ -1,7 +1,10 @@
 #' Extract the function list from a functional sequence.
 #'
+#' This can be used to extract the list of functions inside a functional
+#' sequence created with a chain like \code{. \%>\% foo \%>\% bar}.
+#'
 #' @param fseq A functional sequence ala magrittr.
-#' @return a list of functions (of class \code{flist})
+#' @return a list of functions
 #' 
 #' @export
 functions <- function(fseq)

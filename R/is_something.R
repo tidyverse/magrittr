@@ -6,7 +6,8 @@ is_pipe <- function(pipe)
 {
   identical(pipe, quote(`%>%`))   ||
   identical(pipe, quote(`%T>%`))  ||
-  identical(pipe, quote(`%<>%`))
+  identical(pipe, quote(`%<>%`))  ||
+  identical(pipe, quote(`%$%`))
 }
 
 # Determine whether an non-evaluated call is parenthesized
@@ -25,6 +26,15 @@ is_parenthesized <- function(expr)
 is_tee <- function(pipe)
 {
   identical(pipe, quote(`%T>%`))
+}
+
+# Check whether a pipe is the dollar pipe.
+#
+# @param pipe A (quoted) pipe
+# @return logical - TRUE if pipe is the dollar pipe, FALSE otherwise.
+is_dollar <- function(pipe)
+{
+  identical(pipe, quote(`%$%`))
 }
 
 # Check whether a pipe is the compound assignment pipe operator

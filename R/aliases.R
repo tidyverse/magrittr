@@ -18,6 +18,7 @@
 #' \code{divide_by}          \tab \code{`/`}      \cr
 #' \code{divide_by_int}      \tab \code{`\%/\%`}  \cr
 #' \code{mod}                \tab \code{`\%\%`}   \cr
+#' \code{is_in}              \tab \code{`\%in\%`} \cr
 #' \code{and}                \tab \code{`&`}      \cr
 #' \code{or}                 \tab \code{`|`}      \cr
 #' \code{equals}             \tab \code{`==`}     \cr
@@ -115,6 +116,11 @@ or <- `|`
 #' @usage NULL
 #' @export
 mod <- `%%`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+is_in <- `%in%`
 
 #' @rdname aliases
 #' @usage NULL

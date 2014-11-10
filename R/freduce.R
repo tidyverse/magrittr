@@ -1,12 +1,12 @@
-#' Apply a list of functions in a sequence
+#' Apply a list of functions sequentially
 #'
+#' This function applies the first function to \code{value}, then the
+#' next function to the result of the previous function call, etc. 
+#' 
 #' @param value initial value.
 #' @param function_list a list of functions.
 #' @return The result after applying each function in turn.
 #'
-#' @details this function does not return a vector of the same length as 
-#' \code{function_list}. It applies the first function to \code{value}, the the next
-#' function to the result of the previous, etc.
 #'
 #' @export
 freduce <- function(value, function_list)
