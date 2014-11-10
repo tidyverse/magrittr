@@ -43,7 +43,7 @@ weekly <-
   airquality %>% 
   transform(Date = paste(1973, Month, Day, sep = "-") %>% as.Date %>% 
   aggregate(. ~ Date %>% format("%W"), ., mean)
-
+  
 weekly %>% head(3)
 ```
 We start with the value `airquality` (a `data.frame`). Then based on this, we 
