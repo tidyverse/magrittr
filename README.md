@@ -35,9 +35,13 @@ sequence of operations wherever it may be needed.
 
 # Installation
 
-```R
-devtools::install_github("smbache/magrittr@dev")
-```
+To install the current development version use devtools:
+
+    devtools::install_github("smbache/magrittr")
+
+To install the CRAN version:
+
+    install.packages("magrittr")
 
 # Features
 
