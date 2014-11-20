@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 ![magrittr-pipe](magrittr.jpg)
 
-*This version: May, 2014. Stefan Milton Bache* 
+*This version: November, 2014. Stefan Milton Bache* 
 
 # Abstract
 

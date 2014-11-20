@@ -2,10 +2,9 @@ Package: magrittr
 Type: Package
 Title: magrittr - a forward-pipe operator for R
 Version: 1.5
-Date: 2014-08-07
 Author: Stefan Milton Bache <stefan@stefanbache.dk> and
     Hadley Wickham <h.wickham@gmail.com>
-Maintainer: Stefan Holst Milton Bache <stefan@stefanbache.dk>
+Maintainer: Stefan Milton Bache <stefan@stefanbache.dk>
 Description: Provides a mechanism for chaining commands with a
     new forward-pipe operator. Ceci n'est pas un pipe.
 Suggests:
