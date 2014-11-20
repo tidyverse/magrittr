@@ -3,123 +3,146 @@ magrittr -  Ceci n'est pas un pipe.
 
 [![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=dev)](https://travis-ci.org/smbache/magrittr)
 
+# Introduction
+
+The magrittr package offers a set of operators which promote semantics 
+that will improve your code by
+
+* structuring sequences of data operations left-to-right (as opposed to 
+  from the inside and out),
+* avoiding nested function calls, 
+* minimizing the need for local variables and function definitions, and
+* making it easy to add steps anywhere in the sequence of operations.
+
+The operators pipe their left-hand side values forward into expressions that
+appear on the right-hand side, i.e. one can replace `f(x)` with 
+`x %>% f`, where `%>%` is the (main) pipe-operator. When coupling 
+several function calls with the pipe-operator, the benefit will become
+more apparent. Consider this pseudo example 
+
+
+    the_data <-
+      read.csv('/path/to/data/file.csv') %>%
+      subset(variable_a > x) %>%
+      transform(variable_c = variable_a/variable_b) %>%
+      head(100)
+
+Four operations are performed to 
+arrive at the desired data set, and they are written in a natural order: 
+the same as the order of execution. Also, no temporary variables are needed.
+If yet another operation is required, it is straight-forward to add to the
+sequence of operations wherever it may be needed.
 
 # Installation
 
-    devtools::install_github("smbache/magrittr", ref = "dev")
+```R
+devtools::install_github("smbache/magrittr@dev")
+```
 
-# Introduction
+# Features
 
-This is an experimental redesign of `magrittr` which is more centered on 
-the principle of functional sequences (and generally faster than the original 
-implementation). One should be familiar with
-the general purpose and use of `magrittr` to make the most of the description 
-below, which is still somewhat unstructured.
+### Basic piping: 
+  
+  * `x %>% f` is equivalent to `f(x)`
+  * `x %>% f(y)` is equivalent to `f(x, y)`
+  * `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
 
-For most practical purposes, it works **as usual**:
+### The argument placeholder
 
-    value %>%
-      fun1(arg1) %>%
-      fun2(arg2, .) %>%
-      fun3
+ * `x %>% f(y, .)` is equivalent to `f(y, x)`
+ * `x %>% f(y, z = .)` is equivalent to `f(y, z = x)`
+ 
+### Re-using the placeholder for attributes
 
-The **tee operator** is there:
+It is straight-forward to use the placeholder several times
+in a right-hand side expression. However, when the placeholder
+only appears in a nested expressions magrittr will still apply
+the first-argument rule. The reason is that in most cases this
+results more clean code. 
 
-    value %T>%
-      plot %>%          # usually doesn't return anything, here returns lhs from before
-      some_function     # receives value
+`x %>% f(y = nrow(.), z = ncol(.))` is equivalent to 
+   `f(x, y = nrow(x), z = nrow(x))`
 
-And the **compound assignment pipe operator**:
+The behavior can be
+overruled by enclosing the right-hand side in braces:
 
-	iris$Sepal.Length %<>% multiply_by(2)
+`x %>% {f(y = nrow(.), z = ncol(.))}` is equivalent to 
+   `f(y = nrow(x), z = nrow(x))`
 
-    # equivalent to
-    iris$Sepal.Length <- iris$Sepal.Length %>% multiply_by(2)
+### More advanced right-hand sides and lambdas
+To define a unary function on the fly in the pipeline, enclose the
+body of such function in braces, and refer to the argument as
+`.`, e.g. 
 
-The **main difference** is that the entire right-hand side is "compiled" into a functional
-sequence (a function which applies the individual right-hand sides sequentially). When the 
-left-hand side is a value, the result of applying this function is returned; when it is the
-`magrittr` placeholder (`.`) the **functional sequences itself is returned**:
 
-    fun <- . %>% cos %>% sin %>% sum(na.rm = TRUE)
+    iris %>% 
+      {
+        n <- sample(1:10, size = 1)
+        H <- head(., n)
+        T <- tail(., n)
+        rbind(H, T)
+      } %>%
+      summary
 
-This can be used either normally, `fun(1:10)`, or using the pipe, `1:10 %>% fun`.
-It is therefore a useful shortcut to constructing single argument functions.
+### Building (unary) functions
 
-This **"one-time compilation"** of the functional sequence is also useful in repetitive 
-situations:
+Any pipeline starting with the `.` will return a function which can later
+be used to apply the pipeline to values. Building functions in magrittr 
+is therefore similar to building other values.
 
-    loong_vector %>% lapply(. %>% a %>% b %>% c %>% d)
 
-In this case the expressions `a--d` only has to be processed once.
+    f <- . %>% cos %>% sin 
+    # is equivalent to 
+    f <- function(.) sin(cos(.)) 
 
-# Lambdas
 
-Since every "right-hand side" (RHS) in a pipe expression is treated as a function
-of a single parameter (`.`), a RHS is essentially just the function body with 
-the special rule that when no dot (`.`) appears at the outer-most level in the 
-call (i.e. it only appears in nested function calls, or not at all) then it is
-inserted as the first argument. In other words, it is a short-hand for writing the
-body in full. It is therefore only natural that one could write more advanced 
-function bodies enclosed in `{}`, which is now possible (and takes the role of
-`lambda`, which is not included):
+### Tee operations
+Some right-hand sides are used for their side effect (e.g. plotting, 
+printing to a file, etc) and it may be convenient to be able to 
+subsequently continue the pipeline. The "tee" operator, `%T>%`
+can be used for this purpose and works exactly like `%>%`, except it
+returns the left-hand side value, rather than the potential result 
+of the right-hand side operation:
 
-    rnorm(100) %>% { if (mean(.) > 0) "good times" else "bad times" }
+    rnorm(200) %>%
+    matrix(ncol = 2) %T>%
+    plot %>% # plot usually does not return anything.
+    colSums
 
-This can also be used to "overrule" first-argument piping in some rare occations
-where this is useful, say `rnorm(100) %>% {c(min(.), max(.)}`.
+### Pipe with exposition of variables
+Many functions accept a data argument, e.g. `lm` and `aggregate`, which
+is very useful in a pipeline where data is first processed and then passed
+into such a function. There are also functions that do not have a data 
+argument, for which it is useful to expose the variables in the data.
+This is done with the `%$%` operator:
 
-The expression inside `{}` can be as if one had written `(function(.) { ... })`.
-Sometimes is more expressive to rename the dot argument, so there is a shorthand for this:
+    iris %>%
+      subset(Sepal.Length > mean(Sepal.Length)) %$%
+      cor(Sepal.Length, Sepal.Width)
 
-	rnorm(100) %>% 
-	  {x; if (mean(x) > 0) "good times" else "bad times"}
+    data.frame(z = rnorm(100)) %$%
+      ts.plot(z)
 
-Simply use a bare symbol as the first expression inside, and this will be 
-interpreted as `symbol <- .`. The example above is of course equivalent to
+### Compound assignment pipe operations
+There is also a pipe operator which can be used as shorthand notation
+in situations where the left-hand side is being "overwritten":
 
-	rnorm(100) %>% {x 
-	  if (mean(x) > 0) "good times" else "bad times"
-	}
+    iris$Sepal.Length <- 
+      iris$Sepal.Length %>%
+      sqrt
 
-# Debugging
+To avoid the repetition of the left-hand side immediately after the assignment
+operator, use the `%<>%` operator:
 
-There is also added more debugging functionality, which makes it easier to debug
-certain steps in the chain:
+    iris$Sepal.Length %<>% sqrt 
 
-    fun <- . %>% expr(arg) %>% more %>% and_finally
+This operator works exactly like `%>%`, except the pipeline assigns the result
+rather than returning it. It must be the first pipe operator in a longer chain.
 
-    # debug first and third function
-    debug_fseq(fun, 1, 3)
+# Further information
+For more detail, see the package vignette
 
- 	# ... test and undebug them again:
-	undebug_fseq(fun)
-
-# Extracting subsets of functional sequences
-
-It is also possible to extract the function list using `functions`: 
-
-    functions(fun)
-
-and one can also construct functional subsequences using the `[` operator, e.g. `fun[1:2]`. 
-The result here will be a new functional sequence (i.e. not a list of functions, but
-a single function, which applies the function list sequentially.)
-
-When using a part of a functional sequence in a chain it needs to be parenthesized
-as other function-generating calls:
-
-    value %>%
-      (fun[1:2])
-
-# Inspecting functional sequences.
-
-For easy inspection these have their own `print` method:
-
-    > fun
-    Functional sequence with the following components:
-
-     1. cos(.)
-     2. sin(.)
-     3. sum(., na.rm = TRUE)
-
-    Use 'functions' to extract the individual functions.
+    vignette("magrittr")
+ 
+ 
+ 

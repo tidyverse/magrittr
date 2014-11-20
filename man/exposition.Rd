@@ -11,7 +11,7 @@ lhs \%$\% rhs
 \item{rhs}{An expression where the names in lhs is available.}
 }
 \description{
-Expose the names in lhs to the rhs expression. This is useful when functions
+Expose the names in \code{lhs} to the \code{rhs} expression. This is useful when functions
 do not have a built-in data argument.
 }
 \details{

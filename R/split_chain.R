@@ -4,13 +4,16 @@
 # left-hand side, a sequnce of right-hand sides, and the individual pipe
 # components.
 # 
-# @param a non-evaluated pipe-line expression.
+# @param expr a non-evaluated pipe-line expression.
+# @param env an environment in which to evaluate rhs parts.
 # @return a list with components \code{lhs}, \code{rhss}, and \code{pipes}.
 split_chain <- function(expr, env)
 {
-  rhss <- list()
+  # lists for holding the right-hand sides and the pipe operators.
+  rhss  <- list()
   pipes <- list()
 
+  # Process the call, splitting it at each valid magrittr pipe operator.
   i <- 1L 
   while(is.call(expr) && is_pipe(expr[[1L]])) {
     pipes[[i]] <- expr[[1L]]
@@ -20,23 +23,23 @@ split_chain <- function(expr, env)
       rhs <- eval(rhs, env, env)
 
     rhss[[i]] <- 
-      if (is_dollar(pipes[[i]]))
+      if (is_dollar(pipes[[i]]) || is_funexpr(rhs))
         rhs
       else if (is_function(rhs))
         prepare_function(rhs)
-      else if (is_funexpr(rhs))
-        prepare_funexpr(rhs)
       else if (is_first(rhs)) 
         prepare_first(rhs)
       else 
         rhs
 
+    # Make sure no anonymous functions without parentheses are used.
     if (is.call(rhss[[i]]) && identical(rhss[[i]][[1L]], quote(`function`)))
       stop("Anonymous functions myst be parenthesized", call. = FALSE)
 
     expr <- expr[[2L]]
     i <- i + 1L
   }
-
+  
+  # return the components; expr will now hold the left-most left-hand side.
   list(rhss = rev(rhss), pipes = rev(pipes), lhs = expr)
 }

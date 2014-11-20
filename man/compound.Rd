@@ -12,11 +12,11 @@ lhs \%<>\% rhs
 }
 \description{
 Pipe an object forward into a function or call expression and update the
-lhs object with the resulting value.
+\code{lhs} object with the resulting value.
 }
 \details{
 The compound assignment pipe-operator, \code{\%<>\%}, is used to
-update a value by first piping it into one or more rhs expressions, and
+update a value by first piping it into one or more \code{rhs} expressions, and
 then assigning the result. For example, \code{some_object \%<>\%
 foo \%>\% bar} is equivalent to \code{some_object <- some_object \%>\% foo
 \%>\% bar}. It must be the first pipe-operator in a chain, but otherwise it

@@ -17,7 +17,7 @@ is used for its side-effect, say plotting or printing.
 }
 \details{
 The tee operator works like \code{\link{\%>\%}}, except the
-return value is lhs itself, and not the result of rhs function/expression.
+return value is \code{lhs} itself, and not the result of \code{rhs} function/expression.
 }
 \examples{
 rnorm(200) \%>\%

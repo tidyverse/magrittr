@@ -2,7 +2,8 @@
 # 
 # This function takes the "body" part of a function and wraps it in
 # a function. The return value depends on whether the function is created
-# for its side effect with the tee operator.
+# for its side effect with the tee operator. If the operator is \code{\%$\%}
+# then the expression will be evaluated in a \code{with(., )} statement.
 #
 # @param body an expression which will serve as function body in single-argument
 #    function with an argument names \code{.} (a dot)

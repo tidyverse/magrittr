@@ -4,7 +4,7 @@
 #' that will improve your code by
 #' \itemize{
 #'   \item structuring sequences of data operations left-to-right
-#'         (as opposed to from-inside-out),
+#'         (as opposed to from the inside and out),
 #'   \item avoiding nested function calls, 
 #'   \item minimizing the need for local variables and function definitions, and
 #'   \item making it easy to add steps anywhere in the sequence of operations.

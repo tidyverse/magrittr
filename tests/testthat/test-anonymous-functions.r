@@ -17,7 +17,16 @@ test_that("%>% handles anonymous functions in GlobalEnv", {
   expect_that(a, is_identical_to(b))
   expect_that(a, is_identical_to(c))
 
-
+  # Same using preferred magrittr syntax
+  a <- (function(x) 1 + x^2/2 + x^3/9 + x^4/16)(1:100)
+  
+  b <-
+    1:100 %>%
+    {1 + .^2/2 + .^3/9 + .^4/16}
+    
+  expect_that(a, is_identical_to(b))
+  
+  
   # Simple data.frame functions
   ht1 <-
     iris %>%
