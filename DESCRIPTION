@@ -1,12 +1,17 @@
 Package: magrittr
 Type: Package
-Title: A forward-pipe operator for R
+Title: A Forward-Pipe Operator for R
 Version: 1.5
 Author: Stefan Milton Bache <stefan@stefanbache.dk> and
     Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Stefan Milton Bache <stefan@stefanbache.dk>
 Description: Provides a mechanism for chaining commands with a
-    new forward-pipe operator. Ceci n'est pas un pipe.
+    new forward-pipe operator, %>%. This operator will forward a
+    value, or the result of an expression, into the next function
+    call/expression. There is flexible support for the type
+    of right-hand side expressions. For more information, see
+    package vignette.
+    To quote Rene Magritte, "Ceci n'est pas un pipe."
 Suggests:
     testthat,
     knitr

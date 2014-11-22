@@ -1,9 +1,11 @@
 ## Response to CRAN comments on last submit
 
-* Name removed from title, and casing changed for the rest.
-* The "magrittr" name and the french quote is a reference to 
-  René Magritte and his famous painting "The Treachery of Images", 
-  http://en.wikipedia.org/wiki/The_Treachery_of_Images
+* Another attempt at getting title casing correct.
+* Added a slightly longer description to the DESCRIPTION file
+* Added quotation marks to the Treachery of Images quotation.
+* The quotation is kept as it is part og the package's image. 
+  I hope you will respect this decision.
+* Added NEWS.md to .Rbuildignore
 
 ## Test environments
 
