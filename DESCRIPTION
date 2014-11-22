@@ -1,6 +1,6 @@
 Package: magrittr
 Type: Package
-Title: magrittr - a forward-pipe operator for R
+Title: A forward-pipe operator for R
 Version: 1.5
 Author: Stefan Milton Bache <stefan@stefanbache.dk> and
     Hadley Wickham <h.wickham@gmail.com>
