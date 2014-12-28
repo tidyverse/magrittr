@@ -34,7 +34,7 @@ split_chain <- function(expr, env)
 
     # Make sure no anonymous functions without parentheses are used.
     if (is.call(rhss[[i]]) && identical(rhss[[i]][[1L]], quote(`function`)))
-      stop("Anonymous functions myst be parenthesized", call. = FALSE)
+      stop("Anonymous functions must be parenthesized", call. = FALSE)
 
     expr <- expr[[2L]]
     i <- i + 1L
