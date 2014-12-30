@@ -25,7 +25,7 @@ split_chain <- function(expr, env)
     rhss[[i]] <- 
       if (is_dollar(pipes[[i]]) || is_funexpr(rhs))
         rhs
-      else if (is_function(rhs))
+      else if (is_function(rhs) || is_colexpr(rhs))
         prepare_function(rhs)
       else if (is_first(rhs)) 
         prepare_first(rhs)
