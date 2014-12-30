@@ -56,6 +56,16 @@ is_funexpr <- function(expr)
   is.call(expr) && identical(expr[[1]], quote(`{`))
 }	
 
+# Check whether expression has double or triple colons
+#
+# @param  expr An expression to be tested.
+# @return logical - TRUE if expr contains `::` or `:::`, FALSE otherwise.
+is_colexpr <- function(expr)
+{
+  is.call(expr) &&
+    (identical(expr[[1L]], quote(`::`)) || identical(expr[[1L]], quote(`:::`)))
+}
+
 # Check whether a symbol is the magrittr placeholder.
 #
 # @param  symbol A (quoted) symbol
