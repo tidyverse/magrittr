@@ -181,3 +181,13 @@ inset <- `[<-`
 #' @usage NULL
 #' @export
 inset2 <- `[[<-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+set_attr <- `attr<-`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+set_attributes <- `attributes<-`
