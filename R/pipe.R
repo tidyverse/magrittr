@@ -45,7 +45,7 @@ pipe <- function()
       
       # If compound assignment pipe operator is used, assign result
       if (is_compound_pipe(pipes[[1L]])) {
-        eval(call("<-", lhs, result[["value"]]), parent, parent)
+        eval(as.call(list(base::`<-`, lhs, result[["value"]])), parent, parent)
       # Otherwise, return it.
       } else {
         if (result[["visible"]]) 
