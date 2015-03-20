@@ -1,3 +1,5 @@
+![magrittr logo](./magrittr.png?raw=true "magrittr logo")
+
 magrittr -  Ceci n'est pas un pipe.
 ====================================
 
