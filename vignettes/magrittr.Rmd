@@ -66,7 +66,7 @@ A horrific alternative would be to write
 car_data <- 
   transform(aggregate(. ~ cyl, 
                       data = subset(mtcars, hp > 100), 
-                      FUN = function(x) round(mean(x, 2))), 
+                      FUN = function(x) round(mean(x), 2)), 
             kpl = mpg*0.4251)
 ```
 There is a lot more clutter with parentheses, and the mental task of deciphering
