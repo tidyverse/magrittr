@@ -67,13 +67,13 @@ the first-argument rule. The reason is that in most cases this
 results more clean code. 
 
 `x %>% f(y = nrow(.), z = ncol(.))` is equivalent to 
-   `f(x, y = nrow(x), z = nrow(x))`
+   `f(x, y = nrow(x), z = ncol(x))`
 
 The behavior can be
 overruled by enclosing the right-hand side in braces:
 
 `x %>% {f(y = nrow(.), z = ncol(.))}` is equivalent to 
-   `f(y = nrow(x), z = nrow(x))`
+   `f(y = nrow(x), z = ncol(x))`
 
 ### More advanced right-hand sides and lambdas
 To define a unary function on the fly in the pipeline, enclose the
