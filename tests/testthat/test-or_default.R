@@ -12,7 +12,7 @@ test_that("or_default works with FALSE", {
   expect_false(FALSE %||% 0)
 })
 
-test_that("or_default does not work with vectors of NA", {
+test_that("or_default does work with vectors of NA and returns equal lengths values", {
   input <- c(NA, NA, NA)
-  expect_that(input %||% 0, is_identical_to(input))
+  expect_that(input %||% 0, is_identical_to(c(0, 0, 0)))
 })
