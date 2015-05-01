@@ -11,7 +11,7 @@ or_default <- function(original_value, fallback_value) {
 }
 
 
-#' magrittr or default operator
+#' magrittr or_default operator
 #' 
 #' Tests if a value is NA or NULL and returns a default value instead.s
 #' 
