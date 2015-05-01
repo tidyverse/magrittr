@@ -13,13 +13,12 @@ or_default <- function(original_value, fallback_value) {
 
 #' magrittr or_default operator
 #' 
-#' Tests if a value is NA or NULL and returns a default value instead.s
+#' Tests if a value is NA or NULL and returns a default value instead.
 #' 
 #' @param original_value Any datatype.
 #' @param fallback_value Any datatype.
 #' 
-#' @details The operator only returns the rhs when lhs is NULL, NA, or a vector of. 
-#' Vectors of NULL or NA will not returns the rhs but lhs.s
+#' @details The operator only returns the fallback_value when original_value is NULL, NA, or a vector of NAs. 
 #' 
 #' @examples
 #' x <- NA
