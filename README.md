@@ -145,6 +145,13 @@ operator, use the `%<>%` operator:
 This operator works exactly like `%>%`, except the pipeline assigns the result
 rather than returning it. It must be the first pipe operator in a longer chain.
 
+### Compound assignment with exposition pipe operatios
+Finally, there is a pipe operator with combines compound assignment with exposition.
+Instead of having to write `foo <- foo %$% bar` use the `%<$>%` operator:
+
+    foo %<$>% bar
+
+
 # Further information
 For more detail, see the package vignette
 

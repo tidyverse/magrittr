@@ -131,7 +131,7 @@ pipe <- function()
 #' chain is evaluated. In general it is advised to use the aliases provided 
 #' by magrittr.
 #' 
-#' @seealso \code{\link{\%<>\%}}, \code{\link{\%T>\%}}, \code{\link{\%$\%}}
+#' @seealso \code{\link{\%<>\%}}, \code{\link{\%T>\%}}, \code{\link{\%$\%}}, \code{\link{\%<$>\%}}
 #' 
 #' @examples
 #' # Basic use:
@@ -189,7 +189,7 @@ pipe <- function()
 #' \%>\% bar}. It must be the first pipe-operator in a chain, but otherwise it
 #' works like \code{\link{\%>\%}}.
 #' 
-#' @seealso \code{\link{\%>\%}}, \code{\link{\%T>\%}}, \code{\link{\%$\%}}
+#' @seealso \code{\link{\%>\%}}, \code{\link{\%T>\%}}, \code{\link{\%$\%}}, \code{\link{\%<$>\%}}
 #' 
 #' @examples
 #' iris$Sepal.Length %<>% sqrt
@@ -229,7 +229,7 @@ pipe <- function()
 #' @details The tee operator works like \code{\link{\%>\%}}, except the 
 #' return value is \code{lhs} itself, and not the result of \code{rhs} function/expression.
 #' 
-#' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
+#' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}, \code{\link{\%<$>\%}}
 #' 
 #' @examples
 #' rnorm(200) %>%
@@ -254,7 +254,7 @@ pipe <- function()
 #' of the call. This operator exposes the contents of the left-hand side object
 #' to the expression on the right to give a similar benefit, see the examples.
 
-#' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
+#' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%T>\%}}, \code{\link{\%<$>\%}}
 #' 
 #' @examples
 #' iris %>%
@@ -267,3 +267,31 @@ pipe <- function()
 #' @rdname exposition
 #' @export
 `%$%` <- pipe() 
+
+#' magrittr compound assignment with exposition pipe-operator
+#' 
+#' Pipe an object forward into a function or call expression while exposing the names in \code{lhs} to the \code{rhs} expression, 
+#' then update the \code{lhs} object with the resulting value.
+#' 
+#' @param lhs An object which serves both as the initial value and as target.
+#' @param rhs An expression where the names in lhs is available.
+#' 
+#' @details The compound assignment with exposition pipe-operator, \code{\%<$>\%}, is a
+#' combination of the compound assignment pipe-operator, \code{\%<>\%}, and the exposition 
+#' pipe-operator, \code{\%$\%}, and it used to update a value by first piping into one or more rhs expressions, 
+#' while exposing its contents, and then assigning the result.
+#' For example, \code{some_object \%<$>\% 
+#' foo \%>\% bar} is equivalent to \code{some_object <- some_object \%$\% foo
+#' \%>\% bar}. It must be the first pipe-operator in a chain, but otherwise it
+#' works like \code{\link{\%$\%}}.
+#' 
+
+#' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%T>\%}}, \code{\link{\%$\%}}
+#' 
+#' @examples
+#' d <- data.frame(x=c(1,2), y=c(2,3))
+#' d %<$>% rbind(., data.frame(x=sum(x), y=sum(y)))
+#'   
+#' @rdname compound_exposition
+#' @export
+`%<$>%` <- pipe() 
