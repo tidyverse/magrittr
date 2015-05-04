@@ -27,6 +27,7 @@
 #'    \code{\link{\%T>\%}} \tab tee operator.\cr
 #'    \code{\link{\%<>\%}} \tab compound assignment pipe-operator.\cr
 #'    \code{\link{\%$\%}}  \tab exposition pipe-operator.\cr
+#'    \code{\link{\%<$>\%}} \tab compound assignment with exposition pipe-operator.\cr
 #' }
 #' 
 #' @examples

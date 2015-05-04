@@ -19,4 +19,9 @@ test_that("Compound assignment operator works", {
   z %<>% add(2) %T>% plot
   expect_that(z, is_identical_to(as.numeric(3:12)))
 
+  
+  d <- data.frame(x=c(1,2), y=c(2,3))
+  dd  <- rbind(d, data.frame(x=sum(d$x), y=sum(d$y)))
+  d %<$>% rbind(., data.frame(x=sum(d$x), y=sum(d$y)))
+  expect_that(d ,is_identical_to(dd))
 })

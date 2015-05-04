@@ -136,7 +136,7 @@ Another, less useful example is:
 ```
 
 # Additional pipe operators
-*magrittr* also provides three related pipe operators. These are not as
+*magrittr* also provides four related pipe operators. These are not as
 common as `%>%` but they become useful in special cases. 
 
 The "tee" operator, `%T>%` works like `%>%`, except it returns the left-hand
@@ -165,7 +165,7 @@ data.frame(z = rnorm(100)) %$%
   ts.plot(z)
 ```
 
-Finally, the compound assignment pipe operator `%<>%` can be used as the first pipe
+The compound assignment pipe operator `%<>%` can be used as the first pipe
 in a chain. The effect will be that the result of the pipeline is assigned to the 
 left-hand side object, rather than returning the result as usual. It is essentially
 shorthand notation for expressions like `foo <- foo %>% bar %>% baz`, which
@@ -180,6 +180,13 @@ The `%<>%` can be used whenever `expr <- ...` makes sense, e.g.
 * `x %<>% foo %>% bar`
 * `x[1:10] %<>% foo %>% bar`
 * `x$baz %<>% foo %>% bar`
+
+Finally, the compound assignment with exposition pipe operator `%<$>%`combines the previous two, as a shorthand for
+expressions like `foo <- foo %$% bar`:
+```{r, eval = FALSE}
+d <- data.frame(x=c(1,2), y=c(2,3))
+d %<$>% rbind(., data.frame(x=sum(x), y=sum(y)))
+```
 
 # Aliases
 
