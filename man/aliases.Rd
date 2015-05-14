@@ -21,6 +21,8 @@
 \alias{not}
 \alias{or}
 \alias{raise_to_power}
+\alias{set_attr}
+\alias{set_attributes}
 \alias{set_colnames}
 \alias{set_names}
 \alias{set_rownames}

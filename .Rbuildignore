@@ -1,3 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+^magrittr\.svg$
+^magrittr\.png$
+^cran-comments.md
+^NEWS.md

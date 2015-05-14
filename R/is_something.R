@@ -16,7 +16,7 @@ is_pipe <- function(pipe)
 # @retun logical - TRUE if expression is parenthesized, FALSE otherwise.
 is_parenthesized <- function(expr)
 {
-  is.call(expr) && identical(expr[[1]], quote(`(`))
+  is.call(expr) && identical(expr[[1L]], quote(`(`))
 }
 
 # Check whether a pipe is a tee.
@@ -40,7 +40,7 @@ is_dollar <- function(pipe)
 # Check whether a pipe is the compound assignment pipe operator
 #
 # @param pipe A (quoted) pipe
-# @return logical - TRUE if pipe is the compound assignment pipe, 
+# @return logical - TRUE if pipe is the compound assignment pipe,
 #   otherwise FALSE.
 is_compound_pipe <- function(pipe)
 {
@@ -53,8 +53,18 @@ is_compound_pipe <- function(pipe)
 # @return logical - TRUE if expr is enclosed in `{`, FALSE otherwise.
 is_funexpr <- function(expr)
 {
-  is.call(expr) && identical(expr[[1]], quote(`{`))
-}	
+  is.call(expr) && identical(expr[[1L]], quote(`{`))
+}
+
+# Check whether expression has double or triple colons
+#
+# @param  expr An expression to be tested.
+# @return logical - TRUE if expr contains `::` or `:::`, FALSE otherwise.
+is_colexpr <- function(expr)
+{
+  is.call(expr) &&
+    (identical(expr[[1L]], quote(`::`)) || identical(expr[[1L]], quote(`:::`)))
+}
 
 # Check whether a symbol is the magrittr placeholder.
 #
@@ -63,4 +73,4 @@ is_funexpr <- function(expr)
 is_placeholder <- function(symbol)
 {
   identical(symbol, quote(.))
-}	
+}
