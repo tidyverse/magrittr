@@ -17,4 +17,6 @@ Suggests:
     knitr
 VignetteBuilder: knitr
 License: MIT + file LICENSE
+URL: https://github.com/smbache/magrittr
+BugReports: https://github.com/smbache/magrittr/issues
 ByteCompile: Yes
