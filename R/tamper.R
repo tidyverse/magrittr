@@ -144,7 +144,7 @@ tamper <- function() {
   bad_stage <- length(freduce_calls) - bad_stack_freduce + 1
 
   ## Printout, with the bad stage marked
-  markers <- rep(" ", no_pipes)
+  markers <- rep(" ", no_pipes - 1)
   markers[bad_stage] <- "*"
   with(
     chr_chain_parts,
