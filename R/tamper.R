@@ -27,7 +27,7 @@ tamper <- function() {
   ## If we are not in a pipe, then just pass to recover()
   ## We don't need to go backwards, but why not?
   freduce_calls <- integer()
-  for (i in rev(seq_len(n))) {
+  for (i in seq_len(n)) {
     calli <- calls[[i]]
     if (! is.name(calli[[1L]])) next
     func <- as.character(calli[[1L]])
@@ -103,7 +103,7 @@ tamper <- function() {
     lhs = paste(deparse(chain_parts$lhs), collapse = "\n    "),
     pipes = vapply(chain_parts$pipes, as.character, ""),
     rhss = vapply(lapply(chain_parts$rhss, deparse),
-      paste, "", collapse = "\n    ")
+      paste, "", collapse = "\n         ")
   )
 
   ## ---------------------------------------------------------------
@@ -134,36 +134,53 @@ tamper <- function() {
   )
 
   ## TODO: can an error happen before the first pipe stage? Probably.
-  bad_stack_freduce <- 1
-  while (bad_stack_freduce <= length(freduce_calls) &&
+  bad_stage <- length(freduce_calls)
+  while (bad_stage > 0 &&
            eval(is_below_error,
-                envir = sys.frame(freduce_calls[bad_stack_freduce]))) {
-    bad_stack_freduce <- bad_stack_freduce + 1
+                envir = sys.frame(freduce_calls[bad_stage]))) {
+    bad_stage <- bad_stage - 1
   }
-  bad_stack <- freduce_calls[bad_stack_freduce]
-  bad_stage <- length(freduce_calls) - bad_stack_freduce + 1
+  bad_stack <- freduce_calls[bad_stage]
 
-  ## Printout, with the bad stage marked
-  markers <- rep(" ", no_pipes - 1)
-  markers[bad_stage] <- "*"
-  with(
-    chr_chain_parts,
-    cat(sep = "",
-        lhs, " ",
-        pipes[[1]], "\n",
-        paste(markers, rhss[-no_pipes], pipes[-1], "\n"),
-        "  ", rhss[[no_pipes]], "\n"
-        )
+  markers <- rep("  ", no_pipes - 1)
+  markers[bad_stage] <- "->"
+
+  pipe_stack <- TRUE
+  titles <- c("\nEnter a frame number, 1 to switch mode, or 0 to exit  ",
+              "\nEnter a pipe stage number, 1 to switch mode, or 0 to exit  ")
+  other_text <- c("Show pipe stages\n\n",
+                  paste("Show full stack frames\n\n", " ",
+                        chr_chain_parts$lhs, chr_chain_parts$pipes[1])
+                  )
+
+  chr_stages <- paste(
+    markers,
+    chr_chain_parts$rhss,
+    c(chr_chain_parts$pipes[-1],"")
   )
+
+  stacks <- list(calls, chr_stages)
 
   repeat {
 
     which <- menu(
-      calls,
-      title="\nEnter a frame number, or 0 to exit  ")
-    if (which) {
+      c(other_text[pipe_stack + 1], stacks[[pipe_stack + 1]]),
+      title = titles[pipe_stack + 1])
+
+    if (which == 1) {
+      pipe_stack <- ! pipe_stack
+
+    } else if (which > 1 && pipe_stack) {
+      which <- which - 1
+      eval(substitute(browser(skipCalls = skip),
+                      list(skip = 7 - freduce_calls[which])),
+           envir = sys.frame(freduce_calls[which]))
+
+    } else if (which > 1 && ! pipe_stack) {
+      which <- which - 1
       eval(substitute(browser(skipCalls = skip),
                       list(skip = 7-which)), envir = sys.frame(which))
+
     } else {
       break
     }
