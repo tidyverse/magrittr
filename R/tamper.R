@@ -86,9 +86,18 @@ tamper <- function() {
   ## ---------------------------------------------------------------
   ## This is the main stuff
 
+  ## Find the inner-most pipe call
+  pipe_call <- no_calls
+  while (pipe_call >= 1) {
+    if (as.character(calls[[pipe_call]][[1]]) == "%>%") break
+    pipe_call <- pipe_call - 1L
+  }
+
+  freduce_calls <- freduce_calls[ freduce_calls > pipe_call ]
+
   ## Get the pieces of the pipe, convert to character for printing
   chr_chain_parts <- chain_parts_to_chr(
-    get("chain_parts", envir = sys.frame(1))
+    get("chain_parts", envir = sys.frame(pipe_call))
   )
 
   ## Get the bad pipe stage
