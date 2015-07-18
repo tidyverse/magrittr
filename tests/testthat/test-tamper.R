@@ -65,3 +65,18 @@ test_that("Pipes within pipes are OK", {
     add(1:10)
 
 })
+
+test_that("Error in the lhs is OK", {
+
+  skip(message = "not ready yet for a real test")
+
+  old_handler <- getOption("error")
+  on.exit(options(error = old_handler))
+  options(error = tamper)
+
+  (1 + "foo") %>%
+    multiply_by(2) %>%
+    add(1) %>%
+    print()
+
+})

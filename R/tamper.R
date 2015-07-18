@@ -25,7 +25,9 @@ tamper <- function() {
   no_calls <- length(calls)
 
   freduce_calls <- get_pipe_calls(calls)
-  if (! length(freduce_calls)) {
+  pipe_call <- get_last_pipe_call(calls)
+  freduce_calls <- freduce_calls[ freduce_calls > pipe_call ]
+  if (pipe_call == 0) {
     ## tracing is handled in recover(), so put it back
     tracingState(tState)
     return(recover())
@@ -64,8 +66,7 @@ tamper <- function() {
     }
   }
 
-  ## We return here if there are no frames. This can't really happen,
-  ## because we have at least a pipe stage
+  ## We return here if there are no frames.
   if (from <= 0L) {
     cat(gettext("No suitable frames for tamper()\n"))
     return()
@@ -86,15 +87,6 @@ tamper <- function() {
   ## ---------------------------------------------------------------
   ## This is the main stuff
 
-  ## Find the inner-most pipe call
-  pipe_call <- no_calls
-  while (pipe_call >= 1) {
-    if (as.character(calls[[pipe_call]][[1]]) == "%>%") break
-    pipe_call <- pipe_call - 1L
-  }
-
-  freduce_calls <- freduce_calls[ freduce_calls > pipe_call ]
-
   ## Get the pieces of the pipe, convert to character for printing
   chr_chain_parts <- chain_parts_to_chr(
     get("chain_parts", envir = sys.frame(pipe_call))
@@ -110,10 +102,7 @@ tamper <- function() {
   pipe_stack <- TRUE
   titles <- c("\nEnter a frame number, 1 to switch mode, or 0 to exit  ",
               "\nEnter a pipe stage number, 1 to switch mode, or 0 to exit  ")
-  other_text <- c("Show pipe stages\n\n",
-                  paste("Show full stack frames\n\n", " ",
-                        chr_chain_parts$lhs, chr_chain_parts$pipes[1])
-                  )
+  other_text <- c("Show pipe stages\n", "Show full stack frames\n")
 
   stacks <- list(calls, chr_stages)
 
@@ -126,8 +115,13 @@ tamper <- function() {
     if (which == 1) {
       pipe_stack <- ! pipe_stack
 
+    } else if (which == 2) {
+      eval(substitute(browser(skipCalls = skip),
+                      list(skip = 7 - pipe_call)),
+           envir = sys.frame(pipe_call))
+
     } else if (which > 1 && pipe_stack) {
-      which <- which - 1
+      which <- which - 2
       eval(substitute(browser(skipCalls = skip),
                       list(skip = 7 - freduce_calls[which])),
            envir = sys.frame(freduce_calls[which]))
@@ -158,6 +152,17 @@ get_pipe_calls <- function(calls) {
     }
   }
   freduce_calls
+}
+
+get_last_pipe_call <- function(calls) {
+
+  pipe_call <- length(calls) - 1L       # last one is tamper()
+  while (pipe_call >= 1) {
+    if (is.symbol(calls[[pipe_call]][[1]]) &&
+        as.character(calls[[pipe_call]][[1]]) == "%>%") break
+    pipe_call <- pipe_call - 1L
+  }
+  pipe_call
 }
 
 chain_parts_to_chr <- function(chain_parts) {
@@ -212,12 +217,12 @@ get_bad_stage <- function(freduce_calls) {
 
 format_pipe_stages <- function(chr_chain_parts, bad_stage) {
   no_pipes <- length(chr_chain_parts$rhss)
-  markers <- rep("  ", no_pipes - 1)
-  markers[bad_stage] <- "->"
+  markers <- rep("  ", no_pipes + 1)
+  markers[bad_stage + 1] <- "->"
 
   paste(
     markers,
-    chr_chain_parts$rhss,
-    c(chr_chain_parts$pipes[-1], "")
+    c(chr_chain_parts$lhs, paste0("  ", chr_chain_parts$rhss)),
+    c(chr_chain_parts$pipes, "")
   )
 }
