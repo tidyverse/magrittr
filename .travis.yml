@@ -7,6 +7,7 @@ before_install:
 install:
   - ./travis-tool.sh r_binary_install knitr
   - ./travis-tool.sh r_binary_install testthat
+  - ./travis-tool.sh r_binary_install pryr
 
 script: ./travis-tool.sh run_tests
 
