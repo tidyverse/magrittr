@@ -53,11 +53,6 @@
 
 tamper <- function() {
 
-  if (! requireNamespace("pryr", quietly = TRUE)) {
-    warning("pryr is not available, defaulting to `recover()`")
-    return(recover())
-  }
-
   if (.isMethodsDispatchOn()) {
     ## turn off tracing
     tState <- tracingState(FALSE)
@@ -225,19 +220,12 @@ get_bad_stage <- function(freduce_calls) {
   ## Now we find which stage the error corresponds to. We need
   ## to go up in the stack, until we find `value` evaluated.
 
-  ## Checks which stacks are below the error in reality
-  ## If the `value` promise is not evaled we are below.
-  ## Need to rename these two functions, in case somebody is
-  ## debugging pryr
+  ## Checks which stacks are below the error in reality.
+  ## If the `value` promise is not evaled, then we are below.
   is_below_error <- substitute(
-    `_is_promise`(value) && ! `_promise_info`(value)$evaled,
-    list(
-      "_is_promise" = pryr::is_promise,
-      "_promise_info" = pryr::promise_info
-    )
+    inherits(try(value, silent = TRUE), "try-error")
   )
 
-  ## TODO: can an error happen before the first pipe stage? Probably.
   bad_stage <- length(freduce_calls)
   while (bad_stage > 0 &&
            eval(is_below_error,
