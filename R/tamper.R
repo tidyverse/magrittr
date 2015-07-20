@@ -68,10 +68,10 @@ tamper <- function() {
   from <- 0L
   no_calls <- length(calls)
 
-  freduce_calls <- get_pipe_calls(calls)
+  freduce_calls <- get_pipe_stages(calls)
   pipe_call <- get_last_pipe_call(calls)
   freduce_calls <- freduce_calls[ freduce_calls > pipe_call ]
-  if (pipe_call == 0) {
+  if (is.na(pipe_call)) {
     ## tracing is handled in recover(), so put it back
     tracingState(tState)
     return(recover())
@@ -184,29 +184,17 @@ tamper <- function() {
 
 }
 
-get_pipe_calls <- function(calls) {
+is_freduce_call <- function(x) identical(x[[1L]], quote(freduce))
 
-  freduce_calls <- integer()
-  for (i in seq_along(calls)) {
-    calli <- calls[[i]]
-    if (! is.name(calli[[1L]])) next
-    func <- as.character(calli[[1L]])
-    if (func == "freduce") {
-      freduce_calls <- c(freduce_calls, i)
-    }
-  }
-  freduce_calls
+get_pipe_stages <- function(calls) {
+  which(vapply(calls, is_freduce_call, logical(1)))
 }
 
-get_last_pipe_call <- function(calls) {
+is_pipe_call <- function(x) identical(x[[1L]], quote(`%>%`))
 
-  pipe_call <- length(calls) - 1L       # last one is tamper()
-  while (pipe_call >= 1) {
-    if (is.symbol(calls[[pipe_call]][[1]]) &&
-        as.character(calls[[pipe_call]][[1]]) == "%>%") break
-    pipe_call <- pipe_call - 1L
-  }
-  pipe_call
+get_last_pipe_call <- function(calls) {
+  res <- tail(which(vapply(calls, is_pipe_call, logical(1))), 1)
+  if (length(res)) res else NA_integer_
 }
 
 chain_parts_to_chr <- function(chain_parts) {
@@ -237,15 +225,16 @@ get_bad_stage <- function(freduce_calls) {
   ## Now we find which stage the error corresponds to. We need
   ## to go up in the stack, until we find `value` evaluated.
 
-  ## Need to do this to allow debugging code that uses pryr itself
-  ## and has is_promise or promise_info
-  `_is_promise` <- pryr::is_promise
-  `_promise_info` <- pryr::promise_info
-
   ## Checks which stacks are below the error in reality
-  ## If the `value` promise is not evaled we are below
+  ## If the `value` promise is not evaled we are below.
+  ## Need to rename these two functions, in case somebody is
+  ## debugging pryr
   is_below_error <- substitute(
-    `_is_promise`(value) && ! `_promise_info`(value)$evaled
+    `_is_promise`(value) && ! `_promise_info`(value)$evaled,
+    list(
+      "_is_promise" = pryr::is_promise,
+      "_promise_info" = pryr::promise_info
+    )
   )
 
   ## TODO: can an error happen before the first pipe stage? Probably.
