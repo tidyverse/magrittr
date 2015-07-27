@@ -154,7 +154,7 @@ tamper <- function() {
     if (which == 1) {
       pipe_stack <- ! pipe_stack
 
-    } else if (which == 2) {
+    } else if (pipe_stack && which == 2) {
       eval(substitute(browser(skipCalls = skip),
                       list(skip = 7 - pipe_call)),
            envir = sys.frame(pipe_call))
