@@ -185,7 +185,7 @@ get_pipe_stages <- function(calls) {
   which(vapply(calls, is_freduce_call, logical(1)))
 }
 
-is_pipe_call <- function(x) identical(x[[1L]], quote(`%>%`))
+is_pipe_call <- function(x) is_pipe(x[[1L]])
 
 get_last_pipe_call <- function(calls) {
   res <- tail(which(vapply(calls, is_pipe_call, logical(1))), 1)
