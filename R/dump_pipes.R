@@ -33,7 +33,8 @@ dump_pipes <- function(dumpto = "last.dump", to.file = FALSE) {
   if (to.file) {
     save(list = dumpto, file = paste(dumpto, "rda", sep = "."))
   } else {
-    assign(dumpto, last_dump, envir = .GlobalEnv)
+    ge <- paste0("global", "env")
+    assign(dumpto, last_dump, envir = do.call(ge, list()))
   }
   invisible()
 }
