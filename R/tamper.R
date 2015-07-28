@@ -49,6 +49,9 @@
 #' you can save the value of the dot argument to the global environment:
 #' \preformatted{assign("last_value", value, envir = .GlobalEnv) }
 #'
+#' When in non-interactive mode, \code{tamper} calls
+#' \code{\link{dump_pipes}}.
+#'
 #' @export
 #' @family pipe debuggers
 
@@ -62,7 +65,7 @@ tamper <- function() {
 
   if (! interactive()) {
     try({
-      dump.frames()
+      dump_pipes()
       cat(gettext("tamper called non-interactively; frames dumped, use debugger() to view\n"))
     })
     return(NULL)

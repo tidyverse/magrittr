@@ -55,6 +55,9 @@ the temporary result from the pipe, choose the number at the arrow.
 This is the last pipe stage that has started before the error. Then
 you can save the value of the dot argument to the global environment:
 \preformatted{assign("last_value", value, envir = .GlobalEnv) }
+
+When in non-interactive mode, \code{tamper} calls
+\code{\link{dump_pipes}}.
 }
 \seealso{
 Other pipe.debuggers: \code{\link{dump_pipes}};
