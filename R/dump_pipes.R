@@ -114,8 +114,7 @@ get_last_pipe_call <- function(calls) {
 }
 
 is_trace_call <- function(x) {
-  identical(x[[1L]], quote(.doTrace)) ||
-    identical(x[[1L]], quote(methods::.doTrace))
+  identical(x[[1L]], quote(.doTrace))
 }
 
 find_trace_calls <- function(calls) {
