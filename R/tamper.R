@@ -50,6 +50,7 @@
 #' \preformatted{assign("last_value", value, envir = .GlobalEnv) }
 #'
 #' @export
+#' @family pipe debuggers
 
 tamper <- function() {
 

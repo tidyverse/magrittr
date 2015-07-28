@@ -56,4 +56,8 @@ This is the last pipe stage that has started before the error. Then
 you can save the value of the dot argument to the global environment:
 \preformatted{assign("last_value", value, envir = .GlobalEnv) }
 }
+\seealso{
+Other pipe.debuggers: \code{\link{dump_pipes}};
+  \code{\link{print.dump_pipes}}
+}
 

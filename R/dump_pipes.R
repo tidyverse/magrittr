@@ -1,13 +1,69 @@
 
 #' Dump the evaluation environments of a pipelines
 #'
+#' This function is the equivalent of \code{utils::dump.frames},
+#' for magrittr pipes.
+#'
+#' It dumps the calls and the evaluation environments to
+#' an object in the global environment (\code{.GlobalEnv}).
+#' It also adds an attribute called \code{pipes} that contains
+#' information about the pipe stages, for easier debugging.
+#'
+#' @param dumpto The name of the object or file to dump to.
+#' @param to.file Whether to dump to a file. If \code{FALSE},
+#'   then the dump does into an object in the global workspace.
+#'
+#' @export
+#' @family pipe debuggers
 
 dump_pipes <- function(dumpto = "last.dump", to.file = FALSE) {
 
+  err_msg <- geterrmessage()
   pipe_env <- get_pipe_calls(sys.calls(), sys.frames())
 
-  ## TODO
+  last_dump <- pipe_env$frames
+  names(last_dump) <- limitedLabels(pipe_env$calls)
 
+  attr(last_dump, "pipes") <- pipe_env
+
+  attr(last_dump, "error.message") <- err_msg
+  class(last_dump) <- c("dump_pipes", "dump.frames")
+
+  assign(dumpto, last_dump)
+  if (to.file) {
+    save(list = dumpto, file = paste(dumpto, "rda", sep = "."))
+  } else {
+    assign(dumpto, last_dump, envir = .GlobalEnv)
+  }
+  invisible()
+}
+
+#' Pretty-print a pipeline dump
+#'
+#' @param x Object created by \code{\link{dump_pipes}}.
+#' @param ... Ignored.
+#' @return The object being printed, invisibly.
+#'
+#' @export
+#' @method print dump_pipes
+#' @family pipe debuggers
+
+print.dump_pipes <- function(x, ...) {
+  pipe_env <- attr(x, "pipes")
+  err <- attr(x, "error.message")
+  attr(x, "pipes") <- NULL
+  attr(x, "error.message") <- NULL
+  attr(x, "class") <- setdiff(class(x), "dump_pipes")
+
+  cat("Frames --------------------------------------------------\n\n")
+  print(x)
+
+  cat("Error ---------------------------------------------------\n\n")
+  cat(err, "\n")
+
+  cat("Pipe stages ---------------------------------------------\n\n");
+  cat(pipe_env$chr_stages, sep = "\n")
+  invisible(x)
 }
 
 get_pipe_calls <- function(calls, frames) {

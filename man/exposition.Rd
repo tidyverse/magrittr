@@ -30,6 +30,6 @@ data.frame(z = rnorm(100)) \%$\%
   ts.plot(z)
 }
 \seealso{
-\code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%T>\%}}
+\code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
 }
 
