@@ -1,4 +1,6 @@
-![magrittr logo](./magrittr.png?raw=true "magrittr logo")
+<h1 align="center">
+	<img width="400" src="./inst/logo.png" alt="">
+</h1>
 
 magrittr -  Ceci n'est pas un pipe.
 ====================================
