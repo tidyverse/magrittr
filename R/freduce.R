@@ -11,14 +11,8 @@
 #' @export
 freduce <- function(value, function_list)
 {
-  k <- length(function_list)
-  if (k == 1L) {
-    result <- withVisible(function_list[[1L]](value))
-    if (result[["visible"]])
-      result[["value"]]
-    else
-      invisible(result[["value"]])
-  } else {
+  if (length(function_list) == 1L)
+    function_list[[1L]](value)
+  else 
     Recall(function_list[[1L]](value), function_list[-1L])
-  }
 }
