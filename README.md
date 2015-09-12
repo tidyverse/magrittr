@@ -55,6 +55,10 @@ To install the CRAN version:
   * `x %>% f(y)` is equivalent to `f(x, y)`
   * `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
 
+Here, "equivalent" is not technically exact: evaluation is non-standard,
+and the left-hand side is evaluated before passed on to the right-hand side
+expression. However, in most cases this has no practical implication.
+
 ### The argument placeholder
 
  * `x %>% f(y, .)` is equivalent to `f(y, x)`
