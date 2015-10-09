@@ -24,7 +24,7 @@ pipe <- function()
              function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
 
     # Create a function which applies each of the above functions in turn.
-    env[["_fseq"]] <-
+    fseq <-
      `class<-`(eval(quote(function(value) freduce(value, `_function_list`)), 
                     env, env), c("fseq", "function"))
  
@@ -35,13 +35,13 @@ pipe <- function()
     # Result depends on the left-hand side.
     if (is_placeholder(lhs)) {
       # return the function itself.
-      env[["_fseq"]]
+      fseq
     } else {
       # evaluate the LHS
       lhs_eval <- eval(lhs, parent, parent)
 
       # compute the result by applying the function to the LHS
-      pipe_as_function <- as.function(env[["_fseq"]])
+      pipe_as_function <- as.function(fseq)
 
       # If compound assignment pipe operator is used, assign result
       if (is_compound_pipe(pipes[[1L]])) {
