@@ -38,20 +38,17 @@ pipe <- function()
       env[["_fseq"]]
     } else {
       # evaluate the LHS
-      env[["_lhs"]] <- eval(lhs, parent, parent)
-      
+      lhs_eval <- eval(lhs, parent, parent)
+
       # compute the result by applying the function to the LHS
-      result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-      
+      pipe_as_function <- as.function(env[["_fseq"]])
+
       # If compound assignment pipe operator is used, assign result
       if (is_compound_pipe(pipes[[1L]])) {
-        eval(call("<-", lhs, result[["value"]]), parent, parent)
+        eval(call("<-", lhs, pipe_as_function(lhs_eval)), parent, parent)
       # Otherwise, return it.
       } else {
-        if (result[["visible"]]) 
-          result[["value"]] 
-        else 
-          invisible(result[["value"]])
+        pipe_as_function(lhs_eval)
       }
     }
   }
