@@ -2,6 +2,7 @@
 
 S3method("[",fseq)
 S3method("[[",fseq)
+S3method(as.function,fseq)
 S3method(print,fseq)
 export("%$%")
 export("%<>%")
