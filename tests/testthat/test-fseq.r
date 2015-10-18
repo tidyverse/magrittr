@@ -36,3 +36,14 @@ test_that("fseq associativity", {
   expect_equal(a(1:10), a[2:3](a[[1]](1:10)))
   expect_equal(a(1:10), a[1:3](1:10))
 })
+
+test_that("as.function", {
+  a <- . %>% cos %>% sin %>% tan
+  
+  b <- as.function(a)
+  
+  expect_identical(a(1:10), b(1:10))
+  expect_identical(environment(a), environment(b))
+  expect_identical(formals(a), formals(b))
+  expect_null(attributes(b))
+})
