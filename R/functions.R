@@ -50,5 +50,6 @@ unroll_function_list <- function(function_list, env) {
 
 #' @export
 as.function.fseq <- function(fseq) {
+  attr(fseq, "magrittr:function_list") <- NULL
   unclass(fseq)
 }
