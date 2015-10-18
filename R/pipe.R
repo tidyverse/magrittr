@@ -8,40 +8,28 @@ pipe <- function()
     # the parent environment
     parent <- parent.frame()
     
-    # the environment in which to evaluate pipeline
-    env    <- new.env(parent = parent)
-    
     # split the pipeline/chain into its parts.
-    chain_parts <- split_chain(match.call(), env = env)
+    chain_parts <- split_chain(match.call(), env = parent)
 
     pipes <- chain_parts[["pipes"]] # the pipe operators.
     rhss  <- chain_parts[["rhss" ]] # the right-hand sides.
     lhs   <- chain_parts[["lhs"  ]] # the left-hand side.
 
     # Create the list of functions defined by the right-hand sides.
-    env[["_function_list"]] <- 
+    function_list <- 
       lapply(1:length(rhss), 
              function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
 
     # Create a function which applies each of the above functions in turn.
-    fseq <-
-     `class<-`(eval(quote(function(value) freduce(value, `_function_list`)), 
-                    env, env), c("fseq", "function"))
- 
-    # make freduce available to the resulting function 
-    # even if magrittr is not loaded.
-    env[["freduce"]] <- freduce 
-    
+    magrittr <- new_fseq(function_list, parent)
+
     # Result depends on the left-hand side.
     if (is_placeholder(lhs)) {
       # return the function itself.
-      fseq
+      magrittr
     } else {
       # evaluate the LHS
       . <- eval(lhs, parent, parent)
-
-      # compute the result by applying the function to the LHS
-      magrittr <- as.function(fseq)
 
       # If compound assignment pipe operator is used, assign result
       if (is_compound_pipe(pipes[[1L]])) {

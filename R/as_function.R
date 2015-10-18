@@ -9,5 +9,5 @@ unroll_function_list <- function(function_list, env) {
 
 #' @export
 as.function.fseq <- function(fseq) {
-  unroll_function_list(functions(fseq), parent.env(environment(fseq)))
+  unclass(fseq)
 }
