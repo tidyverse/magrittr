@@ -38,17 +38,17 @@ pipe <- function()
       fseq
     } else {
       # evaluate the LHS
-      lhs_eval <- eval(lhs, parent, parent)
+      . <- eval(lhs, parent, parent)
 
       # compute the result by applying the function to the LHS
-      pipe_as_function <- as.function(fseq)
+      magrittr <- as.function(fseq)
 
       # If compound assignment pipe operator is used, assign result
       if (is_compound_pipe(pipes[[1L]])) {
-        eval(call("<-", lhs, pipe_as_function(lhs_eval)), parent, parent)
+        eval(call("<-", lhs, magrittr(.)), parent, parent)
       # Otherwise, return it.
       } else {
-        pipe_as_function(lhs_eval)
+        magrittr(.)
       }
     }
   }
