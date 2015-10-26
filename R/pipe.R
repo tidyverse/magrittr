@@ -12,46 +12,28 @@ pipe <- function()
     env    <- new.env(parent = parent)
     
     # split the pipeline/chain into its parts.
-    chain_parts <- split_chain(match.call(), env = env)
+    parts <- split_pipeline(match.call(), env = env)
 
-    pipes <- chain_parts[["pipes"]] # the pipe operators.
-    rhss  <- chain_parts[["rhss" ]] # the right-hand sides.
-    lhs   <- chain_parts[["lhs"  ]] # the left-hand side.
+    pipes <- parts[["pipes"]] # the pipe operators.
+    rhss  <- parts[["rhss" ]] # the right-hand sides.
+    lhs   <- parts[["lhs"  ]] # the left-hand side.
 
     # Create the list of functions defined by the right-hand sides.
-    env[["_function_list"]] <- 
-      lapply(1:length(rhss), 
-             function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
-
-    # Create a function which applies each of the above functions in turn.
-    env[["_fseq"]] <-
-     `class<-`(eval(quote(function(value) freduce(value, `_function_list`)), 
-                    env, env), c("fseq", "function"))
- 
-    # make freduce available to the resulting function 
-    # even if magrittr is not loaded.
-    env[["freduce"]] <- freduce 
+    pipeline <- compose_pipeline(pipes, rhss, parent)
     
     # Result depends on the left-hand side.
     if (is_placeholder(lhs)) {
-      # return the function itself.
-      env[["_fseq"]]
+      pipeline
     } else {
       # evaluate the LHS
-      env[["_lhs"]] <- eval(lhs, parent, parent)
-      
-      # compute the result by applying the function to the LHS
-      result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+      . <- eval(lhs, parent, parent)
       
       # If compound assignment pipe operator is used, assign result
       if (is_compound_pipe(pipes[[1L]])) {
-        eval(call("<-", lhs, result[["value"]]), parent, parent)
+        eval(call("<-", lhs, pipeline(.)), parent, parent)
       # Otherwise, return it.
       } else {
-        if (result[["visible"]]) 
-          result[["value"]] 
-        else 
-          invisible(result[["value"]])
+        pipeline(.)
       }
     }
   }
@@ -63,74 +45,62 @@ pipe <- function()
 #' 
 #' @param lhs A value or the magrittr placeholder.
 #' @param rhs A function call using the magrittr semantics.
-#' @details
-#' \bold{Using \code{\%>\%} with unary function calls}\cr
-#' When functions require only one argument, \code{x \%>\% f} is equivalent
-#' to \code{f(x)} (not exactly equivalent; see technical note below.)
-#' \cr\cr
-#' \bold{Placing \code{lhs} as the first argument in \code{rhs} call}\cr
-#' The default behavior of \code{\%>\%} when multiple arguments are required
-#' in the \code{rhs} call, is to place \code{lhs} as the first argument, i.e. 
-#' \code{x \%>\% f(y)} is equivalent to \code{f(x, y)}.
-#' \cr\cr
-#' \bold{Placing \code{lhs} elsewhere in \code{rhs} call}\cr
-#' Often you will want \code{lhs} to the \code{rhs} call at another position than the first.
-#' For this purpose you can use the dot (\code{.}) as placeholder. For example,
-#' \code{y \%>\% f(x, .)} is equivalent to \code{f(x, y)} and
-#' \code{z \%>\% f(x, y, arg = .)} is equivalent to \code{f(x, y, arg = z)}.
-#' \cr\cr
-#' \bold{Using the dot for secondary purposes}\cr
-#' Often, some attribute or property of \code{lhs} is desired in the \code{rhs} call in
-#' addition to the value of \code{lhs} itself, e.g. the number of rows or columns.
-#' It is perfectly valid to use the dot placeholder several times in the \code{rhs}
-#' call, but by design the behavior is slightly different when using it inside
-#' nested function calls. In particular, if the placeholder is only used 
-#' in a nested function call, \code{lhs} will also be placed as the first argument!
-#' The reason for this is that in most use-cases this produces the most readable 
-#' code. For example, \code{iris \%>\% subset(1:nrow(.) \%\% 2 == 0)} is 
-#' equivalent to \code{iris \%>\% subset(., 1:nrow(.) \%\% 2 == 0)} but
-#' slightly more compact. It is possible to overrule this behavior by enclosing
-#' the \code{rhs} in braces. For example, \code{1:10 \%>\% {c(min(.), max(.))}} is
-#' equivalent to \code{c(min(1:10), max(1:10))}.
-#' \cr\cr
-#' \bold{Using \%>\% with call- or function-producing \code{rhs}}\cr
-#' It is possible to force evaluation of \code{rhs} before the piping of \code{lhs} takes 
-#' place. This is useful when \code{rhs} produces the relevant call or function.
-#' To evaluate \code{rhs} first, enclose it in parentheses, i.e. 
-#' \code{a \%>\% (function(x) x^2)}, and \code{1:10 \%>\% (call("sum"))}.
-#' Another example where this is relevant is for reference class methods
-#' which are accessed using the \code{$} operator, where one would do
-#' \code{x \%>\% (rc$f)}, and not \code{x \%>\% rc$f}.
-#' \cr\cr
-#' \bold{Using lambda expressions with \code{\%>\%}}\cr
-#' Each \code{rhs} is essentially a one-expression body of a unary function.
-#' Therefore defining lambdas in magrittr is very natural, and as 
-#' the definitions of regular functions: if more than a single expression
-#' is needed one encloses the body in a pair of braces, \code{\{ rhs \}}.
-#' However, note that within braces there are no "first-argument rule":
-#' it will be exactly like writing a unary function where the argument name is
-#' "\code{.}" (the dot).
-#' \cr\cr
-#' \bold{Using the dot-place holder as \code{lhs}}\cr
-#' When the dot is used as \code{lhs}, the result will be a functional sequence, 
-#' i.e. a function which applies the entire chain of right-hand sides in turn 
-#' to its input. See the examples.
+#' @details \bold{Using \code{\%>\%} with unary function calls}\cr When
+#' functions require only one argument, \code{x \%>\% f} is equivalent to
+#' \code{f(x)} (not exactly equivalent; see technical note below.) \cr\cr
+#' \bold{Placing \code{lhs} as the first argument in \code{rhs} call}\cr The
+#' default behavior of \code{\%>\%} when multiple arguments are required in the
+#' \code{rhs} call, is to place \code{lhs} as the first argument, i.e. \code{x
+#' \%>\% f(y)} is equivalent to \code{f(x, y)}. \cr\cr \bold{Placing \code{lhs}
+#' elsewhere in \code{rhs} call}\cr Often you will want \code{lhs} to the
+#' \code{rhs} call at another position than the first. For this purpose you can
+#' use the dot (\code{.}) as placeholder. For example, \code{y \%>\% f(x, .)} is
+#' equivalent to \code{f(x, y)} and \code{z \%>\% f(x, y, arg = .)} is
+#' equivalent to \code{f(x, y, arg = z)}. \cr\cr \bold{Using the dot for
+#' secondary purposes}\cr Often, some attribute or property of \code{lhs} is
+#' desired in the \code{rhs} call in addition to the value of \code{lhs} itself,
+#' e.g. the number of rows or columns. It is perfectly valid to use the dot
+#' placeholder several times in the \code{rhs} call, but by design the behavior
+#' is slightly different when using it inside nested function calls. In
+#' particular, if the placeholder is only used in a nested function call,
+#' \code{lhs} will also be placed as the first argument! The reason for this is
+#' that in most use-cases this produces the most readable code. For example,
+#' \code{iris \%>\% subset(1:nrow(.) \%\% 2 == 0)} is equivalent to \code{iris
+#' \%>\% subset(., 1:nrow(.) \%\% 2 == 0)} but slightly more compact. It is
+#' possible to overrule this behavior by enclosing the \code{rhs} in braces. For
+#' example, \code{1:10 \%>\% {c(min(.), max(.))}} is equivalent to
+#' \code{c(min(1:10), max(1:10))}. \cr\cr \bold{Using \%>\% with call- or
+#' function-producing \code{rhs}}\cr It is possible to force evaluation of
+#' \code{rhs} before the piping of \code{lhs} takes place. This is useful when
+#' \code{rhs} produces the relevant call or function. To evaluate \code{rhs}
+#' first, enclose it in parentheses, i.e. \code{a \%>\% (function(x) x^2)}, and
+#' \code{1:10 \%>\% (call("sum"))}. Another example where this is relevant is
+#' for reference class methods which are accessed using the \code{$} operator,
+#' where one would do \code{x \%>\% (rc$f)}, and not \code{x \%>\% rc$f}. \cr\cr
+#' \bold{Using lambda expressions with \code{\%>\%}}\cr Each \code{rhs} is
+#' essentially a one-expression body of a unary function. Therefore defining
+#' lambdas in magrittr is very natural, and as the definitions of regular
+#' functions: if more than a single expression is needed one encloses the body
+#' in a pair of braces, \code{\{ rhs \}}. However, note that within braces there
+#' are no "first-argument rule": it will be exactly like writing a unary
+#' function where the argument name is "\code{.}" (the dot). \cr\cr \bold{Using
+#' the dot-place holder as \code{lhs}}\cr When the dot is used as \code{lhs},
+#' the result will be a functional sequence, i.e. a function which applies the
+#' entire chain of right-hand sides in turn to its input. See the examples.
 #' 
-#' @section Technical notes:
-#' The magrittr pipe operators use non-standard evaluation. They capture
-#' their inputs and examines them to figure out how to proceed. First a function
-#' is produced from all of the individual right-hand side expressions, and 
-#' then the result is obtained by applying this function to the left-hand side.
-#' For most purposes, one can disregard the subtle aspects of magrittr's 
-#' evaluation, but some functions may capture their calling environment, 
-#' and thus using the operators will not be exactly equivalent to the 
-#' "standard call" without pipe-operators.
-#' \cr\cr
-#' Another note is that special attention is advised when using non-magrittr
-#' operators in a pipe-chain (\code{+, -, $,} etc.), as operator precedence will impact how the 
-#' chain is evaluated. In general it is advised to use the aliases provided 
-#' by magrittr.
-#' 
+#' @section Technical notes: The magrittr pipe operators use non-standard 
+#'   evaluation. They capture their inputs and examines them to figure out how 
+#'   to proceed. First a function is produced from all of the individual 
+#'   right-hand side expressions, and then the result is obtained by applying 
+#'   this function to the left-hand side. For most purposes, one can disregard 
+#'   the subtle aspects of magrittr's evaluation, but some functions may capture
+#'   their calling environment, and thus using the operators will not be exactly
+#'   equivalent to the "standard call" without pipe-operators. \cr\cr Another 
+#'   note is that special attention is advised when using non-magrittr operators
+#'   in a pipe-chain (\code{+, -, $,} etc.), as operator precedence will impact 
+#'   how the chain is evaluated. In general it is advised to use the aliases 
+#'   provided by magrittr.
+#'   
 #' @seealso \code{\link{\%<>\%}}, \code{\link{\%T>\%}}, \code{\link{\%$\%}}
 #' 
 #' @examples

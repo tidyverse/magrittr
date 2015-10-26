@@ -1,4 +1,4 @@
-# Split a chain expression into its components.
+# Split a Pipeline expression Into Its Components.
 #
 # This function splits a chain of pipe calls into its components: its 
 # left-hand side, a sequnce of right-hand sides, and the individual pipe
@@ -7,7 +7,7 @@
 # @param expr a non-evaluated pipe-line expression.
 # @param env an environment in which to evaluate rhs parts.
 # @return a list with components \code{lhs}, \code{rhss}, and \code{pipes}.
-split_chain <- function(expr, env)
+split_pipeline <- function(expr, env)
 {
   # lists for holding the right-hand sides and the pipe operators.
   rhss  <- list()
