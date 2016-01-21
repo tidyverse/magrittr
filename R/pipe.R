@@ -13,11 +13,18 @@ pipe <- function()
     
     # split the pipeline/chain into its parts.
     parts <- split_pipeline(match.call(), env = env)
-
+    
     pipes <- parts[["pipes"]] # the pipe operators.
     rhss  <- parts[["rhss" ]] # the right-hand sides.
     lhs   <- parts[["lhs"  ]] # the left-hand side.
-
+    
+    if (is_compound_pipe(pipes[[1L]])) {
+      new_rhs <-
+        eval(call("substitute", match.call(), list("%<>%" = quote(`%>%`))))
+      cl <- call("<-", lhs, new_rhs)
+      return(eval(cl, parent, parent))
+    }
+    
     # Create the list of functions defined by the right-hand sides.
     pipeline <- compose_pipeline(pipes, rhss, parent)
     
@@ -25,16 +32,7 @@ pipe <- function()
     if (is_placeholder(lhs)) {
       pipeline
     } else {
-      # evaluate the LHS
-      . <- eval(lhs, parent, parent)
-      
-      # If compound assignment pipe operator is used, assign result
-      if (is_compound_pipe(pipes[[1L]])) {
-        eval(call("<-", lhs, pipeline(.)), parent, parent)
-      # Otherwise, return it.
-      } else {
-        pipeline(.)
-      }
+      pipeline(eval(lhs, parent, parent))
     }
   }
 }
