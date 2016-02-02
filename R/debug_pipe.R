@@ -3,12 +3,12 @@
 #' This function is a wrapper around \code{browser}, which makes it
 #' easier to debug at certain places in a magrittr pipe chain.
 #'
-#' @param x a value
-#' @return x
+#' @param . a value
+#' @return .
 #'
 #' @export
-debug_pipe <- function(x)
+debug_pipe <- function(.)
 {
   browser()
-  x
+  .
 }

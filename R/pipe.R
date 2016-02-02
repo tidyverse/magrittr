@@ -29,7 +29,7 @@ pipe <- function()
     pipeline <- compose_pipeline(pipes, rhss, parent)
     
     # Result depends on the left-hand side.
-    if (is_placeholder(lhs)) {
+    if (is_dot_placeholder(lhs)) {
       pipeline
     } else {
       pipeline(eval(lhs, parent, parent))

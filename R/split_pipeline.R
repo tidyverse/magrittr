@@ -1,12 +1,14 @@
-# Split a Pipeline expression Into Its Components.
-#
-# This function splits a chain of pipe calls into its components: its 
-# left-hand side, a sequnce of right-hand sides, and the individual pipe
-# components.
+#' Split a pipeline expression into its components.
+#'
+#' This function splits a chain of pipe calls into its components: its 
+#' left-hand side, a sequnce of right-hand sides, and the individual pipe
+#' components.
 # 
-# @param expr a non-evaluated pipe-line expression.
-# @param env an environment in which to evaluate rhs parts.
-# @return a list with components \code{lhs}, \code{rhss}, and \code{pipes}.
+#' @param expr a non-evaluated pipe-line expression.
+#' @param env an environment in which to evaluate rhs parts.
+#' @return a list with components \code{lhs} (the left-hand side), 
+#'   \code{rhss} (the right-hand sides), and \code{pipes}.
+#' @noRd
 split_pipeline <- function(expr, env)
 {
   # lists for holding the right-hand sides and the pipe operators.
@@ -19,16 +21,19 @@ split_pipeline <- function(expr, env)
     pipes[[i]] <- expr[[1L]]
     rhs <- expr[[3L]]
 
+    if (is_rhs_formula(rhs))
+      rhs <- rhs[[2L]]
+          
     if (is_parenthesized(rhs))
       rhs <- eval(rhs, env, env)
 
     rhss[[i]] <- 
-      if (is_dollar(pipes[[i]]) || is_funexpr(rhs))
+      if (is_exposition_pipe(pipes[[i]]) || is_lambda_expression(rhs))
         rhs
-      else if (is_function(rhs) || is_colexpr(rhs))
-        prepare_function(rhs)
-      else if (is_first(rhs)) 
-        prepare_first(rhs)
+      else if (is_function(rhs) || has_special_operator(rhs))
+        function_call(rhs)
+      else if (needs_dot(rhs)) 
+        with_dot(rhs)
       else 
         rhs
 
