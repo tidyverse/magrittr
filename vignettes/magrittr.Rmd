@@ -81,8 +81,8 @@ Granted: you may make the second example better, perhaps throw in a few temporar
 variables (which is often avoided to some degree when using *magrittr*),
 but one often sees cluttered lines like the ones presented. 
 
-And here is another selling point. Suppose I want to quickly want to add
-another step somewhere in the process. This is very easy in the
+And here is another selling point. Suppose I want to quickly add
+another step somewhere in the process. This is very easy
 to do in the pipeline version, but a little more challenging in the 
 "standard" example.
 
@@ -123,10 +123,10 @@ car_data %>%
 }
 ```
 Since all right-hand sides are really "body expressions" of unary functions, this
-is only the natural extension the simple right-hand side expressions. Of course
+is only the natural extension of simple right-hand side expressions. Of course
 longer and more complex functions can be made using this approach.
 
-In the first example the anonymous function is enclosed in parentheses.
+In the first example, the anonymous function is enclosed in parentheses.
 Whenever you want to use a function- or call-generating statement as right-hand side, 
 parentheses are used to evaluate the right-hand side before piping takes place.
 
