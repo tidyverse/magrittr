@@ -1,9 +1,13 @@
 # Compose Function From Pipes and RHSs
 compose_pipeline <- function(pipes, rhss, env)
 {
-  last       <- seq_along(rhss) == length(rhss)
-  body_parts <- mapply(prepare_rhs, pipes, rhss, last, SIMPLIFY = FALSE)
+  idx        <- seq_len(length(rhss))
+
+  body_parts <- mapply(prepare_rhs, pipes, rhss, idx, idx == length(idx), SIMPLIFY = FALSE)
   body       <- as.call(c(quote(`{`), body_parts))
   
-  eval(call("function", as.pairlist(alist(.=)), body), env, env)
+  pipeline <- eval(call("function", as.pairlist(alist(.=)), body), env, env)
+  environment(pipeline)[["let"]] <- let
+  
+  pipeline
 }
