@@ -6,8 +6,8 @@
 #' @noRd
 prepare_rhs <- function(pipe, rhs, idx, last)
 {
-  rhs_dot <- `if`(idx == 1, quote(.), as.name(paste0(idx - 1, "._")))
-  lhs_dot <-  as.name(paste0(idx, "._"))
+  rhs_dot <- `if`(idx == 1, quote(.), as.name(paste0("._", idx - 1)))
+  lhs_dot <-  as.name(paste0("._", idx))
   rhs     <- eval(call("substitute", rhs, list(. = rhs_dot)))
   
   if (is_tee_pipe(pipe)) {
