@@ -16,7 +16,7 @@ prepare_rhs <- function(pipe, rhs, idx, last)
     if (isTRUE(last)) {
       call("{", rhs, rhs_dot)
     } else {
-      call("let", lhs_dot, call("{", rhs, rhs_dot)) 
+      call("%<-%", lhs_dot, call("{", rhs, rhs_dot)) 
     }
     
   } else if (is_exposition_pipe(pipe)) {
@@ -26,7 +26,7 @@ prepare_rhs <- function(pipe, rhs, idx, last)
     if (isTRUE(last)) {
       substitute(with(., r), list(r = rhs, . = rhs_dot))
     } else {
-      substitute(let(l., with(r., r)), list(r = rhs, l. = lhs_dot, r. = rhs_dot))
+      substitute(`%<-%`(l., with(r., r)), list(r = rhs, l. = lhs_dot, r. = rhs_dot))
     }
     
   } else {
@@ -35,7 +35,7 @@ prepare_rhs <- function(pipe, rhs, idx, last)
     if (isTRUE(last)) {
       rhs
     } else {
-      call("let", lhs_dot, rhs) 
+      call("%<-%", lhs_dot, rhs) 
     }
   }
 }

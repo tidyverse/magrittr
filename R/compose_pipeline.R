@@ -7,7 +7,7 @@ compose_pipeline <- function(pipes, rhss, env)
   body       <- as.call(c(quote(`{`), body_parts))
   
   pipeline <- eval(call("function", as.pairlist(alist(.=)), body), env, env)
-  environment(pipeline)[["let"]] <- let
+  environment(pipeline)[["%<-%"]] <- let
   
   pipeline
 }
