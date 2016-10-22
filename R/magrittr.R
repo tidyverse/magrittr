@@ -1,3 +1,4 @@
+#' \if{html}{\figure{logo-hex.png}{logo}\cr}
 #' magrittr - Ceci n'est pas un pipe
 #'
 #' The magrittr package offers a set of operators which promote semantics 
@@ -35,9 +36,10 @@
 #' the_data <-
 #'   read.csv('/path/to/data/file.csv') %>%
 #'   subset(variable_a > x) %>%
-#'   transform(variable_c = variable_a/veraiable_b) %>%
+#'   transform(variable_c = variable_a/variable_b) %>%
 #'   head(100)
 #' }
+#' 
 #' @docType package
 #' @name magrittr
 NULL

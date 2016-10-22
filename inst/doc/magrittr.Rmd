@@ -59,19 +59,7 @@ the [philosophy](https://en.wikipedia.org/wiki/Unix_philosophy), originated by
 contributors. The pipe idea can also be found in some other modern 
 languages, such as [`F#`](http://fsharp.org/). 
 
-Here are some of the principles promoted by the pipe via its syntax  
-(this list is subset of 
-[Eric Raymond's](https://en.wikipedia.org/wiki/Eric_S._Raymond))
-[17 Unix Rules](http://www.faqs.org/docs/artu/ch01s06.html)):
 
-1. Modularity: Write simple parts connected by clean interfaces.
-2. Clarity: Clarity is better than cleverness.
-3. Composition: Design programs[/functions] to be connected with 
-   other programs[/functions].
-4. Economy: Programmer time is expensive; conserve it in preference 
-   to machine time.
-
-In the examples to come, keep these in mind and note how they 
 
 At first encounter, you may wonder whether an operator such as `%>%`  can really 
 be all that beneficial; but as you may notice, it semantically changes your 

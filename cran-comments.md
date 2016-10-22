@@ -1,32 +1,25 @@
-## Response to CRAN comments on last submit
+## Changes
 
-* Another attempt at getting title casing correct.
-* Added a slightly longer description to the DESCRIPTION file
-* Added quotation marks to the Treachery of Images quotation.
-* The quotation is kept as it is part og the package's image. 
-  I hope you will respect this decision.
-* Added NEWS.md to .Rbuildignore
+* Removed aliases. Many common names were exported. These will instead
+  be provided by separate package.
+* One can now use `foo$bar` rhs specifications, to meet some OO systems, where
+  methods are accessed like this.
+* The pipe no longer uses recursion. Rather the right-hand sides are all 
+  used to construct a single function, which is much easier to debug. 
+  Also, the stack traces are simpler.
+* One can now wrap right-hand sides in a one-sided formula. This is useful
+  in package development when the dot placeholder is used (but not known
+  to the checker).
+* Some internal clean-up.
 
 ## Test environments
 
-* local Windows 7 install, R 3.1.2
+* local Windows 7 install, R 3.2.3
 * ubuntu 12.04 (on travis-ci), R 3.1.2
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
-
-I experience this NOTE, when using devtools::release, but not
-when I check the package as usual:
-
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Stefan Milton Bache <stefan@stefanbache.dk>'
-Components with restrictions and base license permitting such:
-  MIT + file LICENSE
-File 'LICENSE':
-  YEAR: 2014
-  COPYRIGHT HOLDER: Stefan Milton Bache and Hadley Wickham
+TODO
 
 ## Downstream dependencies
-I have also run R CMD check on downstream dependencies of magrittr. 
-There were only notes unrelated to magrittr.
+TODO

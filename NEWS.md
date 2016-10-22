@@ -1,26 +1,24 @@
-# magrittr 1.5
+# magrittr 1.6
+
+## Breaking Changes
+
+* Aliases have been removed, and will appear in a separate package. This
+  is to make it safer to load and attach all of magrittr.
+* The pipeline function is no longer treated as a list/sequence, and 
+  indexing via `[` will no longer work. This was a little used feature and 
+  had very few use-cases. Instead a simple and more efficient function is
+  constructed.
+
 
 ## New features
 
-### Functional sequences.
-A pipeline, or a "functional sequence", need not be applied
-to a left-hand side value instantly. Instead it can serve as
-a function definition. A pipeline where the left-most left-hand
-side is the magrittr placeholder (the dot `.`) will thus create a
-function, which applies each right-hand side in sequence to its
-argument, e.g. `f <- . %>% abs %>% mean(na.rm = TRUE)`.
+* RHS can be wrapped in a one-sided formula. This is to be able to use e.g. the 
+  placeholder symbol without R CMD check notes. The explicit use of a formula
+  is an explicit way for the user to express that this is desired.
+* The dollar operator is now treated special wrt precedence to allow piping into
+  e.g. R6 methods and functions in lists/environments.
 
-### New operators
-Three new operators are introduced for some special cases
+## Bug fixes
 
-* Compound assignment pipe: `%<>%`
-* Tee pipe: `%T>%`
-* Exposition pipe: `%$%`
+* Colon syntax now works without parentheses.
 
-For more information see the documentation, e.g. `?%T>%`.
-
-### Lambdas
-Lambdas can now be made by enclosing several statements in curly braces,
-and is a unary function of the dot argument.
-
-For more information and examples, see the updated vignette, and help files.
