@@ -5,7 +5,7 @@
 magrittr -  Ceci n'est pas un pipe.
 ====================================
 
-[![Build Status](https://travis-ci.org/smbache/magrittr.png?branch=dev)](https://travis-ci.org/smbache/magrittr)
+[![Build Status](https://travis-ci.org/tidyverse/magrittr.png?branch=dev)](https://travis-ci.org/tidyverse/magrittr)
 
 # Introduction
 
@@ -41,7 +41,7 @@ sequence of operations wherever it may be needed.
 
 To install the current development version use devtools:
 
-    devtools::install_github("smbache/magrittr")
+    devtools::install_github("tidyverse/magrittr")
 
 To install the CRAN version:
 
