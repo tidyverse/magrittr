@@ -206,6 +206,11 @@ rnorm(100) %>% `*`(5) %>% `+`(5) %>%
 ```
 To see a list of the aliases, execute e.g. `?multiply_by`. 
 
+# Debugging
+
+When a pipe is executed, it is converted to a helper function that appears as
+`magrittr(.)` in the call stack.
+
 # Development
 The *magrittr* package is also available in a development version at the
 GitHub development page:

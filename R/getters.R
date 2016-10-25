@@ -18,8 +18,5 @@
 #' @export
 `[.fseq` <- function(x, ...)
 {
-  y  <- x
-  environment(y) <- new.env(parent = parent.env(environment(x)))
-  environment(y)[["_function_list"]] <- functions(x)[...]
-  y
+  new_fseq(functions(x)[...], environment(x))
 }

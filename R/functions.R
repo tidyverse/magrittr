@@ -11,7 +11,7 @@ functions <- function(fseq)
 {
   if (!"fseq" %in% class(fseq))
     stop("Object is not a functional sequence.", call. = FALSE)
-  environment(fseq)[["_function_list"]]
+  attr(fseq, "magrittr:function_list")
 }
 
 #' Print method for functional sequence.
@@ -30,4 +30,26 @@ print.fseq <- function(x, ...)
       function(i) cat(" ", i, ". ", deparse(body(flist[[i]])), "\n", sep = ""))
   cat("\nUse 'functions' to extract the individual functions.", "\n")
   x
+}
+
+new_fseq <- function(function_list, parent) {
+  structure(
+    unroll_function_list(function_list, parent),
+    `magrittr:function_list` = function_list,
+    class = c("fseq", "function"))
+}
+
+unroll_function_list <- function(function_list, env) {
+  bodies <- lapply(function_list, body)
+  assignments <- lapply(bodies[-length(bodies)], function(b) call("<-", quote(.), b))
+  chain_body <- as.call(c(quote(`{`), assignments, bodies[length(bodies)]))
+  nice_pipe <- as.function(c(alist(.=), chain_body))
+  environment(nice_pipe) <- env
+  nice_pipe
+}
+
+#' @export
+as.function.fseq <- function(fseq) {
+  attr(fseq, "magrittr:function_list") <- NULL
+  unclass(fseq)
 }
