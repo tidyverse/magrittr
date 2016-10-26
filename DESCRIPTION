@@ -20,3 +20,4 @@ License: MIT + file LICENSE
 URL: https://github.com/tidyverse/magrittr
 BugReports: https://github.com/tidyverse/magrittr/issues
 ByteCompile: Yes
+RoxygenNote: 5.0.1
