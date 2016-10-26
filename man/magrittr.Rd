@@ -41,7 +41,7 @@ available operators:\cr
 the_data <-
   read.csv('/path/to/data/file.csv') \%>\%
   subset(variable_a > x) \%>\%
-  transform(variable_c = variable_a/veraiable_b) \%>\%
+  transform(variable_c = variable_a/variable_b) \%>\%
   head(100)
 }
 }
