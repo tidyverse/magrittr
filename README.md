@@ -2,7 +2,7 @@
 	<img width="400" src="./inst/logo.png" alt="">
 </h1>
 
-magrittr -  Ceci n'est pas un pipe.
+magrittr -  Ceci n'est pas une pipe.
 ====================================
 
 [![Build Status](https://travis-ci.org/tidyverse/magrittr.png?branch=dev)](https://travis-ci.org/tidyverse/magrittr)
