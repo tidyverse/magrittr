@@ -20,7 +20,9 @@
 #' \code{mod}                \tab \code{`\%\%`}   \cr
 #' \code{is_in}              \tab \code{`\%in\%`} \cr
 #' \code{and}                \tab \code{`&`}      \cr
+#' \code{AND}                \tab \code{`&&`}     \cr
 #' \code{or}                 \tab \code{`|`}      \cr
+#' \code{OR}                 \tab \code{`||`}     \cr
 #' \code{equals}             \tab \code{`==`}     \cr
 #' \code{is_greater_than}    \tab \code{`>`}      \cr
 #' \code{is_weakly_greater_than} \tab \code{`>=`} \cr
@@ -113,7 +115,17 @@ and <- `&`
 #' @rdname aliases
 #' @usage NULL
 #' @export
+AND <- `&&`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
 or <- `|`
+
+#' @rdname aliases
+#' @usage NULL
+#' @export
+OR <- `||`
 
 #' @rdname aliases
 #' @usage NULL
