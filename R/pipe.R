@@ -32,7 +32,7 @@ pipe <- function()
       
       cl <- call("<-", pipeline[["lhs"]], new_rhs)
       
-      eval(cl, parent, parent)
+      eval(cl, parent)
     
     } else if (dot) {
       
@@ -41,7 +41,7 @@ pipe <- function()
     } else {
       
       # These two lines make error scenarios print more nicely.
-      . <- eval(pipeline[["lhs"]], parent, parent)
+      . <- eval(pipeline[["lhs"]], parent)
       pipeline <- pipeline[["fun"]]
     
       # This temporary result variable is needed for backward compatibility

@@ -24,7 +24,7 @@ construct_pipeline <- function(expr, env)
   
   body <- as.call(c(quote(`{`), statements))
   
-  fun <- eval(call("function", as.pairlist(alist(.=)), body), env, env)
+  fun <- eval(call("function", as.pairlist(alist(.=)), body), env)
 
   compound <- is_compound_pipe(pipes[[1]])
   
