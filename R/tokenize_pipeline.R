@@ -11,7 +11,7 @@
 tokenize_pipeline <- function(expr, env)
 {
   if (is_parenthesized(expr))
-    expr <- eval(expr, env, env)
+    expr <- eval(expr, env)
   
   if (is_formularized(expr))
     expr <- expr[[2L]]

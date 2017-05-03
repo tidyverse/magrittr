@@ -21,10 +21,17 @@ construct_pipeline <- function(expr, env)
   last  <- seq_along(rhss) == length(rhss)
   
   statements <- Map(finalize_rhs, rhss, pipes, last)
+
+  # Statement that adds a link to the caller environment within the
+  # pipe evaluation frame. The environment is inlined as a literal
+  # within the statement.
+  install_marker <- quote(`__magrittr_caller_env` <- env)
+  install_marker[[3]] <- env
+  statements <- c(install_marker, statements)
   
   body <- as.call(c(quote(`{`), statements))
   
-  fun <- eval(call("function", as.pairlist(alist(.=)), body), env, env)
+  fun <- eval(call("function", as.pairlist(alist(.=)), body), env)
 
   compound <- is_compound_pipe(pipes[[1]])
   
