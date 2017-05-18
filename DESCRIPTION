@@ -16,7 +16,8 @@ Description: Provides a mechanism for chaining commands with a
     To quote Rene Magritte, "Ceci n'est pas un pipe."
 Suggests:
     testthat,
-    knitr
+    knitr,
+    covr
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 URL: https://github.com/tidyverse/magrittr
