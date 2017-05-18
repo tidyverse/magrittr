@@ -1,9 +1,4 @@
-<h1 align="center">
-	<img width="400" src="./inst/logo.png" alt="">
-</h1>
-
-magrittr -  Ceci n'est pas un pipe.
-====================================
+# magrittr <img src="man/figures/logo.png" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
