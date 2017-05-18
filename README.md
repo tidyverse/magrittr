@@ -3,7 +3,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
 
-# Introduction
+# Overview
 
 The magrittr package offers a set of operators which promote semantics 
 that will improve your code by
