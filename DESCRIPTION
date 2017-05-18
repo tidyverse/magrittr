@@ -20,7 +20,7 @@ Suggests:
     covr
 VignetteBuilder: knitr
 License: MIT + file LICENSE
-URL: https://github.com/tidyverse/magrittr
+URL: http://magrittr.tidyverse.org, https://github.com/tidyverse/magrittr
 BugReports: https://github.com/tidyverse/magrittr/issues
 ByteCompile: Yes
 RoxygenNote: 6.0.1
