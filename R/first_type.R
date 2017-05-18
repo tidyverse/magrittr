@@ -9,7 +9,7 @@ is_first <- function(expr)
 
 # Prepare a magrittr rhs of "first-argument" type.
 #
-# @param a an expression which passes \code{is_first}
+# @param a an expression which passes `is_first`
 # @return an expression prepared for functional sequence construction.
 prepare_first <- function(expr)
 {

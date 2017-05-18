@@ -6,7 +6,7 @@
 # 
 # @param expr a non-evaluated pipe-line expression.
 # @param env an environment in which to evaluate rhs parts.
-# @return a list with components \code{lhs}, \code{rhss}, and \code{pipes}.
+# @return a list with components `lhs`, `rhss`, and `pipes`.
 split_chain <- function(expr, env)
 {
   # lists for holding the right-hand sides and the pipe operators.

@@ -17,7 +17,7 @@ original value instead of the result. This is useful when an expression
 is used for its side-effect, say plotting or printing.
 }
 \details{
-The tee operator works like \code{\link{\%>\%}}, except the 
+The tee operator works like \code{\link{\%>\%}}, except the
 return value is \code{lhs} itself, and not the result of \code{rhs} function/expression.
 }
 \examples{

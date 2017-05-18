@@ -1,6 +1,6 @@
 #' Apply a list of functions sequentially
 #'
-#' This function applies the first function to \code{value}, then the
+#' This function applies the first function to `value`, then the
 #' next function to the result of the previous function call, etc. 
 #' 
 #' @param value initial value.

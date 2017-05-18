@@ -19,6 +19,6 @@ A function or functional sequence.
 }
 \description{
 Functional sequences can be subset using single or double brackets.
-A single-bracket subset results in a new functional sequence, and 
+A single-bracket subset results in a new functional sequence, and
 a double-bracket subset results in a single function.
 }

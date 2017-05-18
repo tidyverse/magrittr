@@ -9,7 +9,7 @@ is_function <- function(expr)
 
 # Prepare a magrittr rhs of funtion type
 #
-# @param a an expression which passes \code{is_function}
+# @param a an expression which passes `is_function`
 # @return an expression prepared for functional sequence construction.
 prepare_function <- function(f)
 {

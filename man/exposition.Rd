@@ -16,8 +16,8 @@ Expose the names in \code{lhs} to the \code{rhs} expression. This is useful when
 do not have a built-in data argument.
 }
 \details{
-Some functions, e.g. \code{lm} and \code{aggregate}, have a 
-data argument, which allows the direct use of names inside the data as part 
+Some functions, e.g. \code{lm} and \code{aggregate}, have a
+data argument, which allows the direct use of names inside the data as part
 of the call. This operator exposes the contents of the left-hand side object
 to the expression on the right to give a similar benefit, see the examples.
 }

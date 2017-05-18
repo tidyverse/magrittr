@@ -18,6 +18,6 @@ undebug_fseq(fseq)
 \code{invisible(NULL)}.
 }
 \description{
-This is a utility function for marking functions in a functional 
+This is a utility function for marking functions in a functional
 sequence for debbuging.
 }

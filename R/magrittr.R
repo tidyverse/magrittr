@@ -10,7 +10,7 @@
 #'   \item making it easy to add steps anywhere in the sequence of operations.
 #' }
 #' The operators pipe their left-hand side values forward into expressions that
-#' appear on the right-hand side, i.e. one can replace \code{f(x)} with 
+#' appear on the right-hand side, i.e. one can replace `f(x)` with 
 #' \code{x \%>\% f}, where \code{\%>\%} is the (main) pipe-operator.
 #' 
 #' Consider the example below. Four operations are performed to 
@@ -20,7 +20,7 @@
 #' sequence of operations whereever it may be needed.
 #' 
 #' For a more detailed introduction see the vignette 
-#' (\code{vignette("magrittr")}) or the documentation pages for the
+#' (`vignette("magrittr")`) or the documentation pages for the
 #' available operators:\cr
 #' \tabular{ll}{
 #'    \code{\link{\%>\%}}  \tab forward-pipe operator.\cr

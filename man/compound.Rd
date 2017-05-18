@@ -12,12 +12,12 @@ lhs \%<>\% rhs
 \item{rhs}{a function call using the magrittr semantics.}
 }
 \description{
-Pipe an object forward into a function or call expression and update the 
+Pipe an object forward into a function or call expression and update the
 \code{lhs} object with the resulting value.
 }
 \details{
 The compound assignment pipe-operator, \code{\%<>\%}, is used to
-update a value by first piping it into one or more \code{rhs} expressions, and 
+update a value by first piping it into one or more \code{rhs} expressions, and
 then assigning the result. For example, \code{some_object \%<>\% 
 foo \%>\% bar} is equivalent to \code{some_object <- some_object \%>\% foo
 \%>\% bar}. It must be the first pipe-operator in a chain, but otherwise it

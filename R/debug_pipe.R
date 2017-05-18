@@ -1,6 +1,6 @@
 #' Debugging function for magrittr pipelines.
 #'
-#' This function is a wrapper around \code{browser}, which makes it
+#' This function is a wrapper around `browser`, which makes it
 #' easier to debug at certain places in a magrittr pipe chain.
 #'
 #' @param x a value
@@ -20,7 +20,7 @@ debug_pipe <- function(x)
 #'
 #' @param fseq a functional sequence.
 #' @param ... indices of functions to debug. 
-#' @return \code{invisible(NULL)}.
+#' @return `invisible(NULL)`.
 #'
 #' @export
 debug_fseq <- function(fseq, ...)
