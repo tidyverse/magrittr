@@ -106,7 +106,7 @@ When functions require only one argument, <code>x %&gt;% f</code> is equivalent
 to <code>f(x)</code> (not exactly equivalent; see technical note below.)
     <b>Placing <code>lhs</code> as the first argument in <code>rhs</code> call</b>
 The default behavior of <code>%&gt;%</code> when multiple arguments are required
-in the <code>rhs</code> call, is to place <code>lhs</code> as the first argument, i.e. 
+in the <code>rhs</code> call, is to place <code>lhs</code> as the first argument, i.e.
 <code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code>.
     <b>Placing <code>lhs</code> elsewhere in <code>rhs</code> call</b>
 Often you will want <code>lhs</code> to the <code>rhs</code> call at another position than the first.
@@ -118,33 +118,33 @@ Often, some attribute or property of <code>lhs</code> is desired in the <code>rh
 addition to the value of <code>lhs</code> itself, e.g. the number of rows or columns.
 It is perfectly valid to use the dot placeholder several times in the <code>rhs</code>
 call, but by design the behavior is slightly different when using it inside
-nested function calls. In particular, if the placeholder is only used 
+nested function calls. In particular, if the placeholder is only used
 in a nested function call, <code>lhs</code> will also be placed as the first argument!
-The reason for this is that in most use-cases this produces the most readable 
-code. For example, <code>iris %&gt;% subset(1:nrow(.) %% 2 == 0)</code> is 
+The reason for this is that in most use-cases this produces the most readable
+code. For example, <code>iris %&gt;% subset(1:nrow(.) %% 2 == 0)</code> is
 equivalent to <code>iris %&gt;% subset(., 1:nrow(.) %% 2 == 0)</code> but
 slightly more compact. It is possible to overrule this behavior by enclosing
 the <code>rhs</code> in braces. For example, <code>1:10 %&gt;% {c(min(.), max(.))}</code> is
 equivalent to <code>c(min(1:10), max(1:10))</code>.
     <b>Using %&gt;% with call- or function-producing <code>rhs</code></b>
-It is possible to force evaluation of <code>rhs</code> before the piping of <code>lhs</code> takes 
+It is possible to force evaluation of <code>rhs</code> before the piping of <code>lhs</code> takes
 place. This is useful when <code>rhs</code> produces the relevant call or function.
-To evaluate <code>rhs</code> first, enclose it in parentheses, i.e. 
+To evaluate <code>rhs</code> first, enclose it in parentheses, i.e.
 <code>a %&gt;% (function(x) x^2)</code>, and <code>1:10 %&gt;% (call("sum"))</code>.
 Another example where this is relevant is for reference class methods
 which are accessed using the <code>$</code> operator, where one would do
 <code>x %&gt;% (rc$f)</code>, and not <code>x %&gt;% rc$f</code>.
     <b>Using lambda expressions with <code>%&gt;%</code></b>
 Each <code>rhs</code> is essentially a one-expression body of a unary function.
-Therefore defining lambdas in magrittr is very natural, and as 
+Therefore defining lambdas in magrittr is very natural, and as
 the definitions of regular functions: if more than a single expression
 is needed one encloses the body in a pair of braces, <code>{ rhs }</code>.
 However, note that within braces there are no "first-argument rule":
 it will be exactly like writing a unary function where the argument name is
 "<code>.</code>" (the dot).
     <b>Using the dot-place holder as <code>lhs</code></b>
-When the dot is used as <code>lhs</code>, the result will be a functional sequence, 
-i.e. a function which applies the entire chain of right-hand sides in turn 
+When the dot is used as <code>lhs</code>, the result will be a functional sequence,
+i.e. a function which applies the entire chain of right-hand sides in turn
 to its input. See the examples.</p>
     
     <h2 class="hasAnchor" id="technical-notes"><a class="anchor" href="#technical-notes"></a>Technical notes</h2>
@@ -152,15 +152,15 @@ to its input. See the examples.</p>
     
     <p>The magrittr pipe operators use non-standard evaluation. They capture
 their inputs and examines them to figure out how to proceed. First a function
-is produced from all of the individual right-hand side expressions, and 
+is produced from all of the individual right-hand side expressions, and
 then the result is obtained by applying this function to the left-hand side.
-For most purposes, one can disregard the subtle aspects of magrittr's 
-evaluation, but some functions may capture their calling environment, 
-and thus using the operators will not be exactly equivalent to the 
+For most purposes, one can disregard the subtle aspects of magrittr's
+evaluation, but some functions may capture their calling environment,
+and thus using the operators will not be exactly equivalent to the
 "standard call" without pipe-operators.
     Another note is that special attention is advised when using non-magrittr
-operators in a pipe-chain (<code>+, -, $,</code> etc.), as operator precedence will impact how the 
-chain is evaluated. In general it is advised to use the aliases provided 
+operators in a pipe-chain (<code>+, -, $,</code> etc.), as operator precedence will impact how the
+chain is evaluated. In general it is advised to use the aliases provided
 by magrittr.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

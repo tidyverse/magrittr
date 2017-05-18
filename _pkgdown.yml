@@ -7,3 +7,20 @@ home:
   links:
   - text: Learn more
     href: http://r4ds.had.co.nz/pipes.html
+
+reference:
+- title: Pipes
+  contents:
+  - starts_with("%")
+
+- title: Function sequences
+  contents:
+  - freduce
+  - functions
+  - print.fseq
+  - "`[[.fseq`"
+
+- title: Other helpers
+  contents:
+  - starts_with("debug")
+  - extract
