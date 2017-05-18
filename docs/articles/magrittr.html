@@ -36,7 +36,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../articles/magrittr.html">Intro</a>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -145,7 +145,7 @@ car_data &lt;-<span class="st"> </span>
 <span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) %T&gt;%
 plot %&gt;%<span class="st"> </span><span class="co"># plot usually does not return anything. </span>
 colSums
-<span class="co">#&gt; [1] -16.41109  15.49266</span></code></pre></div>
+<span class="co">#&gt; [1] 12.856133 -5.918166</span></code></pre></div>
 <p>The “exposition” pipe operator, <code>%$%</code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris %&gt;%
 <span class="st">  </span><span class="kw">subset</span>(Sepal.Length &gt;<span class="st"> </span><span class="kw">mean</span>(Sepal.Length)) %$%
@@ -174,8 +174,8 @@ colSums
        <span class="st">"Variance:"</span>, <span class="kw">var</span>(.), <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)
    <span class="kw">head</span>(.)
 }
-<span class="co">#&gt; Mean: 4.912379 Variance: 23.81333</span>
-<span class="co">#&gt; [1]  7.042914  8.149814 -0.980793  3.331797  1.317190 10.213264</span></code></pre></div>
+<span class="co">#&gt; Mean: 4.563653 Variance: 27.38968</span>
+<span class="co">#&gt; [1]  5.302249 -6.046033 -4.956697 10.161955 -4.319032 10.829993</span></code></pre></div>
 <p>which could be written in more compact form as</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">100</span>) %&gt;%<span class="st"> `</span><span class="dt">*</span><span class="st">`</span>(<span class="dv">5</span>) %&gt;%<span class="st"> `</span><span class="dt">+</span><span class="st">`</span>(<span class="dv">5</span>) %&gt;%<span class="st"> </span>
 {

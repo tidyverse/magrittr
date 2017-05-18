@@ -24,3 +24,17 @@ reference:
   contents:
   - starts_with("debug")
   - extract
+
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Reference
+    href: reference/index.html
+  - text: Intro
+    href: articles/magrittr.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/tidyverse/magrittr

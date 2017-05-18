@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-vignette">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -36,7 +36,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="articles/magrittr.html">Intro</a>
 </li>
 <li>
   <a href="news/index.html">News</a>
@@ -57,44 +57,54 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9">
     
+
+    
+    
+<div class="contents">
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="magrittr" class="section level1">
 
 
-</div>
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
-<p>The magrittr package offers a set of operators which promote semantics that will improve your code by</p>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>The magrittr package offers a set of operators which make your code more readable by:</p>
 <ul>
 <li>structuring sequences of data operations left-to-right (as opposed to from the inside and out),</li>
 <li>avoiding nested function calls,</li>
 <li>minimizing the need for local variables and function definitions, and</li>
 <li>making it easy to add steps anywhere in the sequence of operations.</li>
 </ul>
-<p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f</code>, where <code>%&gt;%</code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">the_data &lt;-
+<p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code>%&gt;%</code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">the_data &lt;-
 <span class="st">  </span><span class="kw">read.csv</span>(<span class="st">'/path/to/data/file.csv'</span>) %&gt;%
 <span class="st">  </span><span class="kw">subset</span>(variable_a &gt;<span class="st"> </span>x) %&gt;%
 <span class="st">  </span><span class="kw">transform</span>(<span class="dt">variable_c =</span> variable_a/variable_b) %&gt;%
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">100</span>)</code></pre></div>
 <p>Four operations are performed to arrive at the desired data set, and they are written in a natural order: the same as the order of execution. Also, no temporary variables are needed. If yet another operation is required, it is straight-forward to add to the sequence of operations wherever it may be needed.</p>
+<p>If you are new to magrittr, the best place to start is the <a href="http://r4ds.had.co.nz/pipes.html">pipes chapter</a> in R for data science.</p>
 </div>
-<div id="installation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
-<p>To install the current development version use devtools:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"tidyverse/magrittr"</span>)</code></pre></div>
-<p>To install the CRAN version:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"magrittr"</span>)</code></pre></div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span>
+<span class="kw">install.packages</span>(<span class="st">"tidyverse"</span>)
+
+<span class="co"># Alternatively, install just magrittr:</span>
+<span class="kw">install.packages</span>(<span class="st">"magrittr"</span>)
+
+<span class="co"># Or the the development version from GitHub:</span>
+<span class="co"># install.packages("devtools")</span>
+devtools::<span class="kw">install_github</span>(<span class="st">"tidyverse/magrittr"</span>)</code></pre></div>
 </div>
-<div id="features" class="section level1">
-<h1 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h1>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
 <div id="basic-piping" class="section level3">
 <h3 class="hasAnchor">
-<a href="#basic-piping" class="anchor"></a>Basic piping:</h3>
+<a href="#basic-piping" class="anchor"></a>Basic piping</h3>
 <ul>
 <li>
 <code>x %&gt;% f</code> is equivalent to <code>f(x)</code>
@@ -128,69 +138,44 @@
 <p>The behavior can be overruled by enclosing the right-hand side in braces:</p>
 <p><code>x %&gt;% {f(y = nrow(.), z = ncol(.))}</code> is equivalent to <code>f(y = nrow(x), z = ncol(x))</code></p>
 </div>
-<div id="more-advanced-right-hand-sides-and-lambdas" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-advanced-right-hand-sides-and-lambdas" class="anchor"></a>More advanced right-hand sides and lambdas</h3>
-<p>To define a unary function on the fly in the pipeline, enclose the body of such function in braces, and refer to the argument as <code>.</code>, e.g.</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">iris %&gt;%<span class="st"> </span>
-<span class="st">  </span>{
-    n &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">10</span>, <span class="dt">size =</span> <span class="dv">1</span>)
-    H &lt;-<span class="st"> </span><span class="kw">head</span>(., n)
-    T &lt;-<span class="st"> </span><span class="kw">tail</span>(., n)
-    <span class="kw">rbind</span>(H, T)
-  } %&gt;%
-<span class="st">  </span>summary</code></pre></div>
-</div>
 <div id="building-unary-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#building-unary-functions" class="anchor"></a>Building (unary) functions</h3>
 <p>Any pipeline starting with the <code>.</code> will return a function which can later be used to apply the pipeline to values. Building functions in magrittr is therefore similar to building other values.</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">f &lt;-<span class="st"> </span>. %&gt;%<span class="st"> </span>cos %&gt;%<span class="st"> </span>sin 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span>. %&gt;%<span class="st"> </span>cos %&gt;%<span class="st"> </span>sin 
 <span class="co"># is equivalent to </span>
 f &lt;-<span class="st"> </span>function(.) <span class="kw">sin</span>(<span class="kw">cos</span>(.)) </code></pre></div>
-</div>
-<div id="tee-operations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tee-operations" class="anchor"></a>Tee operations</h3>
-<p>Some right-hand sides are used for their side effect (e.g. plotting, printing to a file, etc) and it may be convenient to be able to subsequently continue the pipeline. The “tee” operator, <code>%T&gt;%</code> can be used for this purpose and works exactly like <code>%&gt;%</code>, except it returns the left-hand side value, rather than the potential result of the right-hand side operation:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">200</span>) %&gt;%
-<span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) %T&gt;%
-plot %&gt;%<span class="st"> </span><span class="co"># plot usually does not return anything.</span>
-colSums</code></pre></div>
 </div>
 <div id="pipe-with-exposition-of-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pipe-with-exposition-of-variables" class="anchor"></a>Pipe with exposition of variables</h3>
 <p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code>%$%</code> operator:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">iris %&gt;%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris %&gt;%
 <span class="st">  </span><span class="kw">subset</span>(Sepal.Length &gt;<span class="st"> </span><span class="kw">mean</span>(Sepal.Length)) %$%
 <span class="st">  </span><span class="kw">cor</span>(Sepal.Length, Sepal.Width)
+<span class="co">#&gt; [1] 0.3361992</span>
 
 <span class="kw">data.frame</span>(<span class="dt">z =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>)) %$%
 <span class="st">  </span><span class="kw">ts.plot</span>(z)</code></pre></div>
+<p><img src="reference/figures/exposition-1.png" width="672"></p>
 </div>
 <div id="compound-assignment-pipe-operations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#compound-assignment-pipe-operations" class="anchor"></a>Compound assignment pipe operations</h3>
 <p>There is also a pipe operator which can be used as shorthand notation in situations where the left-hand side is being “overwritten”:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">iris$Sepal.Length &lt;-<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris$Sepal.Length &lt;-<span class="st"> </span>
 <span class="st">  </span>iris$Sepal.Length %&gt;%
-<span class="st">  </span>sqrt</code></pre></div>
+<span class="st">  </span><span class="kw">sqrt</span>()</code></pre></div>
 <p>To avoid the repetition of the left-hand side immediately after the assignment operator, use the <code>%&lt;&gt;%</code> operator:</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">iris$Sepal.Length %&lt;&gt;%<span class="st"> </span>sqrt </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris$Sepal.Length %&lt;&gt;%<span class="st"> </span>sqrt</code></pre></div>
 <p>This operator works exactly like <code>%&gt;%</code>, except the pipeline assigns the result rather than returning it. It must be the first pipe operator in a longer chain.</p>
 </div>
 </div>
-<div id="further-information" class="section level1">
-<h1 class="hasAnchor">
-<a href="#further-information" class="anchor"></a>Further information</h1>
-<p>For more detail, see the package vignette</p>
-<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">"magrittr"</span>)</code></pre></div>
 </div>
-
+</div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cran.r-project.org/package=magrittr">https://​cran.r-project.org/​package=magrittr</a>
@@ -198,6 +183,8 @@ colSums</code></pre></div>
 <li>Browse source code at <br><a href="https://github.com/tidyverse/magrittr">https://​github.com/​tidyverse/​magrittr</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/tidyverse/magrittr/issues">https://​github.com/​tidyverse/​magrittr/​issues</a>
+</li>
+<li>Learn more at <br><a href="http://r4ds.had.co.nz/pipes.html">http://​r4ds.had.co.nz/​pipes.html</a>
 </li>
 </ul>
 <h2>License</h2>
@@ -216,6 +203,7 @@ colSums</code></pre></div>
 <li><a href="https://cran.r-project.org/package=magrittr"><img src="http://www.r-pkg.org/badges/version/magrittr" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
+
 </div>
 
 
