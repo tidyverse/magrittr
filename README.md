@@ -5,7 +5,7 @@
 magrittr -  Ceci n'est pas un pipe.
 ====================================
 
-[![Build Status](https://travis-ci.org/tidyverse/magrittr.png?branch=dev)](https://travis-ci.org/tidyverse/magrittr)
+[![Travis-CI Build Status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
 
 # Introduction
 
