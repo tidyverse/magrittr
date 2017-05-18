@@ -1,20 +1,19 @@
-<!--
-%\VignetteEngine{knitr}
-%\VignetteIndexEntry{Introducing magrittr}
--->
+---
+title: "Introducing magrittr"
+author: Stefan Milton Bache
+date: November, 2014
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introducing magrittr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
 
-```{r, echo = FALSE, message = FALSE}
+```{r include = FALSE}
 library(magrittr)
 options(scipen = 3)
-knitr::opts_chunk$set(
-  comment = NA,
-  error   = FALSE,
-  tidy    = FALSE)
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 ```
-
-![magrittr-pipe](magrittr.jpg)
-
-*This version: November, 2014. Stefan Milton Bache* 
 
 # Abstract
 
