@@ -1,10 +1,12 @@
-Package: magrittr
 Type: Package
+Package: magrittr
 Title: A Forward-Pipe Operator for R
-Version: 1.5
-Author: Stefan Milton Bache <stefan@stefanbache.dk> and
-    Hadley Wickham <h.wickham@gmail.com>
-Maintainer: Stefan Milton Bache <stefan@stefanbache.dk>
+Version: 1.5.0
+Authors@R: c(
+    person("Stefan Milton", "Bache", , "stefan@stefanbache.dk", c("aut", "cre", "cph")),
+    person("Hadley", "Wickham", , "hadley@rstudio.com", "aut"),
+    person("RStudio", role = c("cph", "fnd"))
+    )
 Description: Provides a mechanism for chaining commands with a
     new forward-pipe operator, %>%. This operator will forward a
     value, or the result of an expression, into the next function
