@@ -15,7 +15,7 @@ split_chain <- function(expr, env)
 
   # Process the call, splitting it at each valid magrittr pipe operator.
   i <- 1L 
-  while(is.call(expr) && is_pipe(expr[[1L]])) {
+  while (is.call(expr) && (is_pipe(expr[[1L]]) || is_infix(expr[[1L]]))) {
     pipes[[i]] <- expr[[1L]]
     rhs <- expr[[3L]]
 
@@ -23,7 +23,7 @@ split_chain <- function(expr, env)
       rhs <- eval(rhs, env, env)
 
     rhss[[i]] <- 
-      if (is_dollar(pipes[[i]]) || is_funexpr(rhs))
+      if (is_dollar(pipes[[i]]) || is_infix(pipes[[i]]) || is_funexpr(rhs))
         rhs
       else if (is_function(rhs) || is_colexpr(rhs))
         prepare_function(rhs)

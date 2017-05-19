@@ -36,6 +36,14 @@ pipe <- function()
     if (is_placeholder(lhs)) {
       # return the function itself.
       env[["_fseq"]]
+    } else if (is_infix(pipes[[1L]])) {
+      # compute the function sequence result, in this case, there is no lhs
+      # to pass to `_fseq` as the lhs is handled by the infix operator
+      result <- withVisible(eval(quote(`_fseq`()), env, env))
+
+      # Call infix operator with unevaluated LHS and the computed result      
+      eval(call(as.character(pipes[[1L]]), lhs, result[["value"]]), parent,
+           parent)
     } else {
       # evaluate the LHS
       env[["_lhs"]] <- eval(lhs, parent, parent)

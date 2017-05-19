@@ -10,6 +10,14 @@ is_pipe <- function(pipe)
   identical(pipe, quote(`%$%`))
 }
 
+# Check whether a symbol is an infix operator *and* not a pipe
+#
+# @param symbol A quoted symbol
+# @return logical - TRUE if an infix function, FALSE otherwise
+is_infix <- function(symbol) {
+  !is_pipe(symbol) && grepl('^%.*%$', as.character(symbol))
+}
+
 # Determine whether an non-evaluated call is parenthesized
 #
 # @param a non-evaluated expression
