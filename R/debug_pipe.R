@@ -27,7 +27,7 @@ debug_fseq <- function(fseq, ...)
 {
   is_valid_index <- function(i) i %in% 1:length(functions(fseq))
 
-  indices <- list(...)
+  indices <- as.list(...)
     if (!any(vapply(indices, is.numeric, logical(1L))) ||
         !any(vapply(indices, is_valid_index, logical(1L))))
       stop("Index or indices invalid.", call. = FALSE)
