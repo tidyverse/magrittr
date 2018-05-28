@@ -1,6 +1,10 @@
 # magrittr 2.0.0
 TODO: document changes.
 
+* Aliases are removed. They are simple to implement where needed, and polluting the
+  namespace with very common names is not ideal. This will let people use `library`
+  with more confidence.
+
 # magrittr 1.5
 
 ## New features
