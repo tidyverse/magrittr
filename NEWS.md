@@ -4,6 +4,9 @@ TODO: document changes.
 * Aliases are removed. They are simple to implement where needed, and polluting the
   namespace with very common names is not ideal. This will let people use `library`
   with more confidence.
+* Pipeline functions are no longer of class "fseq" and the related S3 functionality
+  has been removed. This functionality was rarely seen used in practice, and the
+  added complexity is not considered justified.
 
 # magrittr 1.5
 

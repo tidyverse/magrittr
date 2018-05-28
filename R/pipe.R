@@ -25,8 +25,7 @@ pipe <- function()
 
     # Create a function which applies each of the above functions in turn.
     env[["_fseq"]] <-
-     `class<-`(eval(quote(function(value) freduce(value, `_function_list`)), 
-                    env, env), c("fseq", "function"))
+      eval(quote(function(value) freduce(value, `_function_list`)), env, env)
  
     # make freduce available to the resulting function 
     # even if magrittr is not loaded.
