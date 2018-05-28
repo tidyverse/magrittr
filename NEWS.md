@@ -1,3 +1,6 @@
+# magrittr 2.0.0
+TODO: document changes.
+
 # magrittr 1.5
 
 ## New features
@@ -24,3 +27,4 @@ Lambdas can now be made by enclosing several statements in curly braces,
 and is a unary function of the dot argument.
 
 For more information and examples, see the updated vignette, and help files.
+
