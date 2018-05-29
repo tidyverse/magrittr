@@ -25,11 +25,11 @@ to the expression on the right to give a similar benefit, see the examples.
 iris \%>\%
   subset(Sepal.Length > mean(Sepal.Length)) \%$\%
   cor(Sepal.Length, Sepal.Width)
-  
-data.frame(z = rnorm(100)) \%$\% 
+
+data.frame(z = rnorm(100)) \%$\%
   ts.plot(z)
-  
+
 }
 \seealso{
-\code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
+\code{\link{\%>\%}}, \code{\link{\%$\%}}
 }

@@ -93,14 +93,14 @@ iris \%>\% head(10)
 
 # Using the dot place-holder
 "Ceci n'est pas une pipe" \%>\% gsub("une", "un", .)
-  
+
 # When dot is nested, lhs is still placed first:
 sample(1:10) \%>\% paste0(LETTERS[.])
 
 # This can be avoided:
 rnorm(100) \%>\% {c(min(.), mean(.), max(.))} \%>\% floor
 
-# Lambda expressions: 
+# Lambda expressions:
 iris \%>\%
 {
   size <- sample(1:10, size = 1)
@@ -123,5 +123,5 @@ trig_fest(1:10)
 
 }
 \seealso{
-\code{\link{\%<>\%}}, \code{\link{\%T>\%}}, \code{\link{\%$\%}}
+\code{\link{\%T>\%}}, \code{\link{\%$\%}}
 }

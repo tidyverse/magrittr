@@ -6,7 +6,6 @@ is_pipe <- function(pipe)
 {
   identical(pipe, quote(`%>%`))   ||
   identical(pipe, quote(`%T>%`))  ||
-  identical(pipe, quote(`%<>%`))  ||
   identical(pipe, quote(`%$%`))
 }
 
@@ -35,16 +34,6 @@ is_tee <- function(pipe)
 is_dollar <- function(pipe)
 {
   identical(pipe, quote(`%$%`))
-}
-
-# Check whether a pipe is the compound assignment pipe operator
-#
-# @param pipe A (quoted) pipe
-# @return logical - TRUE if pipe is the compound assignment pipe,
-#   otherwise FALSE.
-is_compound_pipe <- function(pipe)
-{
-  identical(pipe, quote(`%<>%`))
 }
 
 # Check whether expression is enclosed in curly braces.

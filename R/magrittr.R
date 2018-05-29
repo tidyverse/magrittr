@@ -25,7 +25,6 @@
 #' \tabular{ll}{
 #'    \code{\link{\%>\%}}  \tab forward-pipe operator.\cr
 #'    \code{\link{\%T>\%}} \tab tee operator.\cr
-#'    \code{\link{\%<>\%}} \tab compound assignment pipe-operator.\cr
 #'    \code{\link{\%$\%}}  \tab exposition pipe-operator.\cr
 #' }
 #' 

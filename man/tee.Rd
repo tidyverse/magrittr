@@ -23,10 +23,10 @@ return value is \code{lhs} itself, and not the result of \code{rhs} function/exp
 \examples{
 rnorm(200) \%>\%
 matrix(ncol = 2) \%T>\%
-plot \%>\% # plot usually does not return anything. 
+plot \%>\% # plot usually does not return anything.
 colSums
 
 }
 \seealso{
-\code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
+\code{\link{\%>\%}}, \code{\link{\%$\%}}
 }
