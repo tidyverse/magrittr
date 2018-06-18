@@ -8,3 +8,4 @@
 ^docs$
 ^README\.Rmd$
 ^README-.*\.png$
+^\.github$
