@@ -1,56 +1,24 @@
-# Create a pipe operator.
-#
-# This function is used to create all the magrittr pipe operators.
-pipe <- function()
-{
-  function(lhs, rhs)
-  {
-    # the parent environment
-    parent <- parent.frame()
+# Pipe Function
+pipe <- function(lhs, rhs) {
+  parent <- parent.frame()
+  matched_call <- match.call()
+  built <- build(matched_call, parent)
 
-    # the environment in which to evaluate pipeline
-    env    <- new.env(parent = parent)
-
-    # split the pipeline/chain into its parts.
-    chain_parts <- split_chain(match.call(), env = env)
-
-    pipes <- chain_parts[["pipes"]] # the pipe operators.
-    rhss  <- chain_parts[["rhss" ]] # the right-hand sides.
-    lhs   <- chain_parts[["lhs"  ]] # the left-hand side.
-
-    # Create the list of functions defined by the right-hand sides.
-    env[["_function_list"]] <-
-      lapply(1:length(rhss),
-             function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
-
-    # Create a function which applies each of the above functions in turn.
-    env[["_fseq"]] <-
-      eval(quote(function(value) freduce(value, `_function_list`)), env, env)
-
-    # make freduce available to the resulting function
-    # even if magrittr is not loaded.
-    env[["freduce"]] <- freduce
-
-    # Result depends on the left-hand side.
-    if (is_placeholder(lhs)) {
-      # return the function itself.
-      env[["_fseq"]]
+  if (identical(built[["lhs"]], quote(.))) {
+    built[["pipeline"]]
+  } else {
+    . <- eval(built[["lhs"]], parent, parent)
+    pipeline <- built[["pipeline"]]
+    result   <- withVisible(pipeline(.))
+    if (result[["visible"]]) {
+      result[["value"]]
     } else {
-      # evaluate the LHS
-      env[["_lhs"]] <- eval(lhs, parent, parent)
-
-      # compute the result by applying the function to the LHS
-      result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-
-      if (result[["visible"]])
-        result[["value"]]
-      else
-        invisible(result[["value"]])
+      invisible(result[["value"]])
     }
   }
 }
 
-#' magrittr forward-pipe operator
+#' Forward-pipe Operator
 #'
 #' Pipe an object forward into a function or call expression.
 #'
@@ -60,41 +28,39 @@ pipe <- function()
 #' \bold{Using \code{\%>\%} with unary function calls}\cr
 #' When functions require only one argument, \code{x \%>\% f} is equivalent
 #' to `f(x)` (not exactly equivalent; see technical note below.)
-#' \cr\cr
+#'
 #' \bold{Placing `lhs` as the first argument in `rhs` call}\cr
 #' The default behavior of \code{\%>\%} when multiple arguments are required
 #' in the `rhs` call, is to place `lhs` as the first argument, i.e.
 #' \code{x \%>\% f(y)} is equivalent to `f(x, y)`.
-#' \cr\cr
+#'
 #' \bold{Placing `lhs` elsewhere in `rhs` call}\cr
 #' Often you will want `lhs` to the `rhs` call at another position than the first.
 #' For this purpose you can use the dot (`.`) as placeholder. For example,
 #' \code{y \%>\% f(x, .)} is equivalent to `f(x, y)` and
 #' \code{z \%>\% f(x, y, arg = .)} is equivalent to `f(x, y, arg = z)`.
-#' \cr\cr
+#'
 #' \bold{Using the dot for secondary purposes}\cr
 #' Often, some attribute or property of `lhs` is desired in the `rhs` call in
-#' addition to the value of `lhs` itself, e.g. the number of rows or columns.
+#' addition to the value of `lhs` itself, e.g. the number of rows or columns in
+#' a tabular data object.
 #' It is perfectly valid to use the dot placeholder several times in the `rhs`
 #' call, but by design the behavior is slightly different when using it inside
 #' nested function calls. In particular, if the placeholder is only used
 #' in a nested function call, `lhs` will also be placed as the first argument!
 #' The reason for this is that in most use-cases this produces the most readable
 #' code. For example, \code{iris \%>\% subset(1:nrow(.) \%\% 2 == 0)} is
-#' equivalent to \code{iris \%>\% subset(., 1:nrow(.) \%\% 2 == 0)} but
-#' slightly more compact. It is possible to overrule this behavior by enclosing
-#' the `rhs` in braces. For example, \code{1:10 \%>\% {c(min(.), max(.))}} is
-#' equivalent to `c(min(1:10), max(1:10))`.
-#' \cr\cr
+#' equivalent to \code{iris \%>\% subset(., 1:nrow(.) \%\% 2 == 0)} and
+#' more compact. It is possible to overrule this behavior by enclosing
+#' the `rhs` in braces. For example, \code{x \%>\% {c(min(.), max(.))}} is
+#' equivalent to `c(min(x), max(x))`.
+#'
 #' \bold{Using \%>\% with call- or function-producing `rhs`}\cr
 #' It is possible to force evaluation of `rhs` before the piping of `lhs` takes
 #' place. This is useful when `rhs` produces the relevant call or function.
 #' To evaluate `rhs` first, enclose it in parentheses, i.e.
 #' \code{a \%>\% (function(x) x^2)}, and \code{1:10 \%>\% (call("sum"))}.
-#' Another example where this is relevant is for reference class methods
-#' which are accessed using the `$` operator, where one would do
-#' \code{x \%>\% (rc$f)}, and not \code{x \%>\% rc$f}.
-#' \cr\cr
+#'
 #' \bold{Using lambda expressions with \code{\%>\%}}\cr
 #' Each `rhs` is essentially a one-expression body of a unary function.
 #' Therefore defining lambdas in magrittr is very natural, and as
@@ -103,8 +69,8 @@ pipe <- function()
 #' However, note that within braces there are no "first-argument rule":
 #' it will be exactly like writing a unary function where the argument name is
 #' "`.`" (the dot).
-#' \cr\cr
-#' \bold{Using the dot-place holder as `lhs`}\cr
+#'
+#' \bold{Using the dot place-holder as `lhs`}\cr
 #' When the dot is used as `lhs`, the result will be a functional sequence,
 #' i.e. a function which applies the entire chain of right-hand sides in turn
 #' to its input. See the examples.
@@ -117,8 +83,10 @@ pipe <- function()
 #' For most purposes, one can disregard the subtle aspects of magrittr's
 #' evaluation, but some functions may capture their calling environment,
 #' and thus using the operators will not be exactly equivalent to the
-#' "standard call" without pipe-operators.
-#' \cr\cr
+#' "standard call" without pipe-operators, and if right-hand side function
+#' calls depend on a specific ancestor frame structure, then using pipes is
+#' inapropriate.
+#'
 #' Another note is that special attention is advised when using non-magrittr
 #' operators in a pipe-chain (`+, -, $,` etc.), as operator precedence will impact how the
 #' chain is evaluated. In general it is advised to use the aliases provided
@@ -165,7 +133,7 @@ pipe <- function()
 #'
 #' @rdname pipe
 #' @export
-`%>%`  <- pipe()
+`%>%`  <- pipe
 
 #' magrittr tee operator
 #'
@@ -189,7 +157,7 @@ pipe <- function()
 #'
 #' @rdname tee
 #' @export
-`%T>%` <- pipe()
+`%T>%` <- pipe
 
 #' magrittr exposition pipe-operator
 #'
@@ -216,4 +184,12 @@ pipe <- function()
 #'
 #' @rdname exposition
 #' @export
-`%$%` <- pipe()
+`%$%` <- pipe
+
+#' Exposition Tee Pipe.
+#'
+#' @param lhs A value or the magrittr placeholder.
+#' @param rhs A function call using the magrittr semantics.
+#'
+#' @export
+`%T$%` <- pipe

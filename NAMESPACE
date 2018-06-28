@@ -2,6 +2,5 @@
 
 export("%$%")
 export("%>%")
+export("%T$%")
 export("%T>%")
-export(debug_pipe)
-export(freduce)
