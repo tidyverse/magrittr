@@ -158,17 +158,6 @@
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">  </span><span class="kw">ts.plot</span>(z)</a></code></pre></div>
 <p><img src="reference/figures/exposition-1.png" width="700"></p>
 </div>
-<div id="compound-assignment-pipe-operations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#compound-assignment-pipe-operations" class="anchor"></a>Compound assignment pipe operations</h3>
-<p>There is also a pipe operator which can be used as shorthand notation in situations where the left-hand side is being “overwritten”:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">iris<span class="op">$</span>Sepal.Length &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span>iris<span class="op">$</span>Sepal.Length <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">sqrt</span>()</a></code></pre></div>
-<p>To avoid the repetition of the left-hand side immediately after the assignment operator, use the <code>%&lt;&gt;%</code> operator:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">iris<span class="op">$</span>Sepal.Length <span class="op">%&lt;&gt;%</span><span class="st"> </span>sqrt</a></code></pre></div>
-<p>This operator works exactly like <code>%&gt;%</code>, except the pipeline assigns the result rather than returning it. It must be the first pipe operator in a longer chain.</p>
-</div>
 </div>
 </div>
   </div>

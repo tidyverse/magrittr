@@ -128,24 +128,3 @@ iris %>%
 data.frame(z = rnorm(100)) %$%
   ts.plot(z)
 ```
-
-### Compound assignment pipe operations
-
-There is also a pipe operator which can be used as shorthand notation
-in situations where the left-hand side is being "overwritten":
-
-```{r, eval = FALSE}
-iris$Sepal.Length <- 
-  iris$Sepal.Length %>%
-  sqrt()
-```
-
-To avoid the repetition of the left-hand side immediately after the assignment
-operator, use the `%<>%` operator:
-
-```{r}
-iris$Sepal.Length %<>% sqrt
-```
-
-This operator works exactly like `%>%`, except the pipeline assigns the result
-rather than returning it. It must be the first pipe operator in a longer chain.
