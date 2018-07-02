@@ -1,3 +1,5 @@
+# magrittr 1.5.0.9000
+
 # magrittr 1.5
 
 ## New features
