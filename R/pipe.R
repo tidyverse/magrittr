@@ -100,7 +100,7 @@ pipe <- function()
 #' equivalent to `c(min(1:10), max(1:10))`.
 #' }
 #' 
-#' \subsection{Using `%>%` with call- or function-producing `rhs`} {
+#' \subsection{Using `%>%` with call- or function-producing `rhs`}{
 #' 
 #' It is possible to force evaluation of `rhs` before the piping of `lhs` takes 
 #' place. This is useful when `rhs` produces the relevant call or function.
