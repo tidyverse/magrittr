@@ -64,24 +64,24 @@ pipe <- function()
 #' @param lhs A value or the magrittr placeholder.
 #' @param rhs A function call using the magrittr semantics.
 #' @details
-#' \subsection{Using \code{\%>\%} with unary function calls}{
+#' \subsection{Using `%>%` with unary function calls}{
 #' 
-#' When functions require only one argument, \code{x \%>\% f} is equivalent
+#' When functions require only one argument, `x %>% f` is equivalent
 #' to `f(x)` (not exactly equivalent; see technical note below.)
 #' 
 #' }
 #' \subsection{Placing `lhs` as the first argument in `rhs` call}{
 #' 
-#' The default behavior of \code{\%>\%} when multiple arguments are required
+#' The default behavior of `%>%` when multiple arguments are required
 #' in the `rhs` call, is to place `lhs` as the first argument, i.e. 
-#' \code{x \%>\% f(y)} is equivalent to `f(x, y)`.
+#' `x %>% f(y)` is equivalent to `f(x, y)`.
 #' }
 #' \subsection{Placing `lhs` elsewhere in `rhs` call}{
 #' 
 #' Often you will want `lhs` to the `rhs` call at another position than the first.
 #' For this purpose you can use the dot (`.`) as placeholder. For example,
-#' \code{y \%>\% f(x, .)} is equivalent to `f(x, y)` and
-#' \code{z \%>\% f(x, y, arg = .)} is equivalent to `f(x, y, arg = z)`.
+#' `y %>% f(x, .)` is equivalent to `f(x, y)` and
+#' `z %>% f(x, y, arg = .)` is equivalent to `f(x, y, arg = z)`.
 #' }
 #' 
 #' \subsection{Using the dot for secondary purposes}{
@@ -93,25 +93,25 @@ pipe <- function()
 #' nested function calls. In particular, if the placeholder is only used 
 #' in a nested function call, `lhs` will also be placed as the first argument!
 #' The reason for this is that in most use-cases this produces the most readable 
-#' code. For example, \code{iris \%>\% subset(1:nrow(.) \%\% 2 == 0)} is 
-#' equivalent to \code{iris \%>\% subset(., 1:nrow(.) \%\% 2 == 0)} but
+#' code. For example, `iris %>% subset(1:nrow(.) %% 2 == 0)` is 
+#' equivalent to `iris %>% subset(., 1:nrow(.) %% 2 == 0)` but
 #' slightly more compact. It is possible to overrule this behavior by enclosing
-#' the `rhs` in braces. For example, \code{1:10 \%>\% {c(min(.), max(.))}} is
+#' the `rhs` in braces. For example, `1:10 %>% {c(min(.), max(.))}` is
 #' equivalent to `c(min(1:10), max(1:10))`.
 #' }
 #' 
-#' \subsection{Using \%>\% with call- or function-producing `rhs`} {
+#' \subsection{Using `%>%` with call- or function-producing `rhs`} {
 #' 
 #' It is possible to force evaluation of `rhs` before the piping of `lhs` takes 
 #' place. This is useful when `rhs` produces the relevant call or function.
 #' To evaluate `rhs` first, enclose it in parentheses, i.e. 
-#' \code{a \%>\% (function(x) x^2)}, and \code{1:10 \%>\% (call("sum"))}.
+#' `a %>% (function(x) x^2)`, and `1:10 %>% (call("sum"))`.
 #' Another example where this is relevant is for reference class methods
 #' which are accessed using the `$` operator, where one would do
-#' \code{x \%>\% (rc$f)}, and not \code{x \%>\% rc$f}.
+#' `x %>% (rc$f)`, and not `x %>% rc$f`.
 #' }
 #' 
-#' \subsection{Using lambda expressions with \code{\%>\%}}{
+#' \subsection{Using lambda expressions with `%>%`}{
 #' 
 #' Each `rhs` is essentially a one-expression body of a unary function.
 #' Therefore defining lambdas in magrittr is very natural, and as 

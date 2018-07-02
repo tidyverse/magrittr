@@ -51,7 +51,7 @@ the \code{rhs} in braces. For example, \code{1:10 \%>\% {c(min(.), max(.))}} is
 equivalent to \code{c(min(1:10), max(1:10))}.
 }
 
-\subsection{Using \%>\% with call- or function-producing \code{rhs}} {
+\subsection{Using \code{\%>\%} with call- or function-producing \code{rhs}} {
 
 It is possible to force evaluation of \code{rhs} before the piping of \code{lhs} takes
 place. This is useful when \code{rhs} produces the relevant call or function.
