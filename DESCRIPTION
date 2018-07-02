@@ -23,5 +23,5 @@ License: MIT + file LICENSE
 URL: http://magrittr.tidyverse.org, https://github.com/tidyverse/magrittr
 BugReports: https://github.com/tidyverse/magrittr/issues
 ByteCompile: Yes
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)

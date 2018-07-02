@@ -74,19 +74,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>magrittr forward-pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/magrittr/blob/master/R/pipe.R'><code>R/pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Pipe an object forward into a function or call expression.</p>
     
+    </div>
 
     <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -101,19 +105,22 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><b>Using <code>%&gt;%</code> with unary function calls</b>
+    <p><b>Using <code>%&gt;%</code> with unary function calls</b><br />
 When functions require only one argument, <code>x %&gt;% f</code> is equivalent
 to <code>f(x)</code> (not exactly equivalent; see technical note below.)
-    <b>Placing <code>lhs</code> as the first argument in <code>rhs</code> call</b>
+<br /><br />
+<b>Placing <code>lhs</code> as the first argument in <code>rhs</code> call</b><br />
 The default behavior of <code>%&gt;%</code> when multiple arguments are required
 in the <code>rhs</code> call, is to place <code>lhs</code> as the first argument, i.e.
 <code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code>.
-    <b>Placing <code>lhs</code> elsewhere in <code>rhs</code> call</b>
+<br /><br />
+<b>Placing <code>lhs</code> elsewhere in <code>rhs</code> call</b><br />
 Often you will want <code>lhs</code> to the <code>rhs</code> call at another position than the first.
 For this purpose you can use the dot (<code>.</code>) as placeholder. For example,
 <code>y %&gt;% f(x, .)</code> is equivalent to <code>f(x, y)</code> and
 <code>z %&gt;% f(x, y, arg = .)</code> is equivalent to <code>f(x, y, arg = z)</code>.
-    <b>Using the dot for secondary purposes</b>
+<br /><br />
+<b>Using the dot for secondary purposes</b><br />
 Often, some attribute or property of <code>lhs</code> is desired in the <code>rhs</code> call in
 addition to the value of <code>lhs</code> itself, e.g. the number of rows or columns.
 It is perfectly valid to use the dot placeholder several times in the <code>rhs</code>
@@ -126,7 +133,8 @@ equivalent to <code>iris %&gt;% subset(., 1:nrow(.) %% 2 == 0)</code> but
 slightly more compact. It is possible to overrule this behavior by enclosing
 the <code>rhs</code> in braces. For example, <code>1:10 %&gt;% {c(min(.), max(.))}</code> is
 equivalent to <code>c(min(1:10), max(1:10))</code>.
-    <b>Using %&gt;% with call- or function-producing <code>rhs</code></b>
+<br /><br />
+<b>Using %&gt;% with call- or function-producing <code>rhs</code></b><br />
 It is possible to force evaluation of <code>rhs</code> before the piping of <code>lhs</code> takes
 place. This is useful when <code>rhs</code> produces the relevant call or function.
 To evaluate <code>rhs</code> first, enclose it in parentheses, i.e.
@@ -134,7 +142,8 @@ To evaluate <code>rhs</code> first, enclose it in parentheses, i.e.
 Another example where this is relevant is for reference class methods
 which are accessed using the <code>$</code> operator, where one would do
 <code>x %&gt;% (rc$f)</code>, and not <code>x %&gt;% rc$f</code>.
-    <b>Using lambda expressions with <code>%&gt;%</code></b>
+<br /><br />
+<b>Using lambda expressions with <code>%&gt;%</code></b><br />
 Each <code>rhs</code> is essentially a one-expression body of a unary function.
 Therefore defining lambdas in magrittr is very natural, and as
 the definitions of regular functions: if more than a single expression
@@ -142,7 +151,8 @@ is needed one encloses the body in a pair of braces, <code>{ rhs }</code>.
 However, note that within braces there are no "first-argument rule":
 it will be exactly like writing a unary function where the argument name is
 "<code>.</code>" (the dot).
-    <b>Using the dot-place holder as <code>lhs</code></b>
+<br /><br />
+<b>Using the dot-place holder as <code>lhs</code></b><br />
 When the dot is used as <code>lhs</code>, the result will be a functional sequence,
 i.e. a function which applies the entire chain of right-hand sides in turn
 to its input. See the examples.</p>
@@ -158,14 +168,15 @@ For most purposes, one can disregard the subtle aspects of magrittr's
 evaluation, but some functions may capture their calling environment,
 and thus using the operators will not be exactly equivalent to the
 "standard call" without pipe-operators.
-    Another note is that special attention is advised when using non-magrittr
+<br /><br />
+Another note is that special attention is advised when using non-magrittr
 operators in a pipe-chain (<code>+, -, $,</code> etc.), as operator precedence will impact how the
 chain is evaluated. In general it is advised to use the aliases provided
 by magrittr.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>%&lt;&gt;%</code>, <code>%T&gt;%</code>, <code><a href='exposition.html'>%$%</a></code></p>
+    <div class='dont-index'><p><code>%&lt;&gt;%</code>, <code>%T&gt;%</code>, <code><a href='exposition.html'>%$%</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -263,21 +274,23 @@ by magrittr.</p>
 </div>
 
 <div class="author">
-  <p>Developed by Stefan Milton Bache, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Developed by Stefan Milton Bache, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

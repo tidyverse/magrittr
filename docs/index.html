@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -57,12 +57,11 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     
 
     
     
-<div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="magrittr" class="section level1">
 
@@ -78,26 +77,26 @@
 <li>making it easy to add steps anywhere in the sequence of operations.</li>
 </ul>
 <p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code>%&gt;%</code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">the_data &lt;-
-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">'/path/to/data/file.csv'</span>) %&gt;%
-<span class="st">  </span><span class="kw">subset</span>(variable_a &gt;<span class="st"> </span>x) %&gt;%
-<span class="st">  </span><span class="kw">transform</span>(<span class="dt">variable_c =</span> variable_a/variable_b) %&gt;%
-<span class="st">  </span><span class="kw">head</span>(<span class="dv">100</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">the_data &lt;-</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw">read.csv</span>(<span class="st">'/path/to/data/file.csv'</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">  </span><span class="kw">subset</span>(variable_a <span class="op">&gt;</span><span class="st"> </span>x) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw">transform</span>(<span class="dt">variable_c =</span> variable_a<span class="op">/</span>variable_b) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">100</span>)</a></code></pre></div>
 <p>Four operations are performed to arrive at the desired data set, and they are written in a natural order: the same as the order of execution. Also, no temporary variables are needed. If yet another operation is required, it is straight-forward to add to the sequence of operations wherever it may be needed.</p>
 <p>If you are new to magrittr, the best place to start is the <a href="http://r4ds.had.co.nz/pipes.html">pipes chapter</a> in R for data science.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span>
-<span class="kw">install.packages</span>(<span class="st">"tidyverse"</span>)
-
-<span class="co"># Alternatively, install just magrittr:</span>
-<span class="kw">install.packages</span>(<span class="st">"magrittr"</span>)
-
-<span class="co"># Or the the development version from GitHub:</span>
-<span class="co"># install.packages("devtools")</span>
-devtools::<span class="kw">install_github</span>(<span class="st">"tidyverse/magrittr"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">"tidyverse"</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Alternatively, install just magrittr:</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">install.packages</span>(<span class="st">"magrittr"</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Or the the development version from GitHub:</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"tidyverse/magrittr"</span>)</a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -142,43 +141,43 @@ devtools::<span class="kw">install_github</span>(<span class="st">"tidyverse/mag
 <h3 class="hasAnchor">
 <a href="#building-unary-functions" class="anchor"></a>Building (unary) functions</h3>
 <p>Any pipeline starting with the <code>.</code> will return a function which can later be used to apply the pipeline to values. Building functions in magrittr is therefore similar to building other values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span>. %&gt;%<span class="st"> </span>cos %&gt;%<span class="st"> </span>sin 
-<span class="co"># is equivalent to </span>
-f &lt;-<span class="st"> </span>function(.) <span class="kw">sin</span>(<span class="kw">cos</span>(.)) </code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">f &lt;-<span class="st"> </span>. <span class="op">%&gt;%</span><span class="st"> </span>cos <span class="op">%&gt;%</span><span class="st"> </span>sin </a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co"># is equivalent to </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">f &lt;-<span class="st"> </span><span class="cf">function</span>(.) <span class="kw">sin</span>(<span class="kw">cos</span>(.)) </a></code></pre></div>
 </div>
 <div id="pipe-with-exposition-of-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pipe-with-exposition-of-variables" class="anchor"></a>Pipe with exposition of variables</h3>
 <p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code>%$%</code> operator:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris %&gt;%
-<span class="st">  </span><span class="kw">subset</span>(Sepal.Length &gt;<span class="st"> </span><span class="kw">mean</span>(Sepal.Length)) %$%
-<span class="st">  </span><span class="kw">cor</span>(Sepal.Length, Sepal.Width)
-<span class="co">#&gt; [1] 0.3361992</span>
-
-<span class="kw">data.frame</span>(<span class="dt">z =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>)) %$%
-<span class="st">  </span><span class="kw">ts.plot</span>(z)</code></pre></div>
-<p><img src="reference/figures/exposition-1.png" width="672"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">subset</span>(Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(Sepal.Length)) <span class="op">%$%</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw">cor</span>(Sepal.Length, Sepal.Width)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; [1] 0.3361992</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">data.frame</span>(<span class="dt">z =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>)) <span class="op">%$%</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">  </span><span class="kw">ts.plot</span>(z)</a></code></pre></div>
+<p><img src="reference/figures/exposition-1.png" width="700"></p>
 </div>
 <div id="compound-assignment-pipe-operations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#compound-assignment-pipe-operations" class="anchor"></a>Compound assignment pipe operations</h3>
 <p>There is also a pipe operator which can be used as shorthand notation in situations where the left-hand side is being “overwritten”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris$Sepal.Length &lt;-<span class="st"> </span>
-<span class="st">  </span>iris$Sepal.Length %&gt;%
-<span class="st">  </span><span class="kw">sqrt</span>()</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">iris<span class="op">$</span>Sepal.Length &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span>iris<span class="op">$</span>Sepal.Length <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">sqrt</span>()</a></code></pre></div>
 <p>To avoid the repetition of the left-hand side immediately after the assignment operator, use the <code>%&lt;&gt;%</code> operator:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris$Sepal.Length %&lt;&gt;%<span class="st"> </span>sqrt</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">iris<span class="op">$</span>Sepal.Length <span class="op">%&lt;&gt;%</span><span class="st"> </span>sqrt</a></code></pre></div>
 <p>This operator works exactly like <code>%&gt;%</code>, except the pipeline assigns the result rather than returning it. It must be the first pipe operator in a longer chain.</p>
-</div>
 </div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Links</h2>
+    <div class="links">
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=magrittr">https://​cran.r-project.org/​package=magrittr</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=magrittr">https://​cloud.r-project.org/​package=magrittr</a>
 </li>
 <li>Browse source code at <br><a href="https://github.com/tidyverse/magrittr">https://​github.com/​tidyverse/​magrittr</a>
 </li>
@@ -187,21 +186,34 @@ f &lt;-<span class="st"> </span>function(.) <span class="kw">sin</span>(<span cl
 <li>Learn more at <br><a href="http://r4ds.had.co.nz/pipes.html">http://​r4ds.had.co.nz/​pipes.html</a>
 </li>
 </ul>
+</div>
+<div class="license">
 <h2>License</h2>
-<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE">LICENSE</a></p>
+<ul class="list-unstyled">
+<li>
+<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+</li>
+</ul>
+</div>
+<div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Stefan Milton Bache <br><small class="roles"> Author, maintainer, copyright holder </small> </li>
+<li>Stefan Milton Bache <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
 <li>
-<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author </small> </li>
+<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
 <li>
-<a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a> <br><small class="roles"> Copyright holder, funder </small> </li>
+<a href="https://www.rstudio.com"><img src="https://tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
 </ul>
+</div>
+
+      <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/tidyverse/magrittr"><img src="https://travis-ci.org/tidyverse/magrittr.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/tidyverse/magrittr"><img src="https://ci.appveyor.com/api/projects/status/github/tidyverse/magrittr?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
 <li><a href="https://cran.r-project.org/package=magrittr"><img src="http://www.r-pkg.org/badges/version/magrittr" alt="CRAN_Status_Badge"></a></li>
 </ul>
+</div>
 </div>
 
 </div>
@@ -212,20 +224,20 @@ f &lt;-<span class="st"> </span>function(.) <span class="kw">sin</span>(<span cl
 </div>
 
 <div class="author">
-  <p>Developed by Stefan Milton Bache, <a href="http://hadley.nz">Hadley Wickham</a>, <a href="https://www.rstudio.com"><img src="http://tidyverse.org/rstudio-logo.svg" height="24"></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Developed by Stefan Milton Bache, <a href="http://hadley.nz">Hadley Wickham</a>, <a href="https://www.rstudio.com"><img src="https://tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script></footer>
 </div>
+
+  
 
   </body>
 </html>

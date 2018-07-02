@@ -74,20 +74,24 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>magrittr exposition pipe-operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/magrittr/blob/master/R/pipe.R'><code>R/pipe.R</code></a></small>
+    <div class="hidden name"><code>exposition.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Expose the names in <code>lhs</code> to the <code>rhs</code> expression. This is useful when functions
 do not have a built-in data argument.</p>
     
+    </div>
 
     <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%$%</span> <span class='no'>rhs</span></pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -109,7 +113,7 @@ to the expression on the right to give a similar benefit, see the examples.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>%&gt;%</code>, <code>%&lt;&gt;%</code>, <code>%$%</code></p>
+    <div class='dont-index'><p><code>%&gt;%</code>, <code>%&lt;&gt;%</code>, <code>%$%</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -117,7 +121,7 @@ to the expression on the right to give a similar benefit, see the examples.</p>
   <span class='fu'>subset</span>(<span class='no'>Sepal.Length</span> <span class='kw'>&gt;</span> <span class='fu'>mean</span>(<span class='no'>Sepal.Length</span>)) <span class='kw'>%$%</span>
   <span class='fu'>cor</span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>)</div><div class='output co'>#&gt; [1] 0.3361992</div><div class='input'>
 <span class='fu'>data.frame</span>(<span class='kw'>z</span> <span class='kw'>=</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>)) <span class='kw'>%$%</span>
-  <span class='fu'>ts.plot</span>(<span class='no'>z</span>)</div><img src='exposition-4.png' alt='' width='540' height='400' /><div class='input'>  
+  <span class='fu'>ts.plot</span>(<span class='no'>z</span>)</div><div class='img'><img src='exposition-1.png' alt='' width='700' height='433' /></div><div class='input'>  
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -141,21 +145,23 @@ to the expression on the right to give a similar benefit, see the examples.</p>
 </div>
 
 <div class="author">
-  <p>Developed by Stefan Milton Bache, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='http://tidyverse.org/rstudio-logo.svg' height='24' /></a>.</p>
-  <p>Site built by <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Developed by Stefan Milton Bache, <a href='http://hadley.nz'>Hadley Wickham</a>, <a href='https://www.rstudio.com'><img src='https://tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.</p>
+  <p>Site built by <a href="http://pkgdown.r-lib.org">pkgdown</a>.</p>
 </div>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  ga('create', 'UA-67989-18', 'auto');
-  ga('send', 'pageview');
+ gtag('config', 'UA-115082821-1');
 </script>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
