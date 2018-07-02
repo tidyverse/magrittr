@@ -105,23 +105,20 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><b>Using <code>%&gt;%</code> with unary function calls</b><br />
-When functions require only one argument, <code>x %&gt;% f</code> is equivalent
+    <h3>Using <code>%&gt;%</code> with unary function calls</h3>
+    When functions require only one argument, <code>x %&gt;% f</code> is equivalent
 to <code>f(x)</code> (not exactly equivalent; see technical note below.)
-<br /><br />
-<b>Placing <code>lhs</code> as the first argument in <code>rhs</code> call</b><br />
-The default behavior of <code>%&gt;%</code> when multiple arguments are required
+    <h3>Placing <code>lhs</code> as the first argument in <code>rhs</code> call</h3>
+    The default behavior of <code>%&gt;%</code> when multiple arguments are required
 in the <code>rhs</code> call, is to place <code>lhs</code> as the first argument, i.e.
 <code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code>.
-<br /><br />
-<b>Placing <code>lhs</code> elsewhere in <code>rhs</code> call</b><br />
-Often you will want <code>lhs</code> to the <code>rhs</code> call at another position than the first.
+    <h3>Placing <code>lhs</code> elsewhere in <code>rhs</code> call</h3>
+    Often you will want <code>lhs</code> to the <code>rhs</code> call at another position than the first.
 For this purpose you can use the dot (<code>.</code>) as placeholder. For example,
 <code>y %&gt;% f(x, .)</code> is equivalent to <code>f(x, y)</code> and
 <code>z %&gt;% f(x, y, arg = .)</code> is equivalent to <code>f(x, y, arg = z)</code>.
-<br /><br />
-<b>Using the dot for secondary purposes</b><br />
-Often, some attribute or property of <code>lhs</code> is desired in the <code>rhs</code> call in
+    <h3>Using the dot for secondary purposes</h3>
+    Often, some attribute or property of <code>lhs</code> is desired in the <code>rhs</code> call in
 addition to the value of <code>lhs</code> itself, e.g. the number of rows or columns.
 It is perfectly valid to use the dot placeholder several times in the <code>rhs</code>
 call, but by design the behavior is slightly different when using it inside
@@ -133,29 +130,26 @@ equivalent to <code>iris %&gt;% subset(., 1:nrow(.) %% 2 == 0)</code> but
 slightly more compact. It is possible to overrule this behavior by enclosing
 the <code>rhs</code> in braces. For example, <code>1:10 %&gt;% {c(min(.), max(.))}</code> is
 equivalent to <code>c(min(1:10), max(1:10))</code>.
-<br /><br />
-<b>Using %&gt;% with call- or function-producing <code>rhs</code></b><br />
-It is possible to force evaluation of <code>rhs</code> before the piping of <code>lhs</code> takes
+    <h3>Using %&gt;% with call- or function-producing <code>rhs</code></h3>
+ <p>It is possible to force evaluation of <code>rhs</code> before the piping of <code>lhs</code> takes
 place. This is useful when <code>rhs</code> produces the relevant call or function.
 To evaluate <code>rhs</code> first, enclose it in parentheses, i.e.
 <code>a %&gt;% (function(x) x^2)</code>, and <code>1:10 %&gt;% (call("sum"))</code>.
 Another example where this is relevant is for reference class methods
 which are accessed using the <code>$</code> operator, where one would do
-<code>x %&gt;% (rc$f)</code>, and not <code>x %&gt;% rc$f</code>.
-<br /><br />
-<b>Using lambda expressions with <code>%&gt;%</code></b><br />
-Each <code>rhs</code> is essentially a one-expression body of a unary function.
+<code>x %&gt;% (rc$f)</code>, and not <code>x %&gt;% rc$f</code>.</p>
+<h3>Using lambda expressions with <code>%&gt;%</code></h3>
+    Each <code>rhs</code> is essentially a one-expression body of a unary function.
 Therefore defining lambdas in magrittr is very natural, and as
 the definitions of regular functions: if more than a single expression
 is needed one encloses the body in a pair of braces, <code>{ rhs }</code>.
 However, note that within braces there are no "first-argument rule":
 it will be exactly like writing a unary function where the argument name is
 "<code>.</code>" (the dot).
-<br /><br />
-<b>Using the dot-place holder as <code>lhs</code></b><br />
-When the dot is used as <code>lhs</code>, the result will be a functional sequence,
+    <h3>Using the dot-place holder as <code>lhs</code></h3>
+    When the dot is used as <code>lhs</code>, the result will be a functional sequence,
 i.e. a function which applies the entire chain of right-hand sides in turn
-to its input. See the examples.</p>
+to its input. See the examples.
     
     <h2 class="hasAnchor" id="technical-notes"><a class="anchor" href="#technical-notes"></a>Technical notes</h2>
 
@@ -167,9 +161,8 @@ then the result is obtained by applying this function to the left-hand side.
 For most purposes, one can disregard the subtle aspects of magrittr's
 evaluation, but some functions may capture their calling environment,
 and thus using the operators will not be exactly equivalent to the
-"standard call" without pipe-operators.
-<br /><br />
-Another note is that special attention is advised when using non-magrittr
+"standard call" without pipe-operators.</p>
+<p>Another note is that special attention is advised when using non-magrittr
 operators in a pipe-chain (<code>+, -, $,</code> etc.), as operator precedence will impact how the
 chain is evaluated. In general it is advised to use the aliases provided
 by magrittr.</p>
@@ -203,9 +196,9 @@ by magrittr.</p>
 <span class='co'># Using the dot place-holder</span>
 <span class='st'>"Ceci n'est pas une pipe"</span> <span class='kw'>%&gt;%</span> <span class='fu'>gsub</span>(<span class='st'>"une"</span>, <span class='st'>"un"</span>, <span class='no'>.</span>)</div><div class='output co'>#&gt; [1] "Ceci n'est pas un pipe"</div><div class='input'>
 <span class='co'># When dot is nested, lhs is still placed first:</span>
-<span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'>paste0</span>(<span class='no'>LETTERS</span>[<span class='no'>.</span>])</div><div class='output co'>#&gt;  [1] "4D"  "7G"  "8H"  "2B"  "3C"  "9I"  "5E"  "1A"  "6F"  "10J"</div><div class='input'>
+<span class='fu'>sample</span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'>paste0</span>(<span class='no'>LETTERS</span>[<span class='no'>.</span>])</div><div class='output co'>#&gt;  [1] "1A"  "8H"  "5E"  "2B"  "10J" "3C"  "7G"  "6F"  "4D"  "9I" </div><div class='input'>
 <span class='co'># This can be avoided:</span>
-<span class='fu'>rnorm</span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span> {<span class='fu'>c</span>(<span class='fu'>min</span>(<span class='no'>.</span>), <span class='fu'>mean</span>(<span class='no'>.</span>), <span class='fu'>max</span>(<span class='no'>.</span>))} <span class='kw'>%&gt;%</span> <span class='no'>floor</span></div><div class='output co'>#&gt; [1] -3 -1  2</div><div class='input'>
+<span class='fu'>rnorm</span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span> {<span class='fu'>c</span>(<span class='fu'>min</span>(<span class='no'>.</span>), <span class='fu'>mean</span>(<span class='no'>.</span>), <span class='fu'>max</span>(<span class='no'>.</span>))} <span class='kw'>%&gt;%</span> <span class='no'>floor</span></div><div class='output co'>#&gt; [1] -3  0  2</div><div class='input'>
 <span class='co'># Lambda expressions: </span>
 <span class='no'>iris</span> <span class='kw'>%&gt;%</span>
 {
@@ -215,8 +208,6 @@ by magrittr.</p>
 #&gt; 1            5.1         3.5          1.4         0.2    setosa
 #&gt; 2            4.9         3.0          1.4         0.2    setosa
 #&gt; 3            4.7         3.2          1.3         0.2    setosa
-#&gt; 4            4.6         3.1          1.5         0.2    setosa
-#&gt; 147          6.3         2.5          5.0         1.9 virginica
 #&gt; 148          6.5         3.0          5.2         2.0 virginica
 #&gt; 149          6.2         3.4          5.4         2.3 virginica
 #&gt; 150          5.9         3.0          5.1         1.8 virginica</div><div class='input'>
