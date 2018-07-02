@@ -20,7 +20,7 @@ pipe <- function()
 
     # Create the list of functions defined by the right-hand sides.
     env[["_function_list"]] <- 
-      lapply(1:length(rhss), 
+      lapply(seq_along(rhss), 
              function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
 
     # Create a function which applies each of the above functions in turn.
