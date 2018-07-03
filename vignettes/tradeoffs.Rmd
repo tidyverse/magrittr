@@ -23,24 +23,25 @@ There are many different ways that magrittr could implement the pipe. The goal o
 
 ## Code transformation
 
-There are three main options for how we might transform a pipeline in base R expressions. Here they are illustrated with `. %>% foo() %>% bar()`:
+There are three main options for how we might transform a pipeline in base R expressions. Here they are illustrated with `x %>% foo() %>% bar()`:
 
 *   __Nested__
 
     ```{r}
-    bar(foo(.))
+    bar(foo(x))
     ```
     
 *   __Eager__
 
     ```{r}
-    . <- foo(.)
+    . <- foo(x)
     bar(.)
     ```
     
 *   __Lazy__
 
     ```{r}
+    ...1 <- x
     ...2 %<~% foo(...1)
     bar(...1)
     ```
@@ -117,7 +118,7 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 
 ### Lazy pipe
 
-```{r}
+```{r, eval = TRUE}
 library(rlang)
 
 `%<~%` <- function(name, value, env = caller_env()) {
@@ -148,35 +149,104 @@ library(rlang)
 
 ## Execution environment
 
-There are two possible scopes that we could evaluate the pipe in.
+Once the pipe has been transformed to regular R expressions, it must be evaluated. There are two primary options:
 
-### Tradeoffs
+* In the __current environment__
+* In the environment of a new function, a __closure environment__.
 
-No left overs.
-
-In what scope should components of the pipe be evaluated? We can illustrate the options with two functions:
+This choice affects impacts functions that work with the current environment (like `assign()`, `get()`, `ls()`), or the current context (like `return()`). The following two functions illustrate the primary differences:
 
 ```{r}
 f <- function() {
-  10 %>% return()
-  return(20)
-}
-
-g <- function() {
   x <- 20
   10 %>% assign("x", .)
   x
 }
+
+g <- function() {
+  10 %>% return()
+  return(20)
+}
 ```
 
-There are two scopes in which the pipe could be evaluated:
-
-*   In a new environment (as if we had created an anonymous function and
-    evaluated it), where both `f()` and `g()` return 20.
+*   If evaluated in a closure environment, both `f()` and `g()` return 20.
     
-*   In the current environment, where both `f()` and `g()` return 10.
+*   If evaluated in the current environment, both `f()` and `g()` return 10.
 
-### Current environment
+To discuss implementation challenges with a concrete example, we'll take the following values funtions:
+
+```{r, eval = TRUE}
+double <- function(x) x * 2
+increment <- function(x) x + 1
+x <- 1:10
+```
+
+And implement the following simple pipe:
+
+```{r}
+x %>% double() %>% increment() %>% double()
+```
+
+Using the eager transformation:
+
+```{r, eval = TRUE}
+pipe <- expr({
+  . <- double(.)
+  . <- increment(.)
+  double(.)
+})
+```
+
+Note that we assume the input to the pipe is called `.`, not `x`. This is a small simplification that makes implementation of the transformer a little easier.
 
 ### Closure environment
 
+To evaluate the pipe in a closure environment, we first create a function, using the pipe fragment as body and a single argument (`.`):
+
+```{r, eval = TRUE}
+pipe_fun <- new_function(exprs(. = ), pipe)
+pipe_fun
+```
+
+And then we call it with `x`:
+
+```{r, eval = TRUE}
+pipe_fun(x)
+```
+
+Evaluating the pipe in this way makes it clear that building functions with the pipe is the general case, and providing an initial value is the special case. In other words:
+
+```{r}
+x %>% double() %>% increment() %>% double()
+
+# is shorthand for
+
+(. %>% double() %>% increment() %>% double())(x)
+```
+
+### Current environment
+
+At first glance, evaluating the pipe in the current environment is quite simple:
+
+```{r}
+. <- x
+eval_bare(pipe)
+rm(.)
+```
+
+And this could be wrapped into a simple function so that we can ensure `.` is unbound even when an error occurs:
+
+```{r, eval = TRUE}
+pipe_eval <- function(pipe, init, env = caller_env()) {
+  assign(".", init, envir = env)
+  on.exit(env_unbind(env, "."))
+  
+  eval_bare(pipe, env)
+}
+
+pipe_eval(pipe, x)
+```
+
+(This implementation will clobber any existing `.` but a more sophisticated implementation could restore any existing value on exit. Similarly, the cleanup after the lazy transformation would be more work (since it creates multiple variables), but it's not prohibitively hard.)
+
+The main drawback to this approach is that currently `eval_bare()` loses the visibility flag. This can be fixed, but needs work in C. 
