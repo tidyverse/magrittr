@@ -1,0 +1,62 @@
+---
+title: "Design tradeoffs"
+author: "Hadley Wickham"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Design principles}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+There are many different ways that magrittr could implement the pipe. The goal of this document is to elucidate the variations, and the various pros and cons of each approach. This document is primarily aimed at the magrittr developers (so we don't forget about important considerations), but will be of interest to anyone who wants to understand pipes better, or to create their own pipe that makes different tradeoffs
+
+## Desired properties
+
+These are the properties that we might want a pipe to possess, roughly ordered from most important to leasy important.
+
+*   Visibility: the visibility of the final function in the pipe should be
+    preserved. This important so that pipes that end in a side-effect function
+    (which generally return their first argument invisibly) do not print.
+    
+*   Single evaluation: each component of the pipe should only be evaluated once,
+    i.e. `sample(10) %>% cbind(., .)` yields two columns with the same value.
+
+*   Minimal stack: using the pipe should add minimal additional entries to the
+    call stack, so `traceback()` is maximally useful.
+
+*   Eager clean up: intermediate objects in the pipeline should be unbound
+    as soon as possible so they are available for the garbage collector.
+
+Another important design decision (which doesn't have a clearly correct answer) is what is what scope should components of the pipe be evaluated? We can illustrate the options with two functions:
+
+```{r}
+f <- function() {
+  10 %>% return()
+  return(20)
+}
+
+g <- function() {
+  x <- 20
+  10 %>% assign("x", .)
+  x
+}
+```
+
+There are two scopes in which the pipe could be evaluated:
+
+*   In a new environment (as if we had created an anonymous function and
+    evaluated it), where both `f()` and `g()` return 20.
+    
+*   In the current environment, where both `f()` and `g()` return 10.
+
+## Functional form
+
+## Execution

@@ -20,7 +20,8 @@ BugReports: https://github.com/tidyverse/magrittr/issues
 Suggests: 
     covr,
     knitr,
-    testthat
+    testthat,
+    rmarkdown
 VignetteBuilder: knitr
 ByteCompile: Yes
 Roxygen: list(markdown = TRUE)
