@@ -12,22 +12,55 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
 There are many different ways that magrittr could implement the pipe. The goal of this document is to elucidate the variations, and the various pros and cons of each approach. This document is primarily aimed at the magrittr developers (so we don't forget about important considerations), but will be of interest to anyone who wants to understand pipes better, or to create their own pipe that makes different tradeoffs
 
-## Desired properties
+## Functional form
+
+There are three main options for how we might turn a pipeline into regular R code. I'll illustrate the options here with a simple pipe, `. %>% foo() %>% bar()`, and we'll explore more complicated variants in the individual sections.
+
+*   Nested.
+
+    ```{r}
+    bar(foo(.))
+    ```
+    
+*   Eager.
+
+    ```{r}
+    . <- foo(.)
+    bar(.)
+    ```
+    
+*   Lazy.
+
+    ```{r}
+    ...2 %<~% foo(...1)
+    bar(...1)
+    ```
+
+(There is a fourth option, which uses eager evaluation, but uses a unique variable name for each stage. This has no advantages compared to the eager pipe so we will not consider it further.)
+
+We'll first explore the desired properties we might want a pipe to possess and then see how each of the three variants does.
+
+### Desired properties
 
 These are the properties that we might want a pipe to possess, roughly ordered from most important to leasy important.
 
 *   Visibility: the visibility of the final function in the pipe should be
     preserved. This important so that pipes that end in a side-effect function
     (which generally return their first argument invisibly) do not print.
+  
+*   Laziness.
     
 *   Single evaluation: each component of the pipe should only be evaluated once,
-    i.e. `sample(10) %>% cbind(., .)` yields two columns with the same value.
+    i.e. `sample(10) %>% cbind(., .)` yields two columns with the same value,
+    and `sample(10) %T>% print() %>% identity()` prints and returns the same
+    values.
 
 *   Minimal stack: using the pipe should add minimal additional entries to the
     call stack, so `traceback()` is maximally useful.
@@ -35,7 +68,86 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 *   Eager clean up: intermediate objects in the pipeline should be unbound
     as soon as possible so they are available for the garbage collector.
 
-Another important design decision (which doesn't have a clearly correct answer) is what is what scope should components of the pipe be evaluated? We can illustrate the options with two functions:
+### Nested pipe
+
+*   Visibility: trivially preserved.
+
+*   Lazyiness: trivially preserved.
+
+*   Single evaluation: multiple pronouns and the tee pipe need to be rewritten 
+    to use intermediate assignment:
+
+    ```{r}
+    x %>% foo(., .)
+    foo(. <- x, .)
+
+    x %T>% bar() %>% foo()
+    {bar(. <- x); foo(.)}
+    ```
+
+*   Minimal stack: maximum stack depth is the length of the pipe.
+
+*   Eager clean up: ???
+
+### Eager pipe
+
+*   Visibility: trivially preserved. Note that this means we can not rewrite
+    to be more symmetric:
+    
+    ```{r}
+    . <- foo(.)
+    . <- bar(.)
+    .
+    ```
+
+*   Laziness: lost.
+
+*   Single evaluation: trivially preserved.
+
+*   Minimal stack: maximum stack depth is 1.
+
+*   Eager clean up: trivially preserved.
+
+### Lazy pipe
+
+```{r}
+library(rlang)
+
+`%<~%` <- function(name, value, env = caller_env()) {
+  env_bind_exprs(env, .eval_env = env, !!ensym(name) := !!enexpr(value))
+}
+```
+
+*   Visibility: trivially preserved
+
+*   Laziness: preserved
+
+*   Single evaluation: preserved by property of promises.
+
+*   Minimal stack: maximum stack depth is 1.
+
+*   Eager clean up: can be preserved by inserting a function call after each
+    lazy assignment:
+    
+    ```{r}
+    ...2 %<~% foo(...1)
+    delayed_cleanup()
+    bar(...1)
+    ```
+    
+    `delayed_cleanup()` would be a C function that iterates through all 
+    bindings in an environment, deleting any promises that have already been
+    forced.
+
+## Execution environment
+
+There are two possible scopes that we could evaluate the pipe in.
+
+### Tradeoffs
+
+No left overs.
+
+In what scope should components of the pipe be evaluated? We can illustrate the options with two functions:
 
 ```{r}
 f <- function() {
@@ -57,6 +169,7 @@ There are two scopes in which the pipe could be evaluated:
     
 *   In the current environment, where both `f()` and `g()` return 10.
 
-## Functional form
+### Current environment
 
-## Execution
+### Closure environment
+
