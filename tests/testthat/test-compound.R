@@ -1,6 +1,6 @@
 context("%<>%: compound assignment")
 
-test_that("Compound assignment operator works", {
+test_that("Compound assignment pipe works", {
 
   x <- y <- 1:10
   x[1:5] <- sin(cos(x[1:5]))
