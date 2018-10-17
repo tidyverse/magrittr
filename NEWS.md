@@ -15,8 +15,8 @@ argument, e.g. `f <- . %>% abs %>% mean(na.rm = TRUE)`.
 ### New operators
 Three new operators are introduced for some special cases
 
-* Compound assignment pipe: `%<>%`
-* Tee assignment pipe: `%T>%`
+* Assignment pipe: `%<>%`
+* Tee pipe: `%T>%`
 * Exposition pipe: `%$%`
 
 For more information see the documentation, e.g. `?%T>%`.

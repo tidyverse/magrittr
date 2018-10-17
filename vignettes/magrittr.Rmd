@@ -137,7 +137,7 @@ Another, less useful example is:
 *magrittr* also provides three related pipe operators. These are not as common 
 as `%>%` but they become useful in special cases. 
 
-The "tee" assignment pipe, `%T>%` works like `%>%`, except it returns the left-hand
+The "tee" pipe, `%T>%` works like `%>%`, except it returns the left-hand
 side value, and not the result of the right-hand side operation. This is useful 
 when a step in a pipeline is used for its side-effect (printing, plotting, 
 logging, etc.). As an example (where the actual plot is omitted here):
@@ -163,7 +163,7 @@ data.frame(z = rnorm(100)) %$%
   ts.plot(z)
 ```
 
-Finally, the compound assignment pipe `%<>%` can be used as the first 
+Finally, the "assignment" pipe `%<>%` can be used as the first 
 pipe in a chain. The effect will be that the result of the pipeline is assigned 
 to the left-hand side object, rather than returning the result as usual. It is 
 essentially shorthand notation for expressions like `foo <- foo %>% bar %>% baz`, 

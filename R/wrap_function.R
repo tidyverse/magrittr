@@ -17,9 +17,9 @@
 wrap_function <- function(body, pipe, env)
 {
  
-  if (is_tee(pipe)) {
+  if (is_tee_pipe(pipe)) {
     body <- call("{", body, quote(.))
-  } else if (is_dollar(pipe)) {
+  } else if (is_exposition_pipe(pipe)) {
     body <- substitute(with(., b), list(b = body))
   } 
   eval(call("function", as.pairlist(alist(.=)), body), env, env)
