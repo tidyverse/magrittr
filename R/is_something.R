@@ -10,7 +10,7 @@ is_pipe <- function(pipe)
   identical(pipe, quote(`%$%`))
 }
 
-# Determine whether an non-evaluated call is parenthesized
+# Determine whether an non-evaluated call is parenthesized.
 #
 # @param a non-evaluated expression
 # @retun logical - TRUE if expression is parenthesized, FALSE otherwise.
@@ -19,7 +19,7 @@ is_parenthesized <- function(expr)
   is.call(expr) && identical(expr[[1L]], quote(`(`))
 }
 
-# Check whether a pipe is a tee.
+# Check whether a pipe is the tee pipe.
 #
 # @param pipe A (quoted) pipe
 # @return logical - TRUE if pipe is a tee, FALSE otherwise.
@@ -28,7 +28,7 @@ is_tee <- function(pipe)
   identical(pipe, quote(`%T>%`))
 }
 
-# Check whether a pipe is the dollar pipe.
+# Check whether a pipe is the exposition pipe.
 #
 # @param pipe A (quoted) pipe
 # @return logical - TRUE if pipe is the dollar pipe, FALSE otherwise.
@@ -37,7 +37,7 @@ is_dollar <- function(pipe)
   identical(pipe, quote(`%$%`))
 }
 
-# Check whether a pipe is the compound assignment pipe operator
+# Check whether a pipe is the assignment pipe.
 #
 # @param pipe A (quoted) pipe
 # @return logical - TRUE if pipe is the compound assignment pipe,
@@ -56,7 +56,7 @@ is_funexpr <- function(expr)
   is.call(expr) && identical(expr[[1L]], quote(`{`))
 }
 
-# Check whether expression has double or triple colons
+# Check whether expression has double or triple colons.
 #
 # @param  expr An expression to be tested.
 # @return logical - TRUE if expr contains `::` or `:::`, FALSE otherwise.

@@ -23,10 +23,10 @@
 #' (`vignette("magrittr")`) or the documentation pages for the
 #' available operators:\cr
 #' \tabular{ll}{
-#'    \code{\link{\%>\%}}  \tab forward-pipe operator.\cr
-#'    \code{\link{\%T>\%}} \tab tee operator.\cr
-#'    \code{\link{\%<>\%}} \tab compound assignment pipe-operator.\cr
-#'    \code{\link{\%$\%}}  \tab exposition pipe-operator.\cr
+#'    \code{\link{\%>\%}}  \tab pipe.\cr
+#'    \code{\link{\%T>\%}} \tab tee pipe.\cr
+#'    \code{\link{\%<>\%}} \tab assignment pipe.\cr
+#'    \code{\link{\%$\%}}  \tab exposition pipe.\cr
 #' }
 #' 
 #' @examples

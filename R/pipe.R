@@ -43,7 +43,7 @@ pipe <- function()
       # compute the result by applying the function to the LHS
       result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
       
-      # If compound assignment pipe operator is used, assign result
+      # If assignment pipe is used, assign result
       if (is_compound_pipe(pipes[[1L]])) {
         eval(call("<-", lhs, result[["value"]]), parent, parent)
       # Otherwise, return it.
@@ -57,7 +57,7 @@ pipe <- function()
   }
 }
 
-#' magrittr forward-pipe operator
+#' Pipe
 #' 
 #' Pipe an object forward into a function or call expression.
 #' 
@@ -188,7 +188,7 @@ pipe <- function()
 #' @export
 `%>%`  <- pipe()
 
-#' magrittr compound assignment pipe-operator
+#' Assignment pipe
 #' 
 #' Pipe an object forward into a function or call expression and update the 
 #' `lhs` object with the resulting value.
@@ -196,7 +196,7 @@ pipe <- function()
 #' @param lhs An object which serves both as the initial value and as target.
 #' @param rhs a function call using the magrittr semantics.
 #' 
-#' @details The compound assignment pipe-operator, \code{\%<>\%}, is used to
+#' @details The assignment pipe, \code{\%<>\%}, is used to
 #' update a value by first piping it into one or more `rhs` expressions, and 
 #' then assigning the result. For example, \code{some_object \%<>\% 
 #' foo \%>\% bar} is equivalent to \code{some_object <- some_object \%>\% foo
@@ -231,7 +231,7 @@ pipe <- function()
 #' @export
 `%<>%` <- pipe() 
 
-#' magrittr tee operator
+#' Tee pipe
 #' 
 #' Pipe a value forward into a function- or call expression and return the
 #' original value instead of the result. This is useful when an expression
@@ -240,7 +240,7 @@ pipe <- function()
 #' @param lhs A value or the magrittr placeholder.
 #' @param rhs A function call using the magrittr semantics.
 #' 
-#' @details The tee operator works like \code{\link{\%>\%}}, except the 
+#' @details The tee pipe works like \code{\link{\%>\%}}, except the 
 #' return value is `lhs` itself, and not the result of `rhs` function/expression.
 #' 
 #' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
@@ -255,7 +255,7 @@ pipe <- function()
 #' @export
 `%T>%` <- pipe() 
 
-#' magrittr exposition pipe-operator
+#' Exposition pipe
 #' 
 #' Expose the names in `lhs` to the `rhs` expression. This is useful when functions
 #' do not have a built-in data argument.
