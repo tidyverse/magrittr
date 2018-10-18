@@ -19,30 +19,30 @@ is_parenthesized <- function(expr)
   is.call(expr) && identical(expr[[1L]], quote(`(`))
 }
 
-# Check whether a pipe is the tee pipe operator.
+# Check whether a pipe is the tee pipe.
 #
 # @param pipe A (quoted) pipe
 # @return logical - TRUE if pipe is a tee, FALSE otherwise.
-is_tee_pipe <- function(pipe)
+is_tee <- function(pipe)
 {
   identical(pipe, quote(`%T>%`))
 }
 
-# Check whether a pipe is the exposition pipe operator.
+# Check whether a pipe is the exposition pipe.
 #
 # @param pipe A (quoted) pipe
 # @return logical - TRUE if pipe is the dollar pipe, FALSE otherwise.
-is_exposition_pipe <- function(pipe)
+is_dollar <- function(pipe)
 {
   identical(pipe, quote(`%$%`))
 }
 
-# Check whether a pipe is the assignment pipe operator.
+# Check whether a pipe is the assignment pipe.
 #
 # @param pipe A (quoted) pipe
 # @return logical - TRUE if pipe is the compound assignment pipe,
 #   otherwise FALSE.
-is_assignment_pipe <- function(pipe)
+is_compound_pipe <- function(pipe)
 {
   identical(pipe, quote(`%<>%`))
 }

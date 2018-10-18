@@ -23,7 +23,7 @@ split_chain <- function(expr, env)
       rhs <- eval(rhs, env, env)
 
     rhss[[i]] <- 
-      if (is_exposition_pipe(pipes[[i]]) || is_funexpr(rhs))
+      if (is_dollar(pipes[[i]]) || is_funexpr(rhs))
         rhs
       else if (is_function(rhs) || is_colexpr(rhs))
         prepare_function(rhs)

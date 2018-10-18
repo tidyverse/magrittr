@@ -44,7 +44,7 @@ pipe <- function()
       result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
       
       # If assignment pipe is used, assign result
-      if (is_assignment_pipe(pipes[[1L]])) {
+      if (is_compound_pipe(pipes[[1L]])) {
         eval(call("<-", lhs, result[["value"]]), parent, parent)
       # Otherwise, return it.
       } else {
