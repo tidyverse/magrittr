@@ -25,7 +25,7 @@ debug_pipe <- function(x)
 #' @export
 debug_fseq <- function(fseq, ...)
 {
-  is_valid_index <- function(i) i %in% 1:length(functions(fseq))
+  is_valid_index <- function(i) i %in% seq_along(functions(fseq))
 
   indices <- list(...)
     if (!any(vapply(indices, is.numeric, logical(1L))) ||
@@ -39,7 +39,7 @@ debug_fseq <- function(fseq, ...)
 #' @export
 undebug_fseq <- function(fseq)
 {
-  for (i in 1:length(functions(fseq)))
+  for (i in seq_along(functions(fseq)))
     if (isdebugged(functions(fseq)[[i]])) 
       undebug(functions(fseq)[[i]])
 }

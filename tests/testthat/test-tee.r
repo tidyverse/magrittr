@@ -1,6 +1,6 @@
-context("magrittr tee")
+context("tee pipe")
 
-test_that("tee related functionality works.", {
+test_that("Tee pipe related functionality works.", {
 
   dim_message <- function(data.)
     message(sprintf("Data has dimension %d x %d", NROW(data.), NCOL(data.)))

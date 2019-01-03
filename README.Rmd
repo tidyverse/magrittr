@@ -16,6 +16,7 @@ library(magrittr)
 # magrittr <img src="man/figures/logo.png" align="right" />
 
 [![Travis-CI Build Status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/tidyverse/magrittr?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/magrittr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
 
 ## Overview
@@ -46,7 +47,7 @@ the_data <-
 Four operations are performed to arrive at the desired data set, and they 
 are written in a natural order: the same as the order of execution. Also, no 
 temporary variables are needed. If yet another operation is required, it is 
-straight-forward to add to the sequence of operations wherever it may be needed.
+straightforward to add to the sequence of operations wherever it may be needed.
 
 If you are new to magrittr, the best place to start is the 
 [pipes chapter](http://r4ds.had.co.nz/pipes.html) in R for data science.
@@ -60,7 +61,7 @@ install.packages("tidyverse")
 # Alternatively, install just magrittr:
 install.packages("magrittr")
 
-# Or the the development version from GitHub:
+# Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("tidyverse/magrittr")
 ```
@@ -84,7 +85,7 @@ expression. However, in most cases this has no practical implication.
  
 ### Re-using the placeholder for attributes
 
-It is straight-forward to use the placeholder several times
+It is straightforward to use the placeholder several times
 in a right-hand side expression. However, when the placeholder
 only appears in a nested expressions magrittr will still apply
 the first-argument rule. The reason is that in most cases this
@@ -127,24 +128,3 @@ iris %>%
 data.frame(z = rnorm(100)) %$%
   ts.plot(z)
 ```
-
-### Compound assignment pipe operations
-
-There is also a pipe operator which can be used as shorthand notation
-in situations where the left-hand side is being "overwritten":
-
-```{r, eval = FALSE}
-iris$Sepal.Length <- 
-  iris$Sepal.Length %>%
-  sqrt()
-```
-
-To avoid the repetition of the left-hand side immediately after the assignment
-operator, use the `%<>%` operator:
-
-```{r}
-iris$Sepal.Length %<>% sqrt
-```
-
-This operator works exactly like `%>%`, except the pipeline assigns the result
-rather than returning it. It must be the first pipe operator in a longer chain.

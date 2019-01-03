@@ -1,3 +1,5 @@
+# magrittr 1.5.0.9000
+
 # magrittr 1.5
 
 ## New features
@@ -13,7 +15,7 @@ argument, e.g. `f <- . %>% abs %>% mean(na.rm = TRUE)`.
 ### New operators
 Three new operators are introduced for some special cases
 
-* Compound assignment pipe: `%<>%`
+* Assignment pipe: `%<>%`
 * Tee pipe: `%T>%`
 * Exposition pipe: `%$%`
 
