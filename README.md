@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# magrittr <img src="man/figures/logo.png" align="right" />
+# magrittr <a href='https:/magrittr.tidyverse.org'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![Travis-CI Build
 Status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
@@ -38,7 +38,7 @@ the_data <-
 Four operations are performed to arrive at the desired data set, and
 they are written in a natural order: the same as the order of execution.
 Also, no temporary variables are needed. If yet another operation is
-required, it is straight-forward to add to the sequence of operations
+required, it is straightforward to add to the sequence of operations
 wherever it may be needed.
 
 If you are new to magrittr, the best place to start is the [pipes
@@ -53,7 +53,7 @@ install.packages("tidyverse")
 # Alternatively, install just magrittr:
 install.packages("magrittr")
 
-# Or the the development version from GitHub:
+# Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("tidyverse/magrittr")
 ```
@@ -78,7 +78,7 @@ implication.
 
 ### Re-using the placeholder for attributes
 
-It is straight-forward to use the placeholder several times in a
+It is straightforward to use the placeholder several times in a
 right-hand side expression. However, when the placeholder only appears
 in a nested expressions magrittr will still apply the first-argument
 rule. The reason is that in most cases this results more clean code.
