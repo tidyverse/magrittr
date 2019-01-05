@@ -3,11 +3,15 @@
 
 # magrittr <a href='https:/magrittr.tidyverse.org'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
-[![Travis-CI Build
-Status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/tidyverse/magrittr?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/magrittr)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
+<!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
+[![Travis build
+status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
+[![Codecov test
+coverage](https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/magrittr?branch=master)
+<!-- badges: end -->
 
 ## Overview
 
