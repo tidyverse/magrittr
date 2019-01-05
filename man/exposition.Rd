@@ -2,7 +2,7 @@
 % Please edit documentation in R/pipe.R
 \name{\%$\%}
 \alias{\%$\%}
-\title{magrittr exposition pipe-operator}
+\title{Exposition pipe}
 \usage{
 lhs \%$\% rhs
 }

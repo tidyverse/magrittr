@@ -2,7 +2,7 @@
 % Please edit documentation in R/pipe.R
 \name{\%<>\%}
 \alias{\%<>\%}
-\title{magrittr compound assignment pipe-operator}
+\title{Assignment pipe}
 \usage{
 lhs \%<>\% rhs
 }
@@ -16,7 +16,7 @@ Pipe an object forward into a function or call expression and update the
 \code{lhs} object with the resulting value.
 }
 \details{
-The compound assignment pipe-operator, \code{\%<>\%}, is used to
+The assignment pipe, \code{\%<>\%}, is used to
 update a value by first piping it into one or more \code{rhs} expressions, and
 then assigning the result. For example, \code{some_object \%<>\% 
 foo \%>\% bar} is equivalent to \code{some_object <- some_object \%>\% foo

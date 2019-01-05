@@ -2,7 +2,7 @@
 % Please edit documentation in R/pipe.R
 \name{\%>\%}
 \alias{\%>\%}
-\title{magrittr forward-pipe operator}
+\title{Pipe}
 \usage{
 lhs \%>\% rhs
 }
