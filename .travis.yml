@@ -9,10 +9,13 @@ matrix:
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
-    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+    before_cache:
+    - R CMD INSTALL .
+    - Rscript -e 'remotes::install_github("r-lib/pkgdown")'
+    - Rscript -e 'remotes::install_github("tidyverse/tidytemplate")'
     deploy:
       provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github()'
+      script: Rscript -e 'pkgdown::deploy_site_github(install = FALSE, verbose = TRUE)'
       skip_cleanup: true
   - r: oldrel
   - r: 3.3
