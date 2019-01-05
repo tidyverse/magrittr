@@ -163,7 +163,7 @@
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">matrix</a></span>(<span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">plot <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># plot usually does not return anything. </span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">colSums</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; [1] -3.740450 -5.714643</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; [1]  5.502178 16.016890</span></a></code></pre></div>
 <p>The “exposition” pipe, <code>%$%</code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">iris <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Sepal.Length)) <span class="op">%$%</span></a>
@@ -192,8 +192,8 @@
 <a class="sourceLine" id="cb9-6" data-line-number="6">       <span class="st">"Variance:"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor">var</a></span>(.), <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</a>
 <a class="sourceLine" id="cb9-7" data-line-number="7">   <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(.)</a>
 <a class="sourceLine" id="cb9-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Mean: 4.699864 Variance: 23.18479</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; [1]  6.310018 10.992038  6.868646  3.498443  2.352369 -3.160191</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Mean: 5.185471 Variance: 24.29321</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; [1] -1.476608 -2.442017 -3.227260  9.548924 15.956495 -2.889509</span></a></code></pre></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> `</span><span class="dt">*</span><span class="st">`</span>(<span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> `</span><span class="dt">+</span><span class="st">`</span>(<span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">{</a>
