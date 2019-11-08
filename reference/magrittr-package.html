@@ -8,29 +8,40 @@
 
 <title>magrittr - Ceci n'est pas un pipe — magrittr-package • magrittr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
-<meta property="og:title" content="magrittr - Ceci n'est pas un pipe — magrittr-package" />
 
+
+<meta property="og:title" content="magrittr - Ceci n'est pas un pipe — magrittr-package" />
 <meta property="og:description" content="The magrittr package offers a set of operators which promote semantics
 that will improve your code by
 structuring sequences of data operations left-to-right
@@ -41,29 +52,31 @@ making it easy to add steps anywhere in the sequence of operations.
 The operators pipe their left-hand side values forward into expressions that
 appear on the right-hand side, i.e. one can replace f(x) with
 x %&amp;gt;% f, where %&amp;gt;% is the (main) pipe-operator." />
-
 <meta property="og:image" content="https://magrittr.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
 
+
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<!-- google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
 <script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
- gtag('config', 'UA-115082821-1');
+  gtag('config', 'UA-115082821-1');
 </script>
+
   </head>
 
   <body>
@@ -111,6 +124,7 @@ x %&amp;gt;% f, where %&amp;gt;% is the (main) pipe-operator." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -122,7 +136,6 @@ x %&amp;gt;% f, where %&amp;gt;% is the (main) pipe-operator." />
     </div>
 
     <div class="ref-description">
-    
     <p>The magrittr package offers a set of operators which promote semantics
 that will improve your code by</p><ul>
 <li><p>structuring sequences of data operations left-to-right
@@ -133,10 +146,10 @@ that will improve your code by</p><ul>
 </ul><p>The operators pipe their left-hand side values forward into expressions that
 appear on the right-hand side, i.e. one can replace <code>f(x)</code> with
 <code>x %&gt;% f</code>, where <code>%&gt;%</code> is the (main) pipe-operator.</p>
-    
     </div>
 
-        
+
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Consider the example below. Four operations are performed to
@@ -147,43 +160,38 @@ sequence of operations whereever it may be needed.</p>
 <p>For a more detailed introduction see the vignette
 (<code><a href='../articles/magrittr.html'>vignette("magrittr")</a></code>) or the documentation pages for the
 available operators:<br /></p><table class='table'>
-<tr><td></td><td><code>%&gt;%</code></td></tr>
-<tr><td></td><td>pipe.</td></tr>
-<tr><td></td><td><code>%T&gt;%</code></td></tr>
-<tr><td></td><td>tee pipe.</td></tr>
-<tr><td></td><td><code>%&lt;&gt;%</code></td></tr>
-<tr><td></td><td>assignment pipe.</td></tr>
-<tr><td></td><td><code><a href='exposition.html'>%$%</a></code></td></tr>
-<tr><td></td><td>exposition pipe.</td></tr>
-<tr><td></td><td></td></tr>
+<tr><td><code>%&gt;%</code></td><td>pipe.</td></tr>
+<tr><td><code>%T&gt;%</code></td><td>tee pipe.</td></tr>
+<tr><td><code>%&lt;&gt;%</code></td><td>assignment pipe.</td></tr>
+<tr><td><code><a href='exposition.html'>%$%</a></code></td><td>exposition pipe.</td></tr>
 </table>
-    
+
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Useful links:</p><ul>
 <li><p><a href='http://magrittr.tidyverse.org'>http://magrittr.tidyverse.org</a></p></li>
 <li><p><a href='https://github.com/tidyverse/magrittr'>https://github.com/tidyverse/magrittr</a></p></li>
 <li><p>Report bugs at <a href='https://github.com/tidyverse/magrittr/issues'>https://github.com/tidyverse/magrittr/issues</a></p></li>
-</ul></div>
-    
+</ul>
+
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
 <span class='no'>the_data</span> <span class='kw'>&lt;-</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/read.table'>read.csv</a></span>(<span class='st'>'/path/to/data/file.csv'</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/subset'>subset</a></span>(<span class='no'>variable_a</span> <span class='kw'>&gt;</span> <span class='no'>x</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/transform'>transform</a></span>(<span class='kw'>variable_c</span> <span class='kw'>=</span> <span class='no'>variable_a</span>/<span class='no'>variable_b</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fl'>100</span>)
-<span class='co'># }</span></pre>
+  <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='st'>'/path/to/data/file.csv'</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>variable_a</span> <span class='kw'>&gt;</span> <span class='no'>x</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/transform.html'>transform</a></span>(<span class='kw'>variable_c</span> <span class='kw'>=</span> <span class='no'>variable_a</span>/<span class='no'>variable_b</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fl'>100</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -201,6 +209,7 @@ available operators:<br /></p><table class='table'>
   </div>
 </div>
 
+
       <footer>
       <div class="tidyverse">
   <p>magrittr is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
@@ -212,11 +221,14 @@ available operators:<br /></p><table class='table'>
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
