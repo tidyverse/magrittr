@@ -7,8 +7,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
-[![Travis build
-status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
+[![R build
+status](https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/magrittr)
 [![Codecov test
 coverage](https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/magrittr?branch=master)
 <!-- badges: end -->
@@ -130,4 +130,6 @@ data.frame(z = rnorm(100)) %$%
 
 ## Code of Conduct
 
-Please note that the magrittr project is released with a [Contributor Code of Conduct](https://magrittr.tidyverse.org/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the magrittr project is released with a [Contributor
+Code of Conduct](https://magrittr.tidyverse.org/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
