@@ -31,5 +31,5 @@ data.frame(z = rnorm(100)) \%$\%
   
 }
 \seealso{
-\code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
+\code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%T>\%}}
 }
