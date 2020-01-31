@@ -40,7 +40,7 @@ test_that("placement of lhs is correct in different situations", {
   expect_that(case1c, is_equivalent_to(case0c))
   
   # several placeholder dots
-  expect_that(iris %>% identical(., .), is_true())
+  expect_true(iris %>% identical(., .))
   
   
   # "indirect" function expressions 
