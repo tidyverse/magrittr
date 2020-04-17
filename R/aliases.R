@@ -33,6 +33,7 @@
 #' \code{set_class}          \tab \code{`class<-`} \cr
 #' \code{set_attributes}     \tab \code{`attributes<-`} \cr
 #' \code{set_attr }          \tab \code{`attr<-`} \cr
+#' \code{set_encoding }      \tab \code{`Encoding<-`} \cr
 #' }
 #'
 #' @usage NULL
@@ -200,4 +201,7 @@ set_attr <- `attr<-`
 #' @export
 set_attributes <- `attributes<-`
 
-
+#' @rdname aliases
+#' @usage NULL
+#' @export
+set_encoding <- `Encoding<-`
