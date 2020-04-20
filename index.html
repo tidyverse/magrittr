@@ -87,7 +87,7 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="magrittr" class="section level1">
+<div id="magrittr-" class="section level1">
 
 <!-- badges: start -->
 
@@ -173,7 +173,7 @@
 <div id="pipe-with-exposition-of-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pipe-with-exposition-of-variables" class="anchor"></a>Pipe with exposition of variables</h3>
-<p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code><a href="reference/exposition.html">%$%</a></code> operator:</p>
+<p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code><a href="reference/exposition.html">%$%</a></code> operator:</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="no">iris</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">Sepal.Length</span> <span class="kw">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">Sepal.Length</span>)) <span class="kw">%$%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">Sepal.Length</span>, <span class="no">Sepal.Width</span>)
@@ -235,7 +235,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=magrittr"><img src="https://www.r-pkg.org/badges/version/magrittr" alt="CRAN status"></a></li>
-<li><a href="https://travis-ci.org/tidyverse/magrittr"><img src="https://travis-ci.org/tidyverse/magrittr.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://github.com/tidyverse/magrittr/actions"><img src="https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 <li><a href="https://codecov.io/gh/tidyverse/magrittr?branch=master"><img src="https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>

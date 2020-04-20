@@ -172,7 +172,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>) <span class="kw">%T&gt;%</span>
 <span class="no">plot</span> <span class="kw">%&gt;%</span> <span class="co"># plot usually does not return anything. </span>
 <span class="no">colSums</span>
-<span class="co">#&gt; [1] 12.659296 -8.463779</span></pre></body></html></div>
+<span class="co">#&gt; [1] 17.748023  1.912204</span></pre></body></html></div>
 <p>The “exposition” pipe, <code><a href="../reference/exposition.html">%$%</a></code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">iris</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">Sepal.Length</span> <span class="kw">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">Sepal.Length</span>)) <span class="kw">%$%</span>
@@ -182,7 +182,7 @@
   <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span>(<span class="no">z</span>)</pre></body></html></div>
 <p>Finally, the “assignment” pipe <code><a href="../reference/compound.html">%&lt;&gt;%</a></code> can be used as the first pipe in a chain. The effect will be that the result of the pipeline is assigned to the left-hand side object, rather than returning the result as usual. It is essentially shorthand notation for expressions like <code>foo &lt;- foo %&gt;% bar %&gt;% baz</code>, which boils down to <code>foo %&lt;&gt;% bar %&gt;% baz</code>. Another example is:</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">iris</span>$<span class="no">Sepal.Length</span> <span class="kw">%&lt;&gt;%</span> <span class="no">sqrt</span></pre></body></html></div>
-<p>The <code><a href="../reference/compound.html">%&lt;&gt;%</a></code> can be used whenever <code>expr &lt;- ...</code> makes sense, e.g.</p>
+<p>The <code><a href="../reference/compound.html">%&lt;&gt;%</a></code> can be used whenever <code>expr &lt;- ...</code> makes sense, e.g. </p>
 <ul>
 <li><code>x %&lt;&gt;% foo %&gt;% bar</code></li>
 <li><code>x[1:10] %&lt;&gt;% foo %&gt;% bar</code></li>
@@ -201,15 +201,15 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="no">.</span>), <span class="st">"\n"</span>)
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">.</span>)
 }
-<span class="co">#&gt; Mean: 4.979254 Variance: 24.96504</span>
-<span class="co">#&gt; [1] -1.045727  5.630865 11.913193  0.154083  1.090484  9.241633</span></pre></body></html></div>
+<span class="co">#&gt; Mean: 4.979649 Variance: 25.86395</span>
+<span class="co">#&gt; [1] 3.211463 8.283373 3.703067 5.491227 9.612745 6.179237</span></pre></body></html></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">100</span>) <span class="kw">%&gt;%</span> <span class="fu">`*`</span>(<span class="fl">5</span>) <span class="kw">%&gt;%</span> <span class="fu">`+`</span>(<span class="fl">5</span>) <span class="kw">%&gt;%</span>
 {
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Mean:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">.</span>), <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="no">.</span>),  <span class="st">"\n"</span>)
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">.</span>)
 }</pre></body></html></div>
-<p>To see a list of the aliases, execute e.g. <code><a href="../reference/aliases.html">?multiply_by</a></code>.</p>
+<p>To see a list of the aliases, execute e.g. <code><a href="../reference/aliases.html">?multiply_by</a></code>.</p>
 </div>
 <div id="development" class="section level1">
 <h1 class="hasAnchor">
