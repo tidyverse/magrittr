@@ -7,8 +7,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
-[![Travis build
-status](https://travis-ci.org/tidyverse/magrittr.svg?branch=master)](https://travis-ci.org/tidyverse/magrittr)
+[![R build
+status](https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/magrittr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/magrittr?branch=master)
 <!-- badges: end -->
@@ -110,7 +110,7 @@ f <- function(.) sin(cos(.))
 
 ### Pipe with exposition of variables
 
-Many functions accept a data argument, e.g. `lm` and `aggregate`, which
+Many functions accept a data argument, e.g. `lm` and `aggregate`, which
 is very useful in a pipeline where data is first processed and then
 passed into such a function. There are also functions that do not have a
 data argument, for which it is useful to expose the variables in the
@@ -130,4 +130,6 @@ data.frame(z = rnorm(100)) %$%
 
 ## Code of Conduct
 
-Please note that the magrittr project is released with a [Contributor Code of Conduct](https://magrittr.tidyverse.org/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the magrittr project is released with a [Contributor
+Code of Conduct](https://magrittr.tidyverse.org/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
