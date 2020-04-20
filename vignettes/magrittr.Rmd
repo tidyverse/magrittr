@@ -17,7 +17,7 @@ knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 
 # Abstract
 
-*The magrittr* (to be pronounced with a sophisticated french accent) package has
+The *magrittr* (to be pronounced with a sophisticated french accent) package has
 two aims: decrease development time and improve readability and maintainability 
 of code. Or even shortr: make your code smokin' (puff puff)!
 
