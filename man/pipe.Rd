@@ -15,7 +15,7 @@ lhs \%>\% rhs
 Pipe an object forward into a function or call expression.
 }
 \details{
-\subsection{Using \code{\%>\%} with unary function calls}{
+\subsection{Using \verb{\%>\%} with unary function calls}{
 
 When functions require only one argument, \code{x \%>\% f} is equivalent
 to \code{f(x)} (not exactly equivalent; see technical note below.)
@@ -23,7 +23,7 @@ to \code{f(x)} (not exactly equivalent; see technical note below.)
 }
 \subsection{Placing \code{lhs} as the first argument in \code{rhs} call}{
 
-The default behavior of \code{\%>\%} when multiple arguments are required
+The default behavior of \verb{\%>\%} when multiple arguments are required
 in the \code{rhs} call, is to place \code{lhs} as the first argument, i.e.
 \code{x \%>\% f(y)} is equivalent to \code{f(x, y)}.
 }
@@ -51,7 +51,7 @@ the \code{rhs} in braces. For example, \code{1:10 \%>\% {c(min(.), max(.))}} is
 equivalent to \code{c(min(1:10), max(1:10))}.
 }
 
-\subsection{Using \code{\%>\%} with call- or function-producing \code{rhs}}{
+\subsection{Using \verb{\%>\%} with call- or function-producing \code{rhs}}{
 
 It is possible to force evaluation of \code{rhs} before the piping of \code{lhs} takes
 place. This is useful when \code{rhs} produces the relevant call or function.
@@ -62,7 +62,7 @@ which are accessed using the \code{$} operator, where one would do
 \code{x \%>\% (rc$f)}, and not \code{x \%>\% rc$f}.
 }
 
-\subsection{Using lambda expressions with \code{\%>\%}}{
+\subsection{Using lambda expressions with \verb{\%>\%}}{
 
 Each \code{rhs} is essentially a one-expression body of a unary function.
 Therefore defining lambdas in magrittr is very natural, and as
@@ -92,7 +92,7 @@ and thus using the operators will not be exactly equivalent to the
 "standard call" without pipe-operators.
 
 Another note is that special attention is advised when using non-magrittr
-operators in a pipe-chain (\code{+, -, $,} etc.), as operator precedence will impact how the
+operators in a pipe-chain (\verb{+, -, $,} etc.), as operator precedence will impact how the
 chain is evaluated. In general it is advised to use the aliases provided
 by magrittr.
 }
