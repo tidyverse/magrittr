@@ -268,7 +268,7 @@ pipe <- function()
 #' of the call. This operator exposes the contents of the left-hand side object
 #' to the expression on the right to give a similar benefit, see the examples.
 
-#' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%$\%}}
+#' @seealso \code{\link{\%>\%}}, \code{\link{\%<>\%}}, \code{\link{\%T>\%}}
 #' 
 #' @examples
 #' iris %>%
