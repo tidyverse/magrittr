@@ -12,10 +12,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="tidyverse.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="A Forward-Pipe Operator for R">
 <meta property="og:description" content="Provides a mechanism for chaining commands with a
@@ -37,7 +38,7 @@
   gtag('config', 'UA-115082821-1');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -51,7 +52,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="index.html">magrittr</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
           <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0.9000</span>
         </div>
@@ -101,26 +102,26 @@
 <li>making it easy to add steps anywhere in the sequence of operations.</li>
 </ul>
 <p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code><a href="reference/pipe.html">%&gt;%</a></code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">the_data &lt;-</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">'/path/to/data/file.csv'</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(variable_a <span class="op">&gt;</span><span class="st"> </span>x) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="dt">variable_c =</span> variable_a<span class="op">/</span>variable_b) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="no">the_data</span> <span class="kw">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">'/path/to/data/file.csv'</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">variable_a</span> <span class="kw">&gt;</span> <span class="no">x</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">variable_c</span> <span class="kw">=</span> <span class="no">variable_a</span>/<span class="no">variable_b</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">100</span>)</pre></div>
 <p>Four operations are performed to arrive at the desired data set, and they are written in a natural order: the same as the order of execution. Also, no temporary variables are needed. If yet another operation is required, it is straightforward to add to the sequence of operations wherever it may be needed.</p>
 <p>If you are new to magrittr, the best place to start is the <a href="http://r4ds.had.co.nz/pipes.html">pipes chapter</a> in R for data science.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidyverse"</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># Alternatively, install just magrittr:</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"magrittr"</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Or the development version from GitHub:</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"tidyverse/magrittr"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidyverse"</span>)
+
+<span class="co"># Alternatively, install just magrittr:</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"magrittr"</span>)
+
+<span class="co"># Or the development version from GitHub:</span>
+<span class="co"># install.packages("devtools")</span>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"tidyverse/magrittr"</span>)</pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -165,21 +166,21 @@
 <h3 class="hasAnchor">
 <a href="#building-unary-functions" class="anchor"></a>Building (unary) functions</h3>
 <p>Any pipeline starting with the <code>.</code> will return a function which can later be used to apply the pipeline to values. Building functions in magrittr is therefore similar to building other values.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">f &lt;-<span class="st"> </span>. <span class="op">%&gt;%</span><span class="st"> </span>cos <span class="op">%&gt;%</span><span class="st"> </span>sin </a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co"># is equivalent to </span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">f &lt;-<span class="st"> </span><span class="cf">function</span>(.) <span class="kw"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span>(.)) </a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">f</span> <span class="kw">&lt;-</span> <span class="no">.</span> <span class="kw">%&gt;%</span> <span class="no">cos</span> <span class="kw">%&gt;%</span> <span class="no">sin</span>
+<span class="co"># is equivalent to </span>
+<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">.</span>) <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span>(<span class="no">.</span>))</pre></div>
 </div>
 <div id="pipe-with-exposition-of-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pipe-with-exposition-of-variables" class="anchor"></a>Pipe with exposition of variables</h3>
 <p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code><a href="reference/exposition.html">%$%</a></code> operator:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(Sepal.Length)) <span class="op">%$%</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(Sepal.Length, Sepal.Width)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; [1] 0.3361992</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">z =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="dv">100</span>)) <span class="op">%$%</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span>(z)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">iris</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">Sepal.Length</span> <span class="kw">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">Sepal.Length</span>)) <span class="kw">%$%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">Sepal.Length</span>, <span class="no">Sepal.Width</span>)
+<span class="co">#&gt; [1] 0.3361992</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">100</span>)) <span class="kw">%$%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span>(<span class="no">z</span>)</pre></div>
 <p><img src="reference/figures/exposition-1.png"><!-- --></p>
 </div>
 </div>
@@ -191,13 +192,13 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=magrittr">https://​cloud.r-project.org/​package=magrittr</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/tidyverse/magrittr">https://​github.com/​tidyverse/​magrittr</a>
+<li>Browse source code at <br><a href="https://github.com/tidyverse/magrittr/">https://​github.com/​tidyverse/​magrittr/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/tidyverse/magrittr/issues">https://​github.com/​tidyverse/​magrittr/​issues</a>
 </li>
