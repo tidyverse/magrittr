@@ -4,7 +4,7 @@ pkgdown_sha: b340e0c004a5c3afc3c9bec1c9077a6a354e20e4
 articles:
   magrittr: magrittr.html
   tradeoffs: tradeoffs.html
-last_built: 2020-04-20T21:36Z
+last_built: 2020-04-21T13:38Z
 urls:
   reference: https://magrittr.tidyverse.org/reference
   article: https://magrittr.tidyverse.org/articles
