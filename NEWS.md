@@ -1,5 +1,10 @@
 # magrittr 1.5.0.9000
 
+## Bug fixes
+
+* Fix usage of the pipe with lazy evaluation (#195,
+  commit: 565eb9a6111fa432ab33284d13d59405621926a3)
+
 # magrittr 1.5
 
 ## New features

@@ -16,3 +16,9 @@ test_that("%>% works as expected with and without parentheses and placeholder", 
   expect_that(some_x %>% dnormsd(5), throws_error())
   expect_that(some_x %>% function(x) {x} %>% sin, throws_error())
 })
+
+test_that("test pipe with lazy evaluation #195", {
+  gen <- function(x) function() eval(quote(x))
+  fn <- 1 %>% gen()
+  expect_equal(fn(), 1)
+})
