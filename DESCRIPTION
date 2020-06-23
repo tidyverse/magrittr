@@ -18,7 +18,7 @@ Description: Provides a mechanism for chaining commands with a
     the result of an expression, into the next function call/expression.
     There is flexible support for the type of right-hand side expressions.
     For more information, see package vignette.  To quote Rene Magritte,
-    "Ceci n'est pas un pipe."
+    "Ceci n'est pas une pipe."
 License: MIT + file LICENSE
 URL: http://magrittr.tidyverse.org,
     https://github.com/tidyverse/magrittr
