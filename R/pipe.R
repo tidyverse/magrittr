@@ -281,3 +281,73 @@ pipe <- function()
 #' @rdname exposition
 #' @export
 `%$%` <- pipe() 
+
+
+#' @import rlang
+NULL
+
+`%>%` <- function(x, y) {
+  exprs <- pipe_unroll(substitute(x), substitute(y))
+
+  env <- caller_env()
+  local_bindings("." := NULL, .env = env)
+
+  while (!is_null(exprs)) {
+    expr <- node_car(exprs)
+    rest <- node_cdr(exprs)
+
+    # Return right away to forward visibility (need to add visibility
+    # support to eval_bare())
+    if (is_null(rest)) {
+      return(eval_bare(expr, env))
+    }
+    env_poke(env, ".", eval_bare(expr, env))
+
+    exprs <- rest
+  }
+
+  stop("Unexpected state in the magrittr pipe.")
+}
+
+pipe_unroll <- function(x, y) {
+  out <- new_pipe_node(y, NULL)
+  node <- x
+
+  while (is_call(node, "%>%")) {
+    args <- node_cdr(node)
+    rhs <- node_cadr(args)
+
+    out <- new_pipe_node(rhs, out)
+    node <- node_car(args)
+  }
+
+  new_node(node, out)
+}
+
+new_pipe_node <- function(car, cdr) {
+  if (!is_call(car)) {
+    car <- call2(car)
+  }
+  car <- add_dot(car)
+
+  new_node(car, cdr)
+}
+add_dot <- function(x) {
+  if (!is_call(x)) {
+    return(x)
+  }
+
+  args <- node_cdr(x)
+  while (!is_null(args)) {
+    if (identical(node_car(args), quote(.))) {
+      return(x)
+    }
+    args <- node_cdr(args)
+  }
+
+  x <- duplicate(x, shallow = TRUE)
+  args <- new_node(quote(.), args)
+  node_poke_cdr(x, args)
+
+  x
+}
