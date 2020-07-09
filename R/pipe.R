@@ -292,21 +292,13 @@ NULL
   env <- caller_env()
   local_bindings("." := NULL, .env = env)
 
-  while (!is_null(exprs)) {
-    expr <- node_car(exprs)
-    rest <- node_cdr(exprs)
-
-    # Return right away to forward visibility (need to add visibility
-    # support to eval_bare())
-    if (is_null(rest)) {
-      return(eval_bare(expr, env))
-    }
-    env_poke(env, ".", eval_bare(expr, env))
-
+  while (!is_null(rest <- node_cdr(exprs))) {
+    out <- eval_bare(node_car(exprs), env)
+    env_poke(env, ".", out)
     exprs <- rest
   }
 
-  stop("Unexpected state in the magrittr pipe.")
+  eval_bare(node_car(exprs), env)
 }
 
 pipe_unroll <- function(x, y) {
