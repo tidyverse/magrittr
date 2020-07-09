@@ -345,9 +345,6 @@ add_dot <- function(x) {
     args <- node_cdr(args)
   }
 
-  x <- duplicate(x, shallow = TRUE)
-  args <- new_node(quote(.), args)
-  node_poke_cdr(x, args)
-
-  x
+  args <- new_node(quote(.), node_cdr(x))
+  new_call(node_car(x), args)
 }
