@@ -12,3 +12,4 @@
 ^appveyor\.yml$
 ^\.github$
 ^LICENSE\.md$
+^TAGS$

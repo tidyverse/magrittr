@@ -4,7 +4,7 @@
 \alias{\%>\%}
 \title{Pipe}
 \usage{
-lhs \%>\% rhs
+x \%>\% y
 }
 \arguments{
 \item{lhs}{A value or the magrittr placeholder.}
