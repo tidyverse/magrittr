@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
+<!--optional theme--><link href="../.css" rel="stylesheet">
 <meta property="og:title" content="Design tradeoffs">
 <meta property="og:description" content="magrittr">
 <meta property="og:image" content="https://magrittr.tidyverse.org/logo.png">
@@ -80,7 +81,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="tradeoffs_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Design tradeoffs</h1>
@@ -102,18 +103,24 @@
 <ul>
 <li>
 <p><strong>Nested</strong></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="fu">foo</span>(<span class="no">x</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="fu">foo</span>(<span class="kw">x</span>))
+</pre></div>
 </li>
 <li>
 <p><strong>Eager</strong></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">foo</span>(<span class="no">x</span>)
-<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">.</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">.</span> <span class="op">&lt;-</span> <span class="fu">foo</span>(<span class="kw">x</span>)
+<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="kw">.</span>)
+</pre></div>
 </li>
 <li>
 <p><strong>Lazy</strong></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">...1</span> <span class="kw">&lt;-</span> <span class="no">x</span>
-<span class="no">...2</span> <span class="kw">%&lt;~%</span> <span class="fu">foo</span>(<span class="no">...1</span>)
-<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">...1</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">...1</span> <span class="op">&lt;-</span> <span class="kw">x</span>
+<span class="kw">...2</span> <span class="op">%&lt;~%</span> <span class="fu">foo</span>(<span class="kw">...1</span>)
+<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="kw">...1</span>)
+</pre></div>
 </li>
 </ul>
 <p>(There is a fourth option, which uses eager evaluation, but uses a unique variable name for each stage. This has no advantages compared to the eager pipe so we will not consider it further.)</p>
@@ -140,8 +147,10 @@
 <li>
 <p>Single evaluation: ❌ trivial for simple pipes, but not possible for pipes that use the pronoun in multiple places.</p>
 <p>Note that the simplest rewrite doesn’t work because there’s no gaurantee that the first argument will be evaluated before the second argument.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu">foo</span>(<span class="no">.</span>, <span class="no">.</span>)
-<span class="fu">foo</span>(<span class="no">.</span> <span class="kw">&lt;-</span> <span class="no">x</span>, <span class="no">.</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu">foo</span>(<span class="kw">.</span>, <span class="kw">.</span>)
+<span class="fu">foo</span>(<span class="kw">.</span> <span class="op">&lt;-</span> <span class="kw">x</span>, <span class="kw">.</span>)
+</pre></div>
 </li>
 <li><p>Minimal stack: ❌ maximum stack depth is the length of the pipe.</p></li>
 </ul>
@@ -153,9 +162,11 @@
 <li>
 <p>Visibility: ✅.</p>
 <p>Note that the final computation must be handled differently, as the following transformation loses visibility.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">foo</span>(<span class="no">.</span>)
-<span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">.</span>)
-<span class="no">.</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">.</span> <span class="op">&lt;-</span> <span class="fu">foo</span>(<span class="kw">.</span>)
+<span class="kw">.</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="kw">.</span>)
+<span class="kw">.</span>
+</pre></div>
 </li>
 <li><p>Lazy evaluation: ❌ assignment forces eager evaluation of each step.</p></li>
 <li><p>Eager clean up: ✅</p></li>
@@ -166,20 +177,24 @@
 <div id="lazy-pipe" class="section level3">
 <h3 class="hasAnchor">
 <a href="#lazy-pipe" class="anchor"></a>Lazy pipe</h3>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">`%&lt;~%`</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">name</span>, <span class="no">value</span>, <span class="no">env</span> <span class="kw">=</span> <span class="fu">caller_env</span>()) {
-  <span class="no">name</span> <span class="kw">&lt;-</span> <span class="fu">ensym</span>(<span class="no">name</span>)
-  <span class="no">value</span> <span class="kw">&lt;-</span> <span class="fu">enexpr</span>(<span class="no">value</span>)
-
-  <span class="fu">env_bind_exprs</span>(<span class="no">env</span>, <span class="kw">.eval_env</span> <span class="kw">=</span> <span class="no">env</span>, !!<span class="no">name</span> <span class="kw">:=</span> !!<span class="no">value</span>)
-}</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">`%&lt;~%`</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">name</span>, <span class="kw">value</span>, <span class="kw">env</span> = <span class="fu">caller_env</span>()) {
+  <span class="kw">name</span> <span class="op">&lt;-</span> <span class="fu">ensym</span>(<span class="kw">name</span>)
+  <span class="kw">value</span> <span class="op">&lt;-</span> <span class="fu">enexpr</span>(<span class="kw">value</span>)
+  
+  <span class="fu">env_bind_exprs</span>(<span class="kw">env</span>, .eval_env = <span class="kw">env</span>, <span class="op">!</span><span class="op">!</span><span class="kw">name</span> <span class="op">:=</span> <span class="op">!</span><span class="op">!</span><span class="kw">value</span>)
+}
+</pre></div>
 <ul>
 <li><p>Visibility: ✅</p></li>
 <li><p>Lazy evaluation: ✅</p></li>
 <li>
 <p>Eager clean up: ❌/✅ can be preserved by inserting a function call after each lazy assignment:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">...2</span> <span class="kw">%&lt;~%</span> <span class="fu">foo</span>(<span class="no">...1</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">...2</span> <span class="op">%&lt;~%</span> <span class="fu">foo</span>(<span class="kw">...1</span>)
 <span class="fu">delayed_cleanup</span>()
-<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">...1</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="kw">...1</span>)
+</pre></div>
 <p><code>delayed_cleanup()</code> would be a C function that iterates through all bindings in an environment, deleting any promises that have already been forced.</p>
 </li>
 <li><p>Single evaluation: ✅ by property of promises.</p></li>
@@ -197,132 +212,158 @@
 <li>In a <strong>closure</strong> environment, the environment of a new function.</li>
 </ul>
 <p>This choice affects impacts functions that work with the current environment (like <code><a href="https://rdrr.io/r/base/assign.html">assign()</a></code>, <code><a href="https://rdrr.io/r/base/get.html">get()</a></code>, <code><a href="https://rdrr.io/r/base/ls.html">ls()</a></code>), or the current context (like <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>). The following two functions illustrate the primary differences:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
-  <span class="fl">10</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)
-  <span class="no">x</span>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">f</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fl">20</span>
+  <span class="fl">10</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="kw">.</span>)
+  <span class="kw">x</span>
 }
 
-<span class="no">g</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="fl">10</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
+<span class="kw">g</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="fl">10</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
   <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
-}</pre></body></html></div>
+}
+</pre></div>
 <ul>
 <li><p>If evaluated in the current environment, both <code>f()</code> and <code>g()</code> return 10.</p></li>
 <li><p>If evaluated in a new environment, <code>f()</code> returns 20 and <code>g()</code> returns 10. NOT TRUE! Why not?</p></li>
 <li><p>If evaluated in a closure environment, both <code>f()</code> and <code>g()</code> return 20.</p></li>
 </ul>
 <p>To discuss implementation challenges with a concrete example, we’ll take the following values:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">double</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> * <span class="fl">2</span>
-<span class="no">increment</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">1</span>
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">1</span>:<span class="fl">10</span></pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">double</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) <span class="kw">x</span> <span class="op">*</span> <span class="fl">2</span>
+<span class="kw">increment</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) <span class="kw">x</span> <span class="op">+</span> <span class="fl">1</span>
+<span class="kw">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
+</pre></div>
 <p>And implement the following simple pipe:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="kw">%&gt;%</span> <span class="fu">increment</span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="op">%&gt;%</span> <span class="fu">increment</span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>()
+</pre></div>
 <p>Using the eager transformation:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">pipe</span> <span class="kw">&lt;-</span> <span class="fu">expr</span>({
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>(<span class="no">.</span>)
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">increment</span>(<span class="no">.</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>(<span class="no">.</span>)
-})</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="kw">pipe</span> <span class="op">&lt;-</span> <span class="fu">expr</span>({
+  <span class="kw">.</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>(<span class="kw">.</span>)
+  <span class="kw">.</span> <span class="op">&lt;-</span> <span class="fu">increment</span>(<span class="kw">.</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>(<span class="kw">.</span>)
+})
+</pre></div>
 <p>Note that we assume the input to the pipe is called <code>.</code>, not <code>x</code>. This is a small simplification that makes implementation of the transformer a little easier.</p>
 <div id="closure-environment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#closure-environment" class="anchor"></a>Closure environment</h3>
 <p>To evaluate the pipe in a closure environment, we first create a function, using the pipe fragment as body and a single argument (<code>.</code>):</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">pipe_fun</span> <span class="kw">&lt;-</span> <span class="fu">new_function</span>(<span class="fu">exprs</span>(<span class="kw">.</span> <span class="kw">=</span> ), <span class="no">pipe</span>)
-<span class="no">pipe_fun</span>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">pipe_fun</span> <span class="op">&lt;-</span> <span class="fu">new_function</span>(<span class="fu">exprs</span>(. = ), <span class="kw">pipe</span>)
+<span class="kw">pipe_fun</span>
 <span class="co">#&gt; function (.) </span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;     . &lt;- double(.)</span>
 <span class="co">#&gt;     . &lt;- increment(.)</span>
 <span class="co">#&gt;     double(.)</span>
-<span class="co">#&gt; }</span></pre></body></html></div>
+<span class="co">#&gt; }</span>
+</pre></div>
 <p>And then we call it with <code>x</code>:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu">pipe_fun</span>(<span class="no">x</span>)
-<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span></pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu">pipe_fun</span>(<span class="kw">x</span>)
+<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span>
+</pre></div>
 <p>Evaluating the pipe in this way makes it clear that building functions with the pipe is the general case, and providing an initial value is the special case. In other words:</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="kw">%&gt;%</span> <span class="fu">increment</span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>()
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="op">%&gt;%</span> <span class="fu">increment</span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>()
 
 <span class="co"># is shorthand for</span>
 
-(<span class="no">.</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="kw">%&gt;%</span> <span class="fu">increment</span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>())(<span class="no">x</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">f_closure</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
-  (<span class="kw">function</span>(<span class="no">.</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)
+(<span class="kw">.</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="op">%&gt;%</span> <span class="fu">increment</span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>())(<span class="kw">x</span>)
+</pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="kw">f_closure</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fl">20</span>
+  (<span class="fu">function</span>(<span class="kw">.</span>) {
+    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="kw">.</span>)
   })(<span class="fl">10</span>)
-  <span class="no">x</span>
+  <span class="kw">x</span>
 }
 <span class="fu">f_closure</span>()
 <span class="co">#&gt; [1] 20</span>
 
-<span class="no">g_closure</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  (<span class="kw">function</span>(<span class="no">.</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">.</span>)
+<span class="kw">g_closure</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  (<span class="fu">function</span>(<span class="kw">.</span>) {
+    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw">.</span>)
   })(<span class="fl">10</span>)
   <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
 }
 <span class="fu">g_closure</span>()
-<span class="co">#&gt; [1] 20</span></pre></body></html></div>
+<span class="co">#&gt; [1] 20</span>
+</pre></div>
 </div>
 <div id="new-environment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#new-environment" class="anchor"></a>New environment</h3>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu">eval_bare</span>(<span class="no">pipe</span>, <span class="kw">env</span> <span class="kw">=</span> <span class="fu">env</span>(<span class="kw">.</span> <span class="kw">=</span> <span class="no">x</span>))
-<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span></pre></body></html></div>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">f_new</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)), <span class="fu">env</span>(<span class="kw">.</span> <span class="kw">=</span> <span class="fl">10</span>))
-  <span class="no">x</span>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="fu">eval_bare</span>(<span class="kw">pipe</span>, env = <span class="fu">env</span>(. = <span class="kw">x</span>))
+<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span>
+</pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="kw">f_new</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fl">20</span>
+  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="kw">.</span>)), <span class="fu">env</span>(. = <span class="fl">10</span>))
+  <span class="kw">x</span>
 }
 <span class="fu">f_new</span>()
 <span class="co">#&gt; [1] 20</span>
 
-<span class="no">g_new</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">.</span>)), <span class="fu">env</span>(<span class="kw">.</span> <span class="kw">=</span> <span class="fl">10</span>))
+<span class="kw">g_new</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw">.</span>)), <span class="fu">env</span>(. = <span class="fl">10</span>))
   <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
 }
 <span class="fu">g_new</span>()
-<span class="co">#&gt; Error in eval_bare(expr(return(.)), env(. = 10)): no function to return from, jumping to top level</span></pre></body></html></div>
+<span class="co">#&gt; Error in eval_bare(expr(return(.)), env(. = 10)): no function to return from, jumping to top level</span>
+</pre></div>
 </div>
 <div id="current-environment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#current-environment" class="anchor"></a>Current environment</h3>
 <p>At first glance, evaluating the pipe in the current environment is quite simple:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">.</span> <span class="kw">&lt;-</span> <span class="no">x</span>
-<span class="fu">eval_bare</span>(<span class="no">pipe</span>)
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="kw">.</span> <span class="op">&lt;-</span> <span class="kw">x</span>
+<span class="fu">eval_bare</span>(<span class="kw">pipe</span>)
 <span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span>
-<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="no">.</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="kw">.</span>)
+</pre></div>
 <p>And that leads to:</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">f_current</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="kw">f_current</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fl">20</span>
+  
+  <span class="kw">.</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="kw">.</span>)))
+  <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="kw">.</span>)
 
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)))
-  <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="no">.</span>)
-
-  <span class="no">x</span>
+  <span class="kw">x</span>
 }
 <span class="fu">f_current</span>()
 
-<span class="no">g_current</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">.</span>)))
-  <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="no">.</span>)
-
+<span class="kw">g_current</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="kw">.</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw">.</span>)))
+  <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="kw">.</span>)
+  
   <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
 }
-<span class="fu">g_current</span>()</pre></body></html></div>
+<span class="fu">g_current</span>()
+</pre></div>
 <p>And this could be wrapped into a simple function so that we can ensure <code>.</code> is unbound even when an error occurs:</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">pipe_eval</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">pipe</span>, <span class="no">init</span>, <span class="no">env</span> <span class="kw">=</span> <span class="fu">caller_env</span>()) {
-  <span class="fu">env_bind</span>(<span class="kw">.env</span> <span class="kw">=</span> <span class="no">env</span>, <span class="kw">.</span> <span class="kw">=</span> <span class="no">init</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span>(<span class="fu">env_unbind</span>(<span class="no">env</span>, <span class="st">"."</span>))
-
-  <span class="fu">eval_bare</span>(<span class="no">pipe</span>, <span class="no">env</span>)
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="kw">pipe_eval</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">pipe</span>, <span class="kw">init</span>, <span class="kw">env</span> = <span class="fu">caller_env</span>()) {
+  <span class="fu">env_bind</span>(.env = <span class="kw">env</span>, . = <span class="kw">init</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span>(<span class="fu">env_unbind</span>(<span class="kw">env</span>, <span class="st">"."</span>))
+  
+  <span class="fu">eval_bare</span>(<span class="kw">pipe</span>, <span class="kw">env</span>)
 }
 
-<span class="fu">pipe_eval</span>(<span class="no">pipe</span>, <span class="no">x</span>)
-<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span></pre></body></html></div>
+<span class="fu">pipe_eval</span>(<span class="kw">pipe</span>, <span class="kw">x</span>)
+<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span>
+</pre></div>
 <p>(This implementation will clobber any existing <code>.</code> but a more sophisticated implementation could restore any existing value on exit. Similarly, the cleanup after the lazy transformation would be more work (since it creates multiple variables), but it’s not prohibitively hard.)</p>
 <p>The main drawback to this approach is that <code>eval_bare()</code> currently loses the visibility flag. This can be fixed, but needs work in C.</p>
 </div>
