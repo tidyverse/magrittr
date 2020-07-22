@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
-#include "utils.h"
 
 #define export attribute_visible extern
 
@@ -26,6 +25,7 @@ struct cleanup_info {
 
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
+static SEXP syms_paren = NULL;
 static SEXP syms_pipe = NULL;
 static SEXP syms_pipe_compound = NULL;
 static SEXP syms_pipe_tee = NULL;
@@ -34,14 +34,13 @@ static SEXP calls_base_with = NULL;
 
 static void clean_pipe(void* data);
 static SEXP eval_pipe(void* data);
-static SEXP pipe_unroll(SEXP expr, SEXP rhs, enum pipe_kind kind, SEXP* p_assign);
+static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind, SEXP* p_assign);
 static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
 static inline SEXP as_pipe_tee_call(SEXP x);
 static inline SEXP as_pipe_dollar_call(SEXP x);
 static SEXP as_pipe_compound_lhs(SEXP lhs);
 static __attribute__((noreturn)) void stop_compound_lhs_type();
-
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
@@ -55,7 +54,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   enum pipe_kind c_kind = INTEGER(kind)[0];
 
   SEXP assign = R_NilValue;
-  SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, c_kind, &assign));
+  SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, env, c_kind, &assign));
   SEXP old = PROTECT(Rf_findVar(syms_dot, env));
 
   struct pipe_info pipe_info = {
@@ -112,12 +111,24 @@ void clean_pipe(void* data) {
 static enum pipe_kind parse_pipe_call(SEXP x);
 
 static
-SEXP pipe_unroll(SEXP lhs, SEXP rhs, enum pipe_kind kind, SEXP* p_assign) {
+SEXP pipe_unroll(SEXP lhs,
+                 SEXP rhs,
+                 SEXP env,
+                 enum pipe_kind kind,
+                 SEXP* p_assign) {
   PROTECT_INDEX out_pi;
   SEXP out = R_NilValue;
   PROTECT_WITH_INDEX(out, &out_pi);
 
+  PROTECT_INDEX rhs_pi;
+  PROTECT_WITH_INDEX(rhs, &rhs_pi);
+
   while (true) {
+    if (kind != PIPE_KIND_dollar && TYPEOF(rhs) == LANGSXP && CAR(rhs) == syms_paren) {
+      rhs = eval(rhs, env);
+      REPROTECT(rhs, rhs_pi);
+    }
+
     switch (kind) {
     case PIPE_KIND_compound: {
       // Technically we want to give `%<>%` the same precedence as `<-`.
@@ -151,7 +162,7 @@ SEXP pipe_unroll(SEXP lhs, SEXP rhs, enum pipe_kind kind, SEXP* p_assign) {
 
   out = Rf_cons(lhs, out);
 
-  UNPROTECT(1);
+  UNPROTECT(2);
   return out;
 }
 
@@ -248,9 +259,12 @@ SEXP add_dot(SEXP x) {
 }
 
 
+// Initialisation ----------------------------------------------------
+
 SEXP magrittr_init(SEXP ns) {
   syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
+  syms_paren = Rf_install("(");
   syms_pipe = Rf_install("%>%");
   syms_pipe_compound = Rf_install("%<>%");
   syms_pipe_tee = Rf_install("%T>%");
