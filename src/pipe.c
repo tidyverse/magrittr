@@ -23,6 +23,7 @@ struct cleanup_info {
   SEXP env;
 };
 
+static SEXP syms_assign = NULL;
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
 static SEXP syms_paren = NULL;
@@ -39,8 +40,6 @@ static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
 static inline SEXP as_pipe_tee_call(SEXP x);
 static inline SEXP as_pipe_dollar_call(SEXP x);
-static SEXP as_pipe_compound_lhs(SEXP lhs);
-static __attribute__((noreturn)) void stop_compound_lhs_type();
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
@@ -69,7 +68,9 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   SEXP out = R_ExecWithCleanup(&eval_pipe, &pipe_info, &clean_pipe, &cleanup_info);
 
   if (assign != R_NilValue) {
-    Rf_defineVar(assign, out, env);
+    SEXP call = PROTECT(Rf_lang3(syms_assign, assign, out));
+    eval(call, env);
+    UNPROTECT(1);
   }
 
   UNPROTECT(2);
@@ -135,7 +136,6 @@ SEXP pipe_unroll(SEXP lhs,
       // In practice, since we only support one top-level `%<>%, we
       // can just interpret it as `%>%` and communicate the assignment
       // variable via `p_assign`.
-      lhs = as_pipe_compound_lhs(lhs);
       *p_assign = lhs;
       rhs = as_pipe_call(rhs);
       break;
@@ -165,28 +165,6 @@ SEXP pipe_unroll(SEXP lhs,
   UNPROTECT(2);
   return out;
 }
-
-static
-SEXP as_pipe_compound_lhs(SEXP lhs) {
-  switch (TYPEOF(lhs)) {
-  case STRSXP: {
-    if (!r_is_string(lhs)) {
-      // Should only happen with constructed calls
-      stop_compound_lhs_type();
-    }
-    return Rf_install(CHAR(STRING_ELT(lhs, 0)));
-  }
-  case SYMSXP: return lhs;
-  default: stop_compound_lhs_type();
-  }
-}
-
-static
-__attribute__((noreturn))
-void stop_compound_lhs_type() {
-  Rf_errorcall(R_NilValue, "The left-hand side of `%%<>%%` must be a variable name.");
-}
-
 
 static
 enum pipe_kind parse_pipe_call(SEXP x) {
@@ -262,6 +240,7 @@ SEXP add_dot(SEXP x) {
 // Initialisation ----------------------------------------------------
 
 SEXP magrittr_init(SEXP ns) {
+  syms_assign = Rf_install("<-");
   syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
   syms_paren = Rf_install("(");
