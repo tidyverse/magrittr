@@ -237,7 +237,15 @@ pipe <- function()
 #' 
 #' @rdname compound
 #' @export
-`%<>%` <- pipe() 
+`%<>%` <- function(lhs, rhs) {
+  .External2(
+    magrittr_pipe,
+    lhs = substitute(lhs),
+    rhs = substitute(rhs),
+    kind = 2L,
+    env = parent.frame()
+  )
+}
 
 #' Tee pipe
 #' 

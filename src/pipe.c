@@ -33,24 +33,27 @@ static SEXP calls_base_with = NULL;
 
 static void clean_pipe(void* data);
 static SEXP eval_pipe(void* data);
-static SEXP pipe_unroll(SEXP expr, SEXP rhs, enum pipe_kind kind);
-static SEXP add_dot(SEXP x);
+static SEXP pipe_unroll(SEXP expr, SEXP rhs, enum pipe_kind kind, SEXP* p_assign);
 static SEXP as_pipe_call(SEXP x);
+static SEXP add_dot(SEXP x);
 static SEXP as_pipe_dollar_call(SEXP x);
-static inline SEXP as_pipe_call_switch(enum pipe_kind kind, SEXP x);
+static SEXP as_pipe_compound_lhs(SEXP lhs);
+static __attribute__((noreturn)) void stop_compound_lhs_type();
+
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   args = CDR(args);
 
-  SEXP expr = CAR(args); args = CDR(args);
+  SEXP lhs = CAR(args); args = CDR(args);
   SEXP rhs = CAR(args); args = CDR(args);
   SEXP kind = CAR(args); args = CDR(args);
   SEXP env = CAR(args);
 
   enum pipe_kind c_kind = INTEGER(kind)[0];
 
-  SEXP exprs = PROTECT(pipe_unroll(expr, rhs, c_kind));
+  SEXP assign = R_NilValue;
+  SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, c_kind, &assign));
   SEXP old = PROTECT(Rf_findVar(syms_dot, env));
 
   struct pipe_info pipe_info = {
@@ -63,6 +66,10 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   };
 
   SEXP out = R_ExecWithCleanup(&eval_pipe, &pipe_info, &clean_pipe, &cleanup_info);
+
+  if (assign != R_NilValue) {
+    Rf_defineVar(assign, out, env);
+  }
 
   UNPROTECT(2);
   return out;
@@ -103,43 +110,68 @@ void clean_pipe(void* data) {
 static enum pipe_kind parse_pipe_call(SEXP x);
 
 static
-SEXP pipe_unroll(SEXP expr, SEXP rhs, enum pipe_kind kind) {
+SEXP pipe_unroll(SEXP lhs, SEXP rhs, enum pipe_kind kind, SEXP* p_assign) {
   PROTECT_INDEX out_pi;
   SEXP out = R_NilValue;
   PROTECT_WITH_INDEX(out, &out_pi);
 
-  while (kind) {
-    rhs = as_pipe_call_switch(kind, rhs);
+  while (true) {
+    switch (kind) {
+    case PIPE_KIND_compound: {
+      // Technically we want to give `%<>%` the same precedence as `<-`.
+      // In practice, since we only support one top-level `%<>%, we
+      // can just interpret it as `%>%` and communicate the assignment
+      // variable via `p_assign`.
+      lhs = as_pipe_compound_lhs(lhs);
+      *p_assign = lhs;
+      rhs = as_pipe_call(rhs);
+      break;
+    }
+    case PIPE_KIND_magrittr: rhs = as_pipe_call(rhs); break;
+    case PIPE_KIND_tee: Rf_error("todo"); break;
+    case PIPE_KIND_dollar: rhs = as_pipe_dollar_call(rhs); break;
+    case PIPE_KIND_none: Rf_error("Internal error in `pipe_unroll()`: Unexpected state.");
+    }
+
     out = Rf_cons(rhs, out);
     REPROTECT(out, out_pi);
 
-    SEXP args = CDR(expr);
+    SEXP args = CDR(lhs);
 
-    rhs = CADR(args);
-    expr = CAR(args);
-    kind = parse_pipe_call(expr);
+    if ((kind = parse_pipe_call(lhs))) {
+      lhs = CAR(args);
+      rhs = CADR(args);
+      continue;
+    }
+
+    break;
   }
 
-  out = Rf_cons(expr, out);
+  out = Rf_cons(lhs, out);
 
   UNPROTECT(1);
   return out;
 }
 
-static inline
-SEXP as_pipe_call_switch(enum pipe_kind kind, SEXP x) {
-  switch (kind) {
-  case PIPE_KIND_magrittr:
-  case PIPE_KIND_compound:
-    return as_pipe_call(x);
-  case PIPE_KIND_tee:
-    Rf_error("todo");
-    break;
-  case PIPE_KIND_dollar:
-    return as_pipe_dollar_call(x);
-  case PIPE_KIND_none:
-    Rf_error("Internal error in `pipe_unroll()`: Unexpected state.");
+static
+SEXP as_pipe_compound_lhs(SEXP lhs) {
+  switch (TYPEOF(lhs)) {
+  case STRSXP: {
+    if (!r_is_string(lhs)) {
+      // Should only happen with constructed calls
+      stop_compound_lhs_type();
+    }
+    return Rf_install(CHAR(STRING_ELT(lhs, 0)));
   }
+  case SYMSXP: return lhs;
+  default: stop_compound_lhs_type();
+  }
+}
+
+static
+__attribute__((noreturn))
+void stop_compound_lhs_type() {
+  Rf_errorcall(R_NilValue, "The left-hand side of `%%<>%%` must be a variable name.");
 }
 
 
