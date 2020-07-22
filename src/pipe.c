@@ -24,6 +24,7 @@ struct cleanup_info {
   SEXP env;
 };
 
+static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
 static SEXP syms_pipe = NULL;
 static SEXP syms_pipe_compound = NULL;
@@ -36,7 +37,8 @@ static SEXP eval_pipe(void* data);
 static SEXP pipe_unroll(SEXP expr, SEXP rhs, enum pipe_kind kind, SEXP* p_assign);
 static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
-static SEXP as_pipe_dollar_call(SEXP x);
+static inline SEXP as_pipe_tee_call(SEXP x);
+static inline SEXP as_pipe_dollar_call(SEXP x);
 static SEXP as_pipe_compound_lhs(SEXP lhs);
 static __attribute__((noreturn)) void stop_compound_lhs_type();
 
@@ -128,7 +130,7 @@ SEXP pipe_unroll(SEXP lhs, SEXP rhs, enum pipe_kind kind, SEXP* p_assign) {
       break;
     }
     case PIPE_KIND_magrittr: rhs = as_pipe_call(rhs); break;
-    case PIPE_KIND_tee: Rf_error("todo"); break;
+    case PIPE_KIND_tee: rhs = as_pipe_tee_call(rhs); break;
     case PIPE_KIND_dollar: rhs = as_pipe_dollar_call(rhs); break;
     case PIPE_KIND_none: Rf_error("Internal error in `pipe_unroll()`: Unexpected state.");
     }
@@ -214,9 +216,18 @@ SEXP as_pipe_call(SEXP x) {
   return x;
 }
 
-static
+static inline
 SEXP as_pipe_dollar_call(SEXP x) {
   return Rf_lang3(calls_base_with, syms_dot, x);
+}
+
+static inline
+SEXP as_pipe_tee_call(SEXP x) {
+  x = PROTECT(as_pipe_call(x));
+  SEXP out = Rf_lang3(syms_curly, x, syms_dot);
+
+  UNPROTECT(1);
+  return out;
 }
 
 static
@@ -238,6 +249,7 @@ SEXP add_dot(SEXP x) {
 
 
 SEXP magrittr_init(SEXP ns) {
+  syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
   syms_pipe = Rf_install("%>%");
   syms_pipe_compound = Rf_install("%<>%");

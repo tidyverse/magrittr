@@ -269,7 +269,15 @@ pipe <- function()
 #' 
 #' @rdname tee
 #' @export
-`%T>%` <- pipe() 
+`%T>%` <- function(lhs, rhs) {
+  .External2(
+    magrittr_pipe,
+    lhs = substitute(lhs),
+    rhs = substitute(rhs),
+    kind = 3L,
+    env = parent.frame()
+  )
+}
 
 #' Exposition pipe
 #' 
