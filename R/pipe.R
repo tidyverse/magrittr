@@ -186,7 +186,15 @@ pipe <- function()
 #' 
 #' @rdname pipe
 #' @export
-`%>%`  <- pipe()
+`%>%` <- function(lhs, rhs) {
+  .External2(
+    magrittr_pipe,
+    lhs = substitute(lhs),
+    rhs = substitute(rhs),
+    kind = 1L,
+    env = parent.frame()
+  )
+}
 
 #' Assignment pipe
 #' 
@@ -280,12 +288,15 @@ pipe <- function()
 #'   
 #' @rdname exposition
 #' @export
-`%$%` <- pipe() 
-
+`%$%` <- function(lhs, rhs) {
+  .External2(
+    magrittr_pipe,
+    lhs = substitute(lhs),
+    rhs = substitute(rhs),
+    kind = 4L,
+    env = parent.frame()
+  )
+}
 
 #' @import rlang
 NULL
-
-`%>%` <- function(x, y) {
-  .External2(magrittr_pipe, substitute(x), substitute(y), parent.frame())
-}
