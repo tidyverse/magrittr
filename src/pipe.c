@@ -23,9 +23,12 @@ struct cleanup_info {
   SEXP env;
 };
 
+// Initialised at load time
+static SEXP magrittr_ns_env = NULL;
 static SEXP syms_assign = NULL;
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
+static SEXP syms_new_lambda = NULL;
 static SEXP syms_paren = NULL;
 static SEXP syms_pipe = NULL;
 static SEXP syms_pipe_compound = NULL;
@@ -40,6 +43,7 @@ static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
 static inline SEXP as_pipe_tee_call(SEXP x);
 static inline SEXP as_pipe_dollar_call(SEXP x);
+SEXP new_lambda(SEXP exprs, SEXP env);
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
@@ -51,9 +55,16 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   SEXP env = CAR(args);
 
   enum pipe_kind c_kind = INTEGER(kind)[0];
-
   SEXP assign = R_NilValue;
   SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, env, c_kind, &assign));
+
+  // Create a magrittr lambda when first expression is a `.`
+  if (CAR(exprs) == syms_dot) {
+    SEXP lambda = new_lambda(CDR(exprs), env);
+    UNPROTECT(1);
+    return lambda;
+  }
+
   SEXP old = PROTECT(Rf_findVar(syms_dot, env));
 
   struct pipe_info pipe_info = {
@@ -237,12 +248,24 @@ SEXP add_dot(SEXP x) {
 }
 
 
+SEXP new_lambda(SEXP exprs, SEXP env) {
+  SEXP call = PROTECT(Rf_lang3(syms_new_lambda, exprs, env));
+  SEXP out = Rf_eval(call, magrittr_ns_env);
+
+  UNPROTECT(1);
+  return out;
+}
+
+
 // Initialisation ----------------------------------------------------
 
 SEXP magrittr_init(SEXP ns) {
+  magrittr_ns_env = ns;
+
   syms_assign = Rf_install("<-");
   syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
+  syms_new_lambda = Rf_install("new_lambda");
   syms_paren = Rf_install("(");
   syms_pipe = Rf_install("%>%");
   syms_pipe_compound = Rf_install("%<>%");

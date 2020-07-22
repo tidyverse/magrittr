@@ -314,5 +314,18 @@ pipe <- function()
   )
 }
 
+
+new_lambda <- function(exprs, env) {
+  `_function_list` <- lapply(exprs, as_pipe_fn, env)
+
+  structure(
+    function(value) freduce(value, `_function_list`),
+    class = c("fseq", "function")
+  )
+}
+as_pipe_fn <- function(expr, env) {
+  new_function(pairlist2(. = ), expr, env = env)
+}
+
 #' @import rlang
 NULL
