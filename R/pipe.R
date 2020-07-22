@@ -264,9 +264,8 @@ new_lambda <- function(exprs, env) {
     class = c("fseq", "function")
   )
 }
-as_pipe_fn <- function(expr, env) {
-  new_function(pairlist2(. = ), expr, env = env)
-}
 
-#' @import rlang
-NULL
+lambda_fmls <- as.pairlist(alist(. = ))
+as_pipe_fn <- function(expr, env) {
+  eval(call("function", lambda_fmls, expr), env)
+}

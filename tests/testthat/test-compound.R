@@ -22,7 +22,7 @@ test_that("Assignment pipe works", {
 })
 
 test_that("can't assign to non-assignment expression", {
-  msg <- conditionMessage(catch_cnd(identity(1) <- NULL))
+  msg <- conditionMessage(tryCatch(error = identity, identity(1) <- NULL))
   expect_error(
     1 %>% identity() %<>% identity(),
     msg
