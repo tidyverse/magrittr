@@ -128,13 +128,11 @@
 #' @rdname pipe
 #' @export
 `%>%` <- function(lhs, rhs) {
-  .External2(
-    magrittr_pipe,
-    lhs = substitute(lhs),
-    rhs = substitute(rhs),
-    kind = 1L,
-    env = parent.frame()
-  )
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
 }
 
 #' Assignment pipe
@@ -179,13 +177,11 @@
 #' @rdname compound
 #' @export
 `%<>%` <- function(lhs, rhs) {
-  .External2(
-    magrittr_pipe,
-    lhs = substitute(lhs),
-    rhs = substitute(rhs),
-    kind = 2L,
-    env = parent.frame()
-  )
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 2L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
 }
 
 #' Tee pipe
@@ -211,13 +207,11 @@
 #' @rdname tee
 #' @export
 `%T>%` <- function(lhs, rhs) {
-  .External2(
-    magrittr_pipe,
-    lhs = substitute(lhs),
-    rhs = substitute(rhs),
-    kind = 3L,
-    env = parent.frame()
-  )
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 3L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
 }
 
 #' Exposition pipe
@@ -246,13 +240,11 @@
 #' @rdname exposition
 #' @export
 `%$%` <- function(lhs, rhs) {
-  .External2(
-    magrittr_pipe,
-    lhs = substitute(lhs),
-    rhs = substitute(rhs),
-    kind = 4L,
-    env = parent.frame()
-  )
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 4L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
 }
 
 

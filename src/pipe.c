@@ -25,6 +25,10 @@ struct cleanup_info {
 
 // Initialised at load time
 static SEXP magrittr_ns_env = NULL;
+static SEXP syms_lhs = NULL;
+static SEXP syms_rhs = NULL;
+static SEXP syms_kind = NULL;
+static SEXP syms_env = NULL;
 static SEXP syms_assign = NULL;
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
@@ -50,10 +54,10 @@ static inline void r_env_unbind(SEXP env, SEXP sym);
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   args = CDR(args);
 
-  SEXP lhs = CAR(args); args = CDR(args);
-  SEXP rhs = CAR(args); args = CDR(args);
-  SEXP kind = CAR(args); args = CDR(args);
-  SEXP env = CAR(args);
+  SEXP lhs = PROTECT(Rf_eval(syms_lhs, rho));
+  SEXP rhs = PROTECT(Rf_eval(syms_rhs, rho));
+  SEXP kind = PROTECT(Rf_eval(syms_kind, rho));
+  SEXP env = PROTECT(Rf_eval(syms_env, rho));
 
   enum pipe_kind c_kind = INTEGER(kind)[0];
   SEXP assign = R_NilValue;
@@ -62,7 +66,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   // Create a magrittr lambda when first expression is a `.`
   if (CAR(exprs) == syms_dot) {
     SEXP lambda = new_lambda(CDR(exprs), env);
-    UNPROTECT(1);
+    UNPROTECT(5);
     return lambda;
   }
 
@@ -80,12 +84,13 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   SEXP out = R_ExecWithCleanup(&eval_pipe, &pipe_info, &clean_pipe, &cleanup_info);
 
   if (assign != R_NilValue) {
+    PROTECT(out);
     SEXP call = PROTECT(Rf_lang3(syms_assign, assign, out));
-    eval(call, env);
-    UNPROTECT(1);
+    Rf_eval(call, env);
+    UNPROTECT(2);
   }
 
-  UNPROTECT(2);
+  UNPROTECT(6);
   return out;
 }
 
@@ -269,6 +274,11 @@ SEXP syms_rm = NULL;
 SEXP magrittr_init(SEXP ns) {
   magrittr_ns_env = ns;
 
+  syms_lhs = Rf_install("lhs");
+  syms_rhs = Rf_install("rhs");
+  syms_kind = Rf_install("kind");
+  syms_env = Rf_install("env");
+
   syms_assign = Rf_install("<-");
   syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
@@ -299,7 +309,7 @@ static const R_CallMethodDef call_entries[] = {
 };
 
 static const R_ExternalMethodDef ext_entries[] = {
-  {"magrittr_pipe",              (DL_FUNC) magrittr_pipe, 4},
+  {"magrittr_pipe",              (DL_FUNC) magrittr_pipe, 0},
   {NULL, NULL, 0}
 };
 
