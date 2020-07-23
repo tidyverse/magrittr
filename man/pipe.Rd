@@ -2,9 +2,12 @@
 % Please edit documentation in R/pipe.R
 \name{\%>\%}
 \alias{\%>\%}
+\alias{\%)\%}
 \title{Pipe}
 \usage{
 lhs \%>\% rhs
+
+lhs \%)\% rhs
 }
 \arguments{
 \item{lhs}{A value or the magrittr placeholder.}

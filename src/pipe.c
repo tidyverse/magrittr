@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#define R_NO_REMAP
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
 #include "utils.h"
@@ -30,6 +31,8 @@ static SEXP syms_lhs = NULL;
 static SEXP syms_rhs = NULL;
 static SEXP syms_kind = NULL;
 static SEXP syms_env = NULL;
+static SEXP syms_lazy = NULL;
+
 static SEXP syms_assign = NULL;
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
@@ -37,12 +40,16 @@ static SEXP syms_new_lambda = NULL;
 static SEXP syms_paren = NULL;
 static SEXP syms_pipe = NULL;
 static SEXP syms_pipe_compound = NULL;
-static SEXP syms_pipe_tee = NULL;
 static SEXP syms_pipe_dollar = NULL;
+static SEXP syms_pipe_lazy = NULL;
+static SEXP syms_pipe_tee = NULL;
+
 static SEXP calls_base_with = NULL;
+static SEXP chrs_dot = NULL;
 
 static void clean_pipe(void* data);
 static SEXP eval_pipe(void* data);
+static SEXP eval_pipe_lazy(void* data);
 static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind, SEXP* p_assign);
 static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
@@ -81,7 +88,10 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     .env = env
   };
 
-  SEXP out = R_ExecWithCleanup(&eval_pipe, &pipe_info, &clean_pipe, &cleanup_info);
+  bool use_lazy = Rf_findVar(syms_lazy, rho) != R_UnboundValue;
+  SEXP (*eval)(void*) = use_lazy ? &eval_pipe_lazy : &eval_pipe;
+
+  SEXP out =  R_ExecWithCleanup(eval, &pipe_info, &clean_pipe, &cleanup_info);
 
   if (assign != R_NilValue) {
     PROTECT(out);
@@ -115,6 +125,37 @@ SEXP eval_pipe(void* data) {
 }
 
 static
+SEXP eval_pipe_lazy(void* data) {
+  struct pipe_info* info = (struct pipe_info*) data;
+
+  SEXP exprs = info->exprs;
+  SEXP env = info->env;
+  SEXP prev_mask = env;
+
+  // Older masks are protected by newer masks
+  PROTECT_INDEX mask_pi;
+  PROTECT_WITH_INDEX(R_NilValue, &mask_pi);
+
+  SEXP rest = exprs;
+  while ((rest = CDR(exprs)) != R_NilValue) {
+    SEXP mask = r_new_environment(prev_mask, 1);
+    REPROTECT(mask, mask_pi);
+
+    r_env_bind_lazy(mask, chrs_dot, CAR(exprs), prev_mask);
+
+    exprs = rest;
+    prev_mask = mask;
+  }
+
+  // Evaluate last expression in the very last mask. This triggers a
+  // recursive evaluation of `.` bindings in the hierarchy of masks.
+  SEXP out = Rf_eval(CAR(exprs), prev_mask);
+
+  UNPROTECT(1);
+  return out;
+}
+
+static
 void clean_pipe(void* data) {
   struct cleanup_info* info = (struct cleanup_info*) data;
 
@@ -143,7 +184,7 @@ SEXP pipe_unroll(SEXP lhs,
 
   while (true) {
     if (kind != PIPE_KIND_dollar && TYPEOF(rhs) == LANGSXP && CAR(rhs) == syms_paren) {
-      rhs = eval(rhs, env);
+      rhs = Rf_eval(rhs, env);
       REPROTECT(rhs, rhs_pi);
     }
 
@@ -191,7 +232,7 @@ enum pipe_kind parse_pipe_call(SEXP x) {
 
   SEXP car = CAR(x);
 
-  if (car == syms_pipe) {
+  if (car == syms_pipe || car == syms_pipe_lazy) {
     return PIPE_KIND_magrittr;
   }
   if (car == syms_pipe_compound) {
@@ -275,6 +316,7 @@ SEXP magrittr_init(SEXP ns) {
   syms_rhs = Rf_install("rhs");
   syms_kind = Rf_install("kind");
   syms_env = Rf_install("env");
+  syms_lazy = Rf_install("lazy");
 
   syms_assign = Rf_install("<-");
   syms_curly = Rf_install("{");
@@ -283,8 +325,13 @@ SEXP magrittr_init(SEXP ns) {
   syms_paren = Rf_install("(");
   syms_pipe = Rf_install("%>%");
   syms_pipe_compound = Rf_install("%<>%");
-  syms_pipe_tee = Rf_install("%T>%");
   syms_pipe_dollar = Rf_install("%$%");
+  syms_pipe_lazy = Rf_install("%)%");
+  syms_pipe_tee = Rf_install("%T>%");
+
+  chrs_dot = Rf_allocVector(STRSXP, 1);
+  R_PreserveObject(chrs_dot);
+  SET_STRING_ELT(chrs_dot, 0, Rf_mkChar("."));
 
   calls_base_with = Rf_lang3(Rf_install("::"),
                              Rf_install("base"),
