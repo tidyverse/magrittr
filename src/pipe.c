@@ -49,7 +49,6 @@ static SEXP add_dot(SEXP x);
 static inline SEXP as_pipe_tee_call(SEXP x);
 static inline SEXP as_pipe_dollar_call(SEXP x);
 SEXP new_lambda(SEXP exprs, SEXP env);
-static inline void r_env_unbind(SEXP env, SEXP sym);
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
@@ -266,12 +265,6 @@ SEXP new_lambda(SEXP exprs, SEXP env) {
 
 // Initialisation ----------------------------------------------------
 
-// For `R_removeVarFromFrame()` compatibility
-SEXP syms_envir = NULL;
-SEXP syms_inherits = NULL;
-SEXP syms_list = NULL;
-SEXP syms_rm = NULL;
-
 void magrittr_init_utils(SEXP ns);
 
 SEXP magrittr_init(SEXP ns) {
@@ -292,11 +285,6 @@ SEXP magrittr_init(SEXP ns) {
   syms_pipe_compound = Rf_install("%<>%");
   syms_pipe_tee = Rf_install("%T>%");
   syms_pipe_dollar = Rf_install("%$%");
-
-  syms_envir = Rf_install("envir");
-  syms_inherits = Rf_install("inherits");
-  syms_list = Rf_install("list");
-  syms_rm = Rf_install("rm");
 
   calls_base_with = Rf_lang3(Rf_install("::"),
                              Rf_install("base"),
@@ -320,46 +308,4 @@ static const R_ExternalMethodDef ext_entries[] = {
 export void R_init_magrittr(DllInfo *dll) {
     R_registerRoutines(dll, NULL, call_entries, NULL, ext_entries);
     R_useDynamicSymbols(dll, FALSE);
-}
-
-
-// Helpers -----------------------------------------------------------
-
-#include <Rversion.h>
-
-#if (R_VERSION < R_Version(4, 0, 0))
-static
-void r__env_unbind(SEXP env, SEXP sym) {
-  // Check if binding exists to avoid `rm()` warning
-  if (Rf_findVar(sym, env) != R_UnboundValue) {
-    SEXP nm = PROTECT(Rf_allocVector(STRSXP, 1));
-    SET_STRING_ELT(nm, 0, PRINTNAME(sym));
-
-    // remove(list = y, envir = x, inherits = z)
-    SEXP args = Rf_cons(Rf_ScalarLogical(0), R_NilValue);
-    SET_TAG(args, syms_inherits);
-
-    args = Rf_cons(env, args);
-    SET_TAG(args, syms_envir);
-
-    args = Rf_cons(nm, args);
-    SET_TAG(args, syms_list);
-
-    SEXP call = Rf_lcons(syms_rm, args);
-    PROTECT(call);
-
-    Rf_eval(call, R_BaseEnv);
-    UNPROTECT(2);
-  }
-}
-#endif
-
-static inline
-void r_env_unbind(SEXP env, SEXP sym) {
-#if (R_VERSION < R_Version(4, 0, 0))
-  void r__env_unbind(SEXP, SEXP);
-  r__env_unbind(env, sym);
-#else
-  R_removeVarFromFrame(sym, env);
-#endif
 }

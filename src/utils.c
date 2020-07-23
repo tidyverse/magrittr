@@ -2,6 +2,42 @@
 #include <Rinternals.h>
 
 
+// For `R_removeVarFromFrame()` compatibility
+SEXP syms_envir = NULL;
+SEXP syms_inherits = NULL;
+SEXP syms_list = NULL;
+SEXP syms_rm = NULL;
+
+#include <Rversion.h>
+
+#if (R_VERSION < R_Version(4, 0, 0))
+static
+void r__env_unbind(SEXP env, SEXP sym) {
+  // Check if binding exists to avoid `rm()` warning
+  if (Rf_findVar(sym, env) != R_UnboundValue) {
+    SEXP nm = PROTECT(Rf_allocVector(STRSXP, 1));
+    SET_STRING_ELT(nm, 0, PRINTNAME(sym));
+
+    // remove(list = y, envir = x, inherits = z)
+    SEXP args = Rf_cons(Rf_ScalarLogical(0), R_NilValue);
+    SET_TAG(args, syms_inherits);
+
+    args = Rf_cons(env, args);
+    SET_TAG(args, syms_envir);
+
+    args = Rf_cons(nm, args);
+    SET_TAG(args, syms_list);
+
+    SEXP call = Rf_lcons(syms_rm, args);
+    PROTECT(call);
+
+    Rf_eval(call, R_BaseEnv);
+    UNPROTECT(2);
+  }
+}
+#endif
+
+
 #include <R_ext/Parse.h>
 
 static void abort_parse(SEXP code, const char* why) {
@@ -56,6 +92,11 @@ SEXP r_new_environment(SEXP parent, R_len_t size) {
 
 
 void magrittr_init_utils(SEXP ns) {
+  syms_envir = Rf_install("envir");
+  syms_inherits = Rf_install("inherits");
+  syms_list = Rf_install("list");
+  syms_rm = Rf_install("rm");
+
   new_env_call = r_parse_eval("as.call(list(new.env, TRUE, NULL, NULL))", R_BaseEnv);
   R_PreserveObject(new_env_call);
   new_env__parent_node = CDDR(new_env_call);
