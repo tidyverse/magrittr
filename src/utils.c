@@ -2,6 +2,18 @@
 #include <Rinternals.h>
 
 
+SEXP syms_delayed_assign = NULL;
+
+void r_env_bind_lazy(SEXP env,
+                     SEXP sym,
+                     SEXP expr,
+                     SEXP eval_env) {
+  SEXP call = PROTECT(Rf_lang5(syms_delayed_assign, sym, expr, eval_env, env));
+  Rf_eval(call, R_BaseEnv);
+  UNPROTECT(1);
+}
+
+
 // For `R_removeVarFromFrame()` compatibility
 SEXP syms_envir = NULL;
 SEXP syms_inherits = NULL;
@@ -92,6 +104,7 @@ SEXP r_new_environment(SEXP parent, R_len_t size) {
 
 
 void magrittr_init_utils(SEXP ns) {
+  syms_delayed_assign = Rf_install("delayedAssign");
   syms_envir = Rf_install("envir");
   syms_inherits = Rf_install("inherits");
   syms_list = Rf_install("list");

@@ -4,6 +4,11 @@
 
 #include <Rversion.h>
 
+void r_env_bind_lazy(SEXP env,
+                     SEXP sym,
+                     SEXP expr,
+                     SEXP eval_env);
+
 static inline
 void r_env_unbind(SEXP env, SEXP sym) {
 #if (R_VERSION < R_Version(4, 0, 0))
