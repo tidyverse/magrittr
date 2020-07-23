@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
+#include "utils.h"
 
 #define export attribute_visible extern
 
@@ -271,8 +272,11 @@ SEXP syms_inherits = NULL;
 SEXP syms_list = NULL;
 SEXP syms_rm = NULL;
 
+void magrittr_init_utils(SEXP ns);
+
 SEXP magrittr_init(SEXP ns) {
   magrittr_ns_env = ns;
+  magrittr_init_utils(ns);
 
   syms_lhs = Rf_install("lhs");
   syms_rhs = Rf_install("rhs");
