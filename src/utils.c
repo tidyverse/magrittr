@@ -8,6 +8,15 @@ void r_env_bind_lazy(SEXP env,
                      SEXP sym,
                      SEXP expr,
                      SEXP eval_env) {
+  SEXP prom = PROTECT(Rf_cons(R_UnboundValue, expr));
+  SET_TAG(prom, eval_env);
+  SET_TYPEOF(prom, PROMSXP);
+
+  Rf_defineVar(sym, prom, env);
+
+  UNPROTECT(1);
+  return;
+
   SEXP call = PROTECT(Rf_lang5(syms_delayed_assign, sym, expr, eval_env, env));
   Rf_eval(call, R_BaseEnv);
   UNPROTECT(1);
@@ -88,6 +97,10 @@ static SEXP new_env__parent_node = NULL;
 static SEXP new_env__size_node = NULL;
 
 SEXP r_new_environment(SEXP parent, R_len_t size) {
+  SEXP out = Rf_cons(R_NilValue, parent);
+  SET_TYPEOF(out, ENVSXP);
+  return out;
+
   parent = parent ? parent : R_EmptyEnv;
   SETCAR(new_env__parent_node, parent);
 

@@ -141,7 +141,7 @@ SEXP eval_pipe_lazy(void* data) {
     SEXP mask = r_new_environment(prev_mask, 1);
     REPROTECT(mask, mask_pi);
 
-    r_env_bind_lazy(mask, chrs_dot, CAR(exprs), prev_mask);
+    r_env_bind_lazy(mask, syms_dot, CAR(exprs), prev_mask);
 
     exprs = rest;
     prev_mask = mask;
