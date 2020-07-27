@@ -133,15 +133,22 @@ static
 SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
   SEXP prev_mask = env;
 
-  // Older masks are protected by newer masks
-  PROTECT_INDEX mask_pi;
-  PROTECT_WITH_INDEX(R_NilValue, &mask_pi);
+  // We need one masking environment per pipe expression. We protect
+  // these in a growing pairlist.
+  SEXP shield = PROTECT(Rf_cons(R_NilValue, R_NilValue));
 
   SEXP rest = exprs;
   while ((rest = CDR(exprs)) != R_NilValue) {
-    SEXP mask = r_new_environment(prev_mask, 1);
-    REPROTECT(mask, mask_pi);
+    SEXP mask = r_new_environment(env, 1);
+    SETCAR(shield, mask);
 
+    // Grow protection pairlist
+    SEXP node = Rf_cons(R_NilValue, R_NilValue);
+    SETCDR(shield, node);
+    shield = node;
+
+    // Lazily bind current pipe expression to `.` in the new
+    // mask. Evaluation occurs in the previous mask environment.
     r_env_bind_lazy(mask, syms_dot, CAR(exprs), prev_mask);
 
     exprs = rest;
@@ -149,7 +156,7 @@ SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
   }
 
   // Evaluate last expression in the very last mask. This triggers a
-  // recursive evaluation of `.` bindings in the hierarchy of masks.
+  // recursive evaluation of `.` bindings in the different masks.
   SEXP out = Rf_eval(CAR(exprs), prev_mask);
 
   UNPROTECT(1);
