@@ -22,62 +22,69 @@ pass <- function() "\u2705"
 
 There are many different ways that magrittr could implement the pipe. The goal of this document is to elucidate the variations, and the various pros and cons of each approach. This document is primarily aimed at the magrittr developers (so we don't forget about important considerations), but will be of interest to anyone who wants to understand pipes better, or to create their own pipe that makes different tradeoffs
 
-
 ## Code transformation
 
 There are three main options for how we might transform a pipeline in base R expressions. Here they are illustrated with `x %>% foo() %>% bar()`:
 
-*   __Nested__
+-   **Nested**
 
     ```{r}
     bar(foo(x))
     ```
 
-*   __Eager__
+-   **Eager**
 
     ```{r}
-    . <- foo(x)
-    bar(.)
+    . <- x
+    . <- foo(.)
+    . <- bar(.)
+    .
     ```
 
-*   __Lazy__
+-   **Lazy**
 
     ```{r}
     ...1 <- x
-    ...2 %<~% foo(...1)
-    bar(...1)
+    delayedAssign("..2", foo(..1))
+    delayedAssign("..3", bar(..2))
+    ...3
     ```
 
 (There is a fourth option, which uses eager evaluation, but uses a unique variable name for each stage. This has no advantages compared to the eager pipe so we will not consider it further.)
 
 We'll first explore the desired properties we might want a pipe to possess and then see how each of the three variants does.
 
-
 ### Desired properties
 
 These are the properties that we might want a pipe to possess, roughly ordered from most important to leasy important.
 
-*   Visibility: the visibility of the final function in the pipe should be preserved. This important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
+-   **Visibility**: the visibility of the final function in the pipe should be preserved. This important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
 
-*   Lazy evaluation: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
+-   **Lazy evaluation**: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
 
-*   Eager unbinding: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.
+-   **Eager unbinding**: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.
 
-*   Single evaluation: each component of the pipe should only be evaluated once, so that `sample(10) %>% cbind(., .)` yields two columns with the same value, and `sample(10) %T>% print() %T>% print()` prints the same values twice.
+-   **Single evaluation**: each component of the pipe should only be evaluated once, so that `sample(10) %>% cbind(., .)` yields two columns with the same value, and `sample(10) %T>% print() %T>% print()` prints the same values twice.
 
-*   Minimal stack: using the pipe should add as few entries to the call stack
-    as possible, so that `traceback()` is maximally useful.
+-   **Minimal stack**: using the pipe should add as few entries to the call stack as possible, so that `traceback()` is maximally useful.
 
+|                   | Nested     | Eager      | Lazy       |
+|-------------------|------------|------------|------------|
+| Visibility        | `r pass()` | `r pass()` | `r pass()` |
+| Lazy evaluation   | `r pass()` | `r fail()` | `r pass()` |
+| Eager unbinding   | `r pass()` | `r pass()` | `r fail()` |
+| Single evaluation | `r fail()` | `r pass()` | `r pass()` |
+| Minimal stack     | `r fail()` | `r pass()` | `r pass()` |
 
 ### Nested pipe
 
-*   Visibility: `r pass()`
+-   Visibility: `r pass()`
 
-*   Lazy evaluation: `r pass()`
+-   Lazy evaluation: `r pass()`
 
-*   Eager unbinding: `r pass()`
+-   Eager unbinding: `r pass()`
 
-*   Single evaluation: `r fail()` trivial for simple pipes, but not possible for pipes that use the pronoun in multiple places.
+-   Single evaluation: `r fail()` trivial for simple pipes, but not possible for pipes that use the pronoun in multiple places.
 
     Note that the simplest rewrite doesn't work because there's no gaurantee that the first argument will be evaluated before the second argument.
 
@@ -86,12 +93,11 @@ These are the properties that we might want a pipe to possess, roughly ordered f
     foo(. <- x, .)
     ```
 
-*   Minimal stack: `r fail()` maximum stack depth is the length of the pipe.
-
+-   Minimal stack: `r fail()` maximum stack depth is the length of the pipe.
 
 ### Eager pipe
 
-*   Visibility: `r pass()`.
+-   Visibility: `r pass()`.
 
     Note that the final computation must be handled differently, as the following transformation loses visibility.
 
@@ -101,52 +107,33 @@ These are the properties that we might want a pipe to possess, roughly ordered f
     .
     ```
 
-*   Lazy evaluation: `r fail()` assignment forces eager evaluation of each step.
+-   Lazy evaluation: `r fail()` assignment forces eager evaluation of each step.
 
-*   Eager clean up: `r pass()`
+-   Eager clean up: `r pass()`
 
-*   Single evaluation: `r pass()`
+-   Single evaluation: `r pass()`
 
-*   Minimal stack: `r pass()` maximum stack depth is 1.
-
+-   Minimal stack: `r pass()` maximum stack depth is 1.
 
 ### Lazy pipe
 
-```{r, eval = TRUE}
-`%<~%` <- function(name, value, env = caller_env()) {
-  name <- ensym(name)
-  value <- enexpr(value)
+-   Visibility: `r pass()`
 
-  env_bind_exprs(env, .eval_env = env, !!name := !!value)
-}
-```
+-   Lazy evaluation: `r pass()`
 
-*   Visibility: `r pass()`
+-   Eager clean up: `r fail()`. This can slightly be remedied by inserting a manual clean up function call after each assignment, but this would need to be a C function that iterates through all pipe bindings, deleting any promises that have been forced.
 
-*   Lazy evaluation: `r pass()`
+-   Single evaluation: `r pass()` by property of promises.
 
-*   Eager clean up: `r fail()`/`r pass()` can be preserved by inserting a function call after each lazy assignment:
-
-    ```{r}
-    ...2 %<~% foo(...1)
-    delayed_cleanup()
-    bar(...1)
-    ```
-
-    `delayed_cleanup()` would be a C function that iterates through all bindings in an environment, deleting any promises that have already been forced.
-
-*   Single evaluation: `r pass()` by property of promises.
-
-*   Minimal stack: `r pass()` maximum stack depth is 1.
-
+-   Minimal stack: `r pass()` maximum stack depth is 1.
 
 ## Execution environment
 
 Once the pipe has been transformed to a regular R expression, it must be evaluated. There are three options for where that evaluation could take place:
 
-* In the __current__ environment.
-* In a __new__ environment.
-* In a __closure__ environment, the environment of a new function.
+-   In the **current** environment.
+-   In a **new** environment.
+-   In a **closure** environment, the environment of a new function.
 
 This choice affects impacts functions that work with the current environment (like `assign()`, `get()`, `ls()`), or the current context (like `return()`). The following two functions illustrate the primary differences:
 
@@ -163,11 +150,11 @@ g <- function() {
 }
 ```
 
-*   If evaluated in the current environment, both `f()` and `g()` return 10.
+-   If evaluated in the current environment, both `f()` and `g()` return 10.
 
-*   If evaluated in a new environment, `f()` returns 20 and `g()` returns 10.  NOT TRUE! Why not?
+-   If evaluated in a new environment, `f()` returns 20 and `g()` returns 10. NOT TRUE! Why not?
 
-*   If evaluated in a closure environment, both `f()` and `g()` return 20.
+-   If evaluated in a closure environment, both `f()` and `g()` return 20.
 
 To discuss implementation challenges with a concrete example, we'll take the following values:
 
@@ -194,7 +181,6 @@ pipe <- expr({
 ```
 
 Note that we assume the input to the pipe is called `.`, not `x`. This is a small simplification that makes implementation of the transformer a little easier.
-
 
 ### Closure environment
 
@@ -240,7 +226,6 @@ g_closure <- function() {
 g_closure()
 ```
 
-
 ### New environment
 
 ```{r, eval = TRUE}
@@ -261,7 +246,6 @@ g_new <- function() {
 }
 g_new()
 ```
-
 
 ### Current environment
 
