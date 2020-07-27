@@ -33,15 +33,15 @@ test_that("`.` is restored", {
 })
 
 test_that("lazy pipe evaluates expressions lazily (#120)", {
-   out <- stop("foo") %)% identity() %)% tryCatch(error = identity)
+   out <- stop("foo") %|>% identity() %|>% tryCatch(error = identity)
    expect_true(inherits(out, "simpleError"))
 
    ignore <- function(...) NA
-   out <- stop("foo") %)% identity() %)% ignore()
+   out <- stop("foo") %|>% identity() %|>% ignore()
    expect_identical(out, NA)
 })
 
 test_that("lazy pipe evaluates `.` in correct environments", {
-  out <- NA %)% list(.) %)% list(.) %)% list(.)
+  out <- NA %|>% list(.) %|>% list(.) %|>% list(.)
   expect_identical(out, list(list(list(NA))))
 })

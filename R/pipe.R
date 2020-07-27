@@ -137,7 +137,7 @@
 
 #' @rdname pipe
 #' @export
-`%)%` <- function(lhs, rhs) {
+`%|>%` <- function(lhs, rhs) {
   lhs <- substitute(lhs)
   rhs <- substitute(rhs)
   kind <- 1L

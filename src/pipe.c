@@ -329,7 +329,7 @@ SEXP magrittr_init(SEXP ns) {
   syms_pipe = Rf_install("%>%");
   syms_pipe_compound = Rf_install("%<>%");
   syms_pipe_dollar = Rf_install("%$%");
-  syms_pipe_lazy = Rf_install("%)%");
+  syms_pipe_lazy = Rf_install("%|>%");
   syms_pipe_tee = Rf_install("%T>%");
 
   chrs_dot = Rf_allocVector(STRSXP, 1);
