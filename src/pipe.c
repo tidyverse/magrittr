@@ -49,7 +49,7 @@ static SEXP chrs_dot = NULL;
 
 static void clean_pipe(void* data);
 static SEXP eval_pipe(void* data);
-static SEXP eval_pipe_lazy(void* data);
+static SEXP eval_pipe_lazy(SEXP exprs, SEXP env);
 static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind, SEXP* p_assign);
 static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
@@ -77,21 +77,26 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return lambda;
   }
 
-  SEXP old = PROTECT(Rf_findVar(syms_dot, env));
-
-  struct pipe_info pipe_info = {
-    .exprs = exprs,
-    .env = env
-  };
-  struct cleanup_info cleanup_info = {
-    .old = old,
-    .env = env
-  };
-
   bool use_lazy = Rf_findVar(syms_lazy, rho) != R_UnboundValue;
-  SEXP (*eval)(void*) = use_lazy ? &eval_pipe_lazy : &eval_pipe;
+  SEXP out = R_NilValue;
 
-  SEXP out =  R_ExecWithCleanup(eval, &pipe_info, &clean_pipe, &cleanup_info);
+  if (use_lazy) {
+    out = eval_pipe_lazy(exprs, env);
+  } else {
+    SEXP old = PROTECT(Rf_findVar(syms_dot, env));
+
+    struct pipe_info pipe_info = {
+      .exprs = exprs,
+      .env = env
+    };
+    struct cleanup_info cleanup_info = {
+      .old = old,
+      .env = env
+    };
+
+    out =  R_ExecWithCleanup(eval_pipe, &pipe_info, &clean_pipe, &cleanup_info);
+    UNPROTECT(1);
+  }
 
   if (assign != R_NilValue) {
     PROTECT(out);
@@ -100,7 +105,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     UNPROTECT(2);
   }
 
-  UNPROTECT(6);
+  UNPROTECT(5);
   return out;
 }
 
@@ -125,11 +130,7 @@ SEXP eval_pipe(void* data) {
 }
 
 static
-SEXP eval_pipe_lazy(void* data) {
-  struct pipe_info* info = (struct pipe_info*) data;
-
-  SEXP exprs = info->exprs;
-  SEXP env = info->env;
+SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
   SEXP prev_mask = env;
 
   // Older masks are protected by newer masks
