@@ -133,22 +133,17 @@ static
 SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
   SEXP prev_mask = env;
 
-  // We need one masking environment per pipe expression. We protect
-  // these in a growing pairlist.
-  SEXP shield = PROTECT(Rf_cons(R_NilValue, R_NilValue));
+  PROTECT_INDEX mask_pi;
+  PROTECT_WITH_INDEX(R_NilValue, &mask_pi);
 
   SEXP rest = exprs;
   while ((rest = CDR(exprs)) != R_NilValue) {
     SEXP mask = r_new_environment(env, 1);
-    SETCAR(shield, mask);
-
-    // Grow protection pairlist
-    SEXP node = Rf_cons(R_NilValue, R_NilValue);
-    SETCDR(shield, node);
-    shield = node;
+    REPROTECT(mask, mask_pi);
 
     // Lazily bind current pipe expression to `.` in the new
     // mask. Evaluation occurs in the previous mask environment.
+    // The promise is protected by `mask` and protects `prev_mask`.
     r_env_bind_lazy(mask, syms_dot, CAR(exprs), prev_mask);
 
     exprs = rest;
