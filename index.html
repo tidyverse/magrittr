@@ -62,17 +62,29 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 <li>
+  <a href="articles/magrittr.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="articles/magrittr.html">Intro</a>
+      <a href="articles/tradeoffs.html">Design tradeoffs</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="news/index.html">News</a>
+  <a href="news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/magrittr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/tidyverse/magrittr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -102,22 +114,19 @@
 <li>minimizing the need for local variables and function definitions, and</li>
 <li>making it easy to add steps anywhere in the sequence of operations.</li>
 </ul>
-<p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code><a href="reference/%&gt;%.html">%&gt;%</a></code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">the_data</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">'/path/to/data/file.csv'</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">variable_a</span> <span class="op">&gt;</span> <span class="kw">x</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(variable_c = <span class="kw">variable_a</span><span class="op">/</span><span class="kw">variable_b</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">100</span>)
-</pre></div>
+<p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code><a href="reference/pipe.html">%&gt;%</a></code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example:</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="no">the_data</span> <span class="kw">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="st">'/path/to/data/file.csv'</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">variable_a</span> <span class="kw">&gt;</span> <span class="no">x</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span>(<span class="kw">variable_c</span> <span class="kw">=</span> <span class="no">variable_a</span>/<span class="no">variable_b</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">100</span>)</pre></div>
 <p>Four operations are performed to arrive at the desired data set, and they are written in a natural order: the same as the order of execution. Also, no temporary variables are needed. If yet another operation is required, it is straightforward to add to the sequence of operations wherever it may be needed.</p>
 <p>If you are new to magrittr, the best place to start is the <a href="http://r4ds.had.co.nz/pipes.html">pipes chapter</a> in R for data science.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"tidyverse"</span>)
 
 <span class="co"># Alternatively, install just magrittr:</span>
@@ -125,8 +134,7 @@
 
 <span class="co"># Or the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"tidyverse/magrittr"</span>)
-</pre></div>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"tidyverse/magrittr"</span>)</pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -171,25 +179,21 @@
 <h3 class="hasAnchor">
 <a href="#building-unary-functions" class="anchor"></a>Building (unary) functions</h3>
 <p>Any pipeline starting with the <code>.</code> will return a function which can later be used to apply the pipeline to values. Building functions in magrittr is therefore similar to building other values.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">f</span> <span class="op">&lt;-</span> <span class="kw">.</span> <span class="op">%&gt;%</span> <span class="kw">cos</span> <span class="op">%&gt;%</span> <span class="kw">sin</span> 
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">f</span> <span class="kw">&lt;-</span> <span class="no">.</span> <span class="kw">%&gt;%</span> <span class="no">cos</span> <span class="kw">%&gt;%</span> <span class="no">sin</span>
 <span class="co"># is equivalent to </span>
-<span class="kw">f</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">.</span>) <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span>(<span class="kw">.</span>)) 
-</pre></div>
+<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">.</span>) <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span>(<span class="no">.</span>))</pre></div>
 </div>
 <div id="pipe-with-exposition-of-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pipe-with-exposition-of-variables" class="anchor"></a>Pipe with exposition of variables</h3>
-<p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code><a href="reference/%%24%.html">%$%</a></code> operator:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">iris</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="kw">Sepal.Length</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">Sepal.Length</span>)) <span class="op">%$%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>)
+<p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code><a href="reference/exposition.html">%$%</a></code> operator:</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="no">iris</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">Sepal.Length</span> <span class="kw">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">Sepal.Length</span>)) <span class="kw">%$%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">Sepal.Length</span>, <span class="no">Sepal.Width</span>)
 <span class="co">#&gt; [1] 0.3361992</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(z = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">100</span>)) <span class="op">%$%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span>(<span class="kw">z</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">z</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">100</span>)) <span class="kw">%$%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span>(<span class="no">z</span>)</pre></div>
 <p><img src="reference/figures/exposition-1.png"><!-- --></p>
 </div>
 </div>
