@@ -1,39 +1,46 @@
-# ggfortify
+# florestal
 
 <details>
 
-* Version: 0.4.10
-* Source code: https://github.com/cran/ggfortify
-* URL: https://github.com/sinhrks/ggfortify
-* BugReports: https://github.com/sinhrks/ggfortify/issues
-* Date/Publication: 2020-04-26 13:20:02 UTC
-* Number of recursive dependencies: 124
+* Version: 0.1.1
+* Source code: https://github.com/cran/florestal
+* Date/Publication: 2020-07-07 08:40:02 UTC
+* Number of recursive dependencies: 156
 
-Run `cloud_details(, "ggfortify")` for more info
+Run `cloud_details(, "florestal")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking whether package ‘florestal’ can be installed ... WARNING
     ```
-      Running ‘test-all.R’
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      ── 1. Error: fortify.MSwM works for sample data (@test-MSwM.R#8)  ──────────────
-      Lapack routine dgesv: system is exactly singular: U[3,3] = 0
-      Backtrace:
-       1. MSwM::msmFit(...)
-       2. MSwM::msmFit(...)
-       4. MSwM:::em(ans, control)
-       6. MSwM:::hessian(object)
-       9. base::solve.default(res$Hessian)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      [ OK: 734 | SKIPPED: 47 | WARNINGS: 7 | FAILED: 1 ]
-      1. Error: fortify.MSwM works for sample data (@test-MSwM.R#8) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    Found the following significant warnings:
+      Warning: 'rgl.init' failed, running with 'rgl.useNULL = TRUE'.
+    See ‘/tmp/workdir/florestal/new/florestal.Rcheck/00install.out’ for details.
+    ```
+
+# gMOIP
+
+<details>
+
+* Version: 1.4.3
+* Source code: https://github.com/cran/gMOIP
+* URL: https://github.com/relund/gMOIP/
+* BugReports: https://github.com/relund/gMOIP/issues
+* Date/Publication: 2020-02-20 15:10:02 UTC
+* Number of recursive dependencies: 99
+
+Run `cloud_details(, "gMOIP")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘gMOIP’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: 'rgl.init' failed, running with 'rgl.useNULL = TRUE'.
+    See ‘/tmp/workdir/gMOIP/new/gMOIP.Rcheck/00install.out’ for details.
     ```
 

@@ -1,3 +1,82 @@
+# afex
+
+<details>
+
+* Version: 0.27-2
+* Source code: https://github.com/cran/afex
+* URL: http://afex.singmann.science/, https://github.com/singmann/afex
+* BugReports: https://github.com/singmann/afex/issues
+* Date/Publication: 2020-03-28 08:20:19 UTC
+* Number of recursive dependencies: 199
+
+Run `cloud_details(, "afex")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/afex/new/afex.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘afex/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘afex’ version ‘0.27-2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psychTools’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/afex/old/afex.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘afex/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘afex’ version ‘0.27-2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psychTools’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # ALA4R
 
 <details>
@@ -61,6 +140,81 @@ Status: 1 ERROR
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
 Package suggested but not available: ‘phytools’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# apaTables
+
+<details>
+
+* Version: 2.0.5
+* Source code: https://github.com/cran/apaTables
+* URL: https://github.com/dstanley4/apaTables
+* BugReports: https://github.com/dstanley4/apaTables/issues
+* Date/Publication: 2018-08-29 14:04:27 UTC
+* Number of recursive dependencies: 136
+
+Run `cloud_details(, "apaTables")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/apaTables/new/apaTables.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘apaTables/DESCRIPTION’ ... OK
+* this is package ‘apaTables’ version ‘2.0.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/apaTables/old/apaTables.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘apaTables/DESCRIPTION’ ... OK
+* this is package ‘apaTables’ version ‘2.0.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
 
 The suggested packages are required for a complete check.
 Checking can be attempted without them by setting the environment
@@ -215,6 +369,83 @@ Status: 1 ERROR
 
 
 ```
+# bmlm
+
+<details>
+
+* Version: 1.3.11
+* Source code: https://github.com/cran/bmlm
+* URL: https://github.com/mvuorre/bmlm/
+* BugReports: http://github.com/mvuorre/bmlm/issues/
+* Date/Publication: 2019-02-21 21:30:03 UTC
+* Number of recursive dependencies: 120
+
+Run `cloud_details(, "bmlm")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/bmlm/new/bmlm.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘bmlm/DESCRIPTION’ ... OK
+* this is package ‘bmlm’ version ‘1.3.11’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘qgraph’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/bmlm/old/bmlm.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘bmlm/DESCRIPTION’ ... OK
+* this is package ‘bmlm’ version ‘1.3.11’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘qgraph’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # bootnet
 
 <details>
@@ -243,7 +474,8 @@ Run `cloud_details(, "bootnet")` for more info
 * this is package ‘bootnet’ version ‘1.4.3’
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Packages required but not available: 'qgraph', 'mgm', 'graphicalVAR'
+Packages required but not available:
+  'qgraph', 'mgm', 'graphicalVAR', 'psychTools'
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -269,7 +501,8 @@ Status: 1 ERROR
 * this is package ‘bootnet’ version ‘1.4.3’
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Packages required but not available: 'qgraph', 'mgm', 'graphicalVAR'
+Packages required but not available:
+  'qgraph', 'mgm', 'graphicalVAR', 'psychTools'
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -343,6 +576,85 @@ Run `cloud_details(, "NA")` for more info
 ### CRAN
 
 ```
+
+
+
+
+
+
+```
+# broom
+
+<details>
+
+* Version: 0.7.0
+* Source code: https://github.com/cran/broom
+* URL: https://broom.tidymodels.org/, http://github.com/tidymodels/broom
+* BugReports: http://github.com/tidymodels/broom/issues
+* Date/Publication: 2020-07-09 12:30:09 UTC
+* Number of recursive dependencies: 277
+
+Run `cloud_details(, "broom")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/broom/new/broom.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘broom/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘broom’ version ‘0.7.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/broom/old/broom.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘broom/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘broom’ version ‘0.7.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -531,10 +843,10 @@ Run `cloud_details(, "NA")` for more info
 
 <details>
 
-* Version: 3.6.3
+* Version: 3.6.4
 * Source code: https://github.com/cran/choroplethr
 * URL: www.choroplethr.com
-* Date/Publication: 2018-08-15 18:00:13 UTC
+* Date/Publication: 2020-07-25 21:30:19 UTC
 * Number of recursive dependencies: 108
 
 Run `cloud_details(, "choroplethr")` for more info
@@ -640,6 +952,162 @@ Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWith
 Execution halted
 ERROR: lazy loading failed for package ‘CityWaterBalance’
 * removing ‘/tmp/workdir/CityWaterBalance/old/CityWaterBalance.Rcheck/CityWaterBalance’
+
+```
+# codebook
+
+<details>
+
+* Version: 0.9.2
+* Source code: https://github.com/cran/codebook
+* URL: https://github.com/rubenarslan/codebook
+* BugReports: https://github.com/rubenarslan/codebook/issues
+* Date/Publication: 2020-06-06 23:40:03 UTC
+* Number of recursive dependencies: 191
+
+Run `cloud_details(, "codebook")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/codebook/new/codebook.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘codebook/DESCRIPTION’ ... OK
+* this is package ‘codebook’ version ‘0.9.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/codebook/old/codebook.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘codebook/DESCRIPTION’ ... OK
+* this is package ‘codebook’ version ‘0.9.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# correlation
+
+<details>
+
+* Version: 0.3.0
+* Source code: https://github.com/cran/correlation
+* URL: https://easystats.github.io/correlation/
+* BugReports: https://github.com/easystats/correlation/issues
+* Date/Publication: 2020-06-19 05:40:09 UTC
+* Number of recursive dependencies: 157
+
+Run `cloud_details(, "correlation")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/correlation/new/correlation.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘correlation/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘correlation’ version ‘0.3.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/correlation/old/correlation.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘correlation/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘correlation’ version ‘0.3.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # countyweather
@@ -768,6 +1236,84 @@ Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWith
 Execution halted
 ERROR: lazy loading failed for package ‘DecomposeR’
 * removing ‘/tmp/workdir/DecomposeR/old/DecomposeR.Rcheck/DecomposeR’
+
+```
+# dextergui
+
+<details>
+
+* Version: 0.2.2
+* Source code: https://github.com/cran/dextergui
+* BugReports: https://github.com/jessekps/dexter/issues
+* Date/Publication: 2020-02-20 08:30:02 UTC
+* Number of recursive dependencies: 122
+
+Run `cloud_details(, "dextergui")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/dextergui/new/dextergui.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘dextergui/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘dextergui’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/dextergui/old/dextergui.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘dextergui/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘dextergui’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # easyr
@@ -941,77 +1487,164 @@ Status: 1 ERROR
 
 
 ```
-# EML
+# EGAnet
 
 <details>
 
-* Version: 2.0.2
-* Source code: https://github.com/cran/EML
-* URL: https://docs.ropensci.org/EML, https://github.com/ropensci/EML
-* BugReports: https://github.com/ropensci/EML/issues
-* Date/Publication: 2020-02-08 06:10:15 UTC
-* Number of recursive dependencies: 91
+* Version: 0.9.6
+* Source code: https://github.com/cran/EGAnet
+* Date/Publication: 2020-07-13 04:40:02 UTC
+* Number of recursive dependencies: 207
 
-Run `cloud_details(, "EML")` for more info
+Run `cloud_details(, "EGAnet")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘EML’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/EML/new/EML.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘EML’ ...
-** package ‘EML’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-Warning: namespace ‘EML’ is not available and has been replaced
-by .GlobalEnv when processing object ‘eml’
-Warning: namespace ‘EML’ is not available and has been replaced
-by .GlobalEnv when processing object ‘eml’
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/jqr/libs/jqr.so':
-  libjq.so.1: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘EML’
-* removing ‘/tmp/workdir/EML/new/EML.Rcheck/EML’
+* using log directory ‘/tmp/workdir/EGAnet/new/EGAnet.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘EGAnet/DESCRIPTION’ ... OK
+* this is package ‘EGAnet’ version ‘0.9.6’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+Packages suggested but not available: 'psych', 'psychTools'
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘EML’ ...
-** package ‘EML’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-Warning: namespace ‘EML’ is not available and has been replaced
-by .GlobalEnv when processing object ‘eml’
-Warning: namespace ‘EML’ is not available and has been replaced
-by .GlobalEnv when processing object ‘eml’
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/jqr/libs/jqr.so':
-  libjq.so.1: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘EML’
-* removing ‘/tmp/workdir/EML/old/EML.Rcheck/EML’
+* using log directory ‘/tmp/workdir/EGAnet/old/EGAnet.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘EGAnet/DESCRIPTION’ ... OK
+* this is package ‘EGAnet’ version ‘0.9.6’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+Packages suggested but not available: 'psych', 'psychTools'
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# EstimateGroupNetwork
+
+<details>
+
+* Version: 0.2.2
+* Source code: https://github.com/cran/EstimateGroupNetwork
+* Date/Publication: 2020-01-08 08:20:02 UTC
+* Number of recursive dependencies: 111
+
+Run `cloud_details(, "EstimateGroupNetwork")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/EstimateGroupNetwork/new/EstimateGroupNetwork.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘EstimateGroupNetwork/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘EstimateGroupNetwork’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/EstimateGroupNetwork/old/EstimateGroupNetwork.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘EstimateGroupNetwork/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘EstimateGroupNetwork’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # EvaluateCore
@@ -1029,48 +1662,58 @@ Run `cloud_details(, "EvaluateCore")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘EvaluateCore’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/EvaluateCore/new/EvaluateCore.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘EvaluateCore’ ...
-** package ‘EvaluateCore’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘EvaluateCore’
-* removing ‘/tmp/workdir/EvaluateCore/new/EvaluateCore.Rcheck/EvaluateCore’
+* using log directory ‘/tmp/workdir/EvaluateCore/new/EvaluateCore.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘EvaluateCore/DESCRIPTION’ ... OK
+* this is package ‘EvaluateCore’ version ‘0.1.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘EvaluateCore’ ...
-** package ‘EvaluateCore’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘EvaluateCore’
-* removing ‘/tmp/workdir/EvaluateCore/old/EvaluateCore.Rcheck/EvaluateCore’
+* using log directory ‘/tmp/workdir/EvaluateCore/old/EvaluateCore.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘EvaluateCore/DESCRIPTION’ ... OK
+* this is package ‘EvaluateCore’ version ‘0.1.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # fingertipscharts
@@ -1135,6 +1778,240 @@ Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
 ERROR: lazy loading failed for package ‘fingertipscharts’
 * removing ‘/tmp/workdir/fingertipscharts/old/fingertipscharts.Rcheck/fingertipscharts’
+
+```
+# forwards
+
+<details>
+
+* Version: 0.1.3
+* Source code: https://github.com/cran/forwards
+* URL: https://github.com/forwards/forwards
+* BugReports: https://github.com/forwards/forwards/issues
+* Date/Publication: 2019-07-30 21:10:02 UTC
+* Number of recursive dependencies: 114
+
+Run `cloud_details(, "forwards")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/forwards/new/forwards.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘forwards/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘forwards’ version ‘0.1.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘forwards’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘Overview.Rmd’using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... SKIPPED
+* DONE
+Status: OK
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/forwards/old/forwards.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘forwards/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘forwards’ version ‘0.1.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘forwards’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘Overview.Rmd’using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... SKIPPED
+* DONE
+Status: OK
+
+
+
+
+
+
+```
+# FSA
+
+<details>
+
+* Version: 0.8.30
+* Source code: https://github.com/cran/FSA
+* URL: https://github.com/droglenc/FSA
+* BugReports: https://github.com/droglenc/FSA/issues
+* Date/Publication: 2020-03-09 13:30:16 UTC
+* Number of recursive dependencies: 136
+
+Run `cloud_details(, "FSA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/FSA/new/FSA.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘FSA/DESCRIPTION’ ... OK
+* this is package ‘FSA’ version ‘0.8.30’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/FSA/old/FSA.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘FSA/DESCRIPTION’ ... OK
+* this is package ‘FSA’ version ‘0.8.30’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # gastempt
@@ -1326,6 +2203,152 @@ Status: 1 ERROR
 
 
 ```
+# gms
+
+<details>
+
+* Version: 0.4.0
+* Source code: https://github.com/cran/gms
+* URL: https://github.com/pik-piam/gms
+* BugReports: https://github.com/pik-piam/gms/issues
+* Date/Publication: 2020-07-01 15:00:06 UTC
+* Number of recursive dependencies: 113
+
+Run `cloud_details(, "gms")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/gms/new/gms.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘gms/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘gms’ version ‘0.4.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘qgraph’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/gms/old/gms.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘gms/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘gms’ version ‘0.4.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘qgraph’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# graphicalVAR
+
+<details>
+
+* Version: 0.2.3
+* Source code: https://github.com/cran/graphicalVAR
+* Date/Publication: 2020-04-09 14:00:06 UTC
+* Number of recursive dependencies: 115
+
+Run `cloud_details(, "graphicalVAR")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/graphicalVAR/new/graphicalVAR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘graphicalVAR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘graphicalVAR’ version ‘0.2.3’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/graphicalVAR/old/graphicalVAR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘graphicalVAR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘graphicalVAR’ version ‘0.2.3’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # hadron
 
 <details>
@@ -1387,6 +2410,85 @@ Status: 1 ERROR
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
 Packages suggested but not available: 'rhdf5', 'staplr'
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# huxtable
+
+<details>
+
+* Version: 5.0.0
+* Source code: https://github.com/cran/huxtable
+* URL: https://hughjonesd.github.io/huxtable
+* BugReports: https://github.com/hughjonesd/huxtable/issues
+* Date/Publication: 2020-06-15 23:50:06 UTC
+* Number of recursive dependencies: 126
+
+Run `cloud_details(, "huxtable")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/huxtable/new/huxtable.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘huxtable/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘huxtable’ version ‘5.0.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/huxtable/old/huxtable.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘huxtable/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘huxtable’ version ‘5.0.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
 
 The suggested packages are required for a complete check.
 Checking can be attempted without them by setting the environment
@@ -1635,6 +2737,73 @@ Run `cloud_details(, "NA")` for more info
 
 
 ```
+# jrt
+
+<details>
+
+* Version: 1.0.1
+* Source code: https://github.com/cran/jrt
+* Date/Publication: 2019-05-06 15:30:03 UTC
+* Number of recursive dependencies: 80
+
+Run `cloud_details(, "jrt")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/jrt/new/jrt.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘jrt/DESCRIPTION’ ... OK
+* this is package ‘jrt’ version ‘1.0.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/jrt/old/jrt.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘jrt/DESCRIPTION’ ... OK
+* this is package ‘jrt’ version ‘1.0.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # NA
 
 <details>
@@ -1662,6 +2831,209 @@ Run `cloud_details(, "NA")` for more info
 ### CRAN
 
 ```
+
+
+
+
+
+
+```
+# lvnet
+
+<details>
+
+* Version: 0.3.5
+* Source code: https://github.com/cran/lvnet
+* Date/Publication: 2019-06-21 07:50:03 UTC
+* Number of recursive dependencies: 138
+
+Run `cloud_details(, "lvnet")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/lvnet/new/lvnet.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘lvnet/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘lvnet’ version ‘0.3.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'qgraph', 'psych'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/lvnet/old/lvnet.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘lvnet/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘lvnet’ version ‘0.3.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'qgraph', 'psych'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# MarketMatching
+
+<details>
+
+* Version: 1.1.2
+* Source code: https://github.com/cran/MarketMatching
+* Date/Publication: 2019-07-03 17:10:03 UTC
+* Number of recursive dependencies: 78
+
+Run `cloud_details(, "MarketMatching")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/MarketMatching/new/MarketMatching.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MarketMatching/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MarketMatching’ version ‘1.1.2’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘bsts’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/MarketMatching/old/MarketMatching.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MarketMatching/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MarketMatching’ version ‘1.1.2’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘bsts’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# MDSPCAShiny
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/MDSPCAShiny
+* Date/Publication: 2019-05-24 08:20:20 UTC
+* Number of recursive dependencies: 51
+
+Run `cloud_details(, "MDSPCAShiny")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/MDSPCAShiny/new/MDSPCAShiny.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MDSPCAShiny/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MDSPCAShiny’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/MDSPCAShiny/old/MDSPCAShiny.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MDSPCAShiny/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MDSPCAShiny’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -1807,6 +3179,144 @@ Status: 1 ERROR
 
 
 ```
+# MLRShiny
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/MLRShiny
+* Date/Publication: 2019-04-22 19:20:03 UTC
+* Number of recursive dependencies: 102
+
+Run `cloud_details(, "MLRShiny")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/MLRShiny/new/MLRShiny.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MLRShiny/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MLRShiny’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/MLRShiny/old/MLRShiny.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MLRShiny/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MLRShiny’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# MLRShiny2
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/MLRShiny2
+* Date/Publication: 2019-10-02 08:40:02 UTC
+* Number of recursive dependencies: 102
+
+Run `cloud_details(, "MLRShiny2")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/MLRShiny2/new/MLRShiny2.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MLRShiny2/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MLRShiny2’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/MLRShiny2/old/MLRShiny2.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘MLRShiny2/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MLRShiny2’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # mlVAR
 
 <details>
@@ -1935,6 +3445,85 @@ Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWith
 Execution halted
 ERROR: lazy loading failed for package ‘nesRdata’
 * removing ‘/tmp/workdir/nesRdata/old/nesRdata.Rcheck/nesRdata’
+
+```
+# parameters
+
+<details>
+
+* Version: 0.8.2
+* Source code: https://github.com/cran/parameters
+* URL: https://easystats.github.io/parameters/
+* BugReports: https://github.com/easystats/parameters/issues
+* Date/Publication: 2020-07-24 19:30:02 UTC
+* Number of recursive dependencies: 327
+
+Run `cloud_details(, "parameters")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/parameters/new/parameters.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘parameters/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘parameters’ version ‘0.8.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages suggested but not available: 'EGAnet', 'M3C', 'psych'
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/parameters/old/parameters.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘parameters/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘parameters’ version ‘0.8.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages suggested but not available: 'EGAnet', 'M3C', 'psych'
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # phyr
@@ -2083,6 +3672,73 @@ Status: 1 ERROR
 
 
 ```
+# prepdat
+
+<details>
+
+* Version: 1.0.8
+* Source code: https://github.com/cran/prepdat
+* URL: http://github.com/ayalaallon/prepdat
+* BugReports: http://github.com/ayalaallon/prepdat/issues
+* Date/Publication: 2016-09-23 11:22:48
+* Number of recursive dependencies: 50
+
+Run `cloud_details(, "prepdat")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/prepdat/new/prepdat.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘prepdat/DESCRIPTION’ ... OK
+* this is package ‘prepdat’ version ‘1.0.8’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/prepdat/old/prepdat.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘prepdat/DESCRIPTION’ ... OK
+* this is package ‘prepdat’ version ‘1.0.8’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # processR
 
 <details>
@@ -2098,52 +3754,60 @@ Run `cloud_details(, "processR")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘processR’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/processR/new/processR.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘processR’ ...
-** package ‘processR’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘processR’
-* removing ‘/tmp/workdir/processR/new/processR.Rcheck/processR’
+* using log directory ‘/tmp/workdir/processR/new/processR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘processR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘processR’ version ‘0.2.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘processR’ ...
-** package ‘processR’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘processR’
-* removing ‘/tmp/workdir/processR/old/processR.Rcheck/processR’
+* using log directory ‘/tmp/workdir/processR/old/processR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘processR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘processR’ version ‘0.2.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # PROsetta
@@ -2161,63 +3825,71 @@ Run `cloud_details(, "PROsetta")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘PROsetta’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/PROsetta/new/PROsetta.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘PROsetta’ ...
-** package ‘PROsetta’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘PROsetta’
-* removing ‘/tmp/workdir/PROsetta/new/PROsetta.Rcheck/PROsetta’
+* using log directory ‘/tmp/workdir/PROsetta/new/PROsetta.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘PROsetta/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘PROsetta’ version ‘0.1.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘PROsetta’ ...
-** package ‘PROsetta’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘PROsetta’
-* removing ‘/tmp/workdir/PROsetta/old/PROsetta.Rcheck/PROsetta’
+* using log directory ‘/tmp/workdir/PROsetta/old/PROsetta.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘PROsetta/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘PROsetta’ version ‘0.1.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # provSummarizeR
 
 <details>
 
-* Version: 1.4.1
+* Version: 1.4.2
 * Source code: https://github.com/cran/provSummarizeR
 * URL: https://github.com/End-to-end-provenance
 * BugReports: https://github.com/End-to-end-provenance/provSummarizeR/issues
-* Date/Publication: 2020-07-16 04:30:05 UTC
+* Date/Publication: 2020-07-24 09:40:03 UTC
 * Number of recursive dependencies: 55
 
 Run `cloud_details(, "provSummarizeR")` for more info
@@ -2235,7 +3907,7 @@ Run `cloud_details(, "provSummarizeR")` for more info
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘provSummarizeR/DESCRIPTION’ ... OK
-* this is package ‘provSummarizeR’ version ‘1.4.1’
+* this is package ‘provSummarizeR’ version ‘1.4.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -2265,7 +3937,7 @@ Status: 1 ERROR
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘provSummarizeR/DESCRIPTION’ ... OK
-* this is package ‘provSummarizeR’ version ‘1.4.1’
+* this is package ‘provSummarizeR’ version ‘1.4.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -2301,60 +3973,123 @@ Run `cloud_details(, "qgraph")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘qgraph’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/qgraph/new/qgraph.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘qgraph’ ...
-** package ‘qgraph’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fopenmp  -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fopenmp  -fpic  -g -O2  -c layout_rcpp.cpp -o layout_rcpp.o
-g++ -std=gnu++11 -shared -L/opt/R/3.6.3/lib/R/lib -L/usr/local/lib -o qgraph.so RcppExports.o layout_rcpp.o -llapack -lblas -lgfortran -lm -lquadmath -fopenmp -L/opt/R/3.6.3/lib/R/lib -lR
-installing to /tmp/workdir/qgraph/new/qgraph.Rcheck/00LOCK-qgraph/00new/qgraph/libs
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘qgraph’
-* removing ‘/tmp/workdir/qgraph/new/qgraph.Rcheck/qgraph’
+* using log directory ‘/tmp/workdir/qgraph/new/qgraph.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘qgraph/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘qgraph’ version ‘1.6.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘qgraph’ ...
-** package ‘qgraph’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fopenmp  -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fopenmp  -fpic  -g -O2  -c layout_rcpp.cpp -o layout_rcpp.o
-g++ -std=gnu++11 -shared -L/opt/R/3.6.3/lib/R/lib -L/usr/local/lib -o qgraph.so RcppExports.o layout_rcpp.o -llapack -lblas -lgfortran -lm -lquadmath -fopenmp -L/opt/R/3.6.3/lib/R/lib -lR
-installing to /tmp/workdir/qgraph/old/qgraph.Rcheck/00LOCK-qgraph/00new/qgraph/libs
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘qgraph’
-* removing ‘/tmp/workdir/qgraph/old/qgraph.Rcheck/qgraph’
+* using log directory ‘/tmp/workdir/qgraph/old/qgraph.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘qgraph/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘qgraph’ version ‘1.6.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# quickReg
+
+<details>
+
+* Version: 1.5.0
+* Source code: https://github.com/cran/quickReg
+* Date/Publication: 2017-09-28 06:41:12 UTC
+* Number of recursive dependencies: 68
+
+Run `cloud_details(, "quickReg")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/quickReg/new/quickReg.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘quickReg/DESCRIPTION’ ... OK
+* this is package ‘quickReg’ version ‘1.5.0’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/quickReg/old/quickReg.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘quickReg/DESCRIPTION’ ... OK
+* this is package ‘quickReg’ version ‘1.5.0’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # Rarefy
@@ -2414,6 +4149,84 @@ Status: 1 ERROR
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
 Packages required but not available: 'adiv', 'geiger'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# regressoR
+
+<details>
+
+* Version: 1.1.9
+* Source code: https://github.com/cran/regressoR
+* URL: http://www.promidat.com
+* Date/Publication: 2020-07-01 17:00:02 UTC
+* Number of recursive dependencies: 122
+
+Run `cloud_details(, "regressoR")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/regressoR/new/regressoR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘regressoR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘regressoR’ version ‘1.1.9’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/regressoR/old/regressoR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘regressoR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘regressoR’ version ‘1.1.9’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -2750,6 +4563,75 @@ ERROR: lazy loading failed for package ‘SDLfilter’
 * removing ‘/tmp/workdir/SDLfilter/old/SDLfilter.Rcheck/SDLfilter’
 
 ```
+# semdrw
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/semdrw
+* Date/Publication: 2018-11-14 11:00:02 UTC
+* Number of recursive dependencies: 147
+
+Run `cloud_details(, "semdrw")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/semdrw/new/semdrw.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘semdrw/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘semdrw’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/semdrw/old/semdrw.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘semdrw/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘semdrw’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # SimDesign
 
 <details>
@@ -2824,6 +4706,264 @@ Status: 1 ERROR
 
 
 ```
+# sjPlot
+
+<details>
+
+* Version: 2.8.4
+* Source code: https://github.com/cran/sjPlot
+* URL: https://strengejacke.github.io/sjPlot/
+* BugReports: https://github.com/strengejacke/sjPlot/issues
+* Date/Publication: 2020-05-24 05:00:05 UTC
+* Number of recursive dependencies: 183
+
+Run `cloud_details(, "sjPlot")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/sjPlot/new/sjPlot.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘sjPlot/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘sjPlot’ version ‘2.8.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/sjPlot/old/sjPlot.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘sjPlot/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘sjPlot’ version ‘2.8.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# splithalfr
+
+<details>
+
+* Version: 1.0.10
+* Source code: https://github.com/cran/splithalfr
+* URL: https://thomaspronk.com, https://www.uva.nl/en/profile/p/r/t.pronk/t.pronk.html
+* Date/Publication: 2019-06-07 08:00:03 UTC
+* Number of recursive dependencies: 52
+
+Run `cloud_details(, "splithalfr")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/splithalfr/new/splithalfr.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘splithalfr/DESCRIPTION’ ... OK
+* this is package ‘splithalfr’ version ‘1.0.10’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/splithalfr/old/splithalfr.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘splithalfr/DESCRIPTION’ ... OK
+* this is package ‘splithalfr’ version ‘1.0.10’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# STAT
+
+<details>
+
+* Version: 0.1.0
+* Source code: https://github.com/cran/STAT
+* Date/Publication: 2019-04-01 16:40:10 UTC
+* Number of recursive dependencies: 116
+
+Run `cloud_details(, "STAT")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/STAT/new/STAT.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘STAT/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘STAT’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/STAT/old/STAT.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘STAT/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘STAT’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # NA
 
 <details>
@@ -2873,48 +5013,60 @@ Run `cloud_details(, "tidySEM")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘tidySEM’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/tidySEM/new/tidySEM.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘tidySEM’ ...
-** package ‘tidySEM’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘tidySEM’
-* removing ‘/tmp/workdir/tidySEM/new/tidySEM.Rcheck/tidySEM’
+* using log directory ‘/tmp/workdir/tidySEM/new/tidySEM.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘tidySEM/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘tidySEM’ version ‘0.1.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘tidySEM’ ...
-** package ‘tidySEM’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘mnormt’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘tidySEM’
-* removing ‘/tmp/workdir/tidySEM/old/tidySEM.Rcheck/tidySEM’
+* using log directory ‘/tmp/workdir/tidySEM/old/tidySEM.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘tidySEM/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘tidySEM’ version ‘0.1.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
 # tmap
@@ -2926,7 +5078,7 @@ ERROR: lazy loading failed for package ‘tidySEM’
 * URL: https://github.com/mtennekes/tmap
 * BugReports: https://github.com/mtennekes/tmap/issues
 * Date/Publication: 2020-07-09 15:00:03 UTC
-* Number of recursive dependencies: 139
+* Number of recursive dependencies: 131
 
 Run `cloud_details(, "tmap")` for more info
 
@@ -3126,16 +5278,166 @@ Status: 1 ERROR
 
 
 ```
+# ufs
+
+<details>
+
+* Version: 0.3.1
+* Source code: https://github.com/cran/ufs
+* URL: https://r-packages.gitlab.io/ufs
+* BugReports: https://gitlab.com/r-packages/ufs/issues
+* Date/Publication: 2019-08-22 17:30:02 UTC
+* Number of recursive dependencies: 129
+
+Run `cloud_details(, "ufs")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/ufs/new/ufs.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘ufs/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘ufs’ version ‘0.3.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/ufs/old/ufs.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘ufs/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘ufs’ version ‘0.3.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘psych’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+# wiseR
+
+<details>
+
+* Version: 1.0.1
+* Source code: https://github.com/cran/wiseR
+* URL: https://github.com/SAFE-ICU/wiseR
+* BugReports: https://github.com/SAFE-ICU/wiseR/issues
+* Date/Publication: 2018-11-29 16:10:03 UTC
+* Number of recursive dependencies: 139
+
+Run `cloud_details(, "wiseR")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/wiseR/new/wiseR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘wiseR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘wiseR’ version ‘1.0.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/wiseR/old/wiseR.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘wiseR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘wiseR’ version ‘1.0.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # wrswoR
 
 <details>
 
-* Version: 1.1
+* Version: 1.1.1
 * Source code: https://github.com/cran/wrswoR
 * URL: http://krlmlr.github.io/wrswoR
 * BugReports: https://github.com/krlmlr/wrswoR/issues
-* Date/Publication: 2018-02-02 18:26:36 UTC
-* Number of recursive dependencies: 130
+* Date/Publication: 2020-07-26 18:20:02 UTC
+* Number of recursive dependencies: 131
 
 Run `cloud_details(, "wrswoR")` for more info
 
@@ -3153,7 +5455,7 @@ Run `cloud_details(, "wrswoR")` for more info
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘wrswoR/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘wrswoR’ version ‘1.1’
+* this is package ‘wrswoR’ version ‘1.1.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -3184,7 +5486,7 @@ Status: 1 ERROR
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘wrswoR/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘wrswoR’ version ‘1.1’
+* this is package ‘wrswoR’ version ‘1.1.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR

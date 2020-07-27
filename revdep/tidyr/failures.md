@@ -67,6 +67,73 @@ Status: 1 ERROR
 
 
 ```
+# NetworkChange
+
+<details>
+
+* Version: 0.7
+* Source code: https://github.com/cran/NetworkChange
+* Date/Publication: 2020-07-11 22:00:14 UTC
+* Number of recursive dependencies: 140
+
+Run `cloud_details(, "NetworkChange")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/NetworkChange/new/NetworkChange.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘NetworkChange/DESCRIPTION’ ... OK
+* this is package ‘NetworkChange’ version ‘0.7’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/NetworkChange/old/NetworkChange.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘NetworkChange/DESCRIPTION’ ... OK
+* this is package ‘NetworkChange’ version ‘0.7’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘qgraph’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # RIdeogram
 
 <details>
@@ -187,5 +254,75 @@ Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWith
 Execution halted
 ERROR: lazy loading failed for package ‘ShortForm’
 * removing ‘/tmp/workdir/ShortForm/old/ShortForm.Rcheck/ShortForm’
+
+```
+# visvow
+
+<details>
+
+* Version: 0.9.0
+* Source code: https://github.com/cran/visvow
+* URL: https://www.visiblevowels.org/
+* Date/Publication: 2020-05-12 20:20:02 UTC
+* Number of recursive dependencies: 110
+
+Run `cloud_details(, "visvow")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/visvow/new/visvow.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘visvow/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘visvow’ version ‘0.9.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/visvow/old/visvow.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘visvow/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘visvow’ version ‘0.9.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘psych’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
 
 ```
