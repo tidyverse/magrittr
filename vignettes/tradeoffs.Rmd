@@ -22,6 +22,7 @@ pass <- function() "\u2705"
 
 There are many different ways that magrittr could implement the pipe. The goal of this document is to elucidate the variations, and the various pros and cons of each approach. This document is primarily aimed at the magrittr developers (so we don't forget about important considerations), but will be of interest to anyone who wants to understand pipes better, or to create their own pipe that makes different tradeoffs
 
+
 ## Code transformation
 
 There are three main options for how we might transform a pipeline in base R expressions. Here they are illustrated with `x %>% foo() %>% bar()`:
@@ -31,14 +32,14 @@ There are three main options for how we might transform a pipeline in base R exp
     ```{r}
     bar(foo(x))
     ```
-    
+
 *   __Eager__
 
     ```{r}
     . <- foo(x)
     bar(.)
     ```
-    
+
 *   __Lazy__
 
     ```{r}
@@ -49,31 +50,24 @@ There are three main options for how we might transform a pipeline in base R exp
 
 (There is a fourth option, which uses eager evaluation, but uses a unique variable name for each stage. This has no advantages compared to the eager pipe so we will not consider it further.)
 
-We'll first explore the desired properties we might want a pipe to possess and then see how each of the three variants does. 
+We'll first explore the desired properties we might want a pipe to possess and then see how each of the three variants does.
+
 
 ### Desired properties
 
 These are the properties that we might want a pipe to possess, roughly ordered from most important to leasy important.
 
-*   Visibility: the visibility of the final function in the pipe should be
-    preserved. This important so that pipes that end in a side-effect function
-    (which generally return their first argument invisibly) do not print.
-  
-*   Lazy evaluation: are steps of the pipe only evaluated lazily when actually 
-    needed? This is a useful property as it means that pipes can handle 
-    code like `stop("!") %>% try()`, making pipes capable of capturing a
-    wider range of R expressions.
+*   Visibility: the visibility of the final function in the pipe should be preserved. This important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
 
-*   Eager unbinding: pipes are often used with large data objects, so 
-    intermediate objects in the pipeline should be unbound as soon as possible 
-    so they are available for garbage collection.
+*   Lazy evaluation: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
 
-*   Single evaluation: each component of the pipe should only be evaluated once,
-    so that `sample(10) %>% cbind(., .)` yields two columns with the same value,
-    and `sample(10) %T>% print() %T>% print()` prints the same values twice.
+*   Eager unbinding: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.
+
+*   Single evaluation: each component of the pipe should only be evaluated once, so that `sample(10) %>% cbind(., .)` yields two columns with the same value, and `sample(10) %T>% print() %T>% print()` prints the same values twice.
 
 *   Minimal stack: using the pipe should add as few entries to the call stack
     as possible, so that `traceback()` is maximally useful.
+
 
 ### Nested pipe
 
@@ -83,11 +77,9 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 
 *   Eager unbinding: `r pass()`
 
-*   Single evaluation: `r fail()` trivial for simple pipes, but not possible for 
-    pipes that use the pronoun in multiple places. 
-    
-    Note that the simplest rewrite doesn't work because there's no gaurantee 
-    that the first argument will be evaluated before the second argument.
+*   Single evaluation: `r fail()` trivial for simple pipes, but not possible for pipes that use the pronoun in multiple places.
+
+    Note that the simplest rewrite doesn't work because there's no gaurantee that the first argument will be evaluated before the second argument.
 
     ```{r}
     x %>% foo(., .)
@@ -96,13 +88,13 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 
 *   Minimal stack: `r fail()` maximum stack depth is the length of the pipe.
 
+
 ### Eager pipe
 
-*   Visibility: `r pass()`. 
+*   Visibility: `r pass()`.
 
-    Note that the final computation must be handled differently, as the 
-    following transformation loses visibility.
-    
+    Note that the final computation must be handled differently, as the following transformation loses visibility.
+
     ```{r}
     . <- foo(.)
     . <- bar(.)
@@ -117,13 +109,14 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 
 *   Minimal stack: `r pass()` maximum stack depth is 1.
 
+
 ### Lazy pipe
 
 ```{r, eval = TRUE}
 `%<~%` <- function(name, value, env = caller_env()) {
   name <- ensym(name)
   value <- enexpr(value)
-  
+
   env_bind_exprs(env, .eval_env = env, !!name := !!value)
 }
 ```
@@ -132,22 +125,20 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 
 *   Lazy evaluation: `r pass()`
 
-*   Eager clean up: `r fail()`/`r pass()` can be preserved by inserting a 
-    function call after each lazy assignment:
-    
+*   Eager clean up: `r fail()`/`r pass()` can be preserved by inserting a function call after each lazy assignment:
+
     ```{r}
     ...2 %<~% foo(...1)
     delayed_cleanup()
     bar(...1)
     ```
-    
-    `delayed_cleanup()` would be a C function that iterates through all 
-    bindings in an environment, deleting any promises that have already been
-    forced.
+
+    `delayed_cleanup()` would be a C function that iterates through all bindings in an environment, deleting any promises that have already been forced.
 
 *   Single evaluation: `r pass()` by property of promises.
 
 *   Minimal stack: `r pass()` maximum stack depth is 1.
+
 
 ## Execution environment
 
@@ -174,11 +165,10 @@ g <- function() {
 
 *   If evaluated in the current environment, both `f()` and `g()` return 10.
 
-*   If evaluated in a new environment, `f()` returns 20 and `g()` returns 10.
-    NOT TRUE! Why not?
+*   If evaluated in a new environment, `f()` returns 20 and `g()` returns 10.  NOT TRUE! Why not?
 
 *   If evaluated in a closure environment, both `f()` and `g()` return 20.
-    
+
 To discuss implementation challenges with a concrete example, we'll take the following values:
 
 ```{r, eval = TRUE}
@@ -204,6 +194,7 @@ pipe <- expr({
 ```
 
 Note that we assume the input to the pipe is called `.`, not `x`. This is a small simplification that makes implementation of the transformer a little easier.
+
 
 ### Closure environment
 
@@ -249,6 +240,7 @@ g_closure <- function() {
 g_closure()
 ```
 
+
 ### New environment
 
 ```{r, eval = TRUE}
@@ -270,6 +262,7 @@ g_new <- function() {
 g_new()
 ```
 
+
 ### Current environment
 
 At first glance, evaluating the pipe in the current environment is quite simple:
@@ -285,7 +278,7 @@ And that leads to:
 ```{r}
 f_current <- function() {
   x <- 20
-  
+
   . <- 10
   eval_bare(expr(assign("x", .)))
   rm(.)
@@ -298,7 +291,7 @@ g_current <- function() {
   . <- 10
   eval_bare(expr(return(.)))
   rm(.)
-  
+
   return(20)
 }
 g_current()
@@ -310,7 +303,7 @@ And this could be wrapped into a simple function so that we can ensure `.` is un
 pipe_eval <- function(pipe, init, env = caller_env()) {
   env_bind(.env = env, . = init)
   on.exit(env_unbind(env, "."))
-  
+
   eval_bare(pipe, env)
 }
 
@@ -319,4 +312,4 @@ pipe_eval(pipe, x)
 
 (This implementation will clobber any existing `.` but a more sophisticated implementation could restore any existing value on exit. Similarly, the cleanup after the lazy transformation would be more work (since it creates multiple variables), but it's not prohibitively hard.)
 
-The main drawback to this approach is that `eval_bare()` currently loses the visibility flag. This can be fixed, but needs work in C. 
+The main drawback to this approach is that `eval_bare()` currently loses the visibility flag. This can be fixed, but needs work in C.
