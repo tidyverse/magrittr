@@ -22,6 +22,7 @@ pass <- function() "\u2705"
 
 There are many different ways that magrittr could implement the pipe. The goal of this document is to elucidate the variations, and the various pros and cons of each approach. This document is primarily aimed at the magrittr developers (so we don't forget about important considerations), but will be of interest to anyone who wants to understand pipes better, or to create their own pipe that makes different tradeoffs
 
+
 ## Code transformation
 
 There are three main options for how we might transform a pipeline in base R expressions. Here they are illustrated with `x %>% foo() %>% bar()`:
@@ -32,27 +33,75 @@ There are three main options for how we might transform a pipeline in base R exp
     bar(foo(x))
     ```
 
--   **Eager**
+-   **Eager (mask)**, masking environment
 
     ```{r}
-    . <- x
-    . <- foo(.)
-    . <- bar(.)
-    .
+    local({
+      . <- x
+      . <- foo(.)
+      bar(.)
+    })
     ```
 
--   **Lazy**
+-   **Eager (mask-num)**: masking environment, numbered placeholder
 
     ```{r}
-    ...1 <- x
-    delayedAssign("..2", foo(..1))
-    delayedAssign("..3", bar(..2))
-    ...3
+    local({
+      ...1 <- x
+      ...2 <- foo(...1)
+      bar(...2)
+    })
     ```
 
-(There is a fourth option, which uses eager evaluation, but uses a unique variable name for each stage. This has no advantages compared to the eager pipe so we will not consider it further.)
+-   **Eager (lexical)**: lexical environment
+
+    This variant assigns pipe expressions to the placeholder `.` in the current environment. This assignment is temporary: once the pipe has returned, the placeholder binding is reset to its previous state.
+
+    ```{r}
+    with_dot_cleanup <- function(expr) {
+      old_dot <- get_dot(parent.frame())
+      on.exit(reset_dot(old_dot, parent.frame()))
+      expr
+    }
+    with_dot_cleanup({
+      . <- x
+      . <- foo(.)
+      bar(.)
+    })
+    ```
+
+-   **Lazy (mask)**: masking environments
+
+    ```{r}
+    mask1 <- new.env(parent = env)
+    mask2 <- new.env(parent = env)
+
+    delayedAssign(".", x, mask1)
+    delayedAssign(".", foo(.), mask2)
+    with(mask2, bar(.))
+    ```
+
+-   **Lazy (mask-num)**: masking environment, numbered placeholder
+
+    ```{r}
+    local({
+      delayedAssign("...1", x)
+      delayedAssign("...2", foo(...1))
+      bar(...2)
+    })
+    ```
+
+-   **Lazy (lexical-num)**: lexical environment, numbered placeholder
+
+    ```{r}
+    delayedAssign("...1", x)
+    delayedAssign("...2", foo(.))
+    bar(...2)
+    ```
+
 
 We'll first explore the desired properties we might want a pipe to possess and then see how each of the three variants does.
+
 
 ### Desired properties
 
@@ -60,10 +109,11 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 
 *   **Visibility**: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
 
+*   **Multiple placeholders**: each component of the pipe should only be evaluated once even when there are multiple placeholders, so that `sample(10) %>% cbind(., .)` yields two columns with the same value. Relatedly, `sample(10) %T>% print() %T>% print()` must print the same values twice.
+
 *   **Lazy evaluation**: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
 
-*   **Minimal stack**: using the pipe should add as few entries to the call stack
-    as possible, so that `traceback()` is maximally useful.
+    On the other hand, it might have surprising effects. For instance if a function that suppresses warnings is added to the end of a pipeline, the suppression takes effect for the whole pipeline.
 
 *   **Persistence of piped values**: arguments are not necessarily evaluated right away by the piped function. Sometimes they are evaluated long after the pipeline has returned, for example when a function factory is piped. With persistent piped values, the constructed function can be called at any time:
 
@@ -75,22 +125,38 @@ These are the properties that we might want a pipe to possess, roughly ordered f
 
 *   **Refcount neutrality**: the return value of the pipeline should have a reference count of 1 so it can be mutated in place in further manipulations.
 
--   **Eager unbinding**: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.
+*   **Eager unbinding**: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.
 
--   **Single evaluation**: each component of the pipe should only be evaluated once, so that `sample(10) %>% cbind(., .)` yields two columns with the same value, and `sample(10) %T>% print() %T>% print()` prints the same values twice.
+*   **Progressive stack**: using the pipe should add as few entries to the call stack as possible, so that `traceback()` is maximally useful.
 
-*   **Locality of side effects**: side effects should occur in the current lexical environment. This way, `NA %>% { foo <- . }` assigns the piped value in the current environment and `NA %>% { return(.) }` returns from the function that contains the pipeline.
+*   **Lexical side effects**: side effects should occur in the current lexical environment. This way, `NA %>% { foo <- . }` assigns the piped value in the current environment and `NA %>% { return(.) }` returns from the function that contains the pipeline.
 
 *   **Continuous stack**: the pipe should not affect the chain of parent frames. This is important for tree representations of the call stack.
 
+It is possible to have proper visibility and a neutral impact on refcounts with all implementations by being a bit careful, so we'll only consider the other properties:
 
-|                   | Nested     | Eager      | Lazy       |
-|-------------------|------------|------------|------------|
-| Visibility        | `r pass()` | `r pass()` | `r pass()` |
-| Lazy evaluation   | `r pass()` | `r fail()` | `r pass()` |
-| Eager unbinding   | `r pass()` | `r pass()` | `r fail()` |
-| Single evaluation | `r fail()` | `r pass()` | `r pass()` |
-| Minimal stack     | `r fail()` | `r pass()` | `r pass()` |
+
+|                       | Nested     | Eager<br>(mask) | Eager<br>(mask-num) | Eager<br>(lexical) | Lazy<br>(mask) | Lazy<br>(mask-num) | Lazy<br>(lexical-num) |
+|-----------------------|:----------:|:---------------:|:-------------------:|:------------------:|:--------------:|:------------------:|:---------------------:|
+| Multiple placeholders | `r fail()` | `r pass()`      | `r pass()`          | `r pass()`         | `r pass()`     | `r pass()`         | `r pass()`            |
+| Lazy evaluation       | `r pass()` | `r fail()`      | `r fail()`          | `r fail()`         | `r pass()`     | `r pass()`         | `r pass()`            |
+| Persistence           | `r pass()` | `r fail()`      | `r pass()`          | `r fail()`         | `r pass()`     | `r pass()`         | `r pass()`            |
+| Eager unbinding       | `r pass()` | `r pass()`      | `r fail()`          | `r pass()`         | `r pass()`     | `r fail()`         | `r fail()`            |
+| Progressive stack     | `r fail()` | `r pass()`      | `r pass()`          | `r pass()`         | `r fail()`     | `r fail()`         | `r fail()`            |
+| Lexical effects       | `r pass()` | `r fail()`      | `r fail()`          | `r pass()`         | `r fail()`     | `r fail()`         | `r pass()`            |
+| Continuous stack      | `r pass()` | `r fail()`      | `r fail()`          | `r pass()`         | `r fail()`     | `r fail()`         | `r pass()`            |
+
+
+Some properties are a direct reflection of the high level design decisions:
+
+- Unlike the lazy variants, all eager versions implementing the pipe with iterated evaluation do not pass the lazy evaluation criterion.
+
+- No lazy variant passes the progressive stack criterion. By construction, lazy evaluation requires pushing all the pipe expressions on the stack before evaluation starts. Conversely, all eager variants have a progressive stack.
+
+- The local variants do not have lexical effects or a continuous stack, unlike the lexical variants.
+
+- None of the variants that use numbered placeholders can unbind piped values eagerly. This is how they achieve persistence of these.
+
 
 ### Nested pipe
 
