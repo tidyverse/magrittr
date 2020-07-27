@@ -56,17 +56,33 @@ We'll first explore the desired properties we might want a pipe to possess and t
 
 ### Desired properties
 
-These are the properties that we might want a pipe to possess, roughly ordered from most important to leasy important.
+These are the properties that we might want a pipe to possess, roughly ordered from most important to least important.
 
--   **Visibility**: the visibility of the final function in the pipe should be preserved. This important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
+*   **Visibility**: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
 
--   **Lazy evaluation**: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
+*   **Lazy evaluation**: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
+
+*   **Minimal stack**: using the pipe should add as few entries to the call stack
+    as possible, so that `traceback()` is maximally useful.
+
+*   **Persistence of piped values**: arguments are not necessarily evaluated right away by the piped function. Sometimes they are evaluated long after the pipeline has returned, for example when a function factory is piped. With persistent piped values, the constructed function can be called at any time:
+
+    ```r
+    factory <- function(x) function() x
+    fn <- NA %>% factory()
+    fn()
+    ```
+
+*   **Refcount neutrality**: the return value of the pipeline should have a reference count of 1 so it can be mutated in place in further manipulations.
 
 -   **Eager unbinding**: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.
 
 -   **Single evaluation**: each component of the pipe should only be evaluated once, so that `sample(10) %>% cbind(., .)` yields two columns with the same value, and `sample(10) %T>% print() %T>% print()` prints the same values twice.
 
--   **Minimal stack**: using the pipe should add as few entries to the call stack as possible, so that `traceback()` is maximally useful.
+*   **Locality of side effects**: side effects should occur in the current lexical environment. This way, `NA %>% { foo <- . }` assigns the piped value in the current environment and `NA %>% { return(.) }` returns from the function that contains the pipeline.
+
+*   **Continuous stack**: the pipe should not affect the chain of parent frames. This is important for tree representations of the call stack.
+
 
 |                   | Nested     | Eager      | Lazy       |
 |-------------------|------------|------------|------------|
