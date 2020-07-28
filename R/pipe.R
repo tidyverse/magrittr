@@ -170,6 +170,16 @@ pipe_lazy_masking <- function(lhs, rhs) {
   lazy <- TRUE
   .External2(magrittr_pipe)
 }
+#' @rdname pipe_eager_lexical
+#' @export
+pipe_nested <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  nested <- TRUE
+  .External2(magrittr_pipe)
+}
 
 #' Assignment pipe
 #' 

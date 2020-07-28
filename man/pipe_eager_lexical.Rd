@@ -3,11 +3,14 @@
 \name{pipe_eager_lexical}
 \alias{pipe_eager_lexical}
 \alias{pipe_lazy_masking}
+\alias{pipe_nested}
 \title{Lazy and eager pipes}
 \usage{
 pipe_eager_lexical(lhs, rhs)
 
 pipe_lazy_masking(lhs, rhs)
+
+pipe_nested(lhs, rhs)
 }
 \arguments{
 \item{lhs}{A value or the magrittr placeholder.}

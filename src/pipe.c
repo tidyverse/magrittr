@@ -36,6 +36,7 @@ static SEXP syms_lazy = NULL;
 static SEXP syms_assign = NULL;
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
+static SEXP syms_nested = NULL;
 static SEXP syms_new_lambda = NULL;
 static SEXP syms_paren = NULL;
 static SEXP syms_pipe = NULL;
@@ -51,11 +52,12 @@ static void clean_pipe(void* data);
 static SEXP eval_pipe(void* data);
 static SEXP eval_pipe_lazy(SEXP exprs, SEXP env);
 static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind, SEXP* p_assign);
+static SEXP pipe_nest(SEXP exprs);
 static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
 static inline SEXP as_pipe_tee_call(SEXP x);
 static inline SEXP as_pipe_dollar_call(SEXP x);
-SEXP new_lambda(SEXP exprs, SEXP env);
+static SEXP new_lambda(SEXP exprs, SEXP env);
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
@@ -75,6 +77,14 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     SEXP lambda = new_lambda(CDR(exprs), env);
     UNPROTECT(5);
     return lambda;
+  }
+
+  bool use_nested = Rf_findVar(syms_nested, rho) != R_UnboundValue;
+  if (use_nested) {
+    SEXP call = PROTECT(pipe_nest(exprs));
+    SEXP out = Rf_eval(call, env);
+    UNPROTECT(6);
+    return out;
   }
 
   bool use_lazy = Rf_findVar(syms_lazy, rho) != R_UnboundValue;
@@ -298,6 +308,46 @@ SEXP add_dot(SEXP x) {
 }
 
 
+static
+SEXP pipe_nest(SEXP exprs) {
+  SEXP expr = CAR(exprs);
+  SEXP prev = expr;
+  exprs = CDR(exprs);
+
+  PROTECT_INDEX expr_pi;
+  PROTECT_WITH_INDEX(expr, &expr_pi);
+
+  while (exprs != R_NilValue) {
+    expr = Rf_shallow_duplicate(CAR(exprs));
+    REPROTECT(expr, expr_pi);
+
+    bool found_placeholder = false;
+    SEXP curr = CDR(expr);
+
+    while (curr != R_NilValue) {
+      if (CAR(curr) == syms_dot) {
+        if (found_placeholder) {
+          Rf_errorcall(R_NilValue, "Can't use multiple placeholders.");
+        }
+
+        found_placeholder = true;
+        SETCAR(curr, prev);
+        prev = expr;
+      }
+      curr = CDR(curr);
+    }
+    if (!found_placeholder) {
+      Rf_error("Internal error in `pipe_nest()`: Can't find placeholder.");
+    }
+
+    exprs = CDR(exprs);
+  }
+
+  UNPROTECT(1);
+  return expr;
+}
+
+static
 SEXP new_lambda(SEXP exprs, SEXP env) {
   SEXP call = PROTECT(Rf_lang3(syms_new_lambda, exprs, env));
   SEXP out = Rf_eval(call, magrittr_ns_env);
@@ -324,6 +374,7 @@ SEXP magrittr_init(SEXP ns) {
   syms_assign = Rf_install("<-");
   syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
+  syms_nested = Rf_install("nested");
   syms_new_lambda = Rf_install("new_lambda");
   syms_paren = Rf_install("(");
   syms_pipe = Rf_install("%>%");

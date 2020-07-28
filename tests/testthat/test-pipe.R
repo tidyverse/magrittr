@@ -45,3 +45,11 @@ test_that("lazy pipe evaluates `.` in correct environments", {
   out <- NA %|>% list(.) %|>% list(.) %|>% list(.)
   expect_identical(out, list(list(list(NA))))
 })
+
+test_that("nested pipe can't use multiple placeholders", {
+  rlang::local_bindings(`%>%` = pipe_nested)
+  expect_error(
+    1 %>% list(., .),
+    "multiple"
+  )
+})
