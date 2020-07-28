@@ -132,18 +132,7 @@
   rhs <- substitute(rhs)
   kind <- 1L
   env <- parent.frame()
-  .External2(magrittr_pipe)
-}
-
-#' @rdname pipe
-#' @export
-`%|>%` <- function(lhs, rhs) {
-  lhs <- substitute(lhs)
-  rhs <- substitute(rhs)
-  kind <- 1L
-  env <- parent.frame()
   lazy <- TRUE
-  sym <- quote(`%|>%`)
   .External2(magrittr_pipe)
 }
 

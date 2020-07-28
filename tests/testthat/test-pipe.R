@@ -11,7 +11,9 @@ test_that("compound operator works with fancy pipes", {
   expect_identical(data, head(mtcars$cyl) / mean(mtcars$am))
 })
 
-test_that("pipe expressions are evaluated in the current environment", {
+test_that("eager pipe expressions are evaluated in the current environment", {
+  rlang::local_bindings(`%>%` = pipe_eager_lexical)
+
   fn <- function(...) parent.frame()
   out <- NULL %>% identity() %>% fn()
   expect_identical(out, environment())
@@ -33,16 +35,16 @@ test_that("`.` is restored", {
 })
 
 test_that("lazy pipe evaluates expressions lazily (#120)", {
-   out <- stop("foo") %|>% identity() %|>% tryCatch(error = identity)
+   out <- stop("foo") %>% identity() %>% tryCatch(error = identity)
    expect_true(inherits(out, "simpleError"))
 
    ignore <- function(...) NA
-   out <- stop("foo") %|>% identity() %|>% ignore()
+   out <- stop("foo") %>% identity() %>% ignore()
    expect_identical(out, NA)
 })
 
 test_that("lazy pipe evaluates `.` in correct environments", {
-  out <- NA %|>% list(.) %|>% list(.) %|>% list(.)
+  out <- NA %>% list(.) %>% list(.) %>% list(.)
   expect_identical(out, list(list(list(NA))))
 })
 
