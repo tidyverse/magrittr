@@ -143,6 +143,7 @@
   kind <- 1L
   env <- parent.frame()
   lazy <- TRUE
+  sym <- quote(`%|>%`)
   .External2(magrittr_pipe)
 }
 
@@ -158,6 +159,7 @@ pipe_eager_lexical <- function(lhs, rhs) {
   rhs <- substitute(rhs)
   kind <- 1L
   env <- parent.frame()
+  sym <- sys.call()[[1]]
   .External2(magrittr_pipe)
 }
 #' @rdname pipe_eager_lexical
@@ -168,6 +170,7 @@ pipe_lazy_masking <- function(lhs, rhs) {
   kind <- 1L
   env <- parent.frame()
   lazy <- TRUE
+  sym <- sys.call()[[1]]
   .External2(magrittr_pipe)
 }
 #' @rdname pipe_eager_lexical
@@ -178,6 +181,7 @@ pipe_nested <- function(lhs, rhs) {
   kind <- 1L
   env <- parent.frame()
   nested <- TRUE
+  sym <- sys.call()[[1]]
   .External2(magrittr_pipe)
 }
 

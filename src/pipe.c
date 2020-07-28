@@ -42,8 +42,8 @@ static SEXP syms_paren = NULL;
 static SEXP syms_pipe = NULL;
 static SEXP syms_pipe_compound = NULL;
 static SEXP syms_pipe_dollar = NULL;
-static SEXP syms_pipe_lazy = NULL;
 static SEXP syms_pipe_tee = NULL;
+static SEXP syms_sym = NULL;
 
 static SEXP calls_base_with = NULL;
 static SEXP chrs_dot = NULL;
@@ -51,7 +51,8 @@ static SEXP chrs_dot = NULL;
 static void clean_pipe(void* data);
 static SEXP eval_pipe(void* data);
 static SEXP eval_pipe_lazy(SEXP exprs, SEXP env);
-static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind, SEXP* p_assign);
+static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind,
+                        SEXP pipe_sym, SEXP* p_assign);
 static SEXP pipe_nest(SEXP exprs);
 static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
@@ -68,14 +69,20 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   SEXP kind = PROTECT(Rf_eval(syms_kind, rho));
   SEXP env = PROTECT(Rf_eval(syms_env, rho));
 
+  SEXP pipe_sym = syms_pipe;
+  if (Rf_findVar(syms_sym, rho) != R_UnboundValue) {
+    pipe_sym = Rf_eval(syms_sym, rho);
+  }
+  PROTECT(pipe_sym);
+
   enum pipe_kind c_kind = INTEGER(kind)[0];
   SEXP assign = R_NilValue;
-  SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, env, c_kind, &assign));
+  SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, env, c_kind, pipe_sym, &assign));
 
   // Create a magrittr lambda when first expression is a `.`
   if (CAR(exprs) == syms_dot) {
     SEXP lambda = new_lambda(CDR(exprs), env);
-    UNPROTECT(5);
+    UNPROTECT(6);
     return lambda;
   }
 
@@ -83,7 +90,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   if (use_nested) {
     SEXP call = PROTECT(pipe_nest(exprs));
     SEXP out = Rf_eval(call, env);
-    UNPROTECT(6);
+    UNPROTECT(7);
     return out;
   }
 
@@ -115,7 +122,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     UNPROTECT(2);
   }
 
-  UNPROTECT(5);
+  UNPROTECT(6);
   return out;
 }
 
@@ -180,13 +187,14 @@ void clean_pipe(void* data) {
 }
 
 
-static enum pipe_kind parse_pipe_call(SEXP x);
+static enum pipe_kind parse_pipe_call(SEXP x, SEXP pipe_sym);
 
 static
 SEXP pipe_unroll(SEXP lhs,
                  SEXP rhs,
                  SEXP env,
                  enum pipe_kind kind,
+                 SEXP pipe_sym,
                  SEXP* p_assign) {
   PROTECT_INDEX out_pi;
   SEXP out = R_NilValue;
@@ -222,7 +230,7 @@ SEXP pipe_unroll(SEXP lhs,
 
     SEXP args = CDR(lhs);
 
-    if ((kind = parse_pipe_call(lhs))) {
+    if ((kind = parse_pipe_call(lhs, pipe_sym))) {
       lhs = CAR(args);
       rhs = CADR(args);
       continue;
@@ -238,14 +246,14 @@ SEXP pipe_unroll(SEXP lhs,
 }
 
 static
-enum pipe_kind parse_pipe_call(SEXP x) {
+enum pipe_kind parse_pipe_call(SEXP x, SEXP pipe_sym) {
   if (TYPEOF(x) != LANGSXP) {
     return PIPE_KIND_none;
   }
 
   SEXP car = CAR(x);
 
-  if (car == syms_pipe || car == syms_pipe_lazy) {
+  if (car == pipe_sym) {
     return PIPE_KIND_magrittr;
   }
   if (car == syms_pipe_compound) {
@@ -380,8 +388,8 @@ SEXP magrittr_init(SEXP ns) {
   syms_pipe = Rf_install("%>%");
   syms_pipe_compound = Rf_install("%<>%");
   syms_pipe_dollar = Rf_install("%$%");
-  syms_pipe_lazy = Rf_install("%|>%");
   syms_pipe_tee = Rf_install("%T>%");
+  syms_sym = Rf_install("sym");
 
   chrs_dot = Rf_allocVector(STRSXP, 1);
   R_PreserveObject(chrs_dot);
