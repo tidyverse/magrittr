@@ -56,11 +56,11 @@ We'll first explore the desired properties we might want a pipe to possess and t
 
 ### Desired properties
 
-These are the properties that we might want a pipe to possess, roughly ordered from most important to leasy important.
+These are the properties that we might want a pipe to possess, roughly ordered from most important to least important.
 
--   **Visibility**: the visibility of the final function in the pipe should be preserved. This important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
+-   **Visibility**: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally returns its first argument invisibly) do not print.
 
--   **Lazy evaluation**: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
+-   **Lazy evaluation**: steps of the pipe should only be evaluated when actually needed. This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
 
 -   **Eager unbinding**: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.
 
@@ -135,7 +135,7 @@ Once the pipe has been transformed to a regular R expression, it must be evaluat
 -   In a **new** environment.
 -   In a **closure** environment, the environment of a new function.
 
-This choice affects impacts functions that work with the current environment (like `assign()`, `get()`, `ls()`), or the current context (like `return()`). The following two functions illustrate the primary differences:
+This choice impacts functions that work with the current environment (like `assign()`, `get()`, `ls()`), or the current context (like `return()`). The following two functions illustrate the primary differences:
 
 ```{r}
 f <- function() {
