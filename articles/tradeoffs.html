@@ -469,8 +469,8 @@
 <div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu">factory</span>() <span class="kw">%!&gt;%</span> { <span class="fu">.</span>() }
 <span class="fu">fn</span>()
 <span class="co">#&gt; function() x</span>
-<span class="co">#&gt; &lt;bytecode: 0x7f95ee3a35a0&gt;</span>
-<span class="co">#&gt; &lt;environment: 0x7f95ebc853b0&gt;</span></pre></body></html></div>
+<span class="co">#&gt; &lt;bytecode: 0x7fcd3190e368&gt;</span>
+<span class="co">#&gt; &lt;environment: 0x7fcd326f2378&gt;</span></pre></body></html></div>
 <p>Also, since we’re binding <code>.</code> in the current environment, we need to clean it up once the pipeline has returned. At that point, the placeholder no longer exists:</p>
 <div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu">factory</span>()
 <span class="fu">fn</span>()
