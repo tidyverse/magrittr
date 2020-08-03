@@ -1,62 +1,3 @@
-# Create a pipe operator.
-#
-# This function is used to create all the magrittr pipe operators.
-pipe <- function()
-{
-  function(lhs, rhs)
-  {
-    # the parent environment
-    parent <- parent.frame()
-    
-    # the environment in which to evaluate pipeline
-    env    <- new.env(parent = parent)
-    
-    # split the pipeline/chain into its parts.
-    chain_parts <- split_chain(match.call(), env = env)
-
-    pipes <- chain_parts[["pipes"]] # the pipe operators.
-    rhss  <- chain_parts[["rhss" ]] # the right-hand sides.
-    lhs   <- chain_parts[["lhs"  ]] # the left-hand side.
-
-    # Create the list of functions defined by the right-hand sides.
-    env[["_function_list"]] <- 
-      lapply(seq_along(rhss), 
-             function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
-
-    # Create a function which applies each of the above functions in turn.
-    env[["_fseq"]] <-
-     `class<-`(eval(quote(function(value) freduce(value, `_function_list`)), 
-                    env, env), c("fseq", "function"))
- 
-    # make freduce available to the resulting function 
-    # even if magrittr is not loaded.
-    env[["freduce"]] <- freduce 
-    
-    # Result depends on the left-hand side.
-    if (is_placeholder(lhs)) {
-      # return the function itself.
-      env[["_fseq"]]
-    } else {
-      # evaluate the LHS
-      env[["_lhs"]] <- eval(lhs, parent, parent)
-      
-      # compute the result by applying the function to the LHS
-      result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-      
-      # If assignment pipe is used, assign result
-      if (is_compound_pipe(pipes[[1L]])) {
-        eval(call("<-", lhs, result[["value"]]), parent, parent)
-      # Otherwise, return it.
-      } else {
-        if (result[["visible"]]) 
-          result[["value"]] 
-        else 
-          invisible(result[["value"]])
-      }
-    }
-  }
-}
-
 #' Pipe
 #' 
 #' Pipe an object forward into a function or call expression.
@@ -186,7 +127,13 @@ pipe <- function()
 #' 
 #' @rdname pipe
 #' @export
-`%>%`  <- pipe()
+`%>%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
+}
 
 #' Assignment pipe
 #' 
@@ -229,7 +176,13 @@ pipe <- function()
 #' 
 #' @rdname compound
 #' @export
-`%<>%` <- pipe() 
+`%<>%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 2L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
+}
 
 #' Tee pipe
 #' 
@@ -253,7 +206,13 @@ pipe <- function()
 #' 
 #' @rdname tee
 #' @export
-`%T>%` <- pipe() 
+`%T>%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 3L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
+}
 
 #' Exposition pipe
 #' 
@@ -280,63 +239,25 @@ pipe <- function()
 #'   
 #' @rdname exposition
 #' @export
-`%$%` <- pipe() 
-
-
-#' @import rlang
-NULL
-
-`%>%` <- function(x, y) {
-  exprs <- pipe_unroll(substitute(x), substitute(y))
-
-  env <- caller_env()
-  local_bindings("." := NULL, .env = env)
-
-  while (!is_null(rest <- node_cdr(exprs))) {
-    out <- eval_bare(node_car(exprs), env)
-    env_poke(env, ".", out)
-    exprs <- rest
-  }
-
-  eval_bare(node_car(exprs), env)
+`%$%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 4L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
 }
 
-pipe_unroll <- function(x, y) {
-  out <- new_pipe_node(y, NULL)
-  node <- x
 
-  while (is_call(node, "%>%")) {
-    args <- node_cdr(node)
-    rhs <- node_cadr(args)
+new_lambda <- function(exprs, env) {
+  `_function_list` <- lapply(exprs, as_pipe_fn, env)
 
-    out <- new_pipe_node(rhs, out)
-    node <- node_car(args)
-  }
-
-  new_node(node, out)
+  structure(
+    function(value) freduce(value, `_function_list`),
+    class = c("fseq", "function")
+  )
 }
 
-new_pipe_node <- function(car, cdr) {
-  if (!is_call(car)) {
-    car <- call2(car)
-  }
-  car <- add_dot(car)
-
-  new_node(car, cdr)
-}
-add_dot <- function(x) {
-  if (!is_call(x)) {
-    return(x)
-  }
-
-  args <- node_cdr(x)
-  while (!is_null(args)) {
-    if (identical(node_car(args), quote(.))) {
-      return(x)
-    }
-    args <- node_cdr(args)
-  }
-
-  args <- new_node(quote(.), node_cdr(x))
-  new_call(node_car(x), args)
+lambda_fmls <- as.pairlist(alist(. = ))
+as_pipe_fn <- function(expr, env) {
+  eval(call("function", lambda_fmls, expr), env)
 }
