@@ -185,7 +185,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>) <span class="kw">%T&gt;%</span>
 <span class="no">plot</span> <span class="kw">%&gt;%</span> <span class="co"># plot usually does not return anything. </span>
 <span class="no">colSums</span>
-<span class="co">#&gt; [1]  15.94833 -12.21057</span></pre></body></html></div>
+<span class="co">#&gt; [1] -5.342125 21.384923</span></pre></body></html></div>
 <p>The “exposition” pipe, <code><a href="../reference/exposition.html">%$%</a></code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">iris</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">Sepal.Length</span> <span class="kw">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">Sepal.Length</span>)) <span class="kw">%$%</span>
@@ -214,9 +214,8 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="no">.</span>), <span class="st">"\n"</span>)
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">.</span>)
 }
-<span class="co">#&gt; Mean: 4.978334 Variance: 24.55914</span>
-<span class="co">#&gt; [1]  8.493122975 -0.509173870  3.163578532  2.407772616  4.144813292</span>
-<span class="co">#&gt; [6] -0.008679296</span></pre></body></html></div>
+<span class="co">#&gt; Mean: 5.22345 Variance: 23.1295</span>
+<span class="co">#&gt; [1]  5.414016 13.306841  5.447707 14.184652  3.521871  3.973639</span></pre></body></html></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">100</span>) <span class="kw">%&gt;%</span> <span class="fu">`*`</span>(<span class="fl">5</span>) <span class="kw">%&gt;%</span> <span class="fu">`+`</span>(<span class="fl">5</span>) <span class="kw">%&gt;%</span>
 {

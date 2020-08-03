@@ -98,6 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Design tradeoffs</h1>
                         <h4 class="author">Hadley Wickham</h4>
+                        <h4 class="author">Lionel Henry</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/magrittr/blob/master/vignettes/tradeoffs.Rmd"><code>vignettes/tradeoffs.Rmd</code></a></small>
@@ -118,257 +119,507 @@
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="fu">foo</span>(<span class="no">x</span>))</pre></body></html></div>
 </li>
 <li>
-<p><strong>Eager</strong></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">.</span> <span class="kw">&lt;-</span> <span class="no">x</span>
-<span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">foo</span>(<span class="no">.</span>)
-<span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">.</span>)
-<span class="no">.</span></pre></body></html></div>
+<p><strong>Eager (mask)</strong>, masking environment</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">local</a></span>({
+  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="no">x</span>
+  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">foo</span>(<span class="no">.</span>)
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">.</span>)
+})</pre></body></html></div>
 </li>
 <li>
-<p><strong>Lazy</strong></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">...1</span> <span class="kw">&lt;-</span> <span class="no">x</span>
-<span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"..2"</span>, <span class="fu">foo</span>(<span class="no">..1</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"..3"</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">..2</span>))
-<span class="no">...3</span></pre></body></html></div>
+<p><strong>Eager (mask-num)</strong>: masking environment, numbered placeholder</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">local</a></span>({
+  <span class="no">...1</span> <span class="kw">&lt;-</span> <span class="no">x</span>
+  <span class="no">...2</span> <span class="kw">&lt;-</span> <span class="fu">foo</span>(<span class="no">...1</span>)
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">...2</span>)
+})</pre></body></html></div>
+</li>
+<li>
+<p><strong>Eager (lexical)</strong>: lexical environment</p>
+<p>This variant assigns pipe expressions to the placeholder <code>.</code> in the current environment. This assignment is temporary: once the pipe has returned, the placeholder binding is reset to its previous state.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">with_dot_cleanup</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">expr</span>) {
+  <span class="co"># Initialises `.` in the caller environment and resets it on exit.</span>
+  <span class="co"># (We use `:=` instead of `=` to avoid partial matching.)</span>
+  <span class="kw pkg">rlang</span><span class="kw ns">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/local_bindings.html">local_bindings</a></span>(<span class="no">.</span> <span class="kw">:=</span> <span class="kw">NULL</span>, <span class="kw">.env</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span>())
+  <span class="no">expr</span>
+}
+<span class="fu">with_dot_cleanup</span>({
+  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="no">x</span>
+  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">foo</span>(<span class="no">.</span>)
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">.</span>)
+})</pre></body></html></div>
+</li>
+<li>
+<p><strong>Lazy (mask)</strong>: masking environments</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">mask1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span>(<span class="kw">parent</span> <span class="kw">=</span> <span class="no">env</span>)
+<span class="no">mask2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span>(<span class="kw">parent</span> <span class="kw">=</span> <span class="no">env</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"."</span>, <span class="no">x</span>, <span class="no">mask1</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"."</span>, <span class="fu">foo</span>(<span class="no">.</span>), <span class="no">mask2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">mask2</span>, <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">.</span>))</pre></body></html></div>
+</li>
+<li>
+<p><strong>Lazy (mask-num)</strong>: masking environment, numbered placeholder</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/eval.html">local</a></span>({
+  <span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"...1"</span>, <span class="no">x</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"...2"</span>, <span class="fu">foo</span>(<span class="no">...1</span>))
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">...2</span>)
+})</pre></body></html></div>
+</li>
+<li>
+<p><strong>Lazy (lexical-num)</strong>: lexical environment, numbered placeholder</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"...1"</span>, <span class="no">x</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign</a></span>(<span class="st">"...2"</span>, <span class="fu">foo</span>(<span class="no">.</span>))
+<span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">...2</span>)</pre></body></html></div>
 </li>
 </ul>
-<p>(There is a fourth option, which uses eager evaluation, but uses a unique variable name for each stage. This has no advantages compared to the eager pipe so we will not consider it further.)</p>
 <p>We’ll first explore the desired properties we might want a pipe to possess and then see how each of the three variants does.</p>
-<div id="desired-properties" class="section level3">
-<h3 class="hasAnchor">
-<a href="#desired-properties" class="anchor"></a>Desired properties</h3>
-<p>These are the properties that we might want a pipe to possess, roughly ordered from most important to leasy important.</p>
+</div>
+<div id="desired-properties" class="section level2">
+<h2 class="hasAnchor">
+<a href="#desired-properties" class="anchor"></a>Desired properties</h2>
+<p>These are the properties that we might want a pipe to possess, roughly ordered from most important to least important.</p>
 <ul>
-<li><p><strong>Visibility</strong>: the visibility of the final function in the pipe should be preserved. This important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.</p></li>
-<li><p><strong>Lazy evaluation</strong>: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like <code>stop("!") %&gt;% try()</code>, making pipes capable of capturing a wider range of R expressions.</p></li>
+<li><p><strong>Visibility</strong>: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.</p></li>
+<li><p><strong>Multiple placeholders</strong>: each component of the pipe should only be evaluated once even when there are multiple placeholders, so that <code>sample(10) %&gt;% cbind(., .)</code> yields two columns with the same value. Relatedly, <code>sample(10) %T&gt;% print() %T&gt;% print()</code> must print the same values twice.</p></li>
+<li>
+<p><strong>Lazy evaluation</strong>: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like <code>stop("!") %&gt;% try()</code>, making pipes capable of capturing a wider range of R expressions.</p>
+<p>On the other hand, it might have surprising effects. For instance if a function that suppresses warnings is added to the end of a pipeline, the suppression takes effect for the whole pipeline.</p>
+</li>
+<li>
+<p><strong>Persistence of piped values</strong>: arguments are not necessarily evaluated right away by the piped function. Sometimes they are evaluated long after the pipeline has returned, for example when a function factory is piped. With persistent piped values, the constructed function can be called at any time:</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">factory</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="kw">function</span>() <span class="no">x</span>
+<span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">NA</span> <span class="kw">%&gt;%</span> <span class="fu">factory</span>()
+<span class="fu">fn</span>()
+<span class="co">#&gt; [1] NA</span></pre></body></html></div>
+</li>
+<li><p><strong>Refcount neutrality</strong>: the return value of the pipeline should have a reference count of 1 so it can be mutated in place in further manipulations.</p></li>
 <li><p><strong>Eager unbinding</strong>: pipes are often used with large data objects, so intermediate objects in the pipeline should be unbound as soon as possible so they are available for garbage collection.</p></li>
-<li><p><strong>Single evaluation</strong>: each component of the pipe should only be evaluated once, so that <code>sample(10) %&gt;% cbind(., .)</code> yields two columns with the same value, and <code>sample(10) %T&gt;% print() %T&gt;% print()</code> prints the same values twice.</p></li>
-<li><p><strong>Minimal stack</strong>: using the pipe should add as few entries to the call stack as possible, so that <code><a href="https://rdrr.io/r/base/traceback.html">traceback()</a></code> is maximally useful.</p></li>
+<li><p><strong>Progressive stack</strong>: using the pipe should add as few entries to the call stack as possible, so that <code><a href="https://rdrr.io/r/base/traceback.html">traceback()</a></code> is maximally useful.</p></li>
+<li><p><strong>Lexical side effects</strong>: side effects should occur in the current lexical environment. This way, <code>NA %&gt;% { foo &lt;- . }</code> assigns the piped value in the current environment and <code>NA %&gt;% { return(.) }</code> returns from the function that contains the pipeline.</p></li>
+<li><p><strong>Continuous stack</strong>: the pipe should not affect the chain of parent frames. This is important for tree representations of the call stack.</p></li>
 </ul>
+<p>It is possible to have proper visibility and a neutral impact on refcounts with all implementations by being a bit careful, so we’ll only consider the other properties:</p>
 <table class="table">
+<colgroup>
+<col width="15%">
+<col width="7%">
+<col width="11%">
+<col width="13%">
+<col width="13%">
+<col width="10%">
+<col width="13%">
+<col width="15%">
+</colgroup>
 <thead><tr class="header">
 <th></th>
-<th>Nested</th>
-<th>Eager</th>
-<th>Lazy</th>
+<th align="center">Nested</th>
+<th align="center">Eager<br>(mask)</th>
+<th align="center">Eager<br>(mask-num)</th>
+<th align="center">Eager<br>(lexical)</th>
+<th align="center">Lazy<br>(mask)</th>
+<th align="center">Lazy<br>(mask-num)</th>
+<th align="center">Lazy<br>(lexical-num)</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>Visibility</td>
-<td>✅</td>
-<td>✅</td>
-<td>✅</td>
+<td>Multiple placeholders</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
 </tr>
 <tr class="even">
 <td>Lazy evaluation</td>
-<td>✅</td>
-<td>❌</td>
-<td>✅</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
 </tr>
 <tr class="odd">
-<td>Eager unbinding</td>
-<td>✅</td>
-<td>✅</td>
-<td>❌</td>
+<td>Persistence</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
 </tr>
 <tr class="even">
-<td>Single evaluation</td>
-<td>❌</td>
-<td>✅</td>
-<td>✅</td>
+<td>Eager unbinding</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
 </tr>
 <tr class="odd">
-<td>Minimal stack</td>
-<td>❌</td>
-<td>✅</td>
-<td>✅</td>
+<td>Progressive stack</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+<tr class="even">
+<td>Lexical effects</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+</tr>
+<tr class="odd">
+<td>Continuous stack</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
 </tr>
 </tbody>
 </table>
+<div id="implications-of-design-decisions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#implications-of-design-decisions" class="anchor"></a>Implications of design decisions</h3>
+<p>Some properties are a direct reflection of the high level design decisions.</p>
+<div id="placeholder-binding" class="section level4">
+<h4 class="hasAnchor">
+<a href="#placeholder-binding" class="anchor"></a>Placeholder binding</h4>
+<p>The nested pipe does not assign piped expressions to a placeholder. All the other variants perform this assignment. This means that with a nested rewrite approach, it isn’t possible to have multiple placeholders unless the piped expression is pasted multiple times. This would cause multiple evaluations with deleterious effects:</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">.</span>, <span class="no">.</span>)
+
+<span class="co"># Becomes</span>
+<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>), <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>))</pre></body></html></div>
+<p>Assigning to the placeholder within an argument would preserve the nestedness and lazyness. However that wouldn’t work properly because there’s no gaurantee that the first argument will be evaluated before the second argument.</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>) <span class="kw">%&gt;%</span> <span class="fu">foo</span>(<span class="no">.</span>, <span class="no">.</span>)
+<span class="fu">foo</span>(<span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>), <span class="no">.</span>)</pre></body></html></div>
+<p>For these reasons, the nested pipe does not support multiple placeholders. By contrast, all the other variants assign the result of pipe expressions to the placeholder. There are variations in how the placeholder binding is created (lazily or eagerly, in a mask or in the current environment, with numbered symbols or with a unique symbol) but all these variants allow multiple placeholders.</p>
 </div>
+<div id="masking-environment" class="section level4">
+<h4 class="hasAnchor">
+<a href="#masking-environment" class="anchor"></a>Masking environment</h4>
+<p>Because the local variants of the pipe evaluate in a mask, they do not have lexical effects or a continuous stack. This is unlike the lexical variants that evaluate in the current environment.</p>
+</div>
+<div id="laziness" class="section level4">
+<h4 class="hasAnchor">
+<a href="#laziness" class="anchor"></a>Laziness</h4>
+<p>Unlike the lazy variants, all eager versions implementing the pipe with iterated evaluation do not pass the lazy evaluation criterion.</p>
+<p>Secondly, no lazy variant passes the progressive stack criterion. By construction, lazy evaluation requires pushing all the pipe expressions on the stack before evaluation starts. Conversely, all eager variants have a progressive stack.</p>
+</div>
+<div id="numbered-placeholders" class="section level4">
+<h4 class="hasAnchor">
+<a href="#numbered-placeholders" class="anchor"></a>Numbered placeholders</h4>
+<p>None of the variants that use numbered placeholders can unbind piped values eagerly. This is how they achieve persistence of these bindings.</p>
+</div>
+</div>
+</div>
+<div id="three-implementations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#three-implementations" class="anchor"></a>Three implementations</h2>
+<p>The GNU R team is considering implementing the nested approach in base R with a parse-time code transformation (just like <code>-&gt;</code> is transformed to <code>&lt;-</code> by the parser).</p>
+<p>We have implemented three approaches in magrittr:</p>
+<ul>
+<li>The nested pipe</li>
+<li>The eager lexical pipe</li>
+<li>The lazy masking pipe</li>
+</ul>
+<p>These approaches have complementary strengths and weaknesses.</p>
 <div id="nested-pipe" class="section level3">
 <h3 class="hasAnchor">
 <a href="#nested-pipe" class="anchor"></a>Nested pipe</h3>
-<ul>
-<li><p>Visibility: ✅</p></li>
-<li><p>Lazy evaluation: ✅</p></li>
-<li><p>Eager unbinding: ✅</p></li>
-<li>
-<p>Single evaluation: ❌ trivial for simple pipes, but not possible for pipes that use the pronoun in multiple places.</p>
-<p>Note that the simplest rewrite doesn’t work because there’s no gaurantee that the first argument will be evaluated before the second argument.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu">foo</span>(<span class="no">.</span>, <span class="no">.</span>)
-<span class="fu">foo</span>(<span class="no">.</span> <span class="kw">&lt;-</span> <span class="no">x</span>, <span class="no">.</span>)</pre></body></html></div>
-</li>
-<li><p>Minimal stack: ❌ maximum stack depth is the length of the pipe.</p></li>
-</ul>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">`%|&gt;%`</span> <span class="kw">&lt;-</span> <span class="kw pkg">magrittr</span><span class="kw ns">::</span><span class="no"><a href="../reference/pipe_eager_lexical.html">pipe_nested</a></span></pre></body></html></div>
+<div id="multiple-placeholders" class="section level4">
+<h4 class="hasAnchor">
+<a href="#multiple-placeholders" class="anchor"></a>Multiple placeholders ❌</h4>
+<p>The nested pipe does not bind expressions to a placeholder and so can’t support multiple placeholders.</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="st">"foo"</span> <span class="kw">%|&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">.</span>, <span class="no">.</span>)
+<span class="co">#&gt; Error: Can't use multiple placeholders.</span></pre></body></html></div>
 </div>
-<div id="eager-pipe" class="section level3">
+<div id="lazy-evaluation" class="section level4">
+<h4 class="hasAnchor">
+<a href="#lazy-evaluation" class="anchor"></a>Lazy evaluation ✅</h4>
+<p>Because it relies on the usual rules of argument application, the nested pipe is lazy.</p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r">{
+  <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"oh no"</span>) <span class="kw">%|&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>(<span class="kw">silent</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="st">"success"</span>
+}
+<span class="co">#&gt; [1] "success"</span></pre></body></html></div>
+</div>
+<div id="persistence-and-eager-unbinding" class="section level4">
+<h4 class="hasAnchor">
+<a href="#persistence-and-eager-unbinding" class="anchor"></a>Persistence and eager unbinding ✅</h4>
+<p>The pipe expressions are binded as promises within the execution environment of each function. This environment persists as long as a promise holds onto it. Evaluating the promise discards the reference to the environment which becomes available for garbage collection.</p>
+<p>For instance, here is a function factory that creates a function. The constructed function returns the value supplied at the time of creation:</p>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">factory</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="kw">function</span>() <span class="no">x</span>
+<span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fu">factory</span>(<span class="fl">TRUE</span>)
+<span class="fu">fn</span>()
+<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
+<p>This does not cause any issue with the nested pipe:</p>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%|&gt;%</span> <span class="fu">factory</span>()
+<span class="fu">fn</span>()</pre></body></html></div>
+</div>
+<div id="progressive-stack" class="section level4">
+<h4 class="hasAnchor">
+<a href="#progressive-stack" class="anchor"></a>Progressive stack ❌</h4>
+<p>Because the piped expressions are lazily evaluated, the whole pipeline is pushed on the stack before execution starts. This results in a more complex backtrace than necessary:</p>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">faulty</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"tilt"</span>)
+<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">1</span>
+<span class="no">g</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">2</span>
+<span class="no">h</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">3</span>
+
+<span class="fu">faulty</span>() <span class="kw">%|&gt;%</span> <span class="fu">f</span>() <span class="kw">%|&gt;%</span> <span class="fu">g</span>() <span class="kw">%|&gt;%</span> <span class="fu">h</span>()
+<span class="co">#&gt; Error in faulty() : tilt</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/traceback.html">traceback</a></span>()
+<span class="co">#&gt; 7: stop("tilt")</span>
+<span class="co">#&gt; 6: faulty()</span>
+<span class="co">#&gt; 5: f(faulty())</span>
+<span class="co">#&gt; 4: g(f(faulty()))</span>
+<span class="co">#&gt; 3: h(g(f(faulty())))</span>
+<span class="co">#&gt; 2: .External2(magrittr_pipe) at pipe.R#181</span>
+<span class="co">#&gt; 1: faulty() %|&gt;% f() %|&gt;% g() %|&gt;% h()</span></pre></body></html></div>
+<p>Also note how the expressions in the backtrace look different from the actual code. This is because of the nested rewrite of the pipeline.</p>
+</div>
+<div id="lexical-effects" class="section level4">
+<h4 class="hasAnchor">
+<a href="#lexical-effects" class="anchor"></a>Lexical effects ✅</h4>
+<p>This is a benefit of using the normal R rules of evaluation. Side effects occur in the correct environment:</p>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">foo</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+<span class="fl">TRUE</span> <span class="kw">%|&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"foo"</span>, <span class="no">.</span>)
+<span class="no">foo</span>
+<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
+<p>Control flow has the correct behaviour:</p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
+  <span class="fl">TRUE</span> <span class="kw">%|&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
+  <span class="fl">FALSE</span>
+}
+<span class="fu">fn</span>()
+<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
+</div>
+<div id="continuous-stack" class="section level4">
+<h4 class="hasAnchor">
+<a href="#continuous-stack" class="anchor"></a>Continuous stack ✅</h4>
+<p>Because evaluation occurs in the current environment, the stack is continuous. Let’s instrument errors with a structured backtrace to see what that means:</p>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">error</span> <span class="kw">=</span> <span class="kw pkg">rlang</span><span class="kw ns">::</span><span class="no"><a href="https://rlang.r-lib.org/reference/entrace.html">entrace</a></span>)</pre></body></html></div>
+<p>The tree representation of the backtrace correctly represents the hierarchy of execution frames:</p>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">foobar</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> <span class="kw">%|&gt;%</span> <span class="fu">quux</span>()
+<span class="no">quux</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> <span class="kw">%|&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>()
+
+<span class="st">"tilt"</span> <span class="kw">%|&gt;%</span> <span class="fu">foobar</span>()
+<span class="co">#&gt; Error in x %|&gt;% stop() : tilt</span>
+
+<span class="kw pkg">rlang</span><span class="kw ns">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/last_error.html">last_trace</a></span>()
+<span class="co">#&gt; &lt;error/rlang_error&gt;</span>
+<span class="co">#&gt; tilt</span>
+<span class="co">#&gt; Backtrace:</span>
+<span class="co">#&gt;     █</span>
+<span class="co">#&gt;  1. ├─"tilt" %|&gt;% foobar()</span>
+<span class="co">#&gt;  2. └─global::foobar("tilt")</span>
+<span class="co">#&gt;  3.   ├─x %|&gt;% quux()</span>
+<span class="co">#&gt;  4.   └─global::quux(x)</span>
+<span class="co">#&gt;  5.     └─x %|&gt;% stop()</span></pre></body></html></div>
+</div>
+</div>
+<div id="eager-lexical-pipe" class="section level3">
 <h3 class="hasAnchor">
-<a href="#eager-pipe" class="anchor"></a>Eager pipe</h3>
-<ul>
-<li>
-<p>Visibility: ✅.</p>
-<p>Note that the final computation must be handled differently, as the following transformation loses visibility.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">foo</span>(<span class="no">.</span>)
-<span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>(<span class="no">.</span>)
-<span class="no">.</span></pre></body></html></div>
-</li>
-<li><p>Lazy evaluation: ❌ assignment forces eager evaluation of each step.</p></li>
-<li><p>Eager clean up: ✅</p></li>
-<li><p>Single evaluation: ✅</p></li>
-<li><p>Minimal stack: ✅ maximum stack depth is 1.</p></li>
-</ul>
+<a href="#eager-lexical-pipe" class="anchor"></a>Eager lexical pipe</h3>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">`%!&gt;%`</span> <span class="kw">&lt;-</span> <span class="kw pkg">magrittr</span><span class="kw ns">::</span><span class="no"><a href="../reference/pipe_eager_lexical.html">pipe_eager_lexical</a></span></pre></body></html></div>
+<div id="multiple-placeholders-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#multiple-placeholders-1" class="anchor"></a>Multiple placeholders ✅</h4>
+<p>Pipe expressions are eagerly assigned to the placeholder. This makes it possible to use the placeholder multiple times without causing multiple evaluations.</p>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="st">"foo"</span> <span class="kw">%!&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">.</span>, <span class="no">.</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] "foo"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] "foo"</span></pre></body></html></div>
 </div>
-<div id="lazy-pipe" class="section level3">
+<div id="lazy-evaluation-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#lazy-evaluation-1" class="anchor"></a>Lazy evaluation ❌</h4>
+<p>Assignment forces eager evaluation of each step.</p>
+<div class="sourceCode" id="cb23"><html><body><pre class="r">{
+  <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"oh no"</span>) <span class="kw">%!&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>(<span class="kw">silent</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="st">"success"</span>
+}
+<span class="co">#&gt; Error in stop("oh no") %!&gt;% try(silent = TRUE): oh no</span></pre></body></html></div>
+</div>
+<div id="persistence" class="section level4">
+<h4 class="hasAnchor">
+<a href="#persistence" class="anchor"></a>Persistence: ❌</h4>
+<p>Because we’re updating the value of <code>.</code> at each step, the piped expressions are not persistent. This has subtle effects when the piped expressions are not evaluated right away.</p>
+<p>With the eager pipe we get rather confusing results with the factory function if we try to call the constructed function in the middle of the pipeline. In the following snippet the placeholder <code>.</code> is binded to the constructed function itself rather than the initial value <code>TRUE</code>, by the time the function is called:</p>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu">factory</span>() <span class="kw">%!&gt;%</span> { <span class="fu">.</span>() }
+<span class="fu">fn</span>()
+<span class="co">#&gt; function() x</span>
+<span class="co">#&gt; &lt;bytecode: 0x7f95ee3a35a0&gt;</span>
+<span class="co">#&gt; &lt;environment: 0x7f95ebc853b0&gt;</span></pre></body></html></div>
+<p>Also, since we’re binding <code>.</code> in the current environment, we need to clean it up once the pipeline has returned. At that point, the placeholder no longer exists:</p>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu">factory</span>()
+<span class="fu">fn</span>()
+<span class="co">#&gt; Error in fn(): object '.' not found</span></pre></body></html></div>
+<p>Or it has been reset to its previous value, if any:</p>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">.</span> <span class="kw">&lt;-</span> <span class="st">"wrong"</span>
+<span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu">factory</span>()
+<span class="fu">fn</span>()
+<span class="co">#&gt; [1] "wrong"</span></pre></body></html></div>
+</div>
+<div id="eager-unbinding" class="section level4">
+<h4 class="hasAnchor">
+<a href="#eager-unbinding" class="anchor"></a>Eager unbinding: ✅</h4>
+<p>This is the flip side of updating the value of the placeholder at each step. The previous intermediary values can be collected right away.</p>
+</div>
+<div id="progressive-stack-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#progressive-stack-1" class="anchor"></a>Progressive stack: ✅</h4>
+<p>Since pipe expressions are evaluated one by one as they come, only the relevant part of the pipeline is on the stack when an error is thrown:</p>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">faulty</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"tilt"</span>)
+<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">1</span>
+<span class="no">g</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">2</span>
+<span class="no">h</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">3</span>
+
+<span class="fu">faulty</span>() <span class="kw">%!&gt;%</span> <span class="fu">f</span>() <span class="kw">%!&gt;%</span> <span class="fu">g</span>() <span class="kw">%!&gt;%</span> <span class="fu">h</span>()
+<span class="co">#&gt; Error in faulty() : tilt</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/traceback.html">traceback</a></span>()
+<span class="co">#&gt; 4: stop("tilt")</span>
+<span class="co">#&gt; 3: faulty()</span>
+<span class="co">#&gt; 2: .External2(magrittr_pipe) at pipe.R#163</span>
+<span class="co">#&gt; 1: faulty() %!&gt;% f() %!&gt;% g() %!&gt;% h()</span></pre></body></html></div>
+</div>
+<div id="lexical-effects-and-continuous-stack" class="section level4">
+<h4 class="hasAnchor">
+<a href="#lexical-effects-and-continuous-stack" class="anchor"></a>Lexical effects and continuous stack: ✅</h4>
+<p>Evaluating in the current environment rather than in a mask produces the correct side effects:</p>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">foo</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+<span class="fl">NA</span> <span class="kw">%!&gt;%</span> { <span class="no">foo</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span>; <span class="no">.</span> }
+<span class="co">#&gt; [1] NA</span>
+
+<span class="no">foo</span>
+<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
+  <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
+
+  <span class="fl">FALSE</span>
+}
+<span class="fu">fn</span>()
+<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
+</div>
+</div>
+<div id="lazy-masking-pipe" class="section level3">
 <h3 class="hasAnchor">
-<a href="#lazy-pipe" class="anchor"></a>Lazy pipe</h3>
-<ul>
-<li><p>Visibility: ✅</p></li>
-<li><p>Lazy evaluation: ✅</p></li>
-<li><p>Eager clean up: ❌. This can slightly be remedied by inserting a manual clean up function call after each assignment, but this would need to be a C function that iterates through all pipe bindings, deleting any promises that have been forced.</p></li>
-<li><p>Single evaluation: ✅ by property of promises.</p></li>
-<li><p>Minimal stack: ✅ maximum stack depth is 1.</p></li>
-</ul>
+<a href="#lazy-masking-pipe" class="anchor"></a>Lazy masking pipe</h3>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">`%?&gt;%`</span> <span class="kw">&lt;-</span> <span class="kw pkg">magrittr</span><span class="kw ns">::</span><span class="no"><a href="../reference/pipe_eager_lexical.html">pipe_lazy_masking</a></span></pre></body></html></div>
+<div id="multiple-placeholders-2" class="section level4">
+<h4 class="hasAnchor">
+<a href="#multiple-placeholders-2" class="anchor"></a>Multiple placeholders ✅</h4>
+<p>Pipe expressions are lazily assigned to the placeholder. This makes it possible to use the placeholder multiple times without causing multiple evaluations.</p>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="st">"foo"</span> <span class="kw">%?&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">.</span>, <span class="no">.</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; [1] "foo"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; [1] "foo"</span></pre></body></html></div>
 </div>
+<div id="lazy-evaluation-2" class="section level4">
+<h4 class="hasAnchor">
+<a href="#lazy-evaluation-2" class="anchor"></a>Lazy evaluation ✅</h4>
+<p>Arguments are assigned with <code><a href="https://rdrr.io/r/base/delayedAssign.html">delayedAssign()</a></code> and lazily evaluated:</p>
+<div class="sourceCode" id="cb32"><html><body><pre class="r">{
+  <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"oh no"</span>) <span class="kw">%?&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>(<span class="kw">silent</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="st">"success"</span>
+}
+<span class="co">#&gt; [1] "success"</span></pre></body></html></div>
 </div>
-<div id="execution-environment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#execution-environment" class="anchor"></a>Execution environment</h2>
-<p>Once the pipe has been transformed to a regular R expression, it must be evaluated. There are three options for where that evaluation could take place:</p>
-<ul>
-<li>In the <strong>current</strong> environment.</li>
-<li>In a <strong>new</strong> environment.</li>
-<li>In a <strong>closure</strong> environment, the environment of a new function.</li>
-</ul>
-<p>This choice affects impacts functions that work with the current environment (like <code><a href="https://rdrr.io/r/base/assign.html">assign()</a></code>, <code><a href="https://rdrr.io/r/base/get.html">get()</a></code>, <code><a href="https://rdrr.io/r/base/ls.html">ls()</a></code>), or the current context (like <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>). The following two functions illustrate the primary differences:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
-  <span class="fl">10</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)
-  <span class="no">x</span>
-}
-
-<span class="no">g</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="fl">10</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
-}</pre></body></html></div>
-<ul>
-<li><p>If evaluated in the current environment, both <code>f()</code> and <code>g()</code> return 10.</p></li>
-<li><p>If evaluated in a new environment, <code>f()</code> returns 20 and <code>g()</code> returns 10. NOT TRUE! Why not?</p></li>
-<li><p>If evaluated in a closure environment, both <code>f()</code> and <code>g()</code> return 20.</p></li>
-</ul>
-<p>To discuss implementation challenges with a concrete example, we’ll take the following values:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">double</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> * <span class="fl">2</span>
-<span class="no">increment</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">1</span>
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">1</span>:<span class="fl">10</span></pre></body></html></div>
-<p>And implement the following simple pipe:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="kw">%&gt;%</span> <span class="fu">increment</span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>()</pre></body></html></div>
-<p>Using the eager transformation:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">pipe</span> <span class="kw">&lt;-</span> <span class="fu">expr</span>({
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>(<span class="no">.</span>)
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu">increment</span>(<span class="no">.</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>(<span class="no">.</span>)
-})</pre></body></html></div>
-<p>Note that we assume the input to the pipe is called <code>.</code>, not <code>x</code>. This is a small simplification that makes implementation of the transformer a little easier.</p>
-<div id="closure-environment" class="section level3">
-<h3 class="hasAnchor">
-<a href="#closure-environment" class="anchor"></a>Closure environment</h3>
-<p>To evaluate the pipe in a closure environment, we first create a function, using the pipe fragment as body and a single argument (<code>.</code>):</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">pipe_fun</span> <span class="kw">&lt;-</span> <span class="fu">new_function</span>(<span class="fu">exprs</span>(<span class="kw">.</span> <span class="kw">=</span> ), <span class="no">pipe</span>)
-<span class="no">pipe_fun</span>
-<span class="co">#&gt; function (.) </span>
-<span class="co">#&gt; {</span>
-<span class="co">#&gt;     . &lt;- double(.)</span>
-<span class="co">#&gt;     . &lt;- increment(.)</span>
-<span class="co">#&gt;     double(.)</span>
-<span class="co">#&gt; }</span></pre></body></html></div>
-<p>And then we call it with <code>x</code>:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu">pipe_fun</span>(<span class="no">x</span>)
-<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span></pre></body></html></div>
-<p>Evaluating the pipe in this way makes it clear that building functions with the pipe is the general case, and providing an initial value is the special case. In other words:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">x</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="kw">%&gt;%</span> <span class="fu">increment</span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>()
-
-<span class="co"># is shorthand for</span>
-
-(<span class="no">.</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>() <span class="kw">%&gt;%</span> <span class="fu">increment</span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">double</a></span>())(<span class="no">x</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">f_closure</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
-  (<span class="kw">function</span>(<span class="no">.</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)
-  })(<span class="fl">10</span>)
-  <span class="no">x</span>
-}
-<span class="fu">f_closure</span>()
-<span class="co">#&gt; [1] 20</span>
-
-<span class="no">g_closure</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  (<span class="kw">function</span>(<span class="no">.</span>) {
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">.</span>)
-  })(<span class="fl">10</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
-}
-<span class="fu">g_closure</span>()
-<span class="co">#&gt; [1] 20</span></pre></body></html></div>
+<div id="persistence-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#persistence-1" class="anchor"></a>Persistence: ✅</h4>
+<p>The lazy masking pipe uses one masking environment per pipe expression. This allows persistence of the intermediary values and out of order evaluation. The factory function works as expected for instance:</p>
+<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%?&gt;%</span> <span class="fu">factory</span>()
+<span class="fu">fn</span>()
+<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
 </div>
-<div id="new-environment" class="section level3">
-<h3 class="hasAnchor">
-<a href="#new-environment" class="anchor"></a>New environment</h3>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu">eval_bare</span>(<span class="no">pipe</span>, <span class="kw">env</span> <span class="kw">=</span> <span class="fu">env</span>(<span class="kw">.</span> <span class="kw">=</span> <span class="no">x</span>))
-<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span></pre></body></html></div>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">f_new</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)), <span class="fu">env</span>(<span class="kw">.</span> <span class="kw">=</span> <span class="fl">10</span>))
-  <span class="no">x</span>
-}
-<span class="fu">f_new</span>()
-<span class="co">#&gt; [1] 20</span>
-
-<span class="no">g_new</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">.</span>)), <span class="fu">env</span>(<span class="kw">.</span> <span class="kw">=</span> <span class="fl">10</span>))
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
-}
-<span class="fu">g_new</span>()
-<span class="co">#&gt; Error in eval_bare(expr(return(.)), env(. = 10)): no function to return from, jumping to top level</span></pre></body></html></div>
+<div id="eager-unbinding-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#eager-unbinding-1" class="anchor"></a>Eager unbinding: ✅</h4>
+<p>Because we use one mask environment per pipe expression, the intermediary values can be collected as soon as they are no longer needed.</p>
 </div>
-<div id="current-environment" class="section level3">
-<h3 class="hasAnchor">
-<a href="#current-environment" class="anchor"></a>Current environment</h3>
-<p>At first glance, evaluating the pipe in the current environment is quite simple:</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">.</span> <span class="kw">&lt;-</span> <span class="no">x</span>
-<span class="fu">eval_bare</span>(<span class="no">pipe</span>)
-<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span>
-<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="no">.</span>)</pre></body></html></div>
-<p>And that leads to:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">f_current</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
+<div id="progressive-stack-2" class="section level4">
+<h4 class="hasAnchor">
+<a href="#progressive-stack-2" class="anchor"></a>Progressive stack: ❌</h4>
+<p>With a lazy pipe the whole pipeline is pushed onto the stack before evaluation.</p>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">faulty</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"tilt"</span>)
+<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">1</span>
+<span class="no">g</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">2</span>
+<span class="no">h</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> + <span class="fl">3</span>
 
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"x"</span>, <span class="no">.</span>)))
-  <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="no">.</span>)
+<span class="fu">faulty</span>() <span class="kw">%?&gt;%</span> <span class="fu">f</span>() <span class="kw">%?&gt;%</span> <span class="fu">g</span>() <span class="kw">%?&gt;%</span> <span class="fu">h</span>()
+<span class="co">#&gt; Error in faulty() : tilt</span>
 
-  <span class="no">x</span>
+<span class="fu"><a href="https://rdrr.io/r/base/traceback.html">traceback</a></span>()
+<span class="co">#&gt; 7: stop("tilt")</span>
+<span class="co">#&gt; 6: faulty()</span>
+<span class="co">#&gt; 5: f(.)</span>
+<span class="co">#&gt; 4: g(.)</span>
+<span class="co">#&gt; 3: h(.)</span>
+<span class="co">#&gt; 2: .External2(magrittr_pipe) at pipe.R#174</span>
+<span class="co">#&gt; 1: faulty() %?&gt;% f() %?&gt;% g() %?&gt;% h()</span></pre></body></html></div>
+<p>Note however how the backtrace is less cluttered than with the nested pipe approach, thanks to the placeholder.</p>
+</div>
+<div id="lexical-effects-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#lexical-effects-1" class="anchor"></a>Lexical effects ❌</h4>
+<p>The lazy pipe evaluates in a mask. This causes lexical side effects to occur in the incorrect environment.</p>
+<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="no">foo</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+<span class="fl">TRUE</span> <span class="kw">%?&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">"foo"</span>, <span class="no">.</span>)
+<span class="no">foo</span>
+<span class="co">#&gt; [1] FALSE</span></pre></body></html></div>
+<p>Stack-sensitive functions like <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> function cannot find the proper frame environment:</p>
+<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
+  <span class="fl">TRUE</span> <span class="kw">%?&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
+  <span class="fl">FALSE</span>
 }
-<span class="fu">f_current</span>()
+<span class="fu">fn</span>()
+<span class="co">#&gt; Error in TRUE %?&gt;% return(): no function to return from, jumping to top level</span></pre></body></html></div>
+</div>
+<div id="continuous-stack-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#continuous-stack-1" class="anchor"></a>Continuous stack ❌</h4>
+<p>The masking environment causes a discontinuous stack tree:</p>
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">foobar</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> <span class="kw">%?&gt;%</span> <span class="fu">quux</span>()
+<span class="no">quux</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="no">x</span> <span class="kw">%?&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>()
 
-<span class="no">g_current</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
-  <span class="no">.</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-  <span class="fu">eval_bare</span>(<span class="fu">expr</span>(<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">.</span>)))
-  <span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(<span class="no">.</span>)
+<span class="st">"tilt"</span> <span class="kw">%?&gt;%</span> <span class="fu">foobar</span>()
+<span class="co">#&gt; Error in x %?&gt;% stop() : tilt</span>
 
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">20</span>)
-}
-<span class="fu">g_current</span>()</pre></body></html></div>
-<p>And this could be wrapped into a simple function so that we can ensure <code>.</code> is unbound even when an error occurs:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">pipe_eval</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">pipe</span>, <span class="no">init</span>, <span class="no">env</span> <span class="kw">=</span> <span class="fu">caller_env</span>()) {
-  <span class="fu">env_bind</span>(<span class="kw">.env</span> <span class="kw">=</span> <span class="no">env</span>, <span class="kw">.</span> <span class="kw">=</span> <span class="no">init</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/on.exit.html">on.exit</a></span>(<span class="fu">env_unbind</span>(<span class="no">env</span>, <span class="st">"."</span>))
-
-  <span class="fu">eval_bare</span>(<span class="no">pipe</span>, <span class="no">env</span>)
-}
-
-<span class="fu">pipe_eval</span>(<span class="no">pipe</span>, <span class="no">x</span>)
-<span class="co">#&gt;  [1]  6 10 14 18 22 26 30 34 38 42</span></pre></body></html></div>
-<p>(This implementation will clobber any existing <code>.</code> but a more sophisticated implementation could restore any existing value on exit. Similarly, the cleanup after the lazy transformation would be more work (since it creates multiple variables), but it’s not prohibitively hard.)</p>
-<p>The main drawback to this approach is that <code>eval_bare()</code> currently loses the visibility flag. This can be fixed, but needs work in C.</p>
+<span class="kw pkg">rlang</span><span class="kw ns">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/last_error.html">last_trace</a></span>()
+<span class="co">#&gt; &lt;error/rlang_error&gt;</span>
+<span class="co">#&gt; tilt</span>
+<span class="co">#&gt; Backtrace:</span>
+<span class="co">#&gt;     █</span>
+<span class="co">#&gt;  1. ├─"tilt" %?&gt;% foobar()</span>
+<span class="co">#&gt;  2. ├─global::foobar(.)</span>
+<span class="co">#&gt;  3. │ └─x %?&gt;% quux()</span>
+<span class="co">#&gt;  4. └─global::quux(.)</span>
+<span class="co">#&gt;  5.   └─x %?&gt;% stop()</span></pre></body></html></div>
+</div>
 </div>
 </div>
   </div>
