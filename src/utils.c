@@ -32,7 +32,6 @@ SEXP syms_rm = NULL;
 #include <Rversion.h>
 
 #if (R_VERSION < R_Version(4, 0, 0))
-static
 void r__env_unbind(SEXP env, SEXP sym) {
   // Check if binding exists to avoid `rm()` warning
   if (Rf_findVar(sym, env) != R_UnboundValue) {

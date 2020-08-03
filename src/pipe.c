@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #define R_NO_REMAP
 #include <Rinternals.h>
+#include <R_ext/Rdynload.h>
 #include <R_ext/Visibility.h>
 #include "utils.h"
 
