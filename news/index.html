@@ -148,6 +148,21 @@
 <h1 class="page-header" data-toc-text="1.5.0.9000">
 <a href="#magrittr-1509000" class="anchor"></a>magrittr 1.5.0.9000<small> Unreleased </small>
 </h1>
+<div id="fast-and-lean-implementation-of-the-pipe" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fast-and-lean-implementation-of-the-pipe" class="anchor"></a>Fast and lean implementation of the pipe</h2>
+<p>The pipe has been rewritten in C.</p>
+<ul>
+<li>Minimal performance cost.</li>
+<li>Minimal impact on backtraces.</li>
+<li>No impact on reference counts.</li>
+</ul>
+<p>As part of this rewrite we have slightly changed the behaviour of the pipe so that the piped expressions are now evaluated in the current environment. Previously, the pipe evaluated in its own private environment where <code>.</code> was defined. This is technically a breaking change, but this should only affect very specific corner cases and it brings the behaviour of the pipe closer to other control flow mechanisms like <code>if ()</code> or <code>for ()</code> which also evaluate in the current environment. This also brings it closer to the probable semantics of the native R pipe that is likely to be introduced in the next version of R. The most visible consequences of this new behaviour are:</p>
+<ul>
+<li><p><code><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame()</a></code> now returns the same environment in piped and non-piped evaluation (<a href='https://github.com/tidyverse/magrittr/issues/146'>#146</a>, <a href='https://github.com/tidyverse/magrittr/issues/171'>#171</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/function.html">return()</a></code> returns from the enclosing function. It would previously return from the current pipe expression and continue evaluation from there.</p></li>
+</ul>
+</div>
 </div>
     <div id="magrittr-15" class="section level1">
 <h1 class="page-header" data-toc-text="1.5">
