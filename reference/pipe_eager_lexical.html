@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • magrittr</title>
+<title>Lazy and eager pipes — pipe_eager_lexical • magrittr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Lazy and eager pipes — pipe_eager_lexical" />
+<meta property="og:description" content="Assign these pipe variants to an infix symbol like %&amp;gt;%." />
 <meta property="og:image" content="https://magrittr.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -78,7 +79,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -140,77 +141,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/tidyverse/magrittr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Lazy and eager pipes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/magrittr/blob/master/R/pipe.R'><code>R/pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe_eager_lexical.Rd</code></div>
     </div>
 
-    <div id="magrittr-1509000" class="section level1">
-<h1 class="page-header" data-toc-text="1.5.0.9000">
-<a href="#magrittr-1509000" class="anchor"></a>magrittr 1.5.0.9000<small> Unreleased </small>
-</h1>
-<div id="fast-and-lean-implementation-of-the-pipe" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fast-and-lean-implementation-of-the-pipe" class="anchor"></a>Fast and lean implementation of the pipe</h2>
-<p>The pipe has been rewritten in C with the following goals in mind:</p>
-<ul>
-<li>Minimal performance cost.</li>
-<li>Minimal impact on backtraces.</li>
-<li>No impact on reference counts.</li>
-</ul>
-<p>As part of this rewrite we have changed the behaviour of the pipe to make it closer to the implementation that will likely be included in a future version of R. The pipe now evaluates piped expressions lazily (<a href='https://github.com/tidyverse/magrittr/issues/120'>#120</a>). The main consequence of this change is that warnings and errors can now be handled by trailing pipe calls:</p>
-<pre class="{r}"><code>stop("foo") %&gt;% try()
-warning("bar") %&gt;% suppressWarnings()</code></pre>
-</div>
-<div id="bug-fixes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
-<ul>
-<li>Piped arguments are now persistent. They can be evaluated after the pipeline has returned, which fixes subtle issues with function factories (<a href='https://github.com/tidyverse/magrittr/issues/159'>#159</a>, <a href='https://github.com/tidyverse/magrittr/issues/195'>#195</a>).</li>
-</ul>
-</div>
-</div>
-    <div id="magrittr-15" class="section level1">
-<h1 class="page-header" data-toc-text="1.5">
-<a href="#magrittr-15" class="anchor"></a>magrittr 1.5<small> 2014-11-22 </small>
-</h1>
-<div id="new-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
-<div id="functional-sequences" class="section level3">
-<h3 class="hasAnchor">
-<a href="#functional-sequences" class="anchor"></a>Functional sequences.</h3>
-<p>A pipeline, or a “functional sequence”, need not be applied to a left-hand side value instantly. Instead it can serve as a function definition. A pipeline where the left-most left-hand side is the magrittr placeholder (the dot <code>.</code>) will thus create a function, which applies each right-hand side in sequence to its argument, e.g. <code>f &lt;- . %&gt;% abs %&gt;% mean(na.rm = TRUE)</code>.</p>
-</div>
-<div id="new-operators" class="section level3">
-<h3 class="hasAnchor">
-<a href="#new-operators" class="anchor"></a>New operators</h3>
-<p>Three new operators are introduced for some special cases</p>
-<ul>
-<li>Assignment pipe: <code><a href="../reference/compound.html">%&lt;&gt;%</a></code>
-</li>
-<li>Tee pipe: <code><a href="../reference/tee.html">%T&gt;%</a></code>
-</li>
-<li>Exposition pipe: <code><a href="../reference/exposition.html">%$%</a></code>
-</li>
-</ul>
-<p>For more information see the documentation, e.g. <code>?%T&gt;%</code>.</p>
-</div>
-<div id="lambdas" class="section level3">
-<h3 class="hasAnchor">
-<a href="#lambdas" class="anchor"></a>Lambdas</h3>
-<p>Lambdas can now be made by enclosing several statements in curly braces, and is a unary function of the dot argument.</p>
-<p>For more information and examples, see the updated vignette, and help files.</p>
-</div>
-</div>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Assign these pipe variants to an infix symbol like <code>%&gt;%</code>.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>pipe_eager_lexical</span>(<span class='no'>lhs</span>, <span class='no'>rhs</span>)
+
+<span class='fu'>pipe_lazy_masking</span>(<span class='no'>lhs</span>, <span class='no'>rhs</span>)
+
+<span class='fu'>pipe_nested</span>(<span class='no'>lhs</span>, <span class='no'>rhs</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>lhs</th>
+      <td><p>A value or the magrittr placeholder.</p></td>
+    </tr>
+    <tr>
+      <th>rhs</th>
+      <td><p>A function call using the magrittr semantics.</p></td>
+    </tr>
+    </table>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
