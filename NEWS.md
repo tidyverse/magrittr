@@ -3,29 +3,29 @@
 
 ## Fast and lean implementation of the pipe
 
-The pipe has been rewritten in C.
+The pipe has been rewritten in C with the following goals in mind:
 
 - Minimal performance cost.
 - Minimal impact on backtraces.
 - No impact on reference counts.
 
-As part of this rewrite we have slightly changed the behaviour of the
-pipe so that the piped expressions are now evaluated in the current
-environment. Previously, the pipe evaluated in its own private
-environment where `.` was defined. This is technically a breaking
-change, but this should only affect very specific corner cases and it
-brings the behaviour of the pipe closer to other control flow
-mechanisms like `if ()` or `for ()` which also evaluate in the current
-environment. This also brings it closer to the probable semantics of
-the native R pipe that is likely to be introduced in the next version
-of R. The most visible consequences of this new behaviour are:
+As part of this rewrite we have changed the behaviour of the pipe to
+make it closer to the implementation that will likely be included in a
+future version of R. The pipe now evaluates piped expressions lazily (#120).
+The main consequence of this change is that warnings and errors can
+now be handled by trailing pipe calls:
 
-- `parent.frame()` now returns the same environment in piped and
-  non-piped evaluation (#146, #171).
+```{r}
+stop("foo") %>% try()
+warning("bar") %>% suppressWarnings()
+```
 
-- `return()` returns from the enclosing function. It would previously
-  return from the current pipe expression and continue evaluation from
-  there.
+
+## Bug fixes
+
+* Piped arguments are now persistent. They can be evaluated after the
+  pipeline has returned, which fixes subtle issues with function
+  factories (#159, #195).
 
 
 # magrittr 1.5

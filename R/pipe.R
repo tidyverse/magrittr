@@ -132,6 +132,45 @@
   rhs <- substitute(rhs)
   kind <- 1L
   env <- parent.frame()
+  lazy <- TRUE
+  .External2(magrittr_pipe)
+}
+
+#' Lazy and eager pipes
+#'
+#' Assign these pipe variants to an infix symbol like `%>%`.
+#'
+#' @inheritParams %>%
+#' @keywords internal
+#' @export
+pipe_eager_lexical <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  sym <- sys.call()[[1]]
+  .External2(magrittr_pipe)
+}
+#' @rdname pipe_eager_lexical
+#' @export
+pipe_lazy_masking <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  lazy <- TRUE
+  sym <- sys.call()[[1]]
+  .External2(magrittr_pipe)
+}
+#' @rdname pipe_eager_lexical
+#' @export
+pipe_nested <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  nested <- TRUE
+  sym <- sys.call()[[1]]
   .External2(magrittr_pipe)
 }
 

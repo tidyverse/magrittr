@@ -1,44 +1,74 @@
-# AIG
+# BAwiR
 
 <details>
 
-* Version: 0.1.9
-* Source code: https://github.com/cran/AIG
-* Date/Publication: 2018-05-21 18:51:28 UTC
-* Number of recursive dependencies: 58
+* Version: 1.2.4
+* Source code: https://github.com/cran/BAwiR
+* URL: https://www.R-project.org, https://www.uv.es/vivigui, https://www.uv.es/vivigui/AppEuroACB.html
+* Date/Publication: 2020-05-11 08:40:02 UTC
+* Number of recursive dependencies: 126
 
-Run `cloud_details(, "AIG")` for more info
+Run `cloud_details(, "BAwiR")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking whether package ‘AIG’ can be installed ... WARNING
+*   checking whether package ‘BAwiR’ can be installed ... WARNING
     ```
     Found the following significant warnings:
       Warning: 'rgl.init' failed, running with 'rgl.useNULL = TRUE'.
-    See ‘/tmp/workdir/AIG/new/AIG.Rcheck/00install.out’ for details.
+    See ‘/tmp/workdir/BAwiR/new/BAwiR.Rcheck/00install.out’ for details.
     ```
 
-# jstor
+# rgl
 
 <details>
 
-* Version: 0.3.9
-* Source code: https://github.com/cran/jstor
-* URL: https://github.com/ropensci/jstor, https://docs.ropensci.org/jstor
-* BugReports: https://github.com/ropensci/jstor/issues
-* Date/Publication: 2020-06-04 04:50:03 UTC
-* Number of recursive dependencies: 68
+* Version: 0.100.54
+* Source code: https://github.com/cran/rgl
+* URL: https://r-forge.r-project.org/projects/rgl/
+* BugReports: https://r-forge.r-project.org/projects/rgl/
+* Date/Publication: 2020-04-14 14:40:02 UTC
+* Number of recursive dependencies: 61
 
-Run `cloud_details(, "jstor")` for more info
+Run `cloud_details(, "rgl")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking whether package ‘rgl’ can be installed ... WARNING
     ```
-      Running ‘testthat.R’
+    Found the following significant warnings:
+      Warning: 'rgl.init' failed, running with 'rgl.useNULL = TRUE'.
+    See ‘/tmp/workdir/rgl/new/rgl.Rcheck/00install.out’ for details.
+    ```
+
+*   checking whether the namespace can be loaded with stated dependencies ... NOTE
+    ```
+    Warning: 'rgl.init' failed, running with 'rgl.useNULL = TRUE'.
+    
+    A namespace must be able to be loaded with just the base namespace
+    loaded: otherwise if the namespace gets loaded by a saved object, the
+    session will be unable to start.
+    
+    Probably some imports need to be declared in the NAMESPACE file.
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 10.1Mb
+      sub-directories of 1Mb or more:
+        doc     3.6Mb
+        fonts   1.5Mb
+        libs    3.0Mb
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘heplots’
     ```
 

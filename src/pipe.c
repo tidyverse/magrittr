@@ -1,6 +1,8 @@
 #include <stdbool.h>
+#define R_NO_REMAP
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
+#include "utils.h"
 
 #define export attribute_visible extern
 
@@ -29,26 +31,34 @@ static SEXP syms_lhs = NULL;
 static SEXP syms_rhs = NULL;
 static SEXP syms_kind = NULL;
 static SEXP syms_env = NULL;
+static SEXP syms_lazy = NULL;
+
 static SEXP syms_assign = NULL;
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
+static SEXP syms_nested = NULL;
 static SEXP syms_new_lambda = NULL;
 static SEXP syms_paren = NULL;
 static SEXP syms_pipe = NULL;
 static SEXP syms_pipe_compound = NULL;
-static SEXP syms_pipe_tee = NULL;
 static SEXP syms_pipe_dollar = NULL;
+static SEXP syms_pipe_tee = NULL;
+static SEXP syms_sym = NULL;
+
 static SEXP calls_base_with = NULL;
+static SEXP chrs_dot = NULL;
 
 static void clean_pipe(void* data);
 static SEXP eval_pipe(void* data);
-static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind, SEXP* p_assign);
+static SEXP eval_pipe_lazy(SEXP exprs, SEXP env);
+static SEXP pipe_unroll(SEXP lhs, SEXP rhs, SEXP env, enum pipe_kind kind,
+                        SEXP pipe_sym, SEXP* p_assign);
+static SEXP pipe_nest(SEXP exprs);
 static SEXP as_pipe_call(SEXP x);
 static SEXP add_dot(SEXP x);
 static inline SEXP as_pipe_tee_call(SEXP x);
 static inline SEXP as_pipe_dollar_call(SEXP x);
-SEXP new_lambda(SEXP exprs, SEXP env);
-static inline void r_env_unbind(SEXP env, SEXP sym);
+static SEXP new_lambda(SEXP exprs, SEXP env);
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
@@ -59,29 +69,51 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   SEXP kind = PROTECT(Rf_eval(syms_kind, rho));
   SEXP env = PROTECT(Rf_eval(syms_env, rho));
 
+  SEXP pipe_sym = syms_pipe;
+  if (Rf_findVar(syms_sym, rho) != R_UnboundValue) {
+    pipe_sym = Rf_eval(syms_sym, rho);
+  }
+  PROTECT(pipe_sym);
+
   enum pipe_kind c_kind = INTEGER(kind)[0];
   SEXP assign = R_NilValue;
-  SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, env, c_kind, &assign));
+  SEXP exprs = PROTECT(pipe_unroll(lhs, rhs, env, c_kind, pipe_sym, &assign));
 
   // Create a magrittr lambda when first expression is a `.`
   if (CAR(exprs) == syms_dot) {
     SEXP lambda = new_lambda(CDR(exprs), env);
-    UNPROTECT(5);
+    UNPROTECT(6);
     return lambda;
   }
 
-  SEXP old = PROTECT(Rf_findVar(syms_dot, env));
+  bool use_nested = Rf_findVar(syms_nested, rho) != R_UnboundValue;
+  if (use_nested) {
+    SEXP call = PROTECT(pipe_nest(exprs));
+    SEXP out = Rf_eval(call, env);
+    UNPROTECT(7);
+    return out;
+  }
 
-  struct pipe_info pipe_info = {
-    .exprs = exprs,
-    .env = env
-  };
-  struct cleanup_info cleanup_info = {
-    .old = old,
-    .env = env
-  };
+  bool use_lazy = Rf_findVar(syms_lazy, rho) != R_UnboundValue;
+  SEXP out = R_NilValue;
 
-  SEXP out = R_ExecWithCleanup(&eval_pipe, &pipe_info, &clean_pipe, &cleanup_info);
+  if (use_lazy) {
+    out = eval_pipe_lazy(exprs, env);
+  } else {
+    SEXP old = PROTECT(Rf_findVar(syms_dot, env));
+
+    struct pipe_info pipe_info = {
+      .exprs = exprs,
+      .env = env
+    };
+    struct cleanup_info cleanup_info = {
+      .old = old,
+      .env = env
+    };
+
+    out =  R_ExecWithCleanup(eval_pipe, &pipe_info, &clean_pipe, &cleanup_info);
+    UNPROTECT(1);
+  }
 
   if (assign != R_NilValue) {
     PROTECT(out);
@@ -115,6 +147,35 @@ SEXP eval_pipe(void* data) {
 }
 
 static
+SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
+  SEXP prev_mask = env;
+
+  PROTECT_INDEX mask_pi;
+  PROTECT_WITH_INDEX(R_NilValue, &mask_pi);
+
+  SEXP rest = exprs;
+  while ((rest = CDR(exprs)) != R_NilValue) {
+    SEXP mask = r_new_environment(env, 1);
+    REPROTECT(mask, mask_pi);
+
+    // Lazily bind current pipe expression to `.` in the new
+    // mask. Evaluation occurs in the previous mask environment.
+    // The promise is protected by `mask` and protects `prev_mask`.
+    r_env_bind_lazy(mask, syms_dot, CAR(exprs), prev_mask);
+
+    exprs = rest;
+    prev_mask = mask;
+  }
+
+  // Evaluate last expression in the very last mask. This triggers a
+  // recursive evaluation of `.` bindings in the different masks.
+  SEXP out = Rf_eval(CAR(exprs), prev_mask);
+
+  UNPROTECT(1);
+  return out;
+}
+
+static
 void clean_pipe(void* data) {
   struct cleanup_info* info = (struct cleanup_info*) data;
 
@@ -126,13 +187,14 @@ void clean_pipe(void* data) {
 }
 
 
-static enum pipe_kind parse_pipe_call(SEXP x);
+static enum pipe_kind parse_pipe_call(SEXP x, SEXP pipe_sym);
 
 static
 SEXP pipe_unroll(SEXP lhs,
                  SEXP rhs,
                  SEXP env,
                  enum pipe_kind kind,
+                 SEXP pipe_sym,
                  SEXP* p_assign) {
   PROTECT_INDEX out_pi;
   SEXP out = R_NilValue;
@@ -143,7 +205,7 @@ SEXP pipe_unroll(SEXP lhs,
 
   while (true) {
     if (kind != PIPE_KIND_dollar && TYPEOF(rhs) == LANGSXP && CAR(rhs) == syms_paren) {
-      rhs = eval(rhs, env);
+      rhs = Rf_eval(rhs, env);
       REPROTECT(rhs, rhs_pi);
     }
 
@@ -168,7 +230,7 @@ SEXP pipe_unroll(SEXP lhs,
 
     SEXP args = CDR(lhs);
 
-    if ((kind = parse_pipe_call(lhs))) {
+    if ((kind = parse_pipe_call(lhs, pipe_sym))) {
       lhs = CAR(args);
       rhs = CADR(args);
       continue;
@@ -184,14 +246,14 @@ SEXP pipe_unroll(SEXP lhs,
 }
 
 static
-enum pipe_kind parse_pipe_call(SEXP x) {
+enum pipe_kind parse_pipe_call(SEXP x, SEXP pipe_sym) {
   if (TYPEOF(x) != LANGSXP) {
     return PIPE_KIND_none;
   }
 
   SEXP car = CAR(x);
 
-  if (car == syms_pipe) {
+  if (car == pipe_sym) {
     return PIPE_KIND_magrittr;
   }
   if (car == syms_pipe_compound) {
@@ -254,6 +316,46 @@ SEXP add_dot(SEXP x) {
 }
 
 
+static
+SEXP pipe_nest(SEXP exprs) {
+  SEXP expr = CAR(exprs);
+  SEXP prev = expr;
+  exprs = CDR(exprs);
+
+  PROTECT_INDEX expr_pi;
+  PROTECT_WITH_INDEX(expr, &expr_pi);
+
+  while (exprs != R_NilValue) {
+    expr = Rf_shallow_duplicate(CAR(exprs));
+    REPROTECT(expr, expr_pi);
+
+    bool found_placeholder = false;
+    SEXP curr = CDR(expr);
+
+    while (curr != R_NilValue) {
+      if (CAR(curr) == syms_dot) {
+        if (found_placeholder) {
+          Rf_errorcall(R_NilValue, "Can't use multiple placeholders.");
+        }
+
+        found_placeholder = true;
+        SETCAR(curr, prev);
+        prev = expr;
+      }
+      curr = CDR(curr);
+    }
+    if (!found_placeholder) {
+      Rf_error("Internal error in `pipe_nest()`: Can't find placeholder.");
+    }
+
+    exprs = CDR(exprs);
+  }
+
+  UNPROTECT(1);
+  return expr;
+}
+
+static
 SEXP new_lambda(SEXP exprs, SEXP env) {
   SEXP call = PROTECT(Rf_lang3(syms_new_lambda, exprs, env));
   SEXP out = Rf_eval(call, magrittr_ns_env);
@@ -265,34 +367,33 @@ SEXP new_lambda(SEXP exprs, SEXP env) {
 
 // Initialisation ----------------------------------------------------
 
-// For `R_removeVarFromFrame()` compatibility
-SEXP syms_envir = NULL;
-SEXP syms_inherits = NULL;
-SEXP syms_list = NULL;
-SEXP syms_rm = NULL;
+void magrittr_init_utils(SEXP ns);
 
 SEXP magrittr_init(SEXP ns) {
   magrittr_ns_env = ns;
+  magrittr_init_utils(ns);
 
   syms_lhs = Rf_install("lhs");
   syms_rhs = Rf_install("rhs");
   syms_kind = Rf_install("kind");
   syms_env = Rf_install("env");
+  syms_lazy = Rf_install("lazy");
 
   syms_assign = Rf_install("<-");
   syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
+  syms_nested = Rf_install("nested");
   syms_new_lambda = Rf_install("new_lambda");
   syms_paren = Rf_install("(");
   syms_pipe = Rf_install("%>%");
   syms_pipe_compound = Rf_install("%<>%");
-  syms_pipe_tee = Rf_install("%T>%");
   syms_pipe_dollar = Rf_install("%$%");
+  syms_pipe_tee = Rf_install("%T>%");
+  syms_sym = Rf_install("sym");
 
-  syms_envir = Rf_install("envir");
-  syms_inherits = Rf_install("inherits");
-  syms_list = Rf_install("list");
-  syms_rm = Rf_install("rm");
+  chrs_dot = Rf_allocVector(STRSXP, 1);
+  R_PreserveObject(chrs_dot);
+  SET_STRING_ELT(chrs_dot, 0, Rf_mkChar("."));
 
   calls_base_with = Rf_lang3(Rf_install("::"),
                              Rf_install("base"),
@@ -316,46 +417,4 @@ static const R_ExternalMethodDef ext_entries[] = {
 export void R_init_magrittr(DllInfo *dll) {
     R_registerRoutines(dll, NULL, call_entries, NULL, ext_entries);
     R_useDynamicSymbols(dll, FALSE);
-}
-
-
-// Helpers -----------------------------------------------------------
-
-#include <Rversion.h>
-
-#if (R_VERSION < R_Version(4, 0, 0))
-static
-void r__env_unbind(SEXP env, SEXP sym) {
-  // Check if binding exists to avoid `rm()` warning
-  if (Rf_findVar(sym, env) != R_UnboundValue) {
-    SEXP nm = PROTECT(Rf_allocVector(STRSXP, 1));
-    SET_STRING_ELT(nm, 0, PRINTNAME(sym));
-
-    // remove(list = y, envir = x, inherits = z)
-    SEXP args = Rf_cons(Rf_ScalarLogical(0), R_NilValue);
-    SET_TAG(args, syms_inherits);
-
-    args = Rf_cons(env, args);
-    SET_TAG(args, syms_envir);
-
-    args = Rf_cons(nm, args);
-    SET_TAG(args, syms_list);
-
-    SEXP call = Rf_lcons(syms_rm, args);
-    PROTECT(call);
-
-    Rf_eval(call, R_BaseEnv);
-    UNPROTECT(2);
-  }
-}
-#endif
-
-static inline
-void r_env_unbind(SEXP env, SEXP sym) {
-#if (R_VERSION < R_Version(4, 0, 0))
-  void r__env_unbind(SEXP, SEXP);
-  r__env_unbind(env, sym);
-#else
-  R_removeVarFromFrame(sym, env);
-#endif
 }

@@ -1,6 +1,6 @@
 # Revdeps
 
-## Failed to check (6)
+## Failed to check (7)
 
 |package      |version |error |warning |note |
 |:------------|:-------|:-----|:-------|:----|
@@ -10,4 +10,5 @@
 |LipidMS      |1.1.0   |1     |        |     |
 |phylopath    |?       |      |        |     |
 |rhierbaps    |?       |      |        |     |
+|veccompare   |?       |      |        |     |
 
