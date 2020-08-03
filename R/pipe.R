@@ -281,3 +281,62 @@ pipe <- function()
 #' @rdname exposition
 #' @export
 `%$%` <- pipe() 
+
+
+#' @import rlang
+NULL
+
+`%>%` <- function(x, y) {
+  exprs <- pipe_unroll(substitute(x), substitute(y))
+
+  env <- caller_env()
+  local_bindings("." := NULL, .env = env)
+
+  while (!is_null(rest <- node_cdr(exprs))) {
+    out <- eval_bare(node_car(exprs), env)
+    env_poke(env, ".", out)
+    exprs <- rest
+  }
+
+  eval_bare(node_car(exprs), env)
+}
+
+pipe_unroll <- function(x, y) {
+  out <- new_pipe_node(y, NULL)
+  node <- x
+
+  while (is_call(node, "%>%")) {
+    args <- node_cdr(node)
+    rhs <- node_cadr(args)
+
+    out <- new_pipe_node(rhs, out)
+    node <- node_car(args)
+  }
+
+  new_node(node, out)
+}
+
+new_pipe_node <- function(car, cdr) {
+  if (!is_call(car)) {
+    car <- call2(car)
+  }
+  car <- add_dot(car)
+
+  new_node(car, cdr)
+}
+add_dot <- function(x) {
+  if (!is_call(x)) {
+    return(x)
+  }
+
+  args <- node_cdr(x)
+  while (!is_null(args)) {
+    if (identical(node_car(args), quote(.))) {
+      return(x)
+    }
+    args <- node_cdr(args)
+  }
+
+  args <- new_node(quote(.), node_cdr(x))
+  new_call(node_car(x), args)
+}
