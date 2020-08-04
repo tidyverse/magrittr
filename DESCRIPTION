@@ -26,6 +26,7 @@ BugReports: https://github.com/tidyverse/magrittr/issues
 Suggests: 
     covr,
     knitr,
+    rlang,
     rmarkdown,
     testthat
 VignetteBuilder: 

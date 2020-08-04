@@ -29,6 +29,7 @@
 #'    \code{\link{\%$\%}}  \tab exposition pipe.\cr
 #' }
 #' 
+#' @useDynLib magrittr, .registration = TRUE
 #' @examples
 #' \dontrun{
 #' 
@@ -40,3 +41,7 @@
 #' }
 #' @keywords internal
 "_PACKAGE"
+
+.onLoad <- function(lib, pkg) {
+  .Call(magrittr_init, asNamespace("magrittr"))
+}

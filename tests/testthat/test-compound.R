@@ -20,3 +20,11 @@ test_that("Assignment pipe works", {
   expect_that(z, is_identical_to(as.numeric(3:12)))
 
 })
+
+test_that("can't assign to non-assignment expression", {
+  msg <- conditionMessage(tryCatch(error = identity, identity(1) <- NULL))
+  expect_error(
+    1 %>% identity() %<>% identity(),
+    msg
+  )
+})

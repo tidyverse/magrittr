@@ -1,62 +1,3 @@
-# Create a pipe operator.
-#
-# This function is used to create all the magrittr pipe operators.
-pipe <- function()
-{
-  function(lhs, rhs)
-  {
-    # the parent environment
-    parent <- parent.frame()
-    
-    # the environment in which to evaluate pipeline
-    env    <- new.env(parent = parent)
-    
-    # split the pipeline/chain into its parts.
-    chain_parts <- split_chain(match.call(), env = env)
-
-    pipes <- chain_parts[["pipes"]] # the pipe operators.
-    rhss  <- chain_parts[["rhss" ]] # the right-hand sides.
-    lhs   <- chain_parts[["lhs"  ]] # the left-hand side.
-
-    # Create the list of functions defined by the right-hand sides.
-    env[["_function_list"]] <- 
-      lapply(seq_along(rhss), 
-             function(i) wrap_function(rhss[[i]], pipes[[i]], parent))
-
-    # Create a function which applies each of the above functions in turn.
-    env[["_fseq"]] <-
-     `class<-`(eval(quote(function(value) freduce(value, `_function_list`)), 
-                    env, env), c("fseq", "function"))
- 
-    # make freduce available to the resulting function 
-    # even if magrittr is not loaded.
-    env[["freduce"]] <- freduce 
-    
-    # Result depends on the left-hand side.
-    if (is_placeholder(lhs)) {
-      # return the function itself.
-      env[["_fseq"]]
-    } else {
-      # evaluate the LHS
-      env[["_lhs"]] <- eval(lhs, parent, parent)
-      
-      # compute the result by applying the function to the LHS
-      result <- withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
-      
-      # If assignment pipe is used, assign result
-      if (is_compound_pipe(pipes[[1L]])) {
-        eval(call("<-", lhs, result[["value"]]), parent, parent)
-      # Otherwise, return it.
-      } else {
-        if (result[["visible"]]) 
-          result[["value"]] 
-        else 
-          invisible(result[["value"]])
-      }
-    }
-  }
-}
-
 #' Pipe
 #' 
 #' Pipe an object forward into a function or call expression.
@@ -186,7 +127,52 @@ pipe <- function()
 #' 
 #' @rdname pipe
 #' @export
-`%>%`  <- pipe()
+`%>%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  lazy <- TRUE
+  .External2(magrittr_pipe)
+}
+
+#' Lazy and eager pipes
+#'
+#' Assign these pipe variants to an infix symbol like `%>%`.
+#'
+#' @inheritParams %>%
+#' @keywords internal
+#' @export
+pipe_eager_lexical <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  sym <- sys.call()[[1]]
+  .External2(magrittr_pipe)
+}
+#' @rdname pipe_eager_lexical
+#' @export
+pipe_lazy_masking <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  lazy <- TRUE
+  sym <- sys.call()[[1]]
+  .External2(magrittr_pipe)
+}
+#' @rdname pipe_eager_lexical
+#' @export
+pipe_nested <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 1L
+  env <- parent.frame()
+  nested <- TRUE
+  sym <- sys.call()[[1]]
+  .External2(magrittr_pipe)
+}
 
 #' Assignment pipe
 #' 
@@ -229,7 +215,13 @@ pipe <- function()
 #' 
 #' @rdname compound
 #' @export
-`%<>%` <- pipe() 
+`%<>%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 2L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
+}
 
 #' Tee pipe
 #' 
@@ -253,7 +245,13 @@ pipe <- function()
 #' 
 #' @rdname tee
 #' @export
-`%T>%` <- pipe() 
+`%T>%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 3L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
+}
 
 #' Exposition pipe
 #' 
@@ -280,4 +278,25 @@ pipe <- function()
 #'   
 #' @rdname exposition
 #' @export
-`%$%` <- pipe() 
+`%$%` <- function(lhs, rhs) {
+  lhs <- substitute(lhs)
+  rhs <- substitute(rhs)
+  kind <- 4L
+  env <- parent.frame()
+  .External2(magrittr_pipe)
+}
+
+
+new_lambda <- function(exprs, env) {
+  `_function_list` <- lapply(exprs, as_pipe_fn, env)
+
+  structure(
+    function(value) freduce(value, `_function_list`),
+    class = c("fseq", "function")
+  )
+}
+
+lambda_fmls <- as.pairlist(alist(. = ))
+as_pipe_fn <- function(expr, env) {
+  eval(call("function", lambda_fmls, expr), env)
+}

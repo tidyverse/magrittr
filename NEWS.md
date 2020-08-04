@@ -1,4 +1,32 @@
+
 # magrittr 1.5.0.9000
+
+## Fast and lean implementation of the pipe
+
+The pipe has been rewritten in C with the following goals in mind:
+
+- Minimal performance cost.
+- Minimal impact on backtraces.
+- No impact on reference counts.
+
+As part of this rewrite we have changed the behaviour of the pipe to
+make it closer to the implementation that will likely be included in a
+future version of R. The pipe now evaluates piped expressions lazily (#120).
+The main consequence of this change is that warnings and errors can
+now be handled by trailing pipe calls:
+
+```{r}
+stop("foo") %>% try()
+warning("bar") %>% suppressWarnings()
+```
+
+
+## Bug fixes
+
+* Piped arguments are now persistent. They can be evaluated after the
+  pipeline has returned, which fixes subtle issues with function
+  factories (#159, #195).
+
 
 # magrittr 1.5
 
