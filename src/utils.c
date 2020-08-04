@@ -8,9 +8,10 @@ void r_env_bind_lazy(SEXP env,
                      SEXP sym,
                      SEXP expr,
                      SEXP eval_env) {
-  SEXP prom = PROTECT(Rf_cons(R_UnboundValue, expr));
-  SET_TAG(prom, eval_env);
-  SET_TYPEOF(prom, PROMSXP);
+  SEXP prom = PROTECT(Rf_allocSExp(PROMSXP));
+  SET_PRENV(prom, eval_env);
+  SET_PRCODE(prom, expr);
+  SET_PRVALUE(prom, R_UnboundValue);
 
   Rf_defineVar(sym, prom, env);
 
@@ -90,16 +91,12 @@ SEXP r_parse_eval(const char* str, SEXP env) {
   return out;
 }
 
-
 static SEXP new_env_call = NULL;
 static SEXP new_env__parent_node = NULL;
 static SEXP new_env__size_node = NULL;
 
+#if 0
 SEXP r_new_environment(SEXP parent, R_len_t size) {
-  SEXP out = Rf_cons(R_NilValue, parent);
-  SET_TYPEOF(out, ENVSXP);
-  return out;
-
   parent = parent ? parent : R_EmptyEnv;
   SETCAR(new_env__parent_node, parent);
 
@@ -113,6 +110,7 @@ SEXP r_new_environment(SEXP parent, R_len_t size) {
 
   return env;
 }
+#endif
 
 
 void magrittr_init_utils(SEXP ns) {

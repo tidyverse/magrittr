@@ -156,7 +156,7 @@ SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
 
   SEXP rest = exprs;
   while ((rest = CDR(exprs)) != R_NilValue) {
-    SEXP mask = r_new_environment(env, 1);
+    SEXP mask = r_new_environment(env);
     REPROTECT(mask, mask_pi);
 
     // Lazily bind current pipe expression to `.` in the new
