@@ -180,10 +180,10 @@
 <a href="#desired-properties" class="anchor"></a>Desired properties</h2>
 <p>These are the properties that we might want a pipe to possess, roughly ordered from most important to least important.</p>
 <ul>
-<li><p><strong>Visibility</strong>: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.</p></li>
+<li><p><strong>Visibility</strong>: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally returns its first argument invisibly) do not print.</p></li>
 <li><p><strong>Multiple placeholders</strong>: each component of the pipe should only be evaluated once even when there are multiple placeholders, so that <code>sample(10) %&gt;% cbind(., .)</code> yields two columns with the same value. Relatedly, <code>sample(10) %T&gt;% print() %T&gt;% print()</code> must print the same values twice.</p></li>
 <li>
-<p><strong>Lazy evaluation</strong>: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like <code>stop("!") %&gt;% try()</code>, making pipes capable of capturing a wider range of R expressions.</p>
+<p><strong>Lazy evaluation</strong>: steps of the pipe should only be evaluated when actually needed. This is a useful property as it means that pipes can handle code like <code>stop("!") %&gt;% try()</code>, making pipes capable of capturing a wider range of R expressions.</p>
 <p>On the other hand, it might have surprising effects. For instance if a function that suppresses warnings is added to the end of a pipeline, the suppression takes effect for the whole pipeline.</p>
 </li>
 <li>
@@ -306,7 +306,7 @@
 
 <span class="co"># Becomes</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>), <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>))</pre></body></html></div>
-<p>Assigning to the placeholder within an argument would preserve the nestedness and lazyness. However that wouldn’t work properly because there’s no gaurantee that the first argument will be evaluated before the second argument.</p>
+<p>Assigning to the placeholder within an argument would preserve the nestedness and lazyness. However that wouldn’t work properly because there’s no guarantee that the first argument will be evaluated before the second argument.</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>) <span class="kw">%&gt;%</span> <span class="fu">foo</span>(<span class="no">.</span>, <span class="no">.</span>)
 <span class="fu">foo</span>(<span class="no">.</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fl">10</span>), <span class="no">.</span>)</pre></body></html></div>
 <p>For these reasons, the nested pipe does not support multiple placeholders. By contrast, all the other variants assign the result of pipe expressions to the placeholder. There are variations in how the placeholder binding is created (lazily or eagerly, in a mask or in the current environment, with numbered symbols or with a unique symbol) but all these variants allow multiple placeholders.</p>
@@ -469,8 +469,8 @@
 <div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu">factory</span>() <span class="kw">%!&gt;%</span> { <span class="fu">.</span>() }
 <span class="fu">fn</span>()
 <span class="co">#&gt; function() x</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fa5211d6ba0&gt;</span>
-<span class="co">#&gt; &lt;environment: 0x7fa51fbe17b0&gt;</span></pre></body></html></div>
+<span class="co">#&gt; &lt;bytecode: 0x7fa5cdcc1410&gt;</span>
+<span class="co">#&gt; &lt;environment: 0x7fa5cc78de20&gt;</span></pre></body></html></div>
 <p>Also, since we’re binding <code>.</code> in the current environment, we need to clean it up once the pipeline has returned. At that point, the placeholder no longer exists:</p>
 <div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">fn</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span> <span class="kw">%!&gt;%</span> <span class="fu">factory</span>()
 <span class="fu">fn</span>()
