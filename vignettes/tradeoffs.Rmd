@@ -110,11 +110,11 @@ We'll first explore the desired properties we might want a pipe to possess and t
 
 These are the properties that we might want a pipe to possess, roughly ordered from most important to least important.
 
-*   **Visibility**: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally return their first argument invisibly) do not print.
+*   **Visibility**: the visibility of the final function in the pipe should be preserved. This is important so that pipes that end in a side-effect function (which generally returns its first argument invisibly) do not print.
 
 *   **Multiple placeholders**: each component of the pipe should only be evaluated once even when there are multiple placeholders, so that `sample(10) %>% cbind(., .)` yields two columns with the same value. Relatedly, `sample(10) %T>% print() %T>% print()` must print the same values twice.
 
-*   **Lazy evaluation**: are steps of the pipe only evaluated lazily when actually needed? This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
+*   **Lazy evaluation**: steps of the pipe should only be evaluated when actually needed. This is a useful property as it means that pipes can handle code like `stop("!") %>% try()`, making pipes capable of capturing a wider range of R expressions.
 
     On the other hand, it might have surprising effects. For instance if a function that suppresses warnings is added to the end of a pipeline, the suppression takes effect for the whole pipeline.
 
@@ -167,7 +167,7 @@ sample(10) %>% list(., .)
 list(sample(10), sample(10))
 ```
 
-Assigning to the placeholder within an argument would preserve the nestedness and lazyness. However that wouldn't work properly because there's no gaurantee that the first argument will be evaluated before the second argument.
+Assigning to the placeholder within an argument would preserve the nestedness and lazyness. However that wouldn't work properly because there's no guarantee that the first argument will be evaluated before the second argument.
 
 ```{r}
 sample(10) %>% foo(., .)
