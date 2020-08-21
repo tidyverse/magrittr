@@ -61,3 +61,11 @@ test_that("can splice magrittr input (#191)", {
   exp <- rlang::list2(!!!1:3)
   expect_identical(out, exp)
 })
+
+test_that("allow trailing return for backward compatibility", {
+  expect_error(1 %>% { return(.) })
+  expect_identical(1 %>% return(), 1)
+
+  f <- function() 1 %>% identity() %>% return()
+  expect_identical(f(), 1)
+})

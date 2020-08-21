@@ -45,6 +45,7 @@ static SEXP syms_pipe = NULL;
 static SEXP syms_pipe_compound = NULL;
 static SEXP syms_pipe_dollar = NULL;
 static SEXP syms_pipe_tee = NULL;
+static SEXP syms_return = NULL;
 static SEXP syms_sym = NULL;
 
 static SEXP calls_base_with = NULL;
@@ -61,6 +62,7 @@ static SEXP add_dot(SEXP x);
 static inline SEXP as_pipe_tee_call(SEXP x);
 static inline SEXP as_pipe_dollar_call(SEXP x);
 static SEXP new_lambda(SEXP exprs, SEXP env);
+static inline bool is_return(SEXP x);
 
 // [[ register() ]]
 SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
@@ -169,12 +171,24 @@ SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
     prev_mask = mask;
   }
 
+  // For compatibility, allow last expression to be `return()`.
+  // Substitute it with `.` to avoid an error.
+  SEXP last = CAR(exprs);
+  if (is_return(last)) {
+    last = syms_dot;
+  }
+
   // Evaluate last expression in the very last mask. This triggers a
   // recursive evaluation of `.` bindings in the different masks.
-  SEXP out = Rf_eval(CAR(exprs), prev_mask);
+  SEXP out = Rf_eval(last, prev_mask);
 
   UNPROTECT(1);
   return out;
+}
+
+static inline
+bool is_return(SEXP x) {
+  return TYPEOF(x) == LANGSXP && CAR(x) == syms_return;
 }
 
 static
@@ -417,6 +431,7 @@ SEXP magrittr_init(SEXP ns) {
   syms_pipe_compound = Rf_install("%<>%");
   syms_pipe_dollar = Rf_install("%$%");
   syms_pipe_tee = Rf_install("%T>%");
+  syms_return = Rf_install("return");
   syms_sym = Rf_install("sym");
 
   chrs_dot = Rf_allocVector(STRSXP, 1);
