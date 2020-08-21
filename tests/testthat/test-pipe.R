@@ -55,3 +55,9 @@ test_that("nested pipe can't use multiple placeholders", {
     "multiple"
   )
 })
+
+test_that("can splice magrittr input (#191)", {
+  out <- 1:3 %>% rlang::list2(!!!.)
+  exp <- rlang::list2(!!!1:3)
+  expect_identical(out, exp)
+})

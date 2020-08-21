@@ -35,6 +35,7 @@ static SEXP syms_env = NULL;
 static SEXP syms_lazy = NULL;
 
 static SEXP syms_assign = NULL;
+static SEXP syms_bang = NULL;
 static SEXP syms_curly = NULL;
 static SEXP syms_dot = NULL;
 static SEXP syms_nested = NULL;
@@ -299,6 +300,30 @@ SEXP as_pipe_tee_call(SEXP x) {
   return out;
 }
 
+static inline
+bool is_bang(SEXP x) {
+  return TYPEOF(x) == LANGSXP && CAR(x) == syms_bang;
+}
+
+static
+bool is_spliced_dot(SEXP x) {
+  if (!is_bang(x)) {
+    return false;
+  }
+
+  x = CADR(x);
+  if (!is_bang(x)) {
+    return false;
+  }
+
+  x = CADR(x);
+  if (!is_bang(x)) {
+    return false;
+  }
+
+  return CADR(x) == syms_dot;
+}
+
 static
 SEXP add_dot(SEXP x) {
   if (TYPEOF(x) != LANGSXP) {
@@ -307,7 +332,8 @@ SEXP add_dot(SEXP x) {
 
   SEXP args = CDR(x);
   while (args != R_NilValue) {
-    if (CAR(args) == syms_dot) {
+    SEXP arg = CAR(args);
+    if (arg == syms_dot || is_spliced_dot(arg)) {
       return x;
     }
     args = CDR(args);
@@ -381,6 +407,7 @@ SEXP magrittr_init(SEXP ns) {
   syms_lazy = Rf_install("lazy");
 
   syms_assign = Rf_install("<-");
+  syms_bang = Rf_install("!");
   syms_curly = Rf_install("{");
   syms_dot = Rf_install(".");
   syms_nested = Rf_install("nested");

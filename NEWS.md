@@ -23,6 +23,9 @@ warning("bar") %>% suppressWarnings()
 
 ## Bug fixes
 
+* Can now use the placeholder `.` with the splicing operator `!!!`
+  from rlang (#191).
+
 * Piped arguments are now persistent. They can be evaluated after the
   pipeline has returned, which fixes subtle issues with function
   factories (#159, #195).
