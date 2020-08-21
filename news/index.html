@@ -165,7 +165,8 @@ warning("bar") %&gt;% suppressWarnings()</code></pre>
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Piped arguments are now persistent. They can be evaluated after the pipeline has returned, which fixes subtle issues with function factories (<a href='https://github.com/tidyverse/magrittr/issues/159'>#159</a>, <a href='https://github.com/tidyverse/magrittr/issues/195'>#195</a>).</li>
+<li><p>Can now use the placeholder <code>.</code> with the splicing operator <code>!!!</code> from rlang (<a href='https://github.com/tidyverse/magrittr/issues/191'>#191</a>).</p></li>
+<li><p>Piped arguments are now persistent. They can be evaluated after the pipeline has returned, which fixes subtle issues with function factories (<a href='https://github.com/tidyverse/magrittr/issues/159'>#159</a>, <a href='https://github.com/tidyverse/magrittr/issues/195'>#195</a>).</p></li>
 </ul>
 </div>
 </div>
