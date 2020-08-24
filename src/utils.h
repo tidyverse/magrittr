@@ -29,6 +29,23 @@ SEXP r_new_environment(SEXP parent) {
   return env;
 }
 
+static inline
+SEXP r_env_get(SEXP env, SEXP sym) {
+  SEXP obj = PROTECT(Rf_findVarInFrame3(env, sym, FALSE));
+
+  // Force lazy loaded bindings
+  if (TYPEOF(obj) == PROMSXP) {
+    obj = Rf_eval(obj, R_BaseEnv);
+  }
+
+  UNPROTECT(1);
+  return obj;
+}
+
+#if defined(RLIB_DEBUG)
+SEXP R_inspect(SEXP x);
+SEXP R_inspect3(SEXP x, int deep, int pvec);
+#endif
 
 
 #endif

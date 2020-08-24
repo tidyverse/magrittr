@@ -73,9 +73,9 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   SEXP kind = PROTECT(Rf_eval(syms_kind, rho));
   SEXP env = PROTECT(Rf_eval(syms_env, rho));
 
-  SEXP pipe_sym = syms_pipe;
-  if (Rf_findVar(syms_sym, rho) != R_UnboundValue) {
-    pipe_sym = Rf_eval(syms_sym, rho);
+  SEXP pipe_sym = r_env_get(rho, syms_sym);
+  if (pipe_sym == R_UnboundValue) {
+    pipe_sym = syms_pipe;
   }
   PROTECT(pipe_sym);
 
