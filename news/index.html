@@ -179,28 +179,28 @@
 <span class="fu">my_function</span>(<span class="fl">TRUE</span>)
 <span class="co">#&gt; Error: no function to return from, jumping to top level</span></pre></div>
 <p>In magrittr 1.5, <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> used to return from the current pipe expression. You can rewrite this to the equivalent:</p>
-<pre class="{r}"><code>my_function &lt;- function(x) {
-  x %&gt;% {
-    if (.) {
-      "true"
-    } else {
-      "false"
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">my_function</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) {
+  <span class="no">x</span> <span class="kw">%&gt;%</span> {
+    <span class="kw">if</span> (<span class="no">.</span>) {
+      <span class="st">"true"</span>
+    } <span class="kw">else</span> {
+      <span class="st">"false"</span>
     }
   }
 }
 
-my_function(TRUE)
-#&gt; [1] "true"</code></pre>
+<span class="fu">my_function</span>(<span class="fl">TRUE</span>)
+<span class="co">#&gt; [1] "true"</span></pre></div>
 <p>For backward-compatibility we have special-cased trailing <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> calls as this is a common occurrence in packages:</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fl">1</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()</pre></div>
 <p>Note however that this only returns from the pipeline, not the enclosing function:</p>
-<pre class="{r}"><code>my_function &lt;- function() {
-  "value" %&gt;% identity() %&gt;% return()
-  "wrong value"
+<div class="sourceCode" id="cb5"><pre class="r"><span class="no">my_function</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
+  <span class="st">"value"</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
+  <span class="st">"wrong value"</span>
 }
 
-my_function()
-#&gt; [1] "wrong value"</code></pre>
+<span class="fu">my_function</span>()
+<span class="co">#&gt; [1] "wrong value"</span></pre></div>
 <p>It is generally best to avoid using <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> in a pipeline, even if trailing.</p>
 </div>
 <div id="failures-caused-by-laziness" class="section level3">
