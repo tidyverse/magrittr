@@ -15,10 +15,129 @@ future version of R. The pipe now evaluates piped expressions lazily (#120).
 The main consequence of this change is that warnings and errors can
 now be handled by trailing pipe calls:
 
-```{r}
+```r
 stop("foo") %>% try()
 warning("bar") %>% suppressWarnings()
 ```
+
+
+## Breaking changes
+
+The pipe rewrite should generally not affect your code. We have
+checked magrittr on 2800 CRAN packages and found only a dozen of
+failures.
+
+
+### Behaviour of `return()` in a pipeline
+
+The behaviour of `return()` within pipe expressions was sort of
+undefined. Should it return from the current pipe expression, from the
+whole pipeline, or from the enclosing function? The behaviour that
+makes the most sense is to return from the enclosing
+function. However, we can't make this work easily with the new
+implementation, and so calling `return()` is now an error.
+
+```r
+my_function <- function(x) {
+  x %>% {
+    if (.) return("true")
+    "false"
+  }
+}
+
+my_function(TRUE)
+#> Error: no function to return from, jumping to top level
+```
+
+In magrittr 1.5, `return()` used to return from the current pipe
+expression. You can rewrite this to the equivalent:
+
+```r
+my_function <- function(x) {
+  x %>% {
+    if (.) {
+      "true"
+    } else {
+      "false"
+    }
+  }
+}
+
+my_function(TRUE)
+#> [1] "true"
+```
+
+For backward-compatibility we have special-cased trailing `return()`
+calls as this is a common occurrence in packages:
+
+```r
+1 %>% identity() %>% return()
+```
+
+Note however that this only returns from the pipeline, not the
+enclosing function:
+
+```r
+my_function <- function() {
+  "value" %>% identity() %>% return()
+  "wrong value"
+}
+
+my_function()
+#> [1] "wrong value"
+```
+
+It is generally best to avoid using `return()` in a pipeline, even if
+trailing.
+
+
+### Failures caused by laziness
+
+With the new lazy model for the evaluation of pipe expressions,
+earlier parts of a pipeline are not yet evaluated when the last pipe
+expression is called. They only get evaluated when the last function
+actually uses the piped arguments:
+
+```r
+ignore <- function(x) "return value"
+stop("never called") %>% ignore()
+#> [1] "return value"
+```
+
+This should generally not cause problems. However we found some
+functions with special behaviour, written under the assumption that
+earlier parts of the pipeline were already evaluated and had already
+produced side effects. This is generally incorrect behaviour because
+that means that these functions do not work properly when called
+with the nested form, e.g. `f(g(1))` instead of `1 %>% g() %>% f()`.
+
+The solution to fix this is to call `force()` on the inputs to force
+evaluation, and only then check for side effects:
+
+```r
+my_function <- function(data) {
+  force(data)
+  peek_side_effect()
+}
+```
+
+
+### Incorrect call stack introspection
+
+The magrittr expressions are no longer evaluated in frames that can be
+inspected by `sys.frames()` or `sys.parent()`. Using these functions
+for implementing actual functionality (as opposed as debugging tools)
+is likely to produce bugs. Instead, you should generally use
+`parent.frame()` which works even when R code is called from
+non-inspectable frames. This happens with e.g. `do.call()` and the new
+C implementation of magrittr.
+
+
+### Incorrect assumptions about magrittr internals
+
+Some packages were depending on how magrittr was internally
+structured. Robust code should only use the documented and exported
+API of other packages.
 
 
 ## Bug fixes
