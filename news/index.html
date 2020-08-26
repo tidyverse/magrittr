@@ -158,8 +158,75 @@
 <li>No impact on reference counts.</li>
 </ul>
 <p>As part of this rewrite we have changed the behaviour of the pipe to make it closer to the implementation that will likely be included in a future version of R. The pipe now evaluates piped expressions lazily (<a href='https://github.com/tidyverse/magrittr/issues/120'>#120</a>). The main consequence of this change is that warnings and errors can now be handled by trailing pipe calls:</p>
-<pre class="{r}"><code>stop("foo") %&gt;% try()
-warning("bar") %&gt;% suppressWarnings()</code></pre>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"foo"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>()
+<span class="fu"><a href="https://rdrr.io/r/base/warning.html">warning</a></span>(<span class="st">"bar"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span>()</pre></div>
+</div>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<p>The pipe rewrite should generally not affect your code. We have checked magrittr on 2800 CRAN packages and found only a dozen of failures.</p>
+<div id="behaviour-of-return-in-a-pipeline" class="section level3">
+<h3 class="hasAnchor">
+<a href="#behaviour-of-return-in-a-pipeline" class="anchor"></a>Behaviour of <code>return()</code> in a pipeline</h3>
+<p>The behaviour of <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> within pipe expressions was sort of undefined. Should it return from the current pipe expression, from the whole pipeline, or from the enclosing function? The behaviour that makes the most sense is to return from the enclosing function. However, we can’t make this work easily with the new implementation, and so calling <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is now an error.</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="no">my_function</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) {
+  <span class="no">x</span> <span class="kw">%&gt;%</span> {
+    <span class="kw">if</span> (<span class="no">.</span>) <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="st">"true"</span>)
+    <span class="st">"false"</span>
+  }
+}
+
+<span class="fu">my_function</span>(<span class="fl">TRUE</span>)
+<span class="co">#&gt; Error: no function to return from, jumping to top level</span></pre></div>
+<p>In magrittr 1.5, <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> used to return from the current pipe expression. You can rewrite this to the equivalent:</p>
+<pre class="{r}"><code>my_function &lt;- function(x) {
+  x %&gt;% {
+    if (.) {
+      "true"
+    } else {
+      "false"
+    }
+  }
+}
+
+my_function(TRUE)
+#&gt; [1] "true"</code></pre>
+<p>For backward-compatibility we have special-cased trailing <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> calls as this is a common occurrence in packages:</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fl">1</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()</pre></div>
+<p>Note however that this only returns from the pipeline, not the enclosing function:</p>
+<pre class="{r}"><code>my_function &lt;- function() {
+  "value" %&gt;% identity() %&gt;% return()
+  "wrong value"
+}
+
+my_function()
+#&gt; [1] "wrong value"</code></pre>
+<p>It is generally best to avoid using <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> in a pipeline, even if trailing.</p>
+</div>
+<div id="failures-caused-by-laziness" class="section level3">
+<h3 class="hasAnchor">
+<a href="#failures-caused-by-laziness" class="anchor"></a>Failures caused by laziness</h3>
+<p>With the new lazy model for the evaluation of pipe expressions, earlier parts of a pipeline are not yet evaluated when the last pipe expression is called. They only get evaluated when the last function actually uses the piped arguments:</p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="no">ignore</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="st">"return value"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"never called"</span>) <span class="kw">%&gt;%</span> <span class="fu">ignore</span>()
+<span class="co">#&gt; [1] "return value"</span></pre></div>
+<p>This should generally not cause problems. However we found some functions with special behaviour, written under the assumption that earlier parts of the pipeline were already evaluated and had already produced side effects. This is generally incorrect behaviour because that means that these functions do not work properly when called with the nested form, e.g. <code>f(g(1))</code> instead of <code>1 %&gt;% g() %&gt;% f()</code>.</p>
+<p>The solution to fix this is to call <code><a href="https://rdrr.io/r/base/force.html">force()</a></code> on the inputs to force evaluation, and only then check for side effects:</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="no">my_function</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
+  <span class="fu"><a href="https://rdrr.io/r/base/force.html">force</a></span>(<span class="no">data</span>)
+  <span class="fu">peek_side_effect</span>()
+}</pre></div>
+</div>
+<div id="incorrect-call-stack-introspection" class="section level3">
+<h3 class="hasAnchor">
+<a href="#incorrect-call-stack-introspection" class="anchor"></a>Incorrect call stack introspection</h3>
+<p>The magrittr expressions are no longer evaluated in frames that can be inspected by <code><a href="https://rdrr.io/r/base/sys.parent.html">sys.frames()</a></code> or <code><a href="https://rdrr.io/r/base/sys.parent.html">sys.parent()</a></code>. Using these functions for implementing actual functionality (as opposed as debugging tools) is likely to produce bugs. Instead, you should generally use <code><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame()</a></code> which works even when R code is called from non-inspectable frames. This happens with e.g. <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> and the new C implementation of magrittr.</p>
+</div>
+<div id="incorrect-assumptions-about-magrittr-internals" class="section level3">
+<h3 class="hasAnchor">
+<a href="#incorrect-assumptions-about-magrittr-internals" class="anchor"></a>Incorrect assumptions about magrittr internals</h3>
+<p>Some packages were depending on how magrittr was internally structured. Robust code should only use the documented and exported API of other packages.</p>
+</div>
 </div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
