@@ -41,6 +41,12 @@ test_that("lazy pipe evaluates expressions lazily (#120)", {
    ignore <- function(...) NA
    out <- stop("foo") %>% identity() %>% ignore()
    expect_identical(out, NA)
+
+   out <- stop("foo") %T>% identity() %>% ignore()
+   expect_identical(out, NA)
+
+   out %<>% stop() %>% ignore()
+   expect_identical(out, NA)
 })
 
 test_that("lazy pipe evaluates `.` in correct environments", {
@@ -68,4 +74,19 @@ test_that("allow trailing return for backward compatibility", {
 
   f <- function() 1 %>% identity() %>% return()
   expect_identical(f(), 1)
+})
+
+test_that("visibility is forwarded", {
+  expect_equal(
+    withVisible(mtcars %>% with(invisible(cyl))),
+    list(value = mtcars$cyl, visible = FALSE)
+  )
+  expect_equal(
+    withVisible(mtcars %$% invisible(cyl)),
+    list(value = mtcars$cyl, visible = FALSE)
+  )
+  expect_equal(
+    withVisible(mtcars %T>% identity %>% with(invisible(cyl))),
+    list(value = mtcars$cyl, visible = FALSE)
+  )
 })
