@@ -103,3 +103,15 @@ test_that("visibility is forwarded", {
     list(value = mtcars$cyl, visible = FALSE)
   )
 })
+
+test_that("`%<>%` always returns invisibly", {
+  foo <- 1
+  expect_equal(
+    withVisible(foo %<>% add(1) %>% identity()),
+    list(value = 2, visible = FALSE)
+  )
+  expect_equal(
+    withVisible(foo %<>% add(1) %>% invisible()),
+    list(value = 3, visible = FALSE)
+  )
+})
