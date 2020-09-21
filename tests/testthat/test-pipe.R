@@ -78,7 +78,20 @@ test_that("allow trailing return for backward compatibility", {
 
 test_that("visibility is forwarded", {
   expect_equal(
-    withVisible(mtcars %>% with(invisible(cyl))),
+    withVisible(mtcars %>% { identity(.$cyl) }),
+    list(value = mtcars$cyl, visible = TRUE)
+  )
+  expect_equal(
+    withVisible(mtcars %$% cyl),
+    list(value = mtcars$cyl, visible = TRUE)
+  )
+  expect_equal(
+    withVisible(mtcars %T>% identity() %>% { identity(.$cyl) }),
+    list(value = mtcars$cyl, visible = TRUE)
+  )
+
+  expect_equal(
+    withVisible(mtcars %>% { invisible(.$cyl) }),
     list(value = mtcars$cyl, visible = FALSE)
   )
   expect_equal(
@@ -86,7 +99,7 @@ test_that("visibility is forwarded", {
     list(value = mtcars$cyl, visible = FALSE)
   )
   expect_equal(
-    withVisible(mtcars %T>% identity %>% with(invisible(cyl))),
+    withVisible(mtcars %T>% identity() %>% { invisible(.$cyl) }),
     list(value = mtcars$cyl, visible = FALSE)
   )
 })
