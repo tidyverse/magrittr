@@ -121,6 +121,34 @@ my_function <- function(data) {
 }
 ```
 
+Another issue caused by laziness is that if any function in a pipeline
+returns invisibly, than the whole pipeline returns invisibly as well.
+
+```r
+1 %>% identity() %>% invisible()
+1 %>% invisible() %>% identity()
+1 %>% identity() %>% invisible() %>% identity()
+```
+
+This is consistent with the equivalent nested code. This behaviour can
+be worked around in two ways. You can force visibility by wrapping the
+pipeline in parentheses:
+
+```r
+my_function <- function(x) {
+  (x %>% invisible() %>% identity())
+}
+```
+
+Or by assigning the result to a variable and return it:
+
+```r
+my_function <- function(x) {
+  out <- x %>% invisible() %>% identity()
+  out
+}
+```
+
 
 ### Incorrect call stack introspection
 
