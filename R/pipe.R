@@ -219,6 +219,7 @@ pipe_nested <- function(lhs, rhs) {
   lhs <- substitute(lhs)
   rhs <- substitute(rhs)
   kind <- 2L
+  lazy <- TRUE
   env <- parent.frame()
   .External2(magrittr_pipe)
 }
@@ -249,6 +250,7 @@ pipe_nested <- function(lhs, rhs) {
   lhs <- substitute(lhs)
   rhs <- substitute(rhs)
   kind <- 3L
+  lazy <- TRUE
   env <- parent.frame()
   .External2(magrittr_pipe)
 }
@@ -282,6 +284,7 @@ pipe_nested <- function(lhs, rhs) {
   lhs <- substitute(lhs)
   rhs <- substitute(rhs)
   kind <- 4L
+  lazy <- TRUE
   env <- parent.frame()
   .External2(magrittr_pipe)
 }
