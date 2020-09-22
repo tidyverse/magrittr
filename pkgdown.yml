@@ -1,10 +1,10 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   magrittr: magrittr.html
   tradeoffs: tradeoffs.html
-last_built: 2020-08-26T09:16Z
+last_built: 2020-09-22T11:37Z
 urls:
   reference: https://magrittr.tidyverse.org/reference
   article: https://magrittr.tidyverse.org/articles

@@ -150,7 +150,7 @@
     <p>Pipe an object forward into a function or call expression.</p>
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='kw'>lhs</span> <span class='op'>%&gt;%</span> <span class='kw'>rhs</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,18 +168,18 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
-<h3>Using <code>%&gt;%</code> with unary function calls</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Using <code>%&gt;%</code> with unary function calls</h3>
 
 
 <p>When functions require only one argument, <code>x %&gt;% f</code> is equivalent
 to <code>f(x)</code> (not exactly equivalent; see technical note below.)</p>
-<h3>Placing <code>lhs</code> as the first argument in <code>rhs</code> call</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Placing <code>lhs</code> as the first argument in <code>rhs</code> call</h3>
 
 
 <p>The default behavior of <code>%&gt;%</code> when multiple arguments are required
 in the <code>rhs</code> call, is to place <code>lhs</code> as the first argument, i.e.
 <code>x %&gt;% f(y)</code> is equivalent to <code>f(x, y)</code>.</p>
-<h3>Placing <code>lhs</code> elsewhere in <code>rhs</code> call</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Placing <code>lhs</code> elsewhere in <code>rhs</code> call</h3>
 
 
 <p>Often you will want <code>lhs</code> to the <code>rhs</code> call at another position than the first.
@@ -187,7 +187,7 @@ For this purpose you can use the dot (<code>.</code>) as placeholder. For exampl
 <code>y %&gt;% f(x, .)</code> is equivalent to <code>f(x, y)</code> and
 <code>z %&gt;% f(x, y, arg = .)</code> is equivalent to <code>f(x, y, arg = z)</code>.</p>
 
-<h3>Using the dot for secondary purposes</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Using the dot for secondary purposes</h3>
 
 
 <p>Often, some attribute or property of <code>lhs</code> is desired in the <code>rhs</code> call in
@@ -203,7 +203,7 @@ slightly more compact. It is possible to overrule this behavior by enclosing
 the <code>rhs</code> in braces. For example, <code>1:10 %&gt;% {c(min(.), max(.))}</code> is
 equivalent to <code><a href='https://rdrr.io/r/base/c.html'>c(min(1:10), max(1:10))</a></code>.</p>
 
-<h3>Using <code>%&gt;%</code> with call- or function-producing <code>rhs</code></h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Using <code>%&gt;%</code> with call- or function-producing <code>rhs</code></h3>
 
 
 <p>It is possible to force evaluation of <code>rhs</code> before the piping of <code>lhs</code> takes
@@ -211,10 +211,10 @@ place. This is useful when <code>rhs</code> produces the relevant call or functi
 To evaluate <code>rhs</code> first, enclose it in parentheses, i.e.
 <code>a %&gt;% (function(x) x^2)</code>, and <code>1:10 %&gt;% (call("sum"))</code>.
 Another example where this is relevant is for reference class methods
-which are accessed using the <code>$</code> operator, where one would do
+which are accessed using the <code><a href='https://rdrr.io/r/base/Extract.html'>$</a></code> operator, where one would do
 <code>x %&gt;% (rc$f)</code>, and not <code>x %&gt;% rc$f</code>.</p>
 
-<h3>Using lambda expressions with <code>%&gt;%</code></h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Using lambda expressions with <code>%&gt;%</code></h3>
 
 
 <p>Each <code>rhs</code> is essentially a one-expression body of a unary function.
@@ -224,7 +224,7 @@ is needed one encloses the body in a pair of braces, <code>{ rhs }</code>.
 However, note that within braces there are no "first-argument rule":
 it will be exactly like writing a unary function where the argument name is
 "<code>.</code>" (the dot).</p>
-<h3>Using the dot-place holder as <code>lhs</code></h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Using the dot-place holder as <code>lhs</code></h3>
 
 
 <p>When the dot is used as <code>lhs</code>, the result will be a functional sequence,
@@ -249,11 +249,12 @@ chain is evaluated. In general it is advised to use the aliases provided
 by magrittr.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>%&lt;&gt;%</code>, <code>%T&gt;%</code>, <code><a href='exposition.html'>%$%</a></code></p></div>
+    <div class='dont-index'><p><code>%&lt;&gt;%</code>, <code>%T&gt;%</code>, <code><a href='%$%.html'>%$%</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Basic use:</span>
-<span class='no'>iris</span> <span class='kw'>%&gt;%</span> <span class='no'>head</span></div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+<span class='kw'>iris</span> <span class='op'>%&gt;%</span> <span class='kw'>head</span>
+</div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; 1          5.1         3.5          1.4         0.2  setosa
 #&gt; 2          4.9         3.0          1.4         0.2  setosa
 #&gt; 3          4.7         3.2          1.3         0.2  setosa
@@ -261,7 +262,8 @@ by magrittr.</p>
 #&gt; 5          5.0         3.6          1.4         0.2  setosa
 #&gt; 6          5.4         3.9          1.7         0.4  setosa</div><div class='input'>
 <span class='co'># Use with lhs as first argument</span>
-<span class='no'>iris</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fl'>10</span>)</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+<span class='kw'>iris</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fl'>10</span>)
+</div><div class='output co'>#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #&gt; 1           5.1         3.5          1.4         0.2  setosa
 #&gt; 2           4.9         3.0          1.4         0.2  setosa
 #&gt; 3           4.7         3.2          1.3         0.2  setosa
@@ -273,17 +275,21 @@ by magrittr.</p>
 #&gt; 9           4.4         2.9          1.4         0.2  setosa
 #&gt; 10          4.9         3.1          1.5         0.1  setosa</div><div class='input'>
 <span class='co'># Using the dot place-holder</span>
-<span class='st'>"Ceci n'est pas une pipe"</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"une"</span>, <span class='st'>"un"</span>, <span class='no'>.</span>)</div><div class='output co'>#&gt; [1] "Ceci n'est pas un pipe"</div><div class='input'>
+<span class='st'>"Ceci n'est pas une pipe"</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(<span class='st'>"une"</span>, <span class='st'>"un"</span>, <span class='kw'>.</span>)
+</div><div class='output co'>#&gt; [1] "Ceci n'est pas un pipe"</div><div class='input'>  
 <span class='co'># When dot is nested, lhs is still placed first:</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>LETTERS</span>[<span class='no'>.</span>])</div><div class='output co'>#&gt;  [1] "6F"  "1A"  "5E"  "7G"  "8H"  "4D"  "10J" "2B"  "9I"  "3C" </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>) <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='kw'>LETTERS</span>[<span class='kw'>.</span>])
+</div><div class='output co'>#&gt;  [1] "6F"  "1A"  "5E"  "7G"  "8H"  "4D"  "10J" "2B"  "9I"  "3C" </div><div class='input'>
 <span class='co'># This can be avoided:</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>) <span class='kw'>%&gt;%</span> {<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='no'>.</span>), <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>.</span>), <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>.</span>))} <span class='kw'>%&gt;%</span> <span class='no'>floor</span></div><div class='output co'>#&gt; [1] -3 -1  2</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>) <span class='op'>%&gt;%</span> {<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='kw'>.</span>), <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>.</span>), <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='kw'>.</span>))} <span class='op'>%&gt;%</span> <span class='kw'>floor</span>
+</div><div class='output co'>#&gt; [1] -3 -1  2</div><div class='input'>
 <span class='co'># Lambda expressions: </span>
-<span class='no'>iris</span> <span class='kw'>%&gt;%</span>
+<span class='kw'>iris</span> <span class='op'>%&gt;%</span>
 {
-  <span class='no'>size</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>.</span>, <span class='no'>size</span>), <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span>(<span class='no'>.</span>, <span class='no'>size</span>))
-}</div><div class='output co'>#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+  <span class='kw'>size</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, size = <span class='fl'>1</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>.</span>, <span class='kw'>size</span>), <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span>(<span class='kw'>.</span>, <span class='kw'>size</span>))
+}
+</div><div class='output co'>#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 #&gt; 1            5.1         3.5          1.4         0.2    setosa
 #&gt; 2            4.9         3.0          1.4         0.2    setosa
 #&gt; 3            4.7         3.2          1.3         0.2    setosa
@@ -301,12 +307,13 @@ by magrittr.</p>
 #&gt; 149          6.2         3.4          5.4         2.3 virginica
 #&gt; 150          5.9         3.0          5.1         1.8 virginica</div><div class='input'>
 <span class='co'># renaming in lambdas:</span>
-<span class='no'>iris</span> <span class='kw'>%&gt;%</span>
+<span class='kw'>iris</span> <span class='op'>%&gt;%</span>
 {
-  <span class='no'>my_data</span> <span class='kw'>&lt;-</span> <span class='no'>.</span>
-  <span class='no'>size</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>my_data</span>, <span class='no'>size</span>), <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span>(<span class='no'>my_data</span>, <span class='no'>size</span>))
-}</div><div class='output co'>#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+  <span class='kw'>my_data</span> <span class='op'>&lt;-</span> <span class='kw'>.</span>
+  <span class='kw'>size</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, size = <span class='fl'>1</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>my_data</span>, <span class='kw'>size</span>), <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span>(<span class='kw'>my_data</span>, <span class='kw'>size</span>))
+}
+</div><div class='output co'>#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 #&gt; 1            5.1         3.5          1.4         0.2    setosa
 #&gt; 2            4.9         3.0          1.4         0.2    setosa
 #&gt; 3            4.7         3.2          1.3         0.2    setosa
@@ -328,10 +335,12 @@ by magrittr.</p>
 #&gt; 149          6.2         3.4          5.4         2.3 virginica
 #&gt; 150          5.9         3.0          5.1         1.8 virginica</div><div class='input'>
 <span class='co'># Building unary functions with %&gt;%</span>
-<span class='no'>trig_fest</span> <span class='kw'>&lt;-</span> <span class='no'>.</span> <span class='kw'>%&gt;%</span> <span class='no'>tan</span> <span class='kw'>%&gt;%</span> <span class='no'>cos</span> <span class='kw'>%&gt;%</span> <span class='no'>sin</span>
+<span class='kw'>trig_fest</span> <span class='op'>&lt;-</span> <span class='kw'>.</span> <span class='op'>%&gt;%</span> <span class='kw'>tan</span> <span class='op'>%&gt;%</span> <span class='kw'>cos</span> <span class='op'>%&gt;%</span> <span class='kw'>sin</span>
 
-<span class='fl'>1</span>:<span class='fl'>10</span> <span class='kw'>%&gt;%</span> <span class='no'>trig_fest</span></div><div class='output co'>#&gt;  [1]  0.0133878 -0.5449592  0.8359477  0.3906486 -0.8257855  0.8180174
-#&gt;  [7]  0.6001744  0.7640323  0.7829771  0.7153150</div><div class='input'><span class='fu'>trig_fest</span>(<span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  0.0133878 -0.5449592  0.8359477  0.3906486 -0.8257855  0.8180174
+<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span> <span class='op'>%&gt;%</span> <span class='kw'>trig_fest</span>
+</div><div class='output co'>#&gt;  [1]  0.0133878 -0.5449592  0.8359477  0.3906486 -0.8257855  0.8180174
+#&gt;  [7]  0.6001744  0.7640323  0.7829771  0.7153150</div><div class='input'><span class='fu'>trig_fest</span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)
+</div><div class='output co'>#&gt;  [1]  0.0133878 -0.5449592  0.8359477  0.3906486 -0.8257855  0.8180174
 #&gt;  [7]  0.6001744  0.7640323  0.7829771  0.7153150</div><div class='input'>
 </div></pre>
   </div>
