@@ -230,6 +230,25 @@
   <span class="fu">peek_side_effect</span>()
 }
 </pre></div>
+<p>Another issue caused by laziness is that if any function in a pipeline returns invisibly, than the whole pipeline returns invisibly as well.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()
+<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>()
+<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>()
+</pre></div>
+<p>This is consistent with the equivalent nested code. This behaviour can be worked around in two ways. You can force visibility by wrapping the pipeline in parentheses:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) {
+  (<span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>())
+}
+</pre></div>
+<p>Or by assigning the result to a variable and return it:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) {
+  <span class="kw">out</span> <span class="op">&lt;-</span> <span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>()
+  <span class="kw">out</span>
+}
+</pre></div>
 </div>
 <div id="incorrect-call-stack-introspection" class="section level3">
 <h3 class="hasAnchor">

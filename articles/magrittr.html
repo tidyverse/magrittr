@@ -196,7 +196,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(ncol = <span class="fl">2</span>) <span class="op">%T&gt;%</span>
 <span class="kw">plot</span> <span class="op">%&gt;%</span> <span class="co"># plot usually does not return anything. </span>
 <span class="kw">colSums</span>
-<span class="co">#&gt; [1]  8.983954 -5.943994</span>
+<span class="co">#&gt; [1]  8.363440 -6.356854</span>
 </pre></div>
 <p>The “exposition” pipe, <code><a href="../reference/%%24%.html">%$%</a></code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
@@ -231,8 +231,8 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span>(<span class="kw">.</span>), <span class="st">"\n"</span>)
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">.</span>)
 }
-<span class="co">#&gt; Mean: 5.169942 Variance: 24.50483</span>
-<span class="co">#&gt; [1]  3.132403  5.721070  8.227131  8.260567 -2.590535  7.748602</span>
+<span class="co">#&gt; Mean: 4.981909 Variance: 24.73757</span>
+<span class="co">#&gt; [1]  4.881049  6.196799 10.896833  5.422288  4.282870  3.547869</span>
 </pre></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
