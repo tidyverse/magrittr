@@ -37,6 +37,8 @@ There are three main options for how we might transform a pipeline in base R exp
 
 -   **Eager (mask)**, masking environment
 
+    This is essentially how `%>%` has been implemented prior to magrittr 2.0:
+
     ```{r}
     local({
       . <- x
