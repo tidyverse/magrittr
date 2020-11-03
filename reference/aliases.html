@@ -190,9 +190,9 @@ when composing chains using the <code>%&gt;%</code> operator.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='kw'>iris</span> <span class='op'>%&gt;%</span>
-   <span class='fu'>extract</span>(, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>) <span class='op'>%&gt;%</span>
-   <span class='kw'>head</span>
+    <pre class="examples"><div class='input'> <span class='va'>iris</span> <span class='op'>%&gt;%</span>
+   <span class='fu'>extract</span><span class='op'>(</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+   <span class='va'>head</span>
 </div><div class='output co'>#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width
 #&gt; 1          5.1         3.5          1.4         0.2
 #&gt; 2          4.9         3.0          1.4         0.2
@@ -200,19 +200,19 @@ when composing chains using the <code>%&gt;%</code> operator.</p>
 #&gt; 4          4.6         3.1          1.5         0.2
 #&gt; 5          5.0         3.6          1.4         0.2
 #&gt; 6          5.4         3.9          1.7         0.4</div><div class='input'>
-<span class='kw'>good.times</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>() <span class='op'>%&gt;%</span>
-  <span class='kw'>as.POSIXct</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(by = <span class='st'>"15 mins"</span>, length.out = <span class='fl'>100</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(timestamp = <span class='kw'>.</span>)
+<span class='va'>good.times</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='va'>as.POSIXct</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>by <span class='op'>=</span> <span class='st'>"15 mins"</span>, length.out <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>timestamp <span class='op'>=</span> <span class='va'>.</span><span class='op'>)</span>
 
-<span class='kw'>good.times</span><span class='op'>$</span><span class='kw'>quarter</span> <span class='op'>&lt;-</span>
-  <span class='kw'>good.times</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>use_series</span>(<span class='kw'>timestamp</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='st'>"%M"</span>) <span class='op'>%&gt;%</span>
-  <span class='kw'>as.numeric</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>divide_by_int</span>(<span class='fl'>15</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'>add</span>(<span class='fl'>1</span>)
+<span class='va'>good.times</span><span class='op'>$</span><span class='va'>quarter</span> <span class='op'>&lt;-</span>
+  <span class='va'>good.times</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>use_series</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span><span class='op'>(</span><span class='st'>"%M"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='va'>as.numeric</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>divide_by_int</span><span class='op'>(</span><span class='fl'>15</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>add</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

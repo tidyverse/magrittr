@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   magrittr: magrittr.html
   tradeoffs: tradeoffs.html
-last_built: 2020-09-22T12:01Z
+last_built: 2020-11-03T15:40Z
 urls:
   reference: https://magrittr.tidyverse.org/reference
   article: https://magrittr.tidyverse.org/articles

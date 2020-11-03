@@ -159,9 +159,8 @@
 </ul>
 <p>As part of this rewrite we have changed the behaviour of the pipe to make it closer to the implementation that will likely be included in a future version of R. The pipe now evaluates piped expressions lazily (<a href='https://github.com/tidyverse/magrittr/issues/120'>#120</a>). The main consequence of this change is that warnings and errors can now be handled by trailing pipe calls:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"foo"</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>()
-<span class="fu"><a href="https://rdrr.io/r/base/warning.html">warning</a></span>(<span class="st">"bar"</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span>()
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"foo"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span><span class="st">"bar"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html">suppressWarnings</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -172,45 +171,41 @@
 <a href="#behaviour-of-return-in-a-pipeline" class="anchor"></a>Behaviour of <code>return()</code> in a pipeline</h3>
 <p>The behaviour of <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> within pipe expressions was sort of undefined. Should it return from the current pipe expression, from the whole pipeline, or from the enclosing function? The behaviour that makes the most sense is to return from the enclosing function. However, we can’t make this work easily with the new implementation, and so calling <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is now an error.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) {
-  <span class="kw">x</span> <span class="op">%&gt;%</span> {
-    <span class="co">if</span> (<span class="kw">.</span>) <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="st">"true"</span>)
+<span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">%&gt;%</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="st">"true"</span><span class="op">)</span>
     <span class="st">"false"</span>
-  }
-}
+  <span class="op">}</span>
+<span class="op">}</span>
 
-<span class="fu">my_function</span>(<span class="fl">TRUE</span>)
-<span class="co">#&gt; Error: no function to return from, jumping to top level</span>
-</pre></div>
+<span class="fu">my_function</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Error: no function to return from, jumping to top level</span></pre></div>
 <p>In magrittr 1.5, <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> used to return from the current pipe expression. You can rewrite this to the equivalent:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) {
-  <span class="kw">x</span> <span class="op">%&gt;%</span> {
-    <span class="co">if</span> (<span class="kw">.</span>) {
+<span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">%&gt;%</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">{</span>
       <span class="st">"true"</span>
-    } <span class="co">else</span> {
+    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
       <span class="st">"false"</span>
-    }
-  }
-}
+    <span class="op">}</span>
+  <span class="op">}</span>
+<span class="op">}</span>
 
-<span class="fu">my_function</span>(<span class="fl">TRUE</span>)
-<span class="co">#&gt; [1] "true"</span>
-</pre></div>
+<span class="fu">my_function</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "true"</span></pre></div>
 <p>For backward-compatibility we have special-cased trailing <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> calls as this is a common occurrence in packages:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
-</pre></div>
+<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>Note however that this only returns from the pipeline, not the enclosing function:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="st">"value"</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>()
+<span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="st">"value"</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">)</span>
   <span class="st">"wrong value"</span>
-}
+<span class="op">}</span>
 
-<span class="fu">my_function</span>()
-<span class="co">#&gt; [1] "wrong value"</span>
-</pre></div>
+<span class="fu">my_function</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "wrong value"</span></pre></div>
 <p>It is generally best to avoid using <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> in a pipeline, even if trailing.</p>
 </div>
 <div id="failures-caused-by-laziness" class="section level3">
@@ -218,37 +213,32 @@
 <a href="#failures-caused-by-laziness" class="anchor"></a>Failures caused by laziness</h3>
 <p>With the new lazy model for the evaluation of pipe expressions, earlier parts of a pipeline are not yet evaluated when the last pipe expression is called. They only get evaluated when the last function actually uses the piped arguments:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">ignore</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) <span class="st">"return value"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"never called"</span>) <span class="op">%&gt;%</span> <span class="fu">ignore</span>()
-<span class="co">#&gt; [1] "return value"</span>
-</pre></div>
+<span class="va">ignore</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="st">"return value"</span>
+<span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"never called"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">ignore</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "return value"</span></pre></div>
 <p>This should generally not cause problems. However we found some functions with special behaviour, written under the assumption that earlier parts of the pipeline were already evaluated and had already produced side effects. This is generally incorrect behaviour because that means that these functions do not work properly when called with the nested form, e.g. <code>f(g(1))</code> instead of <code>1 %&gt;% g() %&gt;% f()</code>.</p>
 <p>The solution to fix this is to call <code><a href="https://rdrr.io/r/base/force.html">force()</a></code> on the inputs to force evaluation, and only then check for side effects:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">data</span>) {
-  <span class="fu"><a href="https://rdrr.io/r/base/force.html">force</a></span>(<span class="kw">data</span>)
-  <span class="fu">peek_side_effect</span>()
-}
-</pre></div>
+<span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/force.html">force</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+  <span class="fu">peek_side_effect</span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <p>Another issue caused by laziness is that if any function in a pipeline returns invisibly, than the whole pipeline returns invisibly as well.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()
-<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>()
-<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>()
-</pre></div>
+<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>This is consistent with the equivalent nested code. This behaviour can be worked around in two ways. You can force visibility by wrapping the pipeline in parentheses:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) {
-  (<span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>())
-}
-</pre></div>
+<span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="op">(</span><span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <p>Or by assigning the result to a variable and return it:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw">my_function</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) {
-  <span class="kw">out</span> <span class="op">&lt;-</span> <span class="kw">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>()
-  <span class="kw">out</span>
-}
-</pre></div>
+<span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">out</span> <span class="op">&lt;-</span> <span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">out</span>
+<span class="op">}</span></pre></div>
 </div>
 <div id="incorrect-call-stack-introspection" class="section level3">
 <h3 class="hasAnchor">

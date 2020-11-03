@@ -154,7 +154,7 @@ original value instead of the result. This is useful when an expression
 is used for its side-effect, say plotting or printing.</p>
     </div>
 
-    <pre class="usage"><span class='kw'>lhs</span> <span class='op'>%T&gt;%</span> <span class='kw'>rhs</span></pre>
+    <pre class="usage"><span class='va'>lhs</span> <span class='op'>%T&gt;%</span> <span class='va'>rhs</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,10 +178,10 @@ return value is <code>lhs</code> itself, and not the result of <code>rhs</code> 
     <div class='dont-index'><p><code>%&gt;%</code>, <code>%&lt;&gt;%</code>, <code><a href='%$%.html'>%$%</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>200</span>) <span class='op'>%&gt;%</span>
-<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(ncol = <span class='fl'>2</span>) <span class='op'>%T&gt;%</span>
-<span class='kw'>plot</span> <span class='op'>%&gt;%</span> <span class='co'># plot usually does not return anything. </span>
-<span class='kw'>colSums</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>200</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%T&gt;%</span>
+<span class='va'>plot</span> <span class='op'>%&gt;%</span> <span class='co'># plot usually does not return anything. </span>
+<span class='va'>colSums</span>
 </div><div class='img'><img src='tee-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] -13.634410   3.848376</div><div class='input'>
 </div></pre>
   </div>
