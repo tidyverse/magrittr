@@ -121,8 +121,8 @@
 <a href="#introduction-and-basics" class="anchor"></a>Introduction and basics</h1>
 <p>At first encounter, you may wonder whether an operator such as <code><a href="../reference/%&gt;%.html">%&gt;%</a></code> can really be all that beneficial; but as you may notice, it semantically changes your code in a way that makes it more intuitive to both read and write.</p>
 <p>Consider the following example, in which the <code>mtcars</code> dataset shipped with R is munged a little:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 
 <span class="va">car_data</span> <span class="op">&lt;-</span> 
   <span class="va">mtcars</span> <span class="op">%&gt;%</span>
@@ -133,15 +133,15 @@
 <span class="co">#&gt;   cyl   mpg   disp     hp drat   wt  qsec   vs   am gear carb       kpl</span>
 <span class="co">#&gt; 1   4 25.90 108.05 111.00 3.94 2.15 17.75 1.00 1.00 4.50 2.00 11.010090</span>
 <span class="co">#&gt; 2   6 19.74 183.31 122.29 3.59 3.12 17.98 0.57 0.43 3.86 3.43  8.391474</span>
-<span class="co">#&gt; 3   8 15.10 353.10 209.21 3.23 4.00 16.77 0.00 0.14 3.29 3.50  6.419010</span></pre></div>
+<span class="co">#&gt; 3   8 15.10 353.10 209.21 3.23 4.00 16.77 0.00 0.14 3.29 3.50  6.419010</span></code></pre></div>
 <p>We start with a value, here <code>mtcars</code> (a <code>data.frame</code>). From there, we extract a subset, aggregate the information based on the number of cylinders, and then transform the dataset by adding a variable for kilometers per liter as a supplement to miles per gallon. Finally we print the result before assigning it. Note how the code is arranged in the logical order of how you think about the task: data-&gt;transform-&gt;aggregate, which is also the same order as the code will execute. It’s like a recipe – easy to read, easy to follow!</p>
 <p>A horrific alternative would be to write:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">car_data</span> <span class="op">&lt;-</span> 
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">car_data</span> <span class="op">&lt;-</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="va">cyl</span>, 
                       data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">hp</span> <span class="op">&gt;</span> <span class="fl">100</span><span class="op">)</span>, 
                       FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, 
-            kpl <span class="op">=</span> <span class="va">mpg</span><span class="op">*</span><span class="fl">0.4251</span><span class="op">)</span></pre></div>
+            kpl <span class="op">=</span> <span class="va">mpg</span><span class="op">*</span><span class="fl">0.4251</span><span class="op">)</span></code></pre></div>
 <p>There is a lot more clutter with parentheses, and the mental task of deciphering the code is more challenging—particularly if you did not write it yourself.</p>
 <p>Note also how “building” a function on the fly for use in <code>aggregate</code> is very simple in <em>magrittr</em>: rather than an actual value as the left-hand side in the pipeline, just use the placeholder. This is also very useful in R’s <code>*apply</code> family of functions.</p>
 <p>Granted, you may make the second example better, perhaps throw in a few temporary variables (which is often avoided to some degree when using <em>magrittr</em>), but one often sees cluttered lines like the ones presented.</p>
@@ -157,16 +157,16 @@
 <li>A pipeline with a dot (<code>.</code>) as the LHS will create a unary function. This is used to define the aggregator function.</li>
 </ol>
 <p>One feature, which was not demonstrated above is piping into <em>anonymous functions</em>, or <em>lambdas</em>. This is possible using standard function definitions, e.g.:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">car_data</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">car_data</span> <span class="op">%&gt;%</span>
 <span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span> 
     <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
   <span class="kw">else</span> <span class="va">x</span>
-<span class="op">}</span><span class="op">)</span></pre></div>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>However, <em>magrittr</em> also allows a short-hand notation:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="va">car_data</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">car_data</span> <span class="op">%&gt;%</span>
 <span class="op">{</span> 
   <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">.</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
@@ -174,36 +174,36 @@
 <span class="op">}</span>
 <span class="co">#&gt;   cyl  mpg   disp     hp drat   wt  qsec vs   am gear carb      kpl</span>
 <span class="co">#&gt; 1   4 25.9 108.05 111.00 3.94 2.15 17.75  1 1.00 4.50  2.0 11.01009</span>
-<span class="co">#&gt; 3   8 15.1 353.10 209.21 3.23 4.00 16.77  0 0.14 3.29  3.5  6.41901</span></pre></div>
+<span class="co">#&gt; 3   8 15.1 353.10 209.21 3.23 4.00 16.77  0 0.14 3.29  3.5  6.41901</span></code></pre></div>
 <p>Since all right-hand sides are really “body expressions” of unary functions, this is only the natural extension of the simple right-hand side expressions. Of course, longer and more complex functions can be made using this approach.</p>
 <p>In the first example, the anonymous function is enclosed in parentheses. Whenever you want to use a function- or call-generating statement as right-hand side, parentheses are used to evaluate the right-hand side before piping takes place.</p>
 <p>Another, less useful example is:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">%&gt;%</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>f <span class="op">=</span> <span class="va">sum</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 55</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">%&gt;%</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substitute.html">substitute</a></span><span class="op">(</span><span class="fu">f</span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>f <span class="op">=</span> <span class="va">sum</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] 55</span></code></pre></div>
 </div>
 <div id="additional-pipe-operators" class="section level1">
 <h1 class="hasAnchor">
 <a href="#additional-pipe-operators" class="anchor"></a>Additional pipe operators</h1>
 <p><em>magrittr</em> also provides three related pipe operators. These are not as common as <code><a href="../reference/%&gt;%.html">%&gt;%</a></code> but they become useful in special cases.</p>
 <p>The “tee” pipe, <code><a href="../reference/%T&gt;%.html">%T&gt;%</a></code> works like <code><a href="../reference/%&gt;%.html">%&gt;%</a></code>, except it returns the left-hand side value, and not the result of the right-hand side operation. This is useful when a step in a pipeline is used for its side-effect (printing, plotting, logging, etc.). As an example (where the actual plot is omitted here):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%T&gt;%</span>
 <span class="va">plot</span> <span class="op">%&gt;%</span> <span class="co"># plot usually does not return anything. </span>
 <span class="va">colSums</span>
-<span class="co">#&gt; [1] -17.6287573  -0.5529351</span></pre></div>
+<span class="co">#&gt; [1]  -4.405577 -11.408389</span></code></pre></div>
 <p>The “exposition” pipe, <code><a href="../reference/%%24%.html">%$%</a></code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">iris</span> <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">%$%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span>
    
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">%$%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></code></pre></div>
 <p>Finally, the “assignment” pipe <code><a href="../reference/%&lt;&gt;%.html">%&lt;&gt;%</a></code> can be used as the first pipe in a chain. The effect will be that the result of the pipeline is assigned to the left-hand side object, rather than returning the result as usual. It is essentially shorthand notation for expressions like <code>foo &lt;- foo %&gt;% bar %&gt;% baz</code>, which boils down to <code>foo %&lt;&gt;% bar %&gt;% baz</code>. Another example is:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span> <span class="op">%&lt;&gt;%</span> <span class="va">sqrt</span></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span> <span class="op">%&lt;&gt;%</span> <span class="va">sqrt</span></code></pre></div>
 <p>The <code><a href="../reference/%&lt;&gt;%.html">%&lt;&gt;%</a></code> can be used whenever <code>expr &lt;- ...</code> makes sense, e.g. </p>
 <ul>
 <li><code>x %&lt;&gt;% foo %&gt;% bar</code></li>
@@ -215,8 +215,8 @@
 <h1 class="hasAnchor">
 <a href="#aliases" class="anchor"></a>Aliases</h1>
 <p>In addition to the <code><a href="../reference/%&gt;%.html">%&gt;%</a></code>-operator, <em>magrittr</em> provides some aliases for other operators which make operations such as addition or multiplication fit well into the <em>magrittr</em>-syntax. As an example, consider:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>    <span class="op">%&gt;%</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>    <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/extract.html">multiply_by</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span>
 <span class="fu"><a href="../reference/extract.html">add</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>         <span class="op">%&gt;%</span>
 <span class="op">{</span> 
@@ -224,15 +224,15 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Mean: 4.974627 Variance: 24.60579</span>
-<span class="co">#&gt; [1]  5.3795400 13.0750080  8.8428869  4.7628562  6.6347169 -0.7613551</span></pre></div>
+<span class="co">#&gt; Mean: 4.975512 Variance: 25.19391</span>
+<span class="co">#&gt; [1] 15.637948  3.610613  5.879854 -6.412800 12.256678  5.150476</span></code></pre></div>
 <p>which could be written in more compact form as:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`*`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`*`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
 <span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Mean:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,  <span class="st">"\n"</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>To see a list of the aliases, execute e.g. <code><a href="../reference/extract.html">?multiply_by</a></code>.</p>
 </div>
 <div id="development" class="section level1">
