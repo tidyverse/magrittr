@@ -25,17 +25,22 @@ warning("bar") %>% suppressWarnings()
 
 The pipe rewrite should generally not affect your code. We have
 checked magrittr on 2800 CRAN packages and found only a dozen of
-failures.
+failures. The development version of magrittr has been advertised on
+social media for a 3 months trial period, and no major issues were
+reported. However, there are some corner cases that might require
+updating your code. Below is a report of the backward
+incompatibilities we found in real code to help you transition, should
+you find an issue in your code.
 
 
 ### Behaviour of `return()` in a pipeline
 
-The behaviour of `return()` within pipe expressions was sort of
-undefined. Should it return from the current pipe expression, from the
-whole pipeline, or from the enclosing function? The behaviour that
-makes the most sense is to return from the enclosing
-function. However, we can't make this work easily with the new
-implementation, and so calling `return()` is now an error.
+In previous versions of magrittr, the behaviour of `return()` within
+pipe expressions was undefined. Should it return from the current pipe
+expression, from the whole pipeline, or from the enclosing function?
+The behaviour that makes the most sense is to return from the
+enclosing function. However, we can't make this work easily with the
+new implementation, and so calling `return()` is now an error.
 
 ```r
 my_function <- function(x) {
@@ -75,7 +80,7 @@ calls as this is a common occurrence in packages:
 ```
 
 Note however that this only returns from the pipeline, not the
-enclosing function:
+enclosing function (which is the historical behaviour):
 
 ```r
 my_function <- function() {
