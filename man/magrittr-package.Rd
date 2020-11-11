@@ -49,7 +49,7 @@ the_data <-
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://magrittr.tidyverse.org}
+  \item \url{https://magrittr.tidyverse.org}
   \item \url{https://github.com/tidyverse/magrittr}
   \item Report bugs at \url{https://github.com/tidyverse/magrittr/issues}
 }

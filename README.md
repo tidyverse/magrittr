@@ -10,7 +10,7 @@ status](https://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.o
 [![Codecov test
 coverage](https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/magrittr?branch=master)
 [![R build
-status](https://github.com/smbache/magrittr/workflows/R-CMD-check/badge.svg)](https://github.com/smbache/magrittr/actions)
+status](https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/magrittr/actions)
 <!-- badges: end -->
 
 ## Overview
