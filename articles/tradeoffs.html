@@ -495,8 +495,8 @@
 <code class="sourceCode R"><span class="va">fn</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span> <span class="op">%!&gt;%</span> <span class="fu">factory</span><span class="op">(</span><span class="op">)</span> <span class="op">%!&gt;%</span> <span class="op">{</span> <span class="fu">.</span><span class="op">(</span><span class="op">)</span> <span class="op">}</span>
 <span class="fu">fn</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; function() x</span>
-<span class="co">#&gt; &lt;bytecode: 0x7f8400399408&gt;</span>
-<span class="co">#&gt; &lt;environment: 0x7f8402ade6f8&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x7fdd2996da78&gt;</span>
+<span class="co">#&gt; &lt;environment: 0x7fdd2a3691e0&gt;</span></code></pre></div>
 <p>Also, since we’re binding <code>.</code> in the current environment, we need to clean it up once the pipeline has returned. At that point, the placeholder no longer exists:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fn</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span> <span class="op">%!&gt;%</span> <span class="fu">factory</span><span class="op">(</span><span class="op">)</span>
