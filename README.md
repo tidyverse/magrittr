@@ -46,7 +46,7 @@ required, it is straightforward to add to the sequence of operations
 wherever it may be needed.
 
 If you are new to magrittr, the best place to start is the [pipes
-chapter](http://r4ds.had.co.nz/pipes.html) in R for data science.
+chapter](https://r4ds.had.co.nz/pipes.html) in R for data science.
 
 ## Installation
 
