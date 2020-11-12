@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../index.html">magrittr</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
         </div>
       </div>
     </div>
@@ -122,7 +122,7 @@
 <p>At first encounter, you may wonder whether an operator such as <code><a href="../reference/%&gt;%.html">%&gt;%</a></code> can really be all that beneficial; but as you may notice, it semantically changes your code in a way that makes it more intuitive to both read and write.</p>
 <p>Consider the following example, in which the <code>mtcars</code> dataset shipped with R is munged a little:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 
 <span class="va">car_data</span> <span class="op">&lt;-</span> 
   <span class="va">mtcars</span> <span class="op">%&gt;%</span>
@@ -192,7 +192,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%T&gt;%</span>
 <span class="va">plot</span> <span class="op">%&gt;%</span> <span class="co"># plot usually does not return anything. </span>
 <span class="va">colSums</span>
-<span class="co">#&gt; [1]  -8.401476 -20.943063</span></code></pre></div>
+<span class="co">#&gt; [1] -7.521958 14.619546</span></code></pre></div>
 <p>The “exposition” pipe, <code><a href="../reference/%%24%.html">%$%</a></code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span>
@@ -224,8 +224,8 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Mean: 4.995693 Variance: 25.27796</span>
-<span class="co">#&gt; [1] 11.2135980 -4.6595130 -0.5183186  5.0982824  4.3573136  4.8854284</span></code></pre></div>
+<span class="co">#&gt; Mean: 5.028048 Variance: 23.66733</span>
+<span class="co">#&gt; [1]  5.104035  3.116198  7.536110  2.977434 10.618776  5.724211</span></code></pre></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`*`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -238,7 +238,7 @@
 <div id="development" class="section level1">
 <h1 class="hasAnchor">
 <a href="#development" class="anchor"></a>Development</h1>
-<p>The <em>magrittr</em> package is also available in a development version at the GitHub development page: <a href="http://github.com/tidyverse/magrittr">github.com/tidyverse/magrittr</a>.</p>
+<p>The <em>magrittr</em> package is also available in a development version at the GitHub development page: <a href="https://github.com/tidyverse/magrittr">github.com/tidyverse/magrittr</a>.</p>
 </div>
   </div>
 

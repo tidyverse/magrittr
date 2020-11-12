@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">magrittr</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
         </div>
       </div>
     </div>
@@ -166,11 +166,11 @@
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
-<p>The pipe rewrite should generally not affect your code. We have checked magrittr on 2800 CRAN packages and found only a dozen of failures.</p>
+<p>The pipe rewrite should generally not affect your code. We have checked magrittr on 2800 CRAN packages and found only a dozen of failures. The development version of magrittr has been advertised on social media for a 3 months trial period, and no major issues were reported. However, there are some corner cases that might require updating your code. Below is a report of the backward incompatibilities we found in real code to help you transition, should you find an issue in your code.</p>
 <div id="behaviour-of-return-in-a-pipeline" class="section level3">
 <h3 class="hasAnchor">
 <a href="#behaviour-of-return-in-a-pipeline" class="anchor"></a>Behaviour of <code>return()</code> in a pipeline</h3>
-<p>The behaviour of <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> within pipe expressions was sort of undefined. Should it return from the current pipe expression, from the whole pipeline, or from the enclosing function? The behaviour that makes the most sense is to return from the enclosing function. However, we can’t make this work easily with the new implementation, and so calling <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is now an error.</p>
+<p>In previous versions of magrittr, the behaviour of <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> within pipe expressions was undefined. Should it return from the current pipe expression, from the whole pipeline, or from the enclosing function? The behaviour that makes the most sense is to return from the enclosing function. However, we can’t make this work easily with the new implementation, and so calling <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> is now an error.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -201,7 +201,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fl">1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>Note however that this only returns from the pipeline, not the enclosing function:</p>
+<p>Note however that this only returns from the pipeline, not the enclosing function (which is the historical behaviour):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="va">my_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
