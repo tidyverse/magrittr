@@ -26,6 +26,10 @@ reference:
   - starts_with("debug")
   - extract
 
+- title: FAQ
+  contents:
+  - faq-pipe-gender
+
 navbar:
   components:
     home: ~
