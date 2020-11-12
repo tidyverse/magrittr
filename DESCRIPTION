@@ -5,12 +5,16 @@ Version: 2.0.0
 Authors@R: 
     c(person(given = "Stefan Milton",
              family = "Bache",
-             role = c("aut", "cre", "cph"),
+             role = c("aut", "cph"),
              email = "stefan@stefanbache.dk"),
       person(given = "Hadley",
              family = "Wickham",
              role = "aut",
              email = "hadley@rstudio.com"),
+      person(given = "Lionel",
+             family = "Henry",
+             role = "cre",
+             email = "lionel@rstudio.com"),
       person(given = "RStudio",
              role = c("cph", "fnd")))
 Description: Provides a mechanism for chaining commands with a

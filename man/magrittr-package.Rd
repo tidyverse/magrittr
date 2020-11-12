@@ -56,10 +56,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Stefan Milton Bache \email{stefan@stefanbache.dk} [copyright holder]
+\strong{Maintainer}: Lionel Henry \email{lionel@rstudio.com}
 
 Authors:
 \itemize{
+  \item Stefan Milton Bache \email{stefan@stefanbache.dk} [copyright holder]
   \item Hadley Wickham \email{hadley@rstudio.com}
 }
 
