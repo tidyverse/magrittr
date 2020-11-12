@@ -1,5 +1,5 @@
 
-# magrittr 1.5.0.9000
+# magrittr 2.0.0
 
 ## Fast and lean implementation of the pipe
 
