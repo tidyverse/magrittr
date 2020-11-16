@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../index.html">magrittr</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
         </div>
       </div>
     </div>
@@ -495,8 +495,8 @@
 <code class="sourceCode R"><span class="va">fn</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span> <span class="op">%!&gt;%</span> <span class="fu">factory</span><span class="op">(</span><span class="op">)</span> <span class="op">%!&gt;%</span> <span class="op">{</span> <span class="fu">.</span><span class="op">(</span><span class="op">)</span> <span class="op">}</span>
 <span class="fu">fn</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; function() x</span>
-<span class="co">#&gt; &lt;bytecode: 0x7fdd2996da78&gt;</span>
-<span class="co">#&gt; &lt;environment: 0x7fdd2a3691e0&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;bytecode: 0x7fb89dadef48&gt;</span>
+<span class="co">#&gt; &lt;environment: 0x7fb89bd72ed0&gt;</span></code></pre></div>
 <p>Also, since we’re binding <code>.</code> in the current environment, we need to clean it up once the pipeline has returned. At that point, the placeholder no longer exists:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fn</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span> <span class="op">%!&gt;%</span> <span class="fu">factory</span><span class="op">(</span><span class="op">)</span>
@@ -679,7 +679,7 @@
 
 <div class="author">
   <p>
-    Developed by Stefan Milton Bache, <a href="http://hadley.nz">Hadley Wickham</a>, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
+    Developed by Stefan Milton Bache, <a href="http://hadley.nz">Hadley Wickham</a>, Lionel Henry, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
