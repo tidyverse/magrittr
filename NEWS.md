@@ -1,4 +1,10 @@
 
+# magrittr 2.0.1
+
+* Fixed issue caused by objects with certain names being present in
+  the calling environment (#233).
+
+
 # magrittr 2.0.0
 
 ## Fast and lean implementation of the pipe

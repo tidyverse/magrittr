@@ -1,7 +1,7 @@
 Type: Package
 Package: magrittr
 Title: A Forward-Pipe Operator for R
-Version: 2.0.0
+Version: 2.0.1
 Authors@R: 
     c(person(given = "Stefan Milton",
              family = "Bache",

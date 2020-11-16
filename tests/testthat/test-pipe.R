@@ -115,3 +115,10 @@ test_that("`%<>%` always returns invisibly", {
     list(value = 3, visible = FALSE)
   )
 })
+
+test_that("internal parameters are not looked up beyond private envs of the pipes (#233)", {
+  nested <- "not looked up"
+
+  # Fails because of the duplicate placeholder if nested transformation is performed
+  expect_equal(1 %>% list(., .), list(1, 1))
+})

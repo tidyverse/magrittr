@@ -90,7 +90,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return lambda;
   }
 
-  bool use_nested = Rf_findVar(syms_nested, rho) != R_UnboundValue;
+  bool use_nested = r_env_get(rho, syms_nested) != R_UnboundValue;
   if (use_nested) {
     SEXP call = PROTECT(pipe_nest(exprs));
     SEXP out = Rf_eval(call, env);
@@ -98,13 +98,13 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return out;
   }
 
-  bool use_lazy = Rf_findVar(syms_lazy, rho) != R_UnboundValue;
+  bool use_lazy = r_env_get(rho, syms_lazy) != R_UnboundValue;
   SEXP out = R_NilValue;
 
   if (use_lazy) {
     out = eval_pipe_lazy(exprs, env);
   } else {
-    SEXP old = PROTECT(Rf_findVar(syms_dot, env));
+    SEXP old = PROTECT(r_env_get(env, syms_dot));
 
     struct pipe_info pipe_info = {
       .exprs = exprs,
