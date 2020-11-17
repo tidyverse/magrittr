@@ -41,62 +41,6 @@ Run `cloud_details(, "datamaps")` for more info
     Execution halted
     ```
 
-# jqr
-
-<details>
-
-* Version: 1.1.0
-* Source code: https://github.com/cran/jqr
-* URL: https://github.com/ropensci/jqr
-* BugReports: https://github.com/ropensci/jqr/issues
-* Date/Publication: 2018-10-22 22:20:55 UTC
-* Number of recursive dependencies: 54
-
-Run `cloud_details(, "jqr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘jqr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: combine
-    > ### Title: Combine json pieces
-    > ### Aliases: combine
-    > 
-    > ### ** Examples
-    > 
-    > x <- '{"foo": 5, "bar": 7}' %>% select(a = .foo)
-    > combine(x)
-    Error: Must be class jqson
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      ● empty test (1)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      FAILURE (test-dsl.R:132:3): maths
-      FAILURE (test-dsl.R:177:3): construct objects
-      FAILURE (test-dsl.R:178:3): construct objects
-      FAILURE (test-dsl.R:187:3): paths
-      FAILURE (test-dsl.R:190:3): paths
-      FAILURE (test-dsl.R:192:3): paths
-      FAILURE (test-dsl.R:202:3): recurse
-      FAILURE (test-dsl.R:206:3): recurse
-      
-      [ FAIL 8 | WARN 0 | SKIP 1 | PASS 114 ]
-      Error: Test failures
-      Execution halted
-    ```
-
 # rcrtan
 
 <details>
@@ -140,7 +84,7 @@ Run `cloud_details(, "rcrtan")` for more info
 * URL: https://reproducible.predictiveecology.org, https://github.com/PredictiveEcology/reproducible
 * BugReports: https://github.com/PredictiveEcology/reproducible/issues
 * Date/Publication: 2020-08-18 07:20:36 UTC
-* Number of recursive dependencies: 106
+* Number of recursive dependencies: 105
 
 Run `cloud_details(, "reproducible")` for more info
 
@@ -205,7 +149,7 @@ Run `cloud_details(, "reproducible")` for more info
 * URL: https://github.com/yonicd/ripe
 * BugReports: https://github.com/yonicd/ripe/issues
 * Date/Publication: 2019-12-06 10:10:02 UTC
-* Number of recursive dependencies: 59
+* Number of recursive dependencies: 58
 
 Run `cloud_details(, "ripe")` for more info
 
@@ -257,52 +201,37 @@ ERROR: lazy loading failed for package ‘ripe’
 * DONE (ripe)
 
 ```
-# sketch
+# TCIU
 
 <details>
 
-* Version: 1.0.3
-* Source code: https://github.com/cran/sketch
-* BugReports: https://github.com/kcf-jackson/sketch
-* Date/Publication: 2020-10-08 07:40:03 UTC
-* Number of recursive dependencies: 66
+* Version: 1.1.0
+* Source code: https://github.com/cran/TCIU
+* URL: https://github.com/SOCR/TCIU, https://spacekime.org, https://tciu.predictive.space
+* BugReports: https://github.com/SOCR/TCIU/issues
+* Date/Publication: 2020-09-18 12:00:32 UTC
+* Number of recursive dependencies: 189
 
-Run `cloud_details(, "sketch")` for more info
+Run `cloud_details(, "TCIU")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking examples ... ERROR
+*   checking whether package ‘TCIU’ can be installed ... WARNING
     ```
-    Running examples in ‘sketch-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: compile_r
-    > ### Title: Compile an R file into a JavaScript file
-    > ### Aliases: compile_r
-    > 
-    > ### ** Examples
-    > 
-    > file <- system.file("test_files/test_source.R", package = "sketch")
-    > readLines(file)
-    [1] "console::log(\"'test_source.R' runs successfully.\")"
-    > compile_r(input = file)
-    Error: C stack usage  7969652 is too close to the limit
-    Execution halted
+    Found the following significant warnings:
+      Warning: loading Rplot failed
+    See ‘/tmp/workdir/TCIU/new/TCIU.Rcheck/00install.out’ for details.
     ```
 
-*   checking tests ... ERROR
+## In both
+
+*   checking installed package size ... NOTE
     ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(sketch)
-      > 
-      > test_check("sketch")
-      Error: C stack usage  7970324 is too close to the limit
-      Execution halted
+      installed size is 12.3Mb
+      sub-directories of 1Mb or more:
+        doc  11.2Mb
     ```
 
 # tidytidbits
@@ -355,7 +284,7 @@ Run `cloud_details(, "tidytidbits")` for more info
 * URL: https://torch.mlverse.org/docs, https://github.com/mlverse/torch
 * BugReports: https://github.com/mlverse/torch/issues
 * Date/Publication: 2020-10-20 21:10:02 UTC
-* Number of recursive dependencies: 59
+* Number of recursive dependencies: 58
 
 Run `cloud_details(, "torch")` for more info
 

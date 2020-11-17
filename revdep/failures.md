@@ -73,7 +73,7 @@ Run `cloud_details(, "NA")` for more info
 * Version: 1.3.4
 * Source code: https://github.com/cran/CB2
 * Date/Publication: 2020-07-24 09:42:24 UTC
-* Number of recursive dependencies: 106
+* Number of recursive dependencies: 105
 
 Run `cloud_details(, "CB2")` for more info
 
@@ -144,7 +144,7 @@ Status: 1 ERROR
 * URL: https://github.com/zedoul/cbar
 * BugReports: https://github.com/zedoul/cbar/issues
 * Date/Publication: 2017-10-24 13:20:22 UTC
-* Number of recursive dependencies: 67
+* Number of recursive dependencies: 66
 
 Run `cloud_details(, "cbar")` for more info
 
@@ -283,7 +283,7 @@ Status: 1 ERROR
 * Source code: https://github.com/cran/dimRed
 * URL: https://github.com/gdkrmr/dimRed
 * Date/Publication: 2019-05-08 08:10:07 UTC
-* Number of recursive dependencies: 140
+* Number of recursive dependencies: 139
 
 Run `cloud_details(, "dimRed")` for more info
 
@@ -455,7 +455,7 @@ Run `cloud_details(, "NA")` for more info
 * Version: 0.0.4
 * Source code: https://github.com/cran/ggmsa
 * Date/Publication: 2020-05-28 10:50:10 UTC
-* Number of recursive dependencies: 82
+* Number of recursive dependencies: 81
 
 Run `cloud_details(, "ggmsa")` for more info
 
@@ -536,7 +536,7 @@ Status: 1 ERROR
 * URL: https://github.com/ropensci/jstor, https://docs.ropensci.org/jstor
 * BugReports: https://github.com/ropensci/jstor/issues
 * Date/Publication: 2020-06-04 04:50:03 UTC
-* Number of recursive dependencies: 74
+* Number of recursive dependencies: 73
 
 Run `cloud_details(, "jstor")` for more info
 
@@ -624,7 +624,7 @@ Run `cloud_details(, "jstor")` for more info
 * URL: https://symbolixau.github.io/mapdeck/articles/mapdeck.html
 * BugReports: https://github.com/SymbolixAU/mapdeck/issues
 * Date/Publication: 2020-09-04 05:22:10 UTC
-* Number of recursive dependencies: 75
+* Number of recursive dependencies: 83
 
 Run `cloud_details(, "mapdeck")` for more info
 
@@ -649,8 +649,8 @@ Run `cloud_details(, "mapdeck")` for more info
 ** libs
 g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
 g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c aggregate.cpp -o aggregate.o
-/tmp/ccqSUMiy.s: Assembler messages:
-/tmp/ccqSUMiy.s: Fatal error: can't close aggregate.o: No space left on device
+/tmp/ccZjU7ZO.s: Assembler messages:
+/tmp/ccZjU7ZO.s: Fatal error: can't close aggregate.o: No space left on device
 make: *** [/usr/lib/R/etc/Makeconf:177: aggregate.o] Error 1
 ERROR: compilation failed for package ‘mapdeck’
 * removing ‘/tmp/workdir/mapdeck/new/mapdeck.Rcheck/mapdeck’
@@ -670,8 +670,8 @@ g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO
 g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c od.cpp -o od.o
 g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c path.cpp -o path.o
 g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c point.cpp -o point.o
-/tmp/ccj1hTMJ.s: Assembler messages:
-/tmp/ccj1hTMJ.s: Fatal error: can't close point.o: No space left on device
+/tmp/ccJov3g3.s: Assembler messages:
+/tmp/ccJov3g3.s: Fatal error: can't close point.o: No space left on device
 make: *** [/usr/lib/R/etc/Makeconf:177: point.o] Error 1
 ERROR: compilation failed for package ‘mapdeck’
 * removing ‘/tmp/workdir/mapdeck/old/mapdeck.Rcheck/mapdeck’
@@ -720,7 +720,7 @@ Run `cloud_details(, "NA")` for more info
 * URL: https://github.com/ropensci/osmplotr
 * BugReports: https://github.com/ropensci/osmplotr/issues
 * Date/Publication: 2018-12-19 13:40:03 UTC
-* Number of recursive dependencies: 120
+* Number of recursive dependencies: 119
 
 Run `cloud_details(, "osmplotr")` for more info
 
@@ -944,6 +944,83 @@ ERROR: lazy loading failed for package ‘precautionary’
 * removing ‘/tmp/workdir/precautionary/old/precautionary.Rcheck/precautionary’
 
 ```
+# psychonetrics
+
+<details>
+
+* Version: 0.8
+* Source code: https://github.com/cran/psychonetrics
+* URL: http://psychonetrics.org/
+* BugReports: https://github.com/SachaEpskamp/psychonetrics/issues
+* Date/Publication: 2020-10-26 21:50:03 UTC
+* Number of recursive dependencies: 159
+
+Run `cloud_details(, "psychonetrics")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/psychonetrics/new/psychonetrics.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘psychonetrics/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘psychonetrics’ version ‘0.8’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘metaSEM’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/psychonetrics/old/psychonetrics.Rcheck’
+* using R version 3.6.3 (2020-02-29)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using options ‘--no-manual --no-build-vignettes’
+* checking for file ‘psychonetrics/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘psychonetrics’ version ‘0.8’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package suggested but not available: ‘metaSEM’
+
+The suggested packages are required for a complete check.
+Checking can be attempted without them by setting the environment
+variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+
+```
 # NA
 
 <details>
@@ -1056,7 +1133,7 @@ Status: 1 ERROR
 * URL: https://github.com/yonicd/ripe
 * BugReports: https://github.com/yonicd/ripe/issues
 * Date/Publication: 2019-12-06 10:10:02 UTC
-* Number of recursive dependencies: 59
+* Number of recursive dependencies: 58
 
 Run `cloud_details(, "ripe")` for more info
 
@@ -1253,7 +1330,7 @@ Status: 1 ERROR
 * Source code: https://github.com/cran/SMITIDvisu
 * URL: https://informatique-mia.inrae.fr/biosp/anr-smitid-project/, https://gitlab.paca.inrae.fr/SMITID/visu/
 * Date/Publication: 2020-11-05 11:10:02 UTC
-* Number of recursive dependencies: 85
+* Number of recursive dependencies: 84
 
 Run `cloud_details(, "SMITIDvisu")` for more info
 
@@ -1331,7 +1408,7 @@ Status: 1 ERROR
 * Source code: https://github.com/cran/spectralAnalysis
 * URL: http://www.openanalytics.eu
 * Date/Publication: 2018-06-12 14:30:39 UTC
-* Number of recursive dependencies: 118
+* Number of recursive dependencies: 117
 
 Run `cloud_details(, "spectralAnalysis")` for more info
 
@@ -1400,7 +1477,7 @@ Status: 1 ERROR
 * URL: https://torch.mlverse.org/docs, https://github.com/mlverse/torch
 * BugReports: https://github.com/mlverse/torch/issues
 * Date/Publication: 2020-10-20 21:10:02 UTC
-* Number of recursive dependencies: 59
+* Number of recursive dependencies: 58
 
 Run `cloud_details(, "torch")` for more info
 
