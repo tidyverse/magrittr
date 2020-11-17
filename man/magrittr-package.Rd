@@ -60,7 +60,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Stefan Milton Bache \email{stefan@stefanbache.dk} [copyright holder]
+  \item Stefan Milton Bache \email{stefan@stefanbache.dk} (Original author and creator of magrittr) [copyright holder]
   \item Hadley Wickham \email{hadley@rstudio.com}
 }
 
