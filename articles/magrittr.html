@@ -192,7 +192,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%T&gt;%</span>
 <span class="va">plot</span> <span class="op">%&gt;%</span> <span class="co"># plot usually does not return anything. </span>
 <span class="va">colSums</span>
-<span class="co">#&gt; [1]  3.933311 12.514977</span></code></pre></div>
+<span class="co">#&gt; [1] 17.775756  2.239723</span></code></pre></div>
 <p>The “exposition” pipe, <code><a href="../reference/%%24%.html">%$%</a></code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span>
@@ -224,8 +224,8 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Mean: 5.189078 Variance: 25.63054</span>
-<span class="co">#&gt; [1]  7.2458697  2.9827517 -3.7740758  5.7114229 -0.1874725  9.8358958</span></code></pre></div>
+<span class="co">#&gt; Mean: 5.071374 Variance: 24.60783</span>
+<span class="co">#&gt; [1]  6.802990 -3.643795 11.369074  8.688342  4.610883  9.841376</span></code></pre></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`*`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
