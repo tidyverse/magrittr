@@ -9,10 +9,19 @@
 #'
 #'
 #' @export
-freduce <- function(value, function_list)
-{
-  if (length(function_list) == 1L)
-    function_list[[1L]](value)
-  else 
-    Recall(function_list[[1L]](value), function_list[-1L])
+freduce <- function(value, function_list) {
+  k <- length(function_list)
+  if (k > 1) {
+    for (i in 1:(k - 1L)) {
+      value <- function_list[[i]](value)
+    }
+  }
+
+  value <- withVisible(function_list[[k]](value))
+
+  if (value[["visible"]]) {
+    value[["value"]]
+  } else {
+    invisible(value[["value"]])
+  }
 }

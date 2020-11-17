@@ -4,6 +4,8 @@
 * Fixed issue caused by objects with certain names being present in
   the calling environment (#233).
 
+* Fixed regression in `freduce()` with long lists (kcf-jackson/sketch#5).
+
 
 # magrittr 2.0.0
 
