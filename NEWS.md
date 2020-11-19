@@ -1,4 +1,7 @@
 
+# magrittr (development version)
+
+
 # magrittr 2.0.1
 
 * Fixed issue caused by objects with certain names being present in
