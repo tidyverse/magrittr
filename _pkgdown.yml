@@ -9,6 +9,17 @@ home:
   - text: Learn more
     href: http://r4ds.had.co.nz/pipes.html
 
+navbar:
+  components:
+    home: ~
+
+news:
+  releases:
+  - text: "Version 2.0.0"
+    href: https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/
+  - text: "Version 1.5.0"
+    href: https://blog.rstudio.com/2014/12/01/magrittr-1-5/
+
 reference:
 - title: Pipes
   contents:
@@ -29,7 +40,3 @@ reference:
 - title: FAQ
   contents:
   - faq-pipe-gender
-
-navbar:
-  components:
-    home: ~
