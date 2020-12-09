@@ -74,8 +74,25 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/">Version 2.0.0</a>
+    </li>
+    <li>
+      <a href="https://blog.rstudio.com/2014/12/01/magrittr-1-5/">Version 1.5.0</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/magrittr/">
@@ -192,7 +209,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%T&gt;%</span>
 <span class="va">plot</span> <span class="op">%&gt;%</span> <span class="co"># plot usually does not return anything. </span>
 <span class="va">colSums</span>
-<span class="co">#&gt; [1]  7.379249 -4.006050</span></code></pre></div>
+<span class="co">#&gt; [1] -1.786640  0.287874</span></code></pre></div>
 <p>The “exposition” pipe, <code><a href="../reference/%%24%.html">%$%</a></code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span>
@@ -224,8 +241,8 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Mean: 4.905463 Variance: 25.10074</span>
-<span class="co">#&gt; [1]  3.094671 13.461927  7.226239  9.096468 11.819632  3.838102</span></code></pre></div>
+<span class="co">#&gt; Mean: 4.933735 Variance: 25.68478</span>
+<span class="co">#&gt; [1]  5.608052  3.780781 11.682625  9.242479  6.723675  9.719949</span></code></pre></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`*`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
