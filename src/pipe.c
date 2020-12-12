@@ -244,7 +244,9 @@ SEXP pipe_unroll(SEXP lhs,
     out = Rf_cons(rhs, out);
     REPROTECT(out, out_pi);
 
-    SEXP args = CDR(lhs);
+    SEXP args = R_NilValue;
+    if (TYPEOF(lhs) == LANGSXP)
+      args = CDR(lhs);
 
     if ((kind = parse_pipe_call(lhs, pipe_sym))) {
       lhs = CAR(args);
