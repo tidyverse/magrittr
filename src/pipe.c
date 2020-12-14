@@ -244,11 +244,11 @@ SEXP pipe_unroll(SEXP lhs,
     out = Rf_cons(rhs, out);
     REPROTECT(out, out_pi);
 
-    SEXP args = R_NilValue;
-    if (TYPEOF(lhs) == LANGSXP)
-      args = CDR(lhs);
-
     if ((kind = parse_pipe_call(lhs, pipe_sym))) {
+      if (TYPEOF(lhs) != LANGSXP) {
+        Rf_error("Internal error in `pipe_unroll()`: Expected LHS call.");
+      }
+      SEXP args = CDR(lhs);
       lhs = CAR(args);
       rhs = CADR(args);
       continue;
