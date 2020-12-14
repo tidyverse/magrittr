@@ -1,6 +1,8 @@
 
 # magrittr (development version)
 
+* Fixed an issue that could cause pipe invocations to fail in versions of
+  R built with `--enable-strict-barrier`. (#239, @kevinushey)
 
 # magrittr 2.0.1
 
