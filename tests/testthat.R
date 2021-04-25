@@ -1,4 +1,5 @@
-library(testthat)
-library(magrittr)
+if (require(testthat)) {
+  library(magrittr)
 
-test_check("magrittr")
+  test_check("magrittr")
+}
