@@ -1,3 +1,5 @@
+# magrittr (development version)
+
 # magrittr 2.0.2
 
 * New eager pipe `%!>%` for sequential evaluation (#247). Consider
