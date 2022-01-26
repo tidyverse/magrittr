@@ -40,6 +40,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -54,8 +56,8 @@
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="index.html">magrittr</a>
         <div class="info hidden-xs hidden-sm">
-          <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1.9000</span>
+          <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1.9000</span>
         </div>
       </div>
     </div>
@@ -88,20 +90,21 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/">Version 2.0.0</a>
+      <a href="https://www.tidyverse.org/blog/2020/11/magrittr-2-0-is-here/" class="external-link">Version 2.0.0</a>
     </li>
     <li>
-      <a href="https://blog.rstudio.com/2014/12/01/magrittr-1-5/">Version 1.5.0</a>
+      <a href="https://blog.rstudio.com/2014/12/01/magrittr-1-5/" class="external-link">Version 1.5.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/magrittr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/tidyverse/magrittr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -117,13 +120,13 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="magrittr-" class="section level1">
+<div class="section level1">
 
 <!-- badges: start -->
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>The magrittr package offers a set of operators which make your code more readable by:</p>
 <ul>
 <li>structuring sequences of data operations left-to-right (as opposed to from the inside and out),</li>
@@ -131,36 +134,36 @@
 <li>minimizing the need for local variables and function definitions, and</li>
 <li>making it easy to add steps anywhere in the sequence of operations.</li>
 </ul>
-<p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code><a href="reference/%&gt;%.html">%&gt;%</a></code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example:</p>
+<p>The operators pipe their left-hand side values forward into expressions that appear on the right-hand side, i.e. one can replace <code>f(x)</code> with <code>x %&gt;% f()</code>, where <code>%&gt;%</code> is the (main) pipe-operator. When coupling several function calls with the pipe-operator, the benefit will become more apparent. Consider this pseudo example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">the_data</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">'/path/to/data/file.csv'</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">variable_a</span> <span class="op">&gt;</span> <span class="va">x</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/transform.html">transform</a></span><span class="op">(</span>variable_c <span class="op">=</span> <span class="va">variable_a</span><span class="op">/</span><span class="va">variable_b</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">'/path/to/data/file.csv'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">variable_a</span> <span class="op">&gt;</span> <span class="va">x</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span>variable_c <span class="op">=</span> <span class="va">variable_a</span><span class="op">/</span><span class="va">variable_b</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></code></pre></div>
 <p>Four operations are performed to arrive at the desired data set, and they are written in a natural order: the same as the order of execution. Also, no temporary variables are needed. If yet another operation is required, it is straightforward to add to the sequence of operations wherever it may be needed.</p>
-<p>If you are new to magrittr, the best place to start is the <a href="https://r4ds.had.co.nz/pipes.html">pipes chapter</a> in R for data science.</p>
+<p>If you are new to magrittr, the best place to start is the <a href="https://r4ds.had.co.nz/pipes.html" class="external-link">pipes chapter</a> in R for data science.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># The easiest way to get magrittr is to install the whole tidyverse:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span>
 
 <span class="co"># Alternatively, install just magrittr:</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"magrittr"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"magrittr"</span><span class="op">)</span>
 
 <span class="co"># Or the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidyverse/magrittr"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div id="basic-piping" class="section level3">
-<h3 class="hasAnchor">
-<a href="#basic-piping" class="anchor"></a>Basic piping</h3>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="section level3">
+<h3 id="basic-piping">Basic piping<a class="anchor" aria-label="anchor" href="#basic-piping"></a>
+</h3>
 <ul>
 <li>
 <code>x %&gt;% f</code> is equivalent to <code>f(x)</code>
@@ -174,9 +177,9 @@
 </ul>
 <p>Here, “equivalent” is not technically exact: evaluation is non-standard, and the left-hand side is evaluated before passed on to the right-hand side expression. However, in most cases this has no practical implication.</p>
 </div>
-<div id="the-argument-placeholder" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-argument-placeholder" class="anchor"></a>The argument placeholder</h3>
+<div class="section level3">
+<h3 id="the-argument-placeholder">The argument placeholder<a class="anchor" aria-label="anchor" href="#the-argument-placeholder"></a>
+</h3>
 <ul>
 <li>
 <code>x %&gt;% f(y, .)</code> is equivalent to <code>f(y, x)</code>
@@ -186,41 +189,41 @@
 </li>
 </ul>
 </div>
-<div id="re-using-the-placeholder-for-attributes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#re-using-the-placeholder-for-attributes" class="anchor"></a>Re-using the placeholder for attributes</h3>
+<div class="section level3">
+<h3 id="re-using-the-placeholder-for-attributes">Re-using the placeholder for attributes<a class="anchor" aria-label="anchor" href="#re-using-the-placeholder-for-attributes"></a>
+</h3>
 <p>It is straightforward to use the placeholder several times in a right-hand side expression. However, when the placeholder only appears in a nested expressions magrittr will still apply the first-argument rule. The reason is that in most cases this results more clean code.</p>
 <p><code>x %&gt;% f(y = nrow(.), z = ncol(.))</code> is equivalent to <code>f(x, y = nrow(x), z = ncol(x))</code></p>
 <p>The behavior can be overruled by enclosing the right-hand side in braces:</p>
 <p><code>x %&gt;% {f(y = nrow(.), z = ncol(.))}</code> is equivalent to <code>f(y = nrow(x), z = ncol(x))</code></p>
 </div>
-<div id="building-unary-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#building-unary-functions" class="anchor"></a>Building (unary) functions</h3>
+<div class="section level3">
+<h3 id="building-unary-functions">Building (unary) functions<a class="anchor" aria-label="anchor" href="#building-unary-functions"></a>
+</h3>
 <p>Any pipeline starting with the <code>.</code> will return a function which can later be used to apply the pipeline to values. Building functions in magrittr is therefore similar to building other values.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">.</span> <span class="op">%&gt;%</span> <span class="va">cos</span> <span class="op">%&gt;%</span> <span class="va">sin</span> 
+<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">.</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="va">cos</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="va">sin</span> 
 <span class="co"># is equivalent to </span>
-<span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
+<span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
 </div>
-<div id="pipe-with-exposition-of-variables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pipe-with-exposition-of-variables" class="anchor"></a>Pipe with exposition of variables</h3>
-<p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code><a href="reference/%%24%.html">%$%</a></code> operator:</p>
+<div class="section level3">
+<h3 id="pipe-with-exposition-of-variables">Pipe with exposition of variables<a class="anchor" aria-label="anchor" href="#pipe-with-exposition-of-variables"></a>
+</h3>
+<p>Many functions accept a data argument, e.g. <code>lm</code> and <code>aggregate</code>, which is very useful in a pipeline where data is first processed and then passed into such a function. There are also functions that do not have a data argument, for which it is useful to expose the variables in the data. This is done with the <code>%$%</code> operator:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iris</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">%$%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/exposition.html">%$%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.3361992</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">%$%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html">ts.plot</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/exposition.html">%$%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/ts.plot.html" class="external-link">ts.plot</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/exposition-1.png"><!-- --></p>
 </div>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the magrittr project is released with a <a href="https://magrittr.tidyverse.org/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
@@ -228,65 +231,70 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=magrittr">https://​cloud.r-project.org/​package=magrittr</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/tidyverse/magrittr/">https://​github.com/​tidyverse/​magrittr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/tidyverse/magrittr/issues">https://​github.com/​tidyverse/​magrittr/​issues</a>
-</li>
-<li>Learn more at <br><a href="http://r4ds.had.co.nz/pipes.html">http://​r4ds.had.co.nz/​pipes.html</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=magrittr" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/tidyverse/magrittr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/tidyverse/magrittr/issues" class="external-link">Report a bug</a></li>
+<li><a href="http://r4ds.had.co.nz/pipes.html" class="external-link">Learn more</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Stefan Milton Bache <br><small class="roles"> Author, copyright holder </small>  <br><small>(Original author and creator of magrittr)</small>
-</li>
-<li>
-<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
-<li>Lionel Henry <br><small class="roles"> Maintainer </small>  </li>
-<li>
-<a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
+<li><a href="authors.html#citation">Citing magrittr</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=magrittr"><img src="https://www.r-pkg.org/badges/version/magrittr" alt="CRAN status"></a></li>
-<li><a href="https://codecov.io/gh/tidyverse/magrittr?branch=master"><img src="https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/tidyverse/magrittr/actions"><img src="https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li>Stefan Milton Bache <br><small class="roles"> Author, copyright holder </small>  </li>
+<li>Hadley Wickham <br><small class="roles"> Author </small>  </li>
+<li>Lionel Henry <br><small class="roles"> Maintainer </small>  </li>
+<li>RStudio <br><small class="roles"> Copyright holder, funder </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=magrittr" class="external-link"><img src="https://www.r-pkg.org/badges/version/magrittr" alt="CRAN status"></a></li>
+<li><a href="https://app.codecov.io/gh/tidyverse/magrittr?branch=master" class="external-link"><img src="https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/tidyverse/magrittr/actions" class="external-link"><img src="https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="tidyverse">
-  <p>magrittr is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org">tidyverse.org</a>.</p>
+  <p>magrittr is a part of the <strong>tidyverse</strong>, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at <a href="https://tidyverse.org" class="external-link">tidyverse.org</a>.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by Stefan Milton Bache, <a href="http://hadley.nz">Hadley Wickham</a>, Lionel Henry, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by .
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 
@@ -295,6 +303,8 @@
 
   
 
+
+  
 
   </body>
 </html>
