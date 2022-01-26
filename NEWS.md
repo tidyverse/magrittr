@@ -1,5 +1,4 @@
-
-# magrittr (development version)
+# magrittr 2.0.2
 
 * New eager pipe `%!>%` for sequential evaluation (#247). Consider
   using `force()` in your functions instead to make them strict, if

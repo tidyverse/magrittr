@@ -1,4 +1,3 @@
-
 ## Test environments
 
 * local: macOS, r-release
@@ -12,4 +11,4 @@ There were no ERRORs, WARNINGs, or NOTEs.
 
 ## Downstream dependencies
 
-Whe have run R CMD check on reverse dependencies of magrittr, dplyr, tidyr, and purrr. Maintainers of failing packages were notified or offered fixes two months ago. There are 5 remaining failures in our latest run.
+No failures detected.
