@@ -235,11 +235,11 @@ by magrittr.</p>
 <span class="r-in">  </span>
 <span class="r-in"><span class="co"># When dot is nested, lhs is still placed first:</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="va">.</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "4D"  "5E"  "7G"  "9I"  "3C"  "10J" "2B"  "1A"  "6F"  "8H" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "1A"  "3C"  "2B"  "6F"  "10J" "4D"  "8H"  "7G"  "9I"  "5E" </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># This can be avoided:</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">}</span> <span class="op">%&gt;%</span> <span class="va">floor</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3  0  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -4  0  3</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Lambda expressions: </span></span>
 <span class="r-in"><span class="va">iris</span> <span class="op">%&gt;%</span></span>
@@ -250,10 +250,6 @@ by magrittr.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1            5.1         3.5          1.4         0.2    setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2            4.9         3.0          1.4         0.2    setosa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3            4.7         3.2          1.3         0.2    setosa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4            4.6         3.1          1.5         0.2    setosa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 147          6.3         2.5          5.0         1.9 virginica</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 148          6.5         3.0          5.2         2.0 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 149          6.2         3.4          5.4         2.3 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 150          5.9         3.0          5.1         1.8 virginica</span>
 <span class="r-in"></span>
@@ -273,8 +269,6 @@ by magrittr.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6            5.4         3.9          1.7         0.4    setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7            4.6         3.4          1.4         0.3    setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8            5.0         3.4          1.5         0.2    setosa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9            4.4         2.9          1.4         0.2    setosa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 142          6.9         3.1          5.1         2.3 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 143          5.8         2.7          5.1         1.9 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 144          6.8         3.2          5.9         2.3 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 145          6.7         3.3          5.7         2.5 virginica</span>
