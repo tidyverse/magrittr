@@ -52,7 +52,7 @@
         <a class="navbar-brand" href="../index.html">magrittr</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org" class="external-link">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.2.9000</span>
         </div>
       </div>
     </div>
@@ -211,7 +211,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/tee.html">%T&gt;%</a></span>
 <span class="va">plot</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="co"># plot usually does not return anything. </span>
 <span class="va">colSums</span>
-<span class="co">#&gt; [1] -2.096991 15.299145</span></code></pre></div>
+<span class="co">#&gt; [1] 4.333297 3.723672</span></code></pre></div>
 <p>The “exposition” pipe, <code>%$%</code> exposes the names within the left-hand side object to the right-hand side expression. Essentially, it is a short-hand for using the <code>with</code> functions (and the same left-hand side objects are accepted). This operator is handy when functions do not themselves have a data argument, as for example <code>lm</code> and <code>aggregate</code> do. Here are a few examples as illustration:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
@@ -243,8 +243,8 @@
        <span class="st">"Variance:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
    <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Mean: 5.297339 Variance: 25.00001</span>
-<span class="co">#&gt; [1]  7.0950470  0.0300107  2.5486807  4.1837654  3.5162177 -7.3770560</span></code></pre></div>
+<span class="co">#&gt; Mean: 5.338287 Variance: 25.94501</span>
+<span class="co">#&gt; [1] 6.804010 3.690103 3.192465 2.863003 6.206192 4.204158</span></code></pre></div>
 <p>which could be written in more compact form as:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">`*`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
