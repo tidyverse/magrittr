@@ -122,3 +122,24 @@ test_that("internal parameters are not looked up beyond private envs of the pipe
   # Fails because of the duplicate placeholder if nested transformation is performed
   expect_equal(1 %>% list(., .), list(1, 1))
 })
+
+test_that("eager pipe evaluates sequentially", {
+  local_edition(3)
+
+  f <- function(x) {
+    message("foo")
+    x
+  }
+  g <- function(x) {
+    message("bar")
+    x
+  }
+  h <- function(x) {
+    message("baz")
+    invisible(x)
+  }
+  expect_snapshot({
+    NULL %>% f() %>% g() %>% h()
+    NULL %!>% f() %!>% g() %!>% h()
+  })
+})

@@ -1,8 +1,13 @@
 
 # magrittr (development version)
 
+* New eager pipe `%!>%` for sequential evaluation (#247). Consider
+  using `force()` in your functions instead to make them strict, if
+  sequentiality is required. See the examples in `?"pipe-eager"`.
+
 * Fixed an issue that could cause pipe invocations to fail in versions of
   R built with `--enable-strict-barrier`. (#239, @kevinushey)
+
 
 # magrittr 2.0.1
 
