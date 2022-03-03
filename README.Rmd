@@ -18,7 +18,7 @@ library(magrittr)
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
 [![Codecov test coverage](https://codecov.io/gh/tidyverse/magrittr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/magrittr?branch=main)
-[![R-CMD-check](https://github.com/tidyverse/magrittr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidyverse/magrittr/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/smbache/magrittr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/smbache/magrittr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
