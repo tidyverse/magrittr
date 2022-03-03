@@ -18,6 +18,8 @@ Description: Provides a mechanism for chaining commands with a new
 License: MIT + file LICENSE
 URL:https://magrittr.tidyverse.org, https://github.com/tidyverse/magrittr
 BugReports: https://github.com/tidyverse/magrittr/issues
+Depends:
+    R (>= 3.4.0)
 Suggests: 
     covr,
     knitr,
