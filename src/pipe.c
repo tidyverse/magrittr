@@ -153,6 +153,8 @@ SEXP eval_pipe(void* data) {
 static
 SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
   SEXP prev_mask = env;
+  PROTECT_INDEX prev_mask_pi;
+  PROTECT_WITH_INDEX(prev_mask, &prev_mask_pi);
 
   PROTECT_INDEX mask_pi;
   PROTECT_WITH_INDEX(R_NilValue, &mask_pi);
@@ -169,6 +171,7 @@ SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
 
     exprs = rest;
     prev_mask = mask;
+    REPROTECT(prev_mask, prev_mask_pi);
   }
 
   // For compatibility, allow last expression to be `return()`.
@@ -182,7 +185,7 @@ SEXP eval_pipe_lazy(SEXP exprs, SEXP env) {
   // recursive evaluation of `.` bindings in the different masks.
   SEXP out = Rf_eval(last, prev_mask);
 
-  UNPROTECT(1);
+  UNPROTECT(2);
   return out;
 }
 
