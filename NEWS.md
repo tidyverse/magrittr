@@ -1,5 +1,7 @@
 # magrittr (development version)
 
+* Fixed a rare C level protection issue in `%>%` (#256).
+
 # magrittr 2.0.2
 
 * New eager pipe `%!>%` for sequential evaluation (#247). Consider
