@@ -1,7 +1,7 @@
 Type: Package
 Package: magrittr
 Title: A Forward-Pipe Operator for R
-Version: 2.0.2.9000
+Version: 2.0.3
 Authors@R: c(
     person("Stefan Milton", "Bache", , "stefan@stefanbache.dk", role = c("aut", "cph"),
            comment = "Original author and creator of magrittr"),
@@ -16,7 +16,7 @@ Description: Provides a mechanism for chaining commands with a new
     For more information, see package vignette.  To quote Rene Magritte,
     "Ceci n'est pas un pipe."
 License: MIT + file LICENSE
-URL:https://magrittr.tidyverse.org, https://github.com/tidyverse/magrittr
+URL: https://magrittr.tidyverse.org, https://github.com/tidyverse/magrittr
 BugReports: https://github.com/tidyverse/magrittr/issues
 Depends:
     R (>= 3.4.0)
@@ -29,7 +29,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 ByteCompile: Yes
-Config/Needs/website:tidyverse/tidytemplate
+Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
