@@ -72,9 +72,9 @@ devtools::install_github("tidyverse/magrittr")
 
 ### Basic piping
   
-* `x %>% f` is equivalent to `f(x)`
+* `x %>% f()` is equivalent to `f(x)`
 * `x %>% f(y)` is equivalent to `f(x, y)`
-* `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
+* `x %>% f() %>% g() %>% h()` is equivalent to `h(g(f(x)))`
 
 Here, "equivalent" is not technically exact: evaluation is non-standard,
 and the left-hand side is evaluated before passed on to the right-hand side
@@ -109,7 +109,7 @@ be used to apply the pipeline to values. Building functions in magrittr
 is therefore similar to building other values.
 
 ```{r}
-f <- . %>% cos %>% sin 
+f <- . %>% cos() %>% sin()
 # is equivalent to 
 f <- function(.) sin(cos(.)) 
 ```
