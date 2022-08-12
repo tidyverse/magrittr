@@ -240,10 +240,15 @@ pipe_nested <- function(lhs, rhs) {
 #' 
 #' @examples
 #' rnorm(200) %>%
-#' matrix(ncol = 2) %T>%
-#' plot %>% # plot usually does not return anything. 
+#' matrix(ncol = 2) %T>% # the tee pipe diverts the matrix into the plot function for its side effect and also continues to pass it through the main pipeline
+#' plot %>% # plot usually does not return anything, but here, the pipeline is continued.
 #' colSums
-#' 
+#' # Shown visually:
+#' # rnorm --> matrix --T--> colSums
+#' #                    |
+#' #                    v
+#' #                  plot
+#'
 #' @rdname tee
 #' @export
 `%T>%` <- function(lhs, rhs) {
