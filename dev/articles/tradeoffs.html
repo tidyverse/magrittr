@@ -586,8 +586,8 @@ binded to the constructed function itself rather than the initial value
 <code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span> <span class="op"><a href="../reference/pipe-eager.html">%!&gt;%</a></span> <span class="fu">factory</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe-eager.html">%!&gt;%</a></span> <span class="op">{</span> <span class="fu">.</span><span class="op">(</span><span class="op">)</span> <span class="op">}</span></span>
 <span><span class="fu">fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; function() x</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x56511e7a7960&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x56511bcff550&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x5586630d6a08&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x55866062e4a8&gt;</span></span></code></pre></div>
 <p>Also, since we’re binding <code>.</code> in the current environment,
 we need to clean it up once the pipeline has returned. At that point,
 the placeholder no longer exists:</p>

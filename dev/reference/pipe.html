@@ -215,7 +215,7 @@ by magrittr.</p>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span><span class="co"># When dot is nested, lhs is still placed first:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="va">.</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "2B"  "1A"  "9I"  "4D"  "10J" "5E"  "3C"  "6F"  "8H"  "7G" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "5E"  "7G"  "3C"  "8H"  "9I"  "4D"  "10J" "1A"  "2B"  "6F" </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># This can be avoided:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">}</span> <span class="op">%&gt;%</span> <span class="va">floor</span></span></span>
@@ -234,8 +234,6 @@ by magrittr.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4            4.6         3.1          1.5         0.2    setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5            5.0         3.6          1.4         0.2    setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6            5.4         3.9          1.7         0.4    setosa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7            4.6         3.4          1.4         0.3    setosa</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 144          6.8         3.2          5.9         2.3 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 145          6.7         3.3          5.7         2.5 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 146          6.7         3.0          5.2         2.3 virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 147          6.3         2.5          5.0         1.9 virginica</span>
