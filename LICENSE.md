@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2019 Stefan Milton Bache and Hadley Wickham
+Copyright (c) 2023 magrittr authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
