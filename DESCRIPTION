@@ -5,9 +5,9 @@ Version: 2.0.3.9000
 Authors@R: c(
     person("Stefan Milton", "Bache", , "stefan@stefanbache.dk", role = c("aut", "cph"),
            comment = "Original author and creator of magrittr"),
-    person("Hadley", "Wickham", , "hadley@rstudio.com", role = "aut"),
-    person("Lionel", "Henry", , "lionel@rstudio.com", role = "cre"),
-    person("RStudio", role = c("cph", "fnd"))
+    person("Hadley", "Wickham", , "hadley@posit.co", role = "aut"),
+    person("Lionel", "Henry", , "lionel@posit.co", role = "cre"),
+    person("Posit Software, PBC", role = c("cph", "fnd"))
   )
 Description: Provides a mechanism for chaining commands with a new
     forward-pipe operator, %>%. This operator will forward a value, or the
