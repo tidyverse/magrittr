@@ -8,9 +8,8 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
 [![Codecov test
-coverage](https://codecov.io/gh/tidyverse/magrittr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/magrittr?branch=master)
-[![R build
-status](https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/magrittr/actions)
+coverage](https://codecov.io/gh/tidyverse/magrittr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/magrittr?branch=main)
+[![R-CMD-check](https://github.com/smbache/magrittr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/smbache/magrittr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -18,18 +17,18 @@ status](https://github.com/tidyverse/magrittr/workflows/R-CMD-check/badge.svg)](
 The magrittr package offers a set of operators which make your code more
 readable by:
 
-  - structuring sequences of data operations left-to-right (as opposed
+-   structuring sequences of data operations left-to-right (as opposed
     to from the inside and out),
-  - avoiding nested function calls,
-  - minimizing the need for local variables and function definitions,
+-   avoiding nested function calls,
+-   minimizing the need for local variables and function definitions,
     and
-  - making it easy to add steps anywhere in the sequence of operations.
+-   making it easy to add steps anywhere in the sequence of operations.
 
 The operators pipe their left-hand side values forward into expressions
-that appear on the right-hand side, i.e. one can replace `f(x)` with `x
-%>% f()`, where `%>%` is the (main) pipe-operator. When coupling several
-function calls with the pipe-operator, the benefit will become more
-apparent. Consider this pseudo example:
+that appear on the right-hand side, i.e. one can replace `f(x)` with
+`x %>% f()`, where `%>%` is the (main) pipe-operator. When coupling
+several function calls with the pipe-operator, the benefit will become
+more apparent. Consider this pseudo example:
 
 ``` r
 the_data <-
@@ -59,16 +58,16 @@ install.packages("magrittr")
 
 # Or the development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("tidyverse/magrittr")
+pak::pak("tidyverse/magrittr")
 ```
 
 ## Usage
 
 ### Basic piping
 
-  - `x %>% f` is equivalent to `f(x)`
-  - `x %>% f(y)` is equivalent to `f(x, y)`
-  - `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
+-   `x %>% f` is equivalent to `f(x)`
+-   `x %>% f(y)` is equivalent to `f(x, y)`
+-   `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
 
 Here, “equivalent” is not technically exact: evaluation is non-standard,
 and the left-hand side is evaluated before passed on to the right-hand
@@ -77,8 +76,8 @@ implication.
 
 ### The argument placeholder
 
-  - `x %>% f(y, .)` is equivalent to `f(y, x)`
-  - `x %>% f(y, z = .)` is equivalent to `f(y, z = x)`
+-   `x %>% f(y, .)` is equivalent to `f(y, x)`
+-   `x %>% f(y, z = .)` is equivalent to `f(y, z = x)`
 
 ### Re-using the placeholder for attributes
 
@@ -87,14 +86,14 @@ right-hand side expression. However, when the placeholder only appears
 in a nested expressions magrittr will still apply the first-argument
 rule. The reason is that in most cases this results more clean code.
 
-`x %>% f(y = nrow(.), z = ncol(.))` is equivalent to `f(x, y = nrow(x),
-z = ncol(x))`
+`x %>% f(y = nrow(.), z = ncol(.))` is equivalent to
+`f(x, y = nrow(x), z = ncol(x))`
 
 The behavior can be overruled by enclosing the right-hand side in
 braces:
 
-`x %>% {f(y = nrow(.), z = ncol(.))}` is equivalent to `f(y = nrow(x), z
-= ncol(x))`
+`x %>% {f(y = nrow(.), z = ncol(.))}` is equivalent to
+`f(y = nrow(x), z = ncol(x))`
 
 ### Building (unary) functions
 
