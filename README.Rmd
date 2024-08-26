@@ -64,7 +64,7 @@ install.packages("tidyverse")
 install.packages("magrittr")
 
 # Or the development version from GitHub:
-# install.packages("devtools")
+# install.packages("pak")
 pak::pak("tidyverse/magrittr")
 ```
 
