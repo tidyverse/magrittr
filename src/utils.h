@@ -39,9 +39,9 @@ SEXP r_new_environment(SEXP parent) {
 static inline
 SEXP r_env_get(SEXP env, SEXP sym) {
 #if (R_VERSION >= R_Version(4, 5, 0))
-  SEXP obj = PROTECT(R_getVarEx(sym, env, FALSE, r_unbound_sym));
+  SEXP obj = R_getVarEx(sym, env, FALSE, r_unbound_sym);
 #else
-  SEXP obj = PROTECT(Rf_findVarInFrame3(env, sym, FALSE));
+  SEXP obj = Rf_findVarInFrame3(env, sym, FALSE);
   if (obj == R_UnboundValue) {
     obj = r_unbound_sym;
   }
@@ -49,10 +49,11 @@ SEXP r_env_get(SEXP env, SEXP sym) {
 
   // Force lazy loaded bindings
   if (TYPEOF(obj) == PROMSXP) {
+    PROTECT(obj);
     obj = Rf_eval(obj, R_BaseEnv);
+    UNPROTECT(1);
   }
 
-  UNPROTECT(1);
   return obj;
 }
 
