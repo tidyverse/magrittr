@@ -2,13 +2,13 @@
 
     Code
       NULL %>% f() %>% g() %>% h()
-    Message <simpleMessage>
+    Message
       baz
       bar
       foo
     Code
       NULL %!>% f() %!>% g() %!>% h()
-    Message <simpleMessage>
+    Message
       foo
       bar
       baz

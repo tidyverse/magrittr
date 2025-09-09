@@ -1,5 +1,8 @@
 # magrittr (development version)
 
+* Fixes for CRAN checks.
+
+
 # magrittr 2.0.3
 
 * Fixed a C level protection issue in `%>%` (#256).

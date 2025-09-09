@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# magrittr <a href='https:/magrittr.tidyverse.org'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# magrittr <a href='https://magrittr.tidyverse.org'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/magrittr)](https://cran.r-project.org/package=magrittr)
 [![Codecov test
 coverage](https://codecov.io/gh/tidyverse/magrittr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/magrittr?branch=main)
-[![R-CMD-check](https://github.com/smbache/magrittr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/smbache/magrittr/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/tidyverse/magrittr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidyverse/magrittr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview

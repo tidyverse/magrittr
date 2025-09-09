@@ -2,7 +2,10 @@
 #define MAGRITTR_UTILS_H
 
 
+#include <Rinternals.h>
 #include <Rversion.h>
+
+extern SEXP r_unbound_sym;
 
 void r_env_bind_lazy(SEXP env,
                      SEXP sym,
@@ -11,11 +14,11 @@ void r_env_bind_lazy(SEXP env,
 
 static inline
 void r_env_unbind(SEXP env, SEXP sym) {
-#if (R_VERSION < R_Version(4, 0, 0))
+#if (R_VERSION >= R_Version(4, 0, 0))
+  R_removeVarFromFrame(sym, env);
+#else
   void r__env_unbind(SEXP, SEXP);
   r__env_unbind(env, sym);
-#else
-  R_removeVarFromFrame(sym, env);
 #endif
 }
 
@@ -24,21 +27,33 @@ SEXP r_parse_eval(const char* str, SEXP env);
 
 static inline
 SEXP r_new_environment(SEXP parent) {
+#if (R_VERSION >= R_Version(4, 1, 0))
+  return R_NewEnv(parent, FALSE, 0);
+#else
   SEXP env = Rf_allocSExp(ENVSXP);
   SET_ENCLOS(env, parent);
   return env;
+#endif
 }
 
 static inline
 SEXP r_env_get(SEXP env, SEXP sym) {
-  SEXP obj = PROTECT(Rf_findVarInFrame3(env, sym, FALSE));
+#if (R_VERSION >= R_Version(4, 5, 0))
+  SEXP obj = R_getVarEx(sym, env, FALSE, r_unbound_sym);
+#else
+  SEXP obj = Rf_findVarInFrame3(env, sym, FALSE);
+  if (obj == R_UnboundValue) {
+    obj = r_unbound_sym;
+  }
+#endif
 
   // Force lazy loaded bindings
   if (TYPEOF(obj) == PROMSXP) {
+    PROTECT(obj);
     obj = Rf_eval(obj, R_BaseEnv);
+    UNPROTECT(1);
   }
 
-  UNPROTECT(1);
   return obj;
 }
 

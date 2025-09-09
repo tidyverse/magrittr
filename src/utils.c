@@ -2,6 +2,7 @@
 #include <Rinternals.h>
 
 
+SEXP r_unbound_sym = NULL;
 SEXP syms_delayed_assign = NULL;
 
 void r_env_bind_lazy(SEXP env,
@@ -114,6 +115,7 @@ SEXP r_new_environment(SEXP parent, R_len_t size) {
 
 
 void magrittr_init_utils(SEXP ns) {
+  r_unbound_sym = Rf_install(".__magrittr_unbound_value__.");
   syms_delayed_assign = Rf_install("delayedAssign");
   syms_envir = Rf_install("envir");
   syms_inherits = Rf_install("inherits");
