@@ -5,6 +5,8 @@
 #include <Rinternals.h>
 #include <Rversion.h>
 
+extern SEXP r_unbound_sym;
+
 void r_env_bind_lazy(SEXP env,
                      SEXP sym,
                      SEXP expr,
@@ -36,7 +38,14 @@ SEXP r_new_environment(SEXP parent) {
 
 static inline
 SEXP r_env_get(SEXP env, SEXP sym) {
+#if (R_VERSION >= R_Version(4, 5, 0))
+  SEXP obj = PROTECT(R_getVarEx(sym, env, FALSE, r_unbound_sym));
+#else
   SEXP obj = PROTECT(Rf_findVarInFrame3(env, sym, FALSE));
+  if (obj == R_UnboundValue) {
+    obj = r_unbound_sym;
+  }
+#endif
 
   // Force lazy loaded bindings
   if (TYPEOF(obj) == PROMSXP) {

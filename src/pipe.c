@@ -74,7 +74,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
   SEXP env = PROTECT(Rf_eval(syms_env, rho));
 
   SEXP pipe_sym = r_env_get(rho, syms_sym);
-  if (pipe_sym == R_UnboundValue) {
+  if (pipe_sym == r_unbound_sym) {
     pipe_sym = syms_pipe;
   }
   PROTECT(pipe_sym);
@@ -90,7 +90,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return lambda;
   }
 
-  bool use_nested = r_env_get(rho, syms_nested) != R_UnboundValue;
+  bool use_nested = r_env_get(rho, syms_nested) != r_unbound_sym;
   if (use_nested) {
     SEXP call = PROTECT(pipe_nest(exprs));
     SEXP out = Rf_eval(call, env);
@@ -98,7 +98,7 @@ SEXP magrittr_pipe(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return out;
   }
 
-  bool use_lazy = r_env_get(rho, syms_lazy) != R_UnboundValue;
+  bool use_lazy = r_env_get(rho, syms_lazy) != r_unbound_sym;
   SEXP out = R_NilValue;
 
   if (use_lazy) {
@@ -198,7 +198,7 @@ static
 void clean_pipe(void* data) {
   struct cleanup_info* info = (struct cleanup_info*) data;
 
-  if (info->old == R_UnboundValue) {
+  if (info->old == r_unbound_sym) {
     r_env_unbind(info->env, syms_dot);
   } else {
     Rf_defineVar(syms_dot, info->old, info->env);
