@@ -2,6 +2,7 @@
 #define MAGRITTR_UTILS_H
 
 
+#include <Rinternals.h>
 #include <Rversion.h>
 
 void r_env_bind_lazy(SEXP env,
@@ -11,11 +12,11 @@ void r_env_bind_lazy(SEXP env,
 
 static inline
 void r_env_unbind(SEXP env, SEXP sym) {
-#if (R_VERSION < R_Version(4, 0, 0))
+#if (R_VERSION >= R_Version(4, 0, 0))
+  R_removeVarFromFrame(sym, env);
+#else
   void r__env_unbind(SEXP, SEXP);
   r__env_unbind(env, sym);
-#else
-  R_removeVarFromFrame(sym, env);
 #endif
 }
 
@@ -24,9 +25,13 @@ SEXP r_parse_eval(const char* str, SEXP env);
 
 static inline
 SEXP r_new_environment(SEXP parent) {
+#if (R_VERSION >= R_Version(4, 1, 0))
+  return R_NewEnv(parent, FALSE, 0);
+#else
   SEXP env = Rf_allocSExp(ENVSXP);
   SET_ENCLOS(env, parent);
   return env;
+#endif
 }
 
 static inline
