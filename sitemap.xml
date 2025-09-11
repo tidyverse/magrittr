@@ -1,87 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://magrittr.tidyverse.org/404.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/articles/magrittr.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/articles/tradeoffs.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/index.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/aliases.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/compound.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/debug_fseq.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/debug_pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/exposition.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/faq-pipe-gender.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/freduce.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/fseq.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/functions.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/magrittr-package.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/pipe-eager.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/pipe_eager_lexical.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/print.fseq.html</loc>
-  </url>
-  <url>
-    <loc>https://magrittr.tidyverse.org/reference/tee.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://magrittr.tidyverse.org/404.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/CONTRIBUTING.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/LICENSE-text.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/LICENSE.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/SUPPORT.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/articles/index.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/articles/magrittr.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/articles/tradeoffs.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/authors.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/index.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/news/index.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/aliases.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/compound.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/debug_fseq.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/debug_pipe.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/exposition.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/faq-pipe-gender.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/freduce.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/fseq.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/functions.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/index.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/magrittr-package.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/pipe-eager.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/pipe.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/pipe_eager_lexical.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/print.fseq.html</loc></url>
+<url><loc>https://magrittr.tidyverse.org/reference/tee.html</loc></url>
 </urlset>
+
