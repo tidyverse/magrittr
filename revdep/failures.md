@@ -1,691 +1,14 @@
-# NA
-
-<details>
-
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
-
-Run `cloud_details(, "NA")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# NA
-
-<details>
-
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
-
-Run `cloud_details(, "NA")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# CB2
-
-<details>
-
-* Version: 1.3.4
-* Source code: https://github.com/cran/CB2
-* Date/Publication: 2020-07-24 09:42:24 UTC
-* Number of recursive dependencies: 105
-
-Run `cloud_details(, "CB2")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/CB2/new/CB2.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘CB2/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘CB2’ version ‘1.3.4’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘metap’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/CB2/old/CB2.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘CB2/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘CB2’ version ‘1.3.4’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘metap’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# cbar
-
-<details>
-
-* Version: 0.1.3
-* Source code: https://github.com/cran/cbar
-* URL: https://github.com/zedoul/cbar
-* BugReports: https://github.com/zedoul/cbar/issues
-* Date/Publication: 2017-10-24 13:20:22 UTC
-* Number of recursive dependencies: 66
-
-Run `cloud_details(, "cbar")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/cbar/new/cbar.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘cbar/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘cbar’ version ‘0.1.3’
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Packages required but not available: 'Boom', 'bsts'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/cbar/old/cbar.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘cbar/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘cbar’ version ‘0.1.3’
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Packages required but not available: 'Boom', 'bsts'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# diceR
-
-<details>
-
-* Version: 1.0.0
-* Source code: https://github.com/cran/diceR
-* URL: https://github.com/AlineTalhouk/diceR, https://alinetalhouk.github.io/diceR
-* BugReports: https://github.com/AlineTalhouk/diceR/issues
-* Date/Publication: 2020-07-07 22:30:02 UTC
-* Number of recursive dependencies: 143
-
-Run `cloud_details(, "diceR")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/diceR/new/diceR.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘diceR/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘diceR’ version ‘1.0.0’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘NMF’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/diceR/old/diceR.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘diceR/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘diceR’ version ‘1.0.0’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘NMF’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# dimRed
-
-<details>
-
-* Version: 0.2.3
-* Source code: https://github.com/cran/dimRed
-* URL: https://github.com/gdkrmr/dimRed
-* Date/Publication: 2019-05-08 08:10:07 UTC
-* Number of recursive dependencies: 139
-
-Run `cloud_details(, "dimRed")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/dimRed/new/dimRed.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘dimRed/DESCRIPTION’ ... OK
-* this is package ‘dimRed’ version ‘0.2.3’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘NMF’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/dimRed/old/dimRed.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘dimRed/DESCRIPTION’ ... OK
-* this is package ‘dimRed’ version ‘0.2.3’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘NMF’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# ESTER
-
-<details>
-
-* Version: 0.2.0
-* Source code: https://github.com/cran/ESTER
-* URL: https://github.com/lnalborczyk/ESTER
-* BugReports: https://github.com/lnalborczyk/ESTER/issues
-* Date/Publication: 2017-12-10 14:21:14 UTC
-* Number of recursive dependencies: 164
-
-Run `cloud_details(, "ESTER")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘ESTER’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/ESTER/new/ESTER.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘ESTER’ ...
-** package ‘ESTER’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Warning: namespace ‘rstan’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
-Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘rstan’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘ESTER’
-* removing ‘/tmp/workdir/ESTER/new/ESTER.Rcheck/ESTER’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘ESTER’ ...
-** package ‘ESTER’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Warning: namespace ‘rstan’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
-Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘rstan’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘ESTER’
-* removing ‘/tmp/workdir/ESTER/old/ESTER.Rcheck/ESTER’
-
-```
-# NA
-
-<details>
-
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
-
-Run `cloud_details(, "NA")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# ggmsa
-
-<details>
-
-* Version: 0.0.4
-* Source code: https://github.com/cran/ggmsa
-* Date/Publication: 2020-05-28 10:50:10 UTC
-* Number of recursive dependencies: 81
-
-Run `cloud_details(, "ggmsa")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/ggmsa/new/ggmsa.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘ggmsa/DESCRIPTION’ ... OK
-* this is package ‘ggmsa’ version ‘0.0.4’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘Biostrings’
-
-Packages suggested but not available: 'ggtree', 'seqmagick'
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/ggmsa/old/ggmsa.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘ggmsa/DESCRIPTION’ ... OK
-* this is package ‘ggmsa’ version ‘0.0.4’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘Biostrings’
-
-Packages suggested but not available: 'ggtree', 'seqmagick'
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# jstor
-
-<details>
-
-* Version: 0.3.9
-* Source code: https://github.com/cran/jstor
-* URL: https://github.com/ropensci/jstor, https://docs.ropensci.org/jstor
-* BugReports: https://github.com/ropensci/jstor/issues
-* Date/Publication: 2020-06-04 04:50:03 UTC
-* Number of recursive dependencies: 73
-
-Run `cloud_details(, "jstor")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/jstor/old/jstor.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘jstor/DESCRIPTION’ ... OK
-* this is package ‘jstor’ version ‘0.3.9’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... OK
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘jstor’ can be installed ... OK
-* checking installed package size ... OK
-* checking package directory ... OK
-* checking ‘build’ directory ... OK
-* checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking dependencies in R code ... OK
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking R/sysdata.rda ... OK
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ...
-
-
-
-
-
-```
-# mapdeck
+# apa
 
 <details>
 
 * Version: 0.3.4
-* Source code: https://github.com/cran/mapdeck
-* URL: https://symbolixau.github.io/mapdeck/articles/mapdeck.html
-* BugReports: https://github.com/SymbolixAU/mapdeck/issues
-* Date/Publication: 2020-09-04 05:22:10 UTC
-* Number of recursive dependencies: 83
+* GitHub: https://github.com/dgromer/apa
+* Source code: https://github.com/cran/apa
+* Date/Publication: 2023-10-06 15:00:02 UTC
+* Number of recursive dependencies: 116
 
-Run `cloud_details(, "mapdeck")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘mapdeck’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/mapdeck/new/mapdeck.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘mapdeck’ ...
-** package ‘mapdeck’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c aggregate.cpp -o aggregate.o
-/tmp/ccZjU7ZO.s: Assembler messages:
-/tmp/ccZjU7ZO.s: Fatal error: can't close aggregate.o: No space left on device
-make: *** [/usr/lib/R/etc/Makeconf:177: aggregate.o] Error 1
-ERROR: compilation failed for package ‘mapdeck’
-* removing ‘/tmp/workdir/mapdeck/new/mapdeck.Rcheck/mapdeck’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘mapdeck’ ...
-** package ‘mapdeck’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c aggregate.cpp -o aggregate.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c geojson.cpp -o geojson.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c mesh.cpp -o mesh.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c od.cpp -o od.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c path.cpp -o path.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG -DSTRICT_R_HEADERS -DBOOST_NO_AUTO_PTR -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/colourvalues/include" -I"/usr/local/lib/R/site-library/geojsonsf/include" -I"/usr/local/lib/R/site-library/geometries/include" -I"/usr/local/lib/R/site-library/jsonify/include" -I"/usr/local/lib/R/site-library/rapidjsonr/include" -I"/usr/local/lib/R/site-library/Rcpp/include" -I"/usr/local/lib/R/site-library/sfheaders/include" -I"/usr/local/lib/R/site-library/spatialwidget/include"  -I../inst/include -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c point.cpp -o point.o
-/tmp/ccJov3g3.s: Assembler messages:
-/tmp/ccJov3g3.s: Fatal error: can't close point.o: No space left on device
-make: *** [/usr/lib/R/etc/Makeconf:177: point.o] Error 1
-ERROR: compilation failed for package ‘mapdeck’
-* removing ‘/tmp/workdir/mapdeck/old/mapdeck.Rcheck/mapdeck’
-
-```
-# NA
-
-<details>
-
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
-
-Run `cloud_details(, "NA")` for more info
+Run `revdepcheck::cloud_details(, "apa")` for more info
 
 </details>
 
@@ -694,7 +17,27 @@ Run `cloud_details(, "NA")` for more info
 ### Devel
 
 ```
+* using log directory ‘/tmp/workdir/apa/new/apa.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘apa/DESCRIPTION’ ... OK
+...
+* this is package ‘apa’ version ‘0.3.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘MBESS’
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -704,25 +47,846 @@ Run `cloud_details(, "NA")` for more info
 ### CRAN
 
 ```
+* using log directory ‘/tmp/workdir/apa/old/apa.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘apa/DESCRIPTION’ ... OK
+...
+* this is package ‘apa’ version ‘0.3.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘MBESS’
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
 
 
 ```
-# osmplotr
+# arealDB
+
+<details>
+
+* Version: 0.9.4
+* GitHub: https://github.com/luckinet/arealDB
+* Source code: https://github.com/cran/arealDB
+* Date/Publication: 2025-01-20 13:40:05 UTC
+* Number of recursive dependencies: 109
+
+Run `revdepcheck::cloud_details(, "arealDB")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘arealDB’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/arealDB/new/arealDB.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘arealDB’ ...
+** package ‘arealDB’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘arealDB’
+* removing ‘/tmp/workdir/arealDB/new/arealDB.Rcheck/arealDB’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘arealDB’ ...
+** package ‘arealDB’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘arealDB’
+* removing ‘/tmp/workdir/arealDB/old/arealDB.Rcheck/arealDB’
+
+
+```
+# ClusterGVis
+
+<details>
+
+* Version: 0.1.4
+* GitHub: https://github.com/junjunlab/ClusterGVis
+* Source code: https://github.com/cran/ClusterGVis
+* Date/Publication: 2025-07-19 06:10:02 UTC
+* Number of recursive dependencies: 291
+
+Run `revdepcheck::cloud_details(, "ClusterGVis")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/ClusterGVis/new/ClusterGVis.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ClusterGVis/DESCRIPTION’ ... OK
+...
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/ClusterGVis/old/ClusterGVis.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ClusterGVis/DESCRIPTION’ ... OK
+...
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# cocktailApp
+
+<details>
+
+* Version: 0.2.3
+* GitHub: https://github.com/shabbychef/cocktailApp
+* Source code: https://github.com/cran/cocktailApp
+* Date/Publication: 2023-07-19 13:40:09 UTC
+* Number of recursive dependencies: 91
+
+Run `revdepcheck::cloud_details(, "cocktailApp")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘cocktailApp’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/cocktailApp/new/cocktailApp.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘cocktailApp’ ...
+** package ‘cocktailApp’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: .onLoad failed in loadNamespace() for 'ggtern', details:
+  call: NULL
+  error: <ggplot2::element_line> object properties are invalid:
+- @lineend must be <character> or <NULL>, not S3<arrow>
+Execution halted
+ERROR: lazy loading failed for package ‘cocktailApp’
+* removing ‘/tmp/workdir/cocktailApp/new/cocktailApp.Rcheck/cocktailApp’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘cocktailApp’ ...
+** package ‘cocktailApp’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: .onLoad failed in loadNamespace() for 'ggtern', details:
+  call: NULL
+  error: <ggplot2::element_line> object properties are invalid:
+- @lineend must be <character> or <NULL>, not S3<arrow>
+Execution halted
+ERROR: lazy loading failed for package ‘cocktailApp’
+* removing ‘/tmp/workdir/cocktailApp/old/cocktailApp.Rcheck/cocktailApp’
+
+
+```
+# dySEM
+
+<details>
+
+* Version: 1.1.1
+* GitHub: https://github.com/jsakaluk/dySEM
+* Source code: https://github.com/cran/dySEM
+* Date/Publication: 2025-01-07 22:20:02 UTC
+* Number of recursive dependencies: 140
+
+Run `revdepcheck::cloud_details(, "dySEM")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/dySEM/new/dySEM.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘dySEM/DESCRIPTION’ ... OK
+...
+* this is package ‘dySEM’ version ‘1.1.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘semPlot’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/dySEM/old/dySEM.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘dySEM/DESCRIPTION’ ... OK
+...
+* this is package ‘dySEM’ version ‘1.1.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘semPlot’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# FAfA
+
+<details>
+
+* Version: 0.3
+* GitHub: NA
+* Source code: https://github.com/cran/FAfA
+* Date/Publication: 2025-05-23 19:42:09 UTC
+* Number of recursive dependencies: 253
+
+Run `revdepcheck::cloud_details(, "FAfA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/FAfA/new/FAfA.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘FAfA/DESCRIPTION’ ... OK
+...
+* this is package ‘FAfA’ version ‘0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'MBESS', 'semPlot'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/FAfA/old/FAfA.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘FAfA/DESCRIPTION’ ... OK
+...
+* this is package ‘FAfA’ version ‘0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'MBESS', 'semPlot'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# genekitr
+
+<details>
+
+* Version: 1.2.8
+* GitHub: https://github.com/GangLiLab/genekitr
+* Source code: https://github.com/cran/genekitr
+* Date/Publication: 2024-09-06 13:00:06 UTC
+* Number of recursive dependencies: 196
+
+Run `revdepcheck::cloud_details(, "genekitr")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/genekitr/new/genekitr.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘genekitr/DESCRIPTION’ ... OK
+...
+* this is package ‘genekitr’ version ‘1.2.8’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/genekitr/old/genekitr.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘genekitr/DESCRIPTION’ ... OK
+...
+* this is package ‘genekitr’ version ‘1.2.8’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# GeneSelectR
+
+<details>
+
+* Version: 1.0.1
+* GitHub: https://github.com/dzhakparov/GeneSelectR
+* Source code: https://github.com/cran/GeneSelectR
+* Date/Publication: 2024-02-03 14:00:05 UTC
+* Number of recursive dependencies: 178
+
+Run `revdepcheck::cloud_details(, "GeneSelectR")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/GeneSelectR/new/GeneSelectR.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘GeneSelectR/DESCRIPTION’ ... OK
+...
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/GeneSelectR/old/GeneSelectR.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘GeneSelectR/DESCRIPTION’ ... OK
+...
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# ggmulti
+
+<details>
+
+* Version: 1.0.7
+* GitHub: NA
+* Source code: https://github.com/cran/ggmulti
+* Date/Publication: 2024-04-09 09:40:05 UTC
+* Number of recursive dependencies: 119
+
+Run `revdepcheck::cloud_details(, "ggmulti")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘ggmulti’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/ggmulti/new/ggmulti.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘ggmulti’ ...
+** package ‘ggmulti’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in get(x, envir = ns, inherits = FALSE) : 
+  object 'new_aes' not found
+Error: unable to load R code in package ‘ggmulti’
+Execution halted
+ERROR: lazy loading failed for package ‘ggmulti’
+* removing ‘/tmp/workdir/ggmulti/new/ggmulti.Rcheck/ggmulti’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘ggmulti’ ...
+** package ‘ggmulti’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in get(x, envir = ns, inherits = FALSE) : 
+  object 'new_aes' not found
+Error: unable to load R code in package ‘ggmulti’
+Execution halted
+ERROR: lazy loading failed for package ‘ggmulti’
+* removing ‘/tmp/workdir/ggmulti/old/ggmulti.Rcheck/ggmulti’
+
+
+```
+# ggpicrust2
+
+<details>
+
+* Version: 2.5.2
+* GitHub: https://github.com/cafferychen777/ggpicrust2
+* Source code: https://github.com/cran/ggpicrust2
+* Date/Publication: 2025-08-25 23:00:02 UTC
+* Number of recursive dependencies: 319
+
+Run `revdepcheck::cloud_details(, "ggpicrust2")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/ggpicrust2/new/ggpicrust2.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ggpicrust2/DESCRIPTION’ ... OK
+...
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking examples ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/ggpicrust2/old/ggpicrust2.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ggpicrust2/DESCRIPTION’ ... OK
+...
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking examples ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+# immcp
+
+<details>
+
+* Version: 1.0.3
+* GitHub: https://github.com/YuanlongHu/immcp
+* Source code: https://github.com/cran/immcp
+* Date/Publication: 2022-05-12 05:50:02 UTC
+* Number of recursive dependencies: 183
+
+Run `revdepcheck::cloud_details(, "immcp")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/immcp/new/immcp.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘immcp/DESCRIPTION’ ... OK
+...
+* this is package ‘immcp’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'clusterProfiler', 'arules'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/immcp/old/immcp.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘immcp/DESCRIPTION’ ... OK
+...
+* this is package ‘immcp’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'clusterProfiler', 'arules'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# jmv
+
+<details>
+
+* Version: 2.7.0
+* GitHub: https://github.com/jamovi/jmv
+* Source code: https://github.com/cran/jmv
+* Date/Publication: 2025-06-11 10:50:02 UTC
+* Number of recursive dependencies: 189
+
+Run `revdepcheck::cloud_details(, "jmv")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/jmv/new/jmv.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘jmv/DESCRIPTION’ ... OK
+...
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 3 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/jmv/old/jmv.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘jmv/DESCRIPTION’ ... OK
+...
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 3 NOTEs
+
+
+
+
+
+```
+# lcsm
 
 <details>
 
 * Version: 0.3.2
-* Source code: https://github.com/cran/osmplotr
-* URL: https://github.com/ropensci/osmplotr
-* BugReports: https://github.com/ropensci/osmplotr/issues
-* Date/Publication: 2018-12-19 13:40:03 UTC
-* Number of recursive dependencies: 119
+* GitHub: https://github.com/milanwiedemann/lcsm
+* Source code: https://github.com/cran/lcsm
+* Date/Publication: 2023-02-25 23:40:02 UTC
+* Number of recursive dependencies: 137
 
-Run `cloud_details(, "osmplotr")` for more info
+Run `revdepcheck::cloud_details(, "lcsm")` for more info
 
 </details>
 
@@ -731,17 +895,22 @@ Run `cloud_details(, "osmplotr")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/osmplotr/new/osmplotr.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
+* using log directory ‘/tmp/workdir/lcsm/new/lcsm.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘osmplotr/DESCRIPTION’ ... OK
-* this is package ‘osmplotr’ version ‘0.3.2’
+* using option ‘--no-manual’
+* checking for file ‘lcsm/DESCRIPTION’ ... OK
+...
+* this is package ‘lcsm’ version ‘0.3.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘ggm’
+Package required but not available: ‘semPlot’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -752,22 +921,26 @@ Status: 1 ERROR
 
 
 
-
 ```
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/osmplotr/old/osmplotr.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
+* using log directory ‘/tmp/workdir/lcsm/old/lcsm.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘osmplotr/DESCRIPTION’ ... OK
-* this is package ‘osmplotr’ version ‘0.3.2’
+* using option ‘--no-manual’
+* checking for file ‘lcsm/DESCRIPTION’ ... OK
+...
+* this is package ‘lcsm’ version ‘0.3.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘ggm’
+Package required but not available: ‘semPlot’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -778,17 +951,18 @@ Status: 1 ERROR
 
 
 
-
 ```
-# NA
+# loon.shiny
 
 <details>
 
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
+* Version: 1.0.3
+* GitHub: NA
+* Source code: https://github.com/cran/loon.shiny
+* Date/Publication: 2022-10-08 15:30:02 UTC
+* Number of recursive dependencies: 129
 
-Run `cloud_details(, "NA")` for more info
+Run `revdepcheck::cloud_details(, "loon.shiny")` for more info
 
 </details>
 
@@ -797,7 +971,27 @@ Run `cloud_details(, "NA")` for more info
 ### Devel
 
 ```
+* using log directory ‘/tmp/workdir/loon.shiny/new/loon.shiny.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘loon.shiny/DESCRIPTION’ ... OK
+...
+* this is package ‘loon.shiny’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'loon', 'loon.ggplot'
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -807,22 +1001,44 @@ Run `cloud_details(, "NA")` for more info
 ### CRAN
 
 ```
+* using log directory ‘/tmp/workdir/loon.shiny/old/loon.shiny.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘loon.shiny/DESCRIPTION’ ... OK
+...
+* this is package ‘loon.shiny’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'loon', 'loon.ggplot'
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
 
 
 ```
-# NA
+# loon.tourr
 
 <details>
 
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
+* Version: 0.1.4
+* GitHub: https://github.com/z267xu/loon.tourr
+* Source code: https://github.com/cran/loon.tourr
+* Date/Publication: 2024-04-09 09:40:02 UTC
+* Number of recursive dependencies: 153
 
-Run `cloud_details(, "NA")` for more info
+Run `revdepcheck::cloud_details(, "loon.tourr")` for more info
 
 </details>
 
@@ -831,7 +1047,27 @@ Run `cloud_details(, "NA")` for more info
 ### Devel
 
 ```
+* using log directory ‘/tmp/workdir/loon.tourr/new/loon.tourr.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘loon.tourr/DESCRIPTION’ ... OK
+...
+* this is package ‘loon.tourr’ version ‘0.1.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'loon', 'loon.ggplot'
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -841,22 +1077,44 @@ Run `cloud_details(, "NA")` for more info
 ### CRAN
 
 ```
+* using log directory ‘/tmp/workdir/loon.tourr/old/loon.tourr.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘loon.tourr/DESCRIPTION’ ... OK
+...
+* this is package ‘loon.tourr’ version ‘0.1.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'loon', 'loon.ggplot'
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
 
 
 ```
-# NA
+# numbat
 
 <details>
 
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
+* Version: 1.4.2
+* GitHub: https://github.com/kharchenkolab/numbat
+* Source code: https://github.com/cran/numbat
+* Date/Publication: 2024-09-20 12:20:07 UTC
+* Number of recursive dependencies: 139
 
-Run `cloud_details(, "NA")` for more info
+Run `revdepcheck::cloud_details(, "numbat")` for more info
 
 </details>
 
@@ -865,7 +1123,27 @@ Run `cloud_details(, "NA")` for more info
 ### Devel
 
 ```
+* using log directory ‘/tmp/workdir/numbat/new/numbat.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘numbat/DESCRIPTION’ ... OK
+...
+* this is package ‘numbat’ version ‘1.4.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'ggtree', 'scistreer'
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -875,33 +1153,129 @@ Run `cloud_details(, "NA")` for more info
 ### CRAN
 
 ```
+* using log directory ‘/tmp/workdir/numbat/old/numbat.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘numbat/DESCRIPTION’ ... OK
+...
+* this is package ‘numbat’ version ‘1.4.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'ggtree', 'scistreer'
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
 
 
 ```
-# precautionary
+# OlinkAnalyze
 
 <details>
 
-* Version: 0.1-5
-* Source code: https://github.com/cran/precautionary
-* URL: https://precisionmethods.guru/
-* Date/Publication: 2020-11-03 06:30:02 UTC
-* Number of recursive dependencies: 125
+* Version: 4.3.1
+* GitHub: https://github.com/Olink-Proteomics/OlinkRPackage
+* Source code: https://github.com/cran/OlinkAnalyze
+* Date/Publication: 2025-07-31 22:02:05 UTC
+* Number of recursive dependencies: 208
 
-Run `cloud_details(, "precautionary")` for more info
+Run `revdepcheck::cloud_details(, "OlinkAnalyze")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/OlinkAnalyze/new/OlinkAnalyze.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘OlinkAnalyze/DESCRIPTION’ ... OK
+...
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/OlinkAnalyze/old/OlinkAnalyze.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘OlinkAnalyze/DESCRIPTION’ ... OK
+...
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# ontologics
+
+<details>
+
+* Version: 0.7.4
+* GitHub: https://github.com/luckinet/ontologics
+* Source code: https://github.com/cran/ontologics
+* Date/Publication: 2025-01-17 16:50:02 UTC
+* Number of recursive dependencies: 79
+
+Run `revdepcheck::cloud_details(, "ontologics")` for more info
 
 </details>
 
 ## In both
 
-*   checking whether package ‘precautionary’ can be installed ... ERROR
+*   checking whether package ‘ontologics’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/tmp/workdir/precautionary/new/precautionary.Rcheck/00install.out’ for details.
+    See ‘/tmp/workdir/ontologics/new/ontologics.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -909,53 +1283,128 @@ Run `cloud_details(, "precautionary")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘precautionary’ ...
-** package ‘precautionary’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘ontologics’ ...
+** package ‘ontologics’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
-** demo
-** exec
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘escalation’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
- there is no package called ‘trialr’
-Error: package ‘escalation’ could not be loaded
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
-ERROR: lazy loading failed for package ‘precautionary’
-* removing ‘/tmp/workdir/precautionary/new/precautionary.Rcheck/precautionary’
+ERROR: lazy loading failed for package ‘ontologics’
+* removing ‘/tmp/workdir/ontologics/new/ontologics.Rcheck/ontologics’
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘precautionary’ ...
-** package ‘precautionary’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘ontologics’ ...
+** package ‘ontologics’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
-** demo
-** exec
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘escalation’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
- there is no package called ‘trialr’
-Error: package ‘escalation’ could not be loaded
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
 Execution halted
-ERROR: lazy loading failed for package ‘precautionary’
-* removing ‘/tmp/workdir/precautionary/old/precautionary.Rcheck/precautionary’
+ERROR: lazy loading failed for package ‘ontologics’
+* removing ‘/tmp/workdir/ontologics/old/ontologics.Rcheck/ontologics’
+
+
+```
+# pctax
+
+<details>
+
+* Version: 0.1.3
+* GitHub: https://github.com/Asa12138/pctax
+* Source code: https://github.com/cran/pctax
+* Date/Publication: 2024-12-02 10:00:02 UTC
+* Number of recursive dependencies: 252
+
+Run `revdepcheck::cloud_details(, "pctax")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/pctax/new/pctax.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘pctax/DESCRIPTION’ ... OK
+...
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 3 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/pctax/old/pctax.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘pctax/DESCRIPTION’ ... OK
+...
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 3 NOTEs
+
+
+
+
 
 ```
 # psychonetrics
 
 <details>
 
-* Version: 0.8
+* Version: 0.13.1
+* GitHub: https://github.com/SachaEpskamp/psychonetrics
 * Source code: https://github.com/cran/psychonetrics
-* URL: http://psychonetrics.org/
-* BugReports: https://github.com/SachaEpskamp/psychonetrics/issues
-* Date/Publication: 2020-10-26 21:50:03 UTC
-* Number of recursive dependencies: 159
+* Date/Publication: 2025-06-02 13:30:02 UTC
+* Number of recursive dependencies: 141
 
-Run `cloud_details(, "psychonetrics")` for more info
+Run `revdepcheck::cloud_details(, "psychonetrics")` for more info
 
 </details>
 
@@ -965,26 +1414,26 @@ Run `cloud_details(, "psychonetrics")` for more info
 
 ```
 * using log directory ‘/tmp/workdir/psychonetrics/new/psychonetrics.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
+* using option ‘--no-manual’
 * checking for file ‘psychonetrics/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘psychonetrics’ version ‘0.8’
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘metaSEM’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+...
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... OK
+* checking examples ... OK
 * DONE
-Status: 1 ERROR
-
+Status: 2 NOTEs
 
 
 
@@ -995,20 +1444,357 @@ Status: 1 ERROR
 
 ```
 * using log directory ‘/tmp/workdir/psychonetrics/old/psychonetrics.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
+* using option ‘--no-manual’
 * checking for file ‘psychonetrics/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘psychonetrics’ version ‘0.8’
+...
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+# rattle
+
+<details>
+
+* Version: 5.5.1
+* GitHub: NA
+* Source code: https://github.com/cran/rattle
+* Date/Publication: 2022-03-21 13:10:02 UTC
+* Number of recursive dependencies: 217
+
+Run `revdepcheck::cloud_details(, "rattle")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/rattle/new/rattle.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘rattle/DESCRIPTION’ ... OK
+...
+--- failed re-building ‘rattle.Rnw’
+
+SUMMARY: processing the following file failed:
+  ‘rattle.Rnw’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 WARNING, 3 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/rattle/old/rattle.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘rattle/DESCRIPTION’ ... OK
+...
+--- failed re-building ‘rattle.Rnw’
+
+SUMMARY: processing the following file failed:
+  ‘rattle.Rnw’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 WARNING, 3 NOTEs
+
+
+
+
+
+```
+# rdflib
+
+<details>
+
+* Version: 0.2.9
+* GitHub: https://github.com/ropensci/rdflib
+* Source code: https://github.com/cran/rdflib
+* Date/Publication: 2024-08-17 06:00:05 UTC
+* Number of recursive dependencies: 91
+
+Run `revdepcheck::cloud_details(, "rdflib")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘rdflib’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/rdflib/new/rdflib.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘rdflib’ ...
+** package ‘rdflib’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘rdflib’
+* removing ‘/tmp/workdir/rdflib/new/rdflib.Rcheck/rdflib’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘rdflib’ ...
+** package ‘rdflib’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘rdflib’
+* removing ‘/tmp/workdir/rdflib/old/rdflib.Rcheck/rdflib’
+
+
+```
+# ReporterScore
+
+<details>
+
+* Version: 0.1.9
+* GitHub: https://github.com/Asa12138/ReporterScore
+* Source code: https://github.com/cran/ReporterScore
+* Date/Publication: 2024-11-28 14:10:06 UTC
+* Number of recursive dependencies: 247
+
+Run `revdepcheck::cloud_details(, "ReporterScore")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/ReporterScore/new/ReporterScore.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ReporterScore/DESCRIPTION’ ... OK
+...
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/ReporterScore/old/ReporterScore.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ReporterScore/DESCRIPTION’ ... OK
+...
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# SCpubr
+
+<details>
+
+* Version: 3.0.0
+* GitHub: https://github.com/enblacar/SCpubr
+* Source code: https://github.com/cran/SCpubr
+* Date/Publication: 2025-08-20 08:40:02 UTC
+* Number of recursive dependencies: 289
+
+Run `revdepcheck::cloud_details(, "SCpubr")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/SCpubr/new/SCpubr.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘SCpubr/DESCRIPTION’ ... OK
+...
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/SCpubr/old/SCpubr.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘SCpubr/DESCRIPTION’ ... OK
+...
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# semptools
+
+<details>
+
+* Version: 0.3.2
+* GitHub: https://github.com/sfcheung/semptools
+* Source code: https://github.com/cran/semptools
+* Date/Publication: 2025-07-12 08:20:02 UTC
+* Number of recursive dependencies: 122
+
+Run `revdepcheck::cloud_details(, "semptools")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/semptools/new/semptools.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘semptools/DESCRIPTION’ ... OK
+...
+* this is package ‘semptools’ version ‘0.3.2’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package suggested but not available: ‘metaSEM’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+Package required but not available: ‘semPlot’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -1019,181 +1805,48 @@ Status: 1 ERROR
 
 
 
-
-```
-# NA
-
-<details>
-
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
-
-Run `cloud_details(, "NA")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
 ```
 ### CRAN
 
 ```
+* using log directory ‘/tmp/workdir/semptools/old/semptools.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘semptools/DESCRIPTION’ ... OK
+...
+* this is package ‘semptools’ version ‘0.3.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘semPlot’
 
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
 
 
 ```
-# RichR
+# tabledown
 
 <details>
 
 * Version: 1.0.0
-* Source code: https://github.com/cran/RichR
-* Date/Publication: 2019-02-22 14:00:03 UTC
-* Number of recursive dependencies: 39
+* GitHub: https://github.com/masiraji/tabledown
+* Source code: https://github.com/cran/tabledown
+* Date/Publication: 2024-05-02 13:40:03 UTC
+* Number of recursive dependencies: 164
 
-Run `cloud_details(, "RichR")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/RichR/new/RichR.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘RichR/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘RichR’ version ‘1.0.0’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘metap’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/RichR/old/RichR.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘RichR/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘RichR’ version ‘1.0.0’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘metap’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# ripe
-
-<details>
-
-* Version: 0.1.0
-* Source code: https://github.com/cran/ripe
-* URL: https://github.com/yonicd/ripe
-* BugReports: https://github.com/yonicd/ripe/issues
-* Date/Publication: 2019-12-06 10:10:02 UTC
-* Number of recursive dependencies: 58
-
-Run `cloud_details(, "ripe")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking whether package ‘ripe’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/ripe/new/ripe.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘ripe’ ...
-** package ‘ripe’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in get("is_pipe", asNamespace("magrittr")) : 
-  object 'is_pipe' not found
-Error: unable to load R code in package ‘ripe’
-Execution halted
-ERROR: lazy loading failed for package ‘ripe’
-* removing ‘/tmp/workdir/ripe/new/ripe.Rcheck/ripe’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘ripe’ ...
-** package ‘ripe’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (ripe)
-
-```
-# NA
-
-<details>
-
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
-
-Run `cloud_details(, "NA")` for more info
+Run `revdepcheck::cloud_details(, "tabledown")` for more info
 
 </details>
 
@@ -1202,7 +1855,27 @@ Run `cloud_details(, "NA")` for more info
 ### Devel
 
 ```
-
+* using log directory ‘/tmp/workdir/tabledown/new/tabledown.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tabledown/DESCRIPTION’ ... OK
+...
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘tabledown’ can be installed ... ERROR
+Installation failed.
+See ‘/tmp/workdir/tabledown/new/tabledown.Rcheck/00install.out’ for details.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -1212,81 +1885,25 @@ Run `cloud_details(, "NA")` for more info
 ### CRAN
 
 ```
-
-
-
-
-
-
-```
-# NA
-
-<details>
-
-* Version: NA
-* Source code: https://github.com/cran/NA
-* Number of recursive dependencies: 0
-
-Run `cloud_details(, "NA")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# smartdata
-
-<details>
-
-* Version: 1.0.3
-* Source code: https://github.com/cran/smartdata
-* URL: http://github.com/ncordon/smartdata
-* BugReports: http://github.com/ncordon/smartdata/issues
-* Date/Publication: 2019-12-18 17:40:02 UTC
-* Number of recursive dependencies: 271
-
-Run `cloud_details(, "smartdata")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/smartdata/new/smartdata.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
+* using log directory ‘/tmp/workdir/tabledown/old/tabledown.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘smartdata/DESCRIPTION’ ... OK
-* this is package ‘smartdata’ version ‘1.0.3’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘adaptiveGPCA’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+* using option ‘--no-manual’
+* checking for file ‘tabledown/DESCRIPTION’ ... OK
+...
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘tabledown’ can be installed ... ERROR
+Installation failed.
+See ‘/tmp/workdir/tabledown/old/tabledown.Rcheck/00install.out’ for details.
 * DONE
 Status: 1 ERROR
 
@@ -1294,335 +1911,232 @@ Status: 1 ERROR
 
 
 
-
 ```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/smartdata/old/smartdata.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘smartdata/DESCRIPTION’ ... OK
-* this is package ‘smartdata’ version ‘1.0.3’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘adaptiveGPCA’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# SMITIDvisu
-
-<details>
-
-* Version: 0.0.8
-* Source code: https://github.com/cran/SMITIDvisu
-* URL: https://informatique-mia.inrae.fr/biosp/anr-smitid-project/, https://gitlab.paca.inrae.fr/SMITID/visu/
-* Date/Publication: 2020-11-05 11:10:02 UTC
-* Number of recursive dependencies: 84
-
-Run `cloud_details(, "SMITIDvisu")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/SMITIDvisu/new/SMITIDvisu.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘SMITIDvisu/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘SMITIDvisu’ version ‘0.0.8’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘SMITIDstruct’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/SMITIDvisu/old/SMITIDvisu.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘SMITIDvisu/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘SMITIDvisu’ version ‘0.0.8’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘SMITIDstruct’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# spectralAnalysis
-
-<details>
-
-* Version: 3.12.0
-* Source code: https://github.com/cran/spectralAnalysis
-* URL: http://www.openanalytics.eu
-* Date/Publication: 2018-06-12 14:30:39 UTC
-* Number of recursive dependencies: 117
-
-Run `cloud_details(, "spectralAnalysis")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/spectralAnalysis/new/spectralAnalysis.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘spectralAnalysis/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘spectralAnalysis’ version ‘3.12.0’
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Packages required but not available: 'BiocGenerics', 'NMF'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/spectralAnalysis/old/spectralAnalysis.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘spectralAnalysis/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘spectralAnalysis’ version ‘3.12.0’
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Packages required but not available: 'BiocGenerics', 'NMF'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-
-```
-# torch
+# tidybins
 
 <details>
 
 * Version: 0.1.1
-* Source code: https://github.com/cran/torch
-* URL: https://torch.mlverse.org/docs, https://github.com/mlverse/torch
-* BugReports: https://github.com/mlverse/torch/issues
-* Date/Publication: 2020-10-20 21:10:02 UTC
-* Number of recursive dependencies: 58
+* GitHub: https://github.com/Harrison4192/tidybins
+* Source code: https://github.com/cran/tidybins
+* Date/Publication: 2024-06-12 04:50:02 UTC
+* Number of recursive dependencies: 222
 
-Run `cloud_details(, "torch")` for more info
+Run `revdepcheck::cloud_details(, "tidybins")` for more info
 
 </details>
 
-## Newly broken
-
-*   checking whether package ‘torch’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/torch/new/torch.Rcheck/00install.out’ for details.
-    ```
-
-## Newly fixed
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 157.6Mb
-      sub-directories of 1Mb or more:
-        R       3.1Mb
-        help    2.8Mb
-        libs  151.2Mb
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘torch’ ...
-** package ‘torch’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c autograd.cpp -o autograd.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c contrib.cpp -o contrib.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c cuda.cpp -o cuda.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c device.cpp -o device.o
-In file included from device.cpp:2:
-torch_types.h:7: warning: "LANTERN_HOST_HANDLER" redefined
-    7 | #define LANTERN_HOST_HANDLER lantern_host_handler();
-      | 
-In file included from device.cpp:1:
-lantern/lantern.h:35: note: this is the location of the previous definition
-   35 | #define LANTERN_HOST_HANDLER
-      | 
-In file included from device.cpp:1:
-lantern/lantern.h: In function ‘bool lanternInit(const string&, std::string*)’:
-lantern/lantern.h:4097:6: note: variable tracking size limit exceeded with ‘-fvar-tracking-assignments’, retrying without
- 4097 | bool lanternInit(const std::string &libPath, std::string *pError)
-      |      ^~~~~~~~~~~
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c dimname_list.cpp -o dimname_list.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c dtype.cpp -o dtype.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c gen-namespace.cpp -o gen-namespace.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c generator.cpp -o generator.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c indexing.cpp -o indexing.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c lantern.cpp -o lantern.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c layout.cpp -o layout.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c memory_format.cpp -o memory_format.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c nn_utils_rnn.cpp -o nn_utils_rnn.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c qscheme.cpp -o qscheme.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c quantization.cpp -o quantization.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c reduction.cpp -o reduction.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c save.cpp -o save.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c scalar.cpp -o scalar.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c storage.cpp -o storage.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c tensor.cpp -o tensor.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c tensor_list.cpp -o tensor_list.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c tensor_options.cpp -o tensor_options.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c utils.cpp -o utils.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c variable_list.cpp -o variable_list.o
-g++ -std=gnu++11 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o torch.so RcppExports.o autograd.o contrib.o cuda.o device.o dimname_list.o dtype.o gen-namespace.o generator.o indexing.o lantern.o layout.o memory_format.o nn_utils_rnn.o qscheme.o quantization.o reduction.o save.o scalar.o storage.o tensor.o tensor_list.o tensor_options.o utils.o variable_list.o -L/usr/lib/R/lib -lR
-Renaming torch lib to torchpkg
-"/usr/lib/R/bin/Rscript" "../tools/renamelib.R"
-installing to /tmp/workdir/torch/new/torch.Rcheck/00LOCK-torch/00new/torch/libs
-** R
-Warning in dir.create(outCodeDir) :
-  cannot create dir '/tmp/workdir/torch/new/torch.Rcheck/00LOCK-torch/00new/torch/R', reason 'No space left on device'
-Error in .install_package_code_files(".", instdir) : 
-  cannot open directory '/tmp/workdir/torch/new/torch.Rcheck/00LOCK-torch/00new/torch/R'
-ERROR: unable to collate and parse R files for package ‘torch’
-* removing ‘/tmp/workdir/torch/new/torch.Rcheck/torch’
+* using log directory ‘/tmp/workdir/tidybins/new/tidybins.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tidybins/DESCRIPTION’ ... OK
+...
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 3 NOTEs
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘torch’ ...
-** package ‘torch’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c autograd.cpp -o autograd.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c contrib.cpp -o contrib.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c cuda.cpp -o cuda.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c device.cpp -o device.o
-In file included from device.cpp:2:
-torch_types.h:7: warning: "LANTERN_HOST_HANDLER" redefined
-    7 | #define LANTERN_HOST_HANDLER lantern_host_handler();
-      | 
-In file included from device.cpp:1:
-lantern/lantern.h:35: note: this is the location of the previous definition
-   35 | #define LANTERN_HOST_HANDLER
-      | 
-In file included from device.cpp:1:
-lantern/lantern.h: In function ‘bool lanternInit(const string&, std::string*)’:
-lantern/lantern.h:4097:6: note: variable tracking size limit exceeded with ‘-fvar-tracking-assignments’, retrying without
- 4097 | bool lanternInit(const std::string &libPath, std::string *pError)
-      |      ^~~~~~~~~~~
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c dimname_list.cpp -o dimname_list.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c dtype.cpp -o dtype.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c gen-namespace.cpp -o gen-namespace.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c generator.cpp -o generator.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c indexing.cpp -o indexing.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c lantern.cpp -o lantern.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c layout.cpp -o layout.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c memory_format.cpp -o memory_format.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c nn_utils_rnn.cpp -o nn_utils_rnn.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c qscheme.cpp -o qscheme.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c quantization.cpp -o quantization.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c reduction.cpp -o reduction.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c save.cpp -o save.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c scalar.cpp -o scalar.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c storage.cpp -o storage.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c tensor.cpp -o tensor.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c tensor_list.cpp -o tensor_list.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c tensor_options.cpp -o tensor_options.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c utils.cpp -o utils.o
-g++ -std=gnu++11 -I"/usr/share/R/include" -DNDEBUG  -I"/usr/local/lib/R/site-library/Rcpp/include"   -fpic  -g -O2 -fdebug-prefix-map=/build/r-base-jbaK_j/r-base-3.6.3=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c variable_list.cpp -o variable_list.o
-g++ -std=gnu++11 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -Wl,-z,relro -o torch.so RcppExports.o autograd.o contrib.o cuda.o device.o dimname_list.o dtype.o gen-namespace.o generator.o indexing.o lantern.o layout.o memory_format.o nn_utils_rnn.o qscheme.o quantization.o reduction.o save.o scalar.o storage.o tensor.o tensor_list.o tensor_options.o utils.o variable_list.o -L/usr/lib/R/lib -lR
-Renaming torch lib to torchpkg
-"/usr/lib/R/bin/Rscript" "../tools/renamelib.R"
-installing to /tmp/workdir/torch/old/torch.Rcheck/00LOCK-torch/00new/torch/libs
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (torch)
+* using log directory ‘/tmp/workdir/tidybins/old/tidybins.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tidybins/DESCRIPTION’ ... OK
+...
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 3 NOTEs
+
+
+
+
+
+```
+# tidycomm
+
+<details>
+
+* Version: 0.4.2
+* GitHub: https://github.com/tidycomm/tidycomm
+* Source code: https://github.com/cran/tidycomm
+* Date/Publication: 2025-08-27 12:00:02 UTC
+* Number of recursive dependencies: 141
+
+Run `revdepcheck::cloud_details(, "tidycomm")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/tidycomm/new/tidycomm.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tidycomm/DESCRIPTION’ ... OK
+...
+* this is package ‘tidycomm’ version ‘0.4.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘MBESS’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/tidycomm/old/tidycomm.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tidycomm/DESCRIPTION’ ... OK
+...
+* this is package ‘tidycomm’ version ‘0.4.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘MBESS’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# TransProR
+
+<details>
+
+* Version: 1.0.6
+* GitHub: https://github.com/SSSYDYSSS/TransProR
+* Source code: https://github.com/cran/TransProR
+* Date/Publication: 2025-08-26 10:50:02 UTC
+* Number of recursive dependencies: 193
+
+Run `revdepcheck::cloud_details(, "TransProR")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/TransProR/new/TransProR.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘TransProR/DESCRIPTION’ ... OK
+...
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘ggtree’
+
+Package suggested but not available for checking: ‘ggtreeExtra’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/TransProR/old/TransProR.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘TransProR/DESCRIPTION’ ... OK
+...
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘ggtree’
+
+Package suggested but not available for checking: ‘ggtreeExtra’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
 
 ```
