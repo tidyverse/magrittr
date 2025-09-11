@@ -7,7 +7,8 @@ Authors@R: c(
            comment = "Original author and creator of magrittr"),
     person("Hadley", "Wickham", , "hadley@posit.co", role = "aut"),
     person("Lionel", "Henry", , "lionel@posit.co", role = "cre"),
-    person("Posit Software, PBC", role = c("cph", "fnd"))
+    person("Posit Software, PBC", role = c("cph", "fnd"),
+            comment = c(ROR = "03wc8by49"))
   )
 Description: Provides a mechanism for chaining commands with a new
     forward-pipe operator, %>%. This operator will forward a value, or the
@@ -20,16 +21,16 @@ URL: https://magrittr.tidyverse.org, https://github.com/tidyverse/magrittr
 BugReports: https://github.com/tidyverse/magrittr/issues
 Depends:
     R (>= 3.4.0)
-Suggests: 
+Suggests:
     covr,
     knitr,
     rlang,
     rmarkdown,
     testthat
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 ByteCompile: Yes
 Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.3
