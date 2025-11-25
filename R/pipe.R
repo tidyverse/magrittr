@@ -261,7 +261,7 @@ pipe_nested <- function(lhs, rhs) {
 #' do not have a built-in data argument.
 #' 
 #' @param lhs A list, environment, or a data.frame.
-#' @param rhs An expression where the names in lhs is available.
+#' @param rhs An expression where the names in lhs are available.
 #' 
 #' @details Some functions, e.g. `lm` and `aggregate`, have a 
 #' data argument, which allows the direct use of names inside the data as part 
