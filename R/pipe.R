@@ -72,7 +72,7 @@
 #' 
 #' @section Technical notes:
 #' The magrittr pipe operators use non-standard evaluation. They capture
-#' their inputs and examines them to figure out how to proceed. First a function
+#' their inputs and examine them to figure out how to proceed. First a function
 #' is produced from all of the individual right-hand side expressions, and 
 #' then the result is obtained by applying this function to the left-hand side.
 #' For most purposes, one can disregard the subtle aspects of magrittr's 
