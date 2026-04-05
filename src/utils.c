@@ -1,14 +1,18 @@
 #define R_NO_REMAP
 #include <Rinternals.h>
+#include <Rversion.h>
 
 
 SEXP r_unbound_sym = NULL;
-SEXP syms_delayed_assign = NULL;
 
 void r_env_bind_lazy(SEXP env,
                      SEXP sym,
                      SEXP expr,
                      SEXP eval_env) {
+
+#if (R_VERSION >= R_Version(4, 6, 0))
+  R_MakeDelayedBinding(sym, expr, eval_env, env);
+#else
   SEXP prom = PROTECT(Rf_allocSExp(PROMSXP));
   SET_PRENV(prom, eval_env);
   SET_PRCODE(prom, expr);
@@ -17,11 +21,7 @@ void r_env_bind_lazy(SEXP env,
   Rf_defineVar(sym, prom, env);
 
   UNPROTECT(1);
-  return;
-
-  SEXP call = PROTECT(Rf_lang5(syms_delayed_assign, sym, expr, eval_env, env));
-  Rf_eval(call, R_BaseEnv);
-  UNPROTECT(1);
+#endif
 }
 
 
@@ -30,8 +30,6 @@ SEXP syms_envir = NULL;
 SEXP syms_inherits = NULL;
 SEXP syms_list = NULL;
 SEXP syms_rm = NULL;
-
-#include <Rversion.h>
 
 #if (R_VERSION < R_Version(4, 0, 0))
 void r__env_unbind(SEXP env, SEXP sym) {
@@ -116,7 +114,6 @@ SEXP r_new_environment(SEXP parent, R_len_t size) {
 
 void magrittr_init_utils(SEXP ns) {
   r_unbound_sym = Rf_install(".__magrittr_unbound_value__.");
-  syms_delayed_assign = Rf_install("delayedAssign");
   syms_envir = Rf_install("envir");
   syms_inherits = Rf_install("inherits");
   syms_list = Rf_install("list");
