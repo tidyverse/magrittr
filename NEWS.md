@@ -1,3 +1,5 @@
+# magrittr (development version)
+
 # magrittr 2.0.5
 
 * Fixes for CRAN checks.
