@@ -38,5 +38,5 @@ matrix(ncol = 2) %T>%
 plot %>% # plot usually does not return anything. 
 colSums
 
-#> [1] -17.133206   5.507542
+#> [1] -13.634410   3.848376
 ```

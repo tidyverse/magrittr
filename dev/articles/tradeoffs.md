@@ -245,7 +245,8 @@ support multiple placeholders.
 
 ``` r
 "foo" %|>% list(., .)
-#> Error: Can't use multiple placeholders.
+#> Error:
+#> ! Can't use multiple placeholders.
 ```
 
 #### Lazy evaluation ✅
@@ -398,7 +399,8 @@ Assignment forces eager evaluation of each step.
   stop("oh no") %!>% try(silent = TRUE)
   "success"
 }
-#> Error in stop("oh no") %!>% try(silent = TRUE): oh no
+#> Error in `stop("oh no") %!>% try(silent = TRUE)`:
+#> ! oh no
 ```
 
 #### Persistence: ❌
@@ -418,8 +420,8 @@ fn <- TRUE %!>% factory() %!>% { .() }
 fn()
 #> function () 
 #> x
-#> <bytecode: 0x55bda77591f8>
-#> <environment: 0x55bda845e938>
+#> <bytecode: 0x562a271345e8>
+#> <environment: 0x562a26e06448>
 ```
 
 Also, since we’re binding `.` in the current environment, we need to
@@ -429,7 +431,8 @@ placeholder no longer exists:
 ``` r
 fn <- TRUE %!>% factory()
 fn()
-#> Error: object '.' not found
+#> Error:
+#> ! object '.' not found
 ```
 
 Or it has been reset to its previous value, if any:

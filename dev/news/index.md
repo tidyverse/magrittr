@@ -2,6 +2,12 @@
 
 ## magrittr (development version)
 
+## magrittr 2.0.5
+
+CRAN release: 2026-04-04
+
+- Fixes for CRAN checks.
+
 ## magrittr 2.0.4
 
 CRAN release: 2025-09-12

@@ -19,13 +19,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/tidyverse/magrittr/blob/main/DESCRIPTION)
 
-Bache S, Wickham H (2025). *magrittr: A Forward-Pipe Operator for R*. R
-package version 2.0.4.9000, <https://magrittr.tidyverse.org>.
+Bache S, Wickham H (2026). *magrittr: A Forward-Pipe Operator for R*. R
+package version 2.0.5.9000, <https://magrittr.tidyverse.org>.
 
     @Manual{,
       title = {magrittr: A Forward-Pipe Operator for R},
       author = {Stefan Milton Bache and Hadley Wickham},
-      year = {2025},
-      note = {R package version 2.0.4.9000},
+      year = {2026},
+      note = {R package version 2.0.5.9000},
       url = {https://magrittr.tidyverse.org},
     }

@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">magrittr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.4.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.5.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -415,7 +415,8 @@ parser).</p>
 can’t support multiple placeholders.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"foo"</span> <span class="op">%|&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">.</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error: Can't use multiple placeholders.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use multiple placeholders.</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="lazy-evaluation">Lazy evaluation ✅<a class="anchor" aria-label="anchor" href="#lazy-evaluation"></a>
@@ -552,7 +553,8 @@ multiple evaluations.</p>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"oh no"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe-eager.html">%!&gt;%</a></span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span>silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="st">"success"</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Error in stop("oh no") %!&gt;% try(silent = TRUE): oh no</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `stop("oh no") %!&gt;% try(silent = TRUE)`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> oh no</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="persistence">Persistence: ❌<a class="anchor" aria-label="anchor" href="#persistence"></a>
@@ -570,15 +572,16 @@ binded to the constructed function itself rather than the initial value
 <span><span class="fu">fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; function () </span></span>
 <span><span class="co">#&gt; x</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55bda77591f8&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x55bda845e938&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x562a271345e8&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x562a26e06448&gt;</span></span></code></pre></div>
 <p>Also, since we’re binding <code>.</code> in the current environment,
 we need to clean it up once the pipeline has returned. At that point,
 the placeholder no longer exists:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fn</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span> <span class="op"><a href="../reference/pipe-eager.html">%!&gt;%</a></span> <span class="fu">factory</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">fn</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error: object '.' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object '.' not found</span></span></code></pre></div>
 <p>Or it has been reset to its previous value, if any:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">.</span> <span class="op">&lt;-</span> <span class="st">"wrong"</span></span>

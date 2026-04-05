@@ -134,11 +134,11 @@ iris %>% head(10)
   
 # When dot is nested, lhs is still placed first:
 sample(1:10) %>% paste0(LETTERS[.])
-#>  [1] "1A"  "10J" "9I"  "4D"  "2B"  "3C"  "6F"  "5E"  "7G"  "8H" 
+#>  [1] "6F"  "1A"  "5E"  "7G"  "8H"  "4D"  "10J" "2B"  "9I"  "3C" 
 
 # This can be avoided:
 rnorm(100) %>% {c(min(.), mean(.), max(.))} %>% floor
-#> [1] -3  0  2
+#> [1] -3 -1  2
 
 # Lambda expressions: 
 iris %>%
@@ -154,6 +154,8 @@ iris %>%
 #> 5            5.0         3.6          1.4         0.2    setosa
 #> 6            5.4         3.9          1.7         0.4    setosa
 #> 7            4.6         3.4          1.4         0.3    setosa
+#> 8            5.0         3.4          1.5         0.2    setosa
+#> 143          5.8         2.7          5.1         1.9 virginica
 #> 144          6.8         3.2          5.9         2.3 virginica
 #> 145          6.7         3.3          5.7         2.5 virginica
 #> 146          6.7         3.0          5.2         2.3 virginica
@@ -175,6 +177,16 @@ iris %>%
 #> 3            4.7         3.2          1.3         0.2    setosa
 #> 4            4.6         3.1          1.5         0.2    setosa
 #> 5            5.0         3.6          1.4         0.2    setosa
+#> 6            5.4         3.9          1.7         0.4    setosa
+#> 7            4.6         3.4          1.4         0.3    setosa
+#> 8            5.0         3.4          1.5         0.2    setosa
+#> 9            4.4         2.9          1.4         0.2    setosa
+#> 10           4.9         3.1          1.5         0.1    setosa
+#> 141          6.7         3.1          5.6         2.4 virginica
+#> 142          6.9         3.1          5.1         2.3 virginica
+#> 143          5.8         2.7          5.1         1.9 virginica
+#> 144          6.8         3.2          5.9         2.3 virginica
+#> 145          6.7         3.3          5.7         2.5 virginica
 #> 146          6.7         3.0          5.2         2.3 virginica
 #> 147          6.3         2.5          5.0         1.9 virginica
 #> 148          6.5         3.0          5.2         2.0 virginica
