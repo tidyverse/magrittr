@@ -17,12 +17,11 @@ coverage](https://codecov.io/gh/tidyverse/magrittr/branch/main/graph/badge.svg)]
 The magrittr package offers a set of operators which make your code more
 readable by:
 
--   structuring sequences of data operations left-to-right (as opposed
-    to from the inside and out),
--   avoiding nested function calls,
--   minimizing the need for local variables and function definitions,
-    and
--   making it easy to add steps anywhere in the sequence of operations.
+- structuring sequences of data operations left-to-right (as opposed to
+  from the inside and out),
+- avoiding nested function calls,
+- minimizing the need for local variables and function definitions, and
+- making it easy to add steps anywhere in the sequence of operations.
 
 The operators pipe their left-hand side values forward into expressions
 that appear on the right-hand side, i.e. one can replace `f(x)` with
@@ -57,7 +56,7 @@ install.packages("tidyverse")
 install.packages("magrittr")
 
 # Or the development version from GitHub:
-# install.packages("devtools")
+# install.packages("pak")
 pak::pak("tidyverse/magrittr")
 ```
 
@@ -65,9 +64,9 @@ pak::pak("tidyverse/magrittr")
 
 ### Basic piping
 
--   `x %>% f` is equivalent to `f(x)`
--   `x %>% f(y)` is equivalent to `f(x, y)`
--   `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
+- `x %>% f` is equivalent to `f(x)`
+- `x %>% f(y)` is equivalent to `f(x, y)`
+- `x %>% f %>% g %>% h` is equivalent to `h(g(f(x)))`
 
 Here, “equivalent” is not technically exact: evaluation is non-standard,
 and the left-hand side is evaluated before passed on to the right-hand
@@ -76,8 +75,8 @@ implication.
 
 ### The argument placeholder
 
--   `x %>% f(y, .)` is equivalent to `f(y, x)`
--   `x %>% f(y, z = .)` is equivalent to `f(y, z = x)`
+- `x %>% f(y, .)` is equivalent to `f(y, x)`
+- `x %>% f(y, z = .)` is equivalent to `f(y, z = x)`
 
 ### Re-using the placeholder for attributes
 
@@ -120,6 +119,9 @@ iris %>%
   subset(Sepal.Length > mean(Sepal.Length)) %$%
   cor(Sepal.Length, Sepal.Width)
 #> [1] 0.3361992
+```
+
+``` r
 
 data.frame(z = rnorm(100)) %$%
   ts.plot(z)
